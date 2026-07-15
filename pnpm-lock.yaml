@@ -311,6 +311,9 @@ importers:
       '@kan/db':
         specifier: workspace:*
         version: link:../db
+      '@kan/discord':
+        specifier: workspace:*
+        version: link:../discord
       '@kan/email':
         specifier: workspace:^
         version: link:../email

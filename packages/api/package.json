@@ -55,6 +55,7 @@
   "dependencies": {
     "@kan/auth": "workspace:*",
     "@kan/db": "workspace:*",
+    "@kan/discord": "workspace:*",
     "@kan/email": "workspace:^",
     "@kan/logger": "workspace:^",
     "@kan/shared": "workspace:^",
