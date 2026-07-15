@@ -56,3 +56,5 @@ i18n.cache
 /apps/web/pgdata
 
 .claude
+/graphify-out
+.superpowers/sdd
