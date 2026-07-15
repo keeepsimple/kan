@@ -162,6 +162,8 @@ export const listRouter = createTRPCRouter({
         listPublicId: z.string().min(12),
         name: z.string().min(1).optional(),
         index: z.number().optional(),
+        discordBehaviour: z.enum(["create_thread", "notify"]).nullable().optional(),
+        discordRoleIds: z.array(z.string().max(32)).max(25).optional(),
       }),
     )
     .output(listUpdateResponseSchema)
@@ -207,6 +209,17 @@ export const listRouter = createTRPCRouter({
         result = await listRepo.reorder(ctx.db, {
           listPublicId: input.listPublicId,
           newIndex: input.index,
+        });
+      }
+
+      if (
+        input.discordBehaviour !== undefined ||
+        input.discordRoleIds !== undefined
+      ) {
+        result = await listRepo.updateDiscordConfig(ctx.db, {
+          listPublicId: input.listPublicId,
+          discordBehaviour: input.discordBehaviour,
+          discordRoleIds: input.discordRoleIds,
         });
       }
 

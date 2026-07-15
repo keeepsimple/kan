@@ -261,6 +261,33 @@ export const update = async (
   return result;
 };
 
+export const updateDiscordConfig = async (
+  db: dbClient,
+  args: {
+    listPublicId: string;
+    discordBehaviour?: "create_thread" | "notify" | null;
+    discordRoleIds?: string[];
+  },
+) => {
+  const [result] = await db
+    .update(lists)
+    .set({
+      ...(args.discordBehaviour !== undefined && {
+        discordBehaviour: args.discordBehaviour,
+      }),
+      ...(args.discordRoleIds !== undefined && {
+        discordRoleIds: JSON.stringify(args.discordRoleIds),
+      }),
+    })
+    .where(and(eq(lists.publicId, args.listPublicId), isNull(lists.deletedAt)))
+    .returning({
+      publicId: lists.publicId,
+      name: lists.name,
+    });
+
+  return result;
+};
+
 export const reorder = async (
   db: dbClient,
   args: {

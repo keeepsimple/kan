@@ -198,6 +198,7 @@ export const getByPublicId = async (
       slug: true,
       visibility: true,
       isArchived: true,
+      discordChannelId: true,
     },
     with: {
       userFavorites: {
@@ -246,6 +247,8 @@ export const getByPublicId = async (
           name: true,
           boardId: true,
           index: true,
+          discordBehaviour: true,
+          discordRoleIds: true,
         },
         with: {
           cards: {
@@ -607,6 +610,7 @@ export const create = async (
     slug: string;
     type?: "regular" | "template";
     sourceBoardId?: number;
+    discordChannelId?: string;
   },
 ) => {
   const [result] = await db
@@ -620,6 +624,7 @@ export const create = async (
       slug: boardInput.slug,
       type: boardInput.type ?? "regular",
       sourceBoardId: boardInput.sourceBoardId,
+      discordChannelId: boardInput.discordChannelId,
     })
     .returning({
       id: boards.id,
@@ -638,6 +643,7 @@ export const update = async (
     visibility: BoardVisibilityStatus | undefined;
     boardPublicId: string;
     isArchived?: boolean;
+    discordChannelId?: string | null;
   },
 ) => {
   const [result] = await db
@@ -647,7 +653,10 @@ export const update = async (
       slug: boardInput.slug,
       visibility: boardInput.visibility,
       updatedAt: new Date(),
-      ...(boardInput.isArchived !== undefined && { isArchived: boardInput.isArchived })
+      ...(boardInput.isArchived !== undefined && { isArchived: boardInput.isArchived }),
+      ...(boardInput.discordChannelId !== undefined && {
+        discordChannelId: boardInput.discordChannelId,
+      }),
     })
     .where(eq(boards.publicId, boardInput.boardPublicId))
     .returning({

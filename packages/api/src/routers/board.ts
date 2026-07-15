@@ -302,6 +302,7 @@ export const boardRouter = createTRPCRouter({
         labels: z.array(z.string().min(1)),
         type: z.enum(["regular", "template"]).optional(),
         sourceBoardPublicId: z.string().min(12).optional(),
+        discordChannelId: z.string().max(32).optional(),
       }),
     )
     .output(boardCreateResponseSchema)
@@ -414,6 +415,7 @@ export const boardRouter = createTRPCRouter({
         createdBy: userId,
         workspaceId: workspace.id,
         type: input.type,
+        discordChannelId: input.discordChannelId,
       });
 
       if (!result)
@@ -472,6 +474,7 @@ export const boardRouter = createTRPCRouter({
         visibility: z.enum(["public", "private"]).optional(),
         favorite: z.boolean().optional(),
         isArchived: z.boolean().optional(),
+        discordChannelId: z.string().max(32).nullable().optional(),
       }),
     )
     .output(boardUpdateResponseSchema)
@@ -513,7 +516,7 @@ export const boardRouter = createTRPCRouter({
       }
 
       // Handle other updates (name, slug, visibility)
-      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined || input.isArchived !== undefined;
+      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined || input.isArchived !== undefined || input.discordChannelId !== undefined;
 
       if (!hasOtherUpdates) {
         // Only favorite was updated, return success
@@ -541,6 +544,7 @@ export const boardRouter = createTRPCRouter({
         boardPublicId: input.boardPublicId,
         visibility: input.visibility,
         isArchived: input.isArchived,
+        discordChannelId: input.discordChannelId,
       });
 
       if (!result)

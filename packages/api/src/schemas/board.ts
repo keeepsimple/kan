@@ -56,6 +56,7 @@ export const boardDetailSchema = z.object({
   visibility: z.string(),
   isArchived: z.boolean(),
   favorite: z.boolean(),
+  discordChannelId: z.string().nullish(),
   workspace: z.object({
     publicId: z.string(),
     cardPrefix: z.string(),
@@ -67,6 +68,8 @@ export const boardDetailSchema = z.object({
       publicId: z.string(),
       name: z.string(),
       index: z.number(),
+      discordBehaviour: z.string().nullish(),
+      discordRoleIds: z.string().nullish(),
       cards: z.array(boardDetailCardSchema),
     }),
   ),
