@@ -6,6 +6,8 @@ import * as permissionRepo from "@kan/db/repository/permission.repo";
 import type { Permission, Role } from "@kan/shared";
 import { canManageRole, getDefaultPermissions } from "@kan/shared";
 
+export type { Permission };
+
 /**
  * Get effective permissions for a member by combining role permissions with overrides
  */
