@@ -35,6 +35,7 @@ export function CrispIntegrationSection({
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<CrispFormValues>({
     resolver: zodResolver(crispFormSchema),
@@ -44,7 +45,7 @@ export function CrispIntegrationSection({
   const selectedBoardPublicId = watch("boardPublicId");
 
   const { data: boards } = api.board.all.useQuery(
-    { workspacePublicId },
+    { workspacePublicId, type: "regular" },
     { enabled: !isLoading && !integration },
   );
 
@@ -53,11 +54,12 @@ export function CrispIntegrationSection({
     { enabled: selectedBoardPublicId.length >= 12 },
   );
 
-  const lists = selectedBoard?.lists ?? [];
+  const lists = selectedBoard?.allLists ?? [];
 
   const createIntegration = api.crispIntegration.create.useMutation({
     onSuccess: async () => {
       await utils.crispIntegration.get.invalidate({ workspacePublicId });
+      reset();
       showPopup({
         header: t`Crisp connected`,
         message: t`Copy the webhook URL into your Crisp dashboard to finish setup.`,
@@ -76,6 +78,7 @@ export function CrispIntegrationSection({
   const disconnectIntegration = api.crispIntegration.disconnect.useMutation({
     onSuccess: async () => {
       await utils.crispIntegration.get.invalidate({ workspacePublicId });
+      reset();
       showPopup({
         header: t`Crisp disconnected`,
         message: t`The Crisp integration has been removed.`,
