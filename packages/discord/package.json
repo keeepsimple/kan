@@ -1,0 +1,29 @@
+{
+  "name": "@kan/discord",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "license": "GPL-3.0",
+  "scripts": {
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "devDependencies": {
+    "@kan/eslint-config": "workspace:*",
+    "@kan/prettier-config": "workspace:*",
+    "@kan/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "^3.0.0"
+  },
+  "prettier": "@kan/prettier-config"
+}
