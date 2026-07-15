@@ -3,6 +3,7 @@ import { TRPCError } from "@trpc/server";
 import { env } from "next-runtime-env";
 import { z } from "zod";
 
+import type { dbClient } from "@kan/db/client";
 import * as crispIntegrationRepo from "@kan/db/repository/crispIntegration.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
@@ -25,7 +26,7 @@ function buildWebhookUrl(secret: string) {
 }
 
 async function getAuthorizedWorkspace(
-  ctx: { db: never; user?: { id: string } | null },
+  ctx: { db: dbClient; user?: { id: string } | null },
   workspacePublicId: string,
 ) {
   const userId = ctx.user?.id;
@@ -58,7 +59,7 @@ export const crispIntegrationRouter = createTRPCRouter({
     .output(connectionSchema.nullable())
     .query(async ({ ctx, input }) => {
       const { workspace } = await getAuthorizedWorkspace(
-        ctx as never,
+        ctx,
         input.workspacePublicId,
       );
 
@@ -97,7 +98,7 @@ export const crispIntegrationRouter = createTRPCRouter({
     .output(connectionSchema)
     .mutation(async ({ ctx, input }) => {
       const { userId, workspace } = await getAuthorizedWorkspace(
-        ctx as never,
+        ctx,
         input.workspacePublicId,
       );
 
@@ -155,7 +156,7 @@ export const crispIntegrationRouter = createTRPCRouter({
     .output(z.object({ success: z.boolean() }))
     .mutation(async ({ ctx, input }) => {
       const { workspace } = await getAuthorizedWorkspace(
-        ctx as never,
+        ctx,
         input.workspacePublicId,
       );
 
