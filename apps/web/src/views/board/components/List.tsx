@@ -164,7 +164,7 @@ export default function List({
                         },
                       ]
                     : []),
-                  ...(discordStatus?.connected
+                  ...(discordStatus?.connected || list.discordBehaviour
                     ? [
                         {
                           label: t`Discord settings`,

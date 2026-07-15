@@ -43,9 +43,14 @@ export default function ListDiscordSettingsModal({
   );
   const [roleIds, setRoleIds] = useState<string[]>(currentRoleIds);
 
-  const { data: roles } = api.discord.listRoles.useQuery(
+  const { data: discordStatus } = api.discord.getStatus.useQuery(
     { workspacePublicId: workspace.publicId },
     { enabled: !!workspace.publicId },
+  );
+
+  const { data: roles } = api.discord.listRoles.useQuery(
+    { workspacePublicId: workspace.publicId },
+    { enabled: !!workspace.publicId && !!discordStatus?.connected },
   );
 
   const updateList = api.list.update.useMutation({

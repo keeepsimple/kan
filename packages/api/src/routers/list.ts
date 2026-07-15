@@ -163,7 +163,7 @@ export const listRouter = createTRPCRouter({
         name: z.string().min(1).optional(),
         index: z.number().optional(),
         discordBehaviour: z.enum(["create_thread", "notify"]).nullable().optional(),
-        discordRoleIds: z.array(z.string().max(32)).max(25).optional(),
+        discordRoleIds: z.array(z.string().max(32).regex(/^\d+$/)).max(25).optional(),
       }),
     )
     .output(listUpdateResponseSchema)

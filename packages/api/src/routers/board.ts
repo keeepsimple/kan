@@ -302,7 +302,7 @@ export const boardRouter = createTRPCRouter({
         labels: z.array(z.string().min(1)),
         type: z.enum(["regular", "template"]).optional(),
         sourceBoardPublicId: z.string().min(12).optional(),
-        discordChannelId: z.string().max(32).optional(),
+        discordChannelId: z.string().max(32).regex(/^\d+$/).optional(),
       }),
     )
     .output(boardCreateResponseSchema)
@@ -474,7 +474,7 @@ export const boardRouter = createTRPCRouter({
         visibility: z.enum(["public", "private"]).optional(),
         favorite: z.boolean().optional(),
         isArchived: z.boolean().optional(),
-        discordChannelId: z.string().max(32).nullable().optional(),
+        discordChannelId: z.string().max(32).regex(/^\d+$/).nullable().optional(),
       }),
     )
     .output(boardUpdateResponseSchema)

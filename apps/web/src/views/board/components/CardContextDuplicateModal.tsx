@@ -54,7 +54,9 @@ export function CardContextDuplicateModal({
     { enabled: !!boardPublicId },
   );
   const lists = board?.lists ?? [];
-  const listOptions = lists.map((l) => ({ publicId: l.publicId, name: l.name }));
+  const listOptions = lists
+    .filter((list) => list.discordBehaviour !== "notify")
+    .map((l) => ({ publicId: l.publicId, name: l.name }));
   const currentListPublicId = card?.list?.publicId;
   const hasLabels = (card?.labels?.length ?? 0) > 0;
   const hasMembers = (card?.members?.length ?? 0) > 0;

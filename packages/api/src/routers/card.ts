@@ -1298,6 +1298,8 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
+      assertListAllowsCardCreation(targetList);
+
       if (targetList.workspaceId !== sourceCardMeta.workspaceId)
         throw new TRPCError({
           message: `Target list must be in the same workspace`,
