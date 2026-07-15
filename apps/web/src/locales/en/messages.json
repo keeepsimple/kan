@@ -75,7 +75,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        60
+        67
       ]
     ],
     "translation": "{0} has been added to your favorites."
@@ -91,7 +91,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        61
+        68
       ]
     ],
     "translation": "{0} has been removed from your favorites."
@@ -107,7 +107,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        462
+        464
       ]
     ],
     "translation": "{0} labels"
@@ -123,7 +123,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        565
+        608
       ]
     ],
     "translation": "{0} not found"
@@ -443,7 +443,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        136
+        148
       ]
     ],
     "translation": "Add a card"
@@ -551,7 +551,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        137
+        155
       ]
     ],
     "translation": "Add to favorites"
@@ -718,7 +718,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        57
+        64
       ]
     ],
     "translation": "Added to favorites"
@@ -925,7 +925,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        107
+        108
       ]
     ],
     "translation": "An error occurred while connecting your GitHub account."
@@ -937,7 +937,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        130
+        131
       ]
     ],
     "translation": "An error occurred while disconnecting your GitHub account."
@@ -949,7 +949,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        87
+        88
       ]
     ],
     "translation": "An error occurred while disconnecting your Trello account."
@@ -1109,7 +1109,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        115
+        122
       ]
     ],
     "translation": "Archive board"
@@ -1485,7 +1485,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        538
+        581
       ],
       [
         "src/views/card/index.tsx",
@@ -1517,7 +1517,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        47
+        54
       ]
     ],
     "translation": "Board archived"
@@ -1541,7 +1541,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        23
+        24
       ]
     ],
     "translation": "Board name cannot exceed 100 characters"
@@ -1553,7 +1553,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        22
+        23
       ]
     ],
     "translation": "Board name is required"
@@ -1589,10 +1589,22 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        47
+        54
       ]
     ],
     "translation": "Board unarchived"
+  },
+  "NVurEd": {
+    "translation": "Board updated",
+    "message": "Board updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDiscordChannelModal.tsx",
+        36
+      ]
+    ]
   },
   "Xid3K6": {
     "message": "Board URL can only contain letters, numbers, and hyphens",
@@ -2270,6 +2282,18 @@
     ],
     "translation": "Card not found"
   },
+  "0LwNjp": {
+    "translation": "Card threads for this board are created in the selected channel.",
+    "message": "Card threads for this board are created in the selected channel.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDiscordChannelModal.tsx",
+        75
+      ]
+    ]
+  },
   "ZH7TVS": {
     "message": "Card title",
     "placeholders": {},
@@ -2277,7 +2301,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        328
+        330
       ]
     ],
     "translation": "Card title"
@@ -2289,7 +2313,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        309
+        311
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2301,6 +2325,18 @@
       ]
     ],
     "translation": "Card URL copied to clipboard"
+  },
+  "plEbd2": {
+    "translation": "Cards cannot be created here; moving a card here posts to its thread",
+    "message": "Cards cannot be created here; moving a card here posts to its thread",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListDiscordSettingsModal.tsx",
+        80
+      ]
+    ]
   },
   "VhMDMg": {
     "message": "Change Password",
@@ -2754,6 +2790,10 @@
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
         195
+      ],
+      [
+        "src/views/settings/components/DiscordIntegration.tsx",
+        116
       ]
     ],
     "translation": "Connect"
@@ -2765,7 +2805,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        212
+        213
       ]
     ],
     "translation": "Connect GitHub"
@@ -2777,7 +2817,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        162
+        163
       ]
     ],
     "translation": "Connect Trello"
@@ -2801,7 +2841,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        191
+        192
       ]
     ],
     "translation": "Connect your GitHub account to import projects."
@@ -2813,10 +2853,42 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        149
+        150
       ]
     ],
     "translation": "Connect your Trello account to import boards."
+  },
+  "bCW+p2": {
+    "translation": "Connected to {0}",
+    "message": "Connected to {0}",
+    "placeholders": {
+      "0": [
+        "status.guildName ?? status.guildId ?? \"\""
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordIntegration.tsx",
+        71
+      ]
+    ]
+  },
+  "wJHHRt": {
+    "translation": "Connected to {0}.",
+    "message": "Connected to {0}.",
+    "placeholders": {
+      "0": [
+        "data.guildName"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordIntegration.tsx",
+        30
+      ]
+    ]
   },
   "jfC/xh": {
     "message": "Contact",
@@ -3053,7 +3125,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        166
+        215
       ]
     ],
     "translation": "Create {0}"
@@ -3069,7 +3141,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        527
+        529
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3097,7 +3169,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        537
+        539
       ]
     ],
     "translation": "Create card"
@@ -3189,7 +3261,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        424
+        426
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3205,11 +3277,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        93
+        95
       ],
       [
         "src/views/board/index.tsx",
-        679
+        722
       ]
     ],
     "translation": "Create new list"
@@ -3225,6 +3297,18 @@
       ]
     ],
     "translation": "Create template"
+  },
+  "5rnYtO": {
+    "translation": "Create thread",
+    "message": "Create thread",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListDiscordSettingsModal.tsx",
+        74
+      ]
+    ]
   },
   "SiPp29": {
     "message": "Create webhook",
@@ -3277,6 +3361,18 @@
       ]
     ],
     "translation": "created the card"
+  },
+  "kXWZZT": {
+    "translation": "Creating a card here creates a Discord thread",
+    "message": "Creating a card here creates a Discord thread",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListDiscordSettingsModal.tsx",
+        75
+      ]
+    ]
   },
   "J5nbej": {
     "message": "Critical",
@@ -3586,7 +3682,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        148
+        166
       ]
     ],
     "translation": "Delete board"
@@ -3626,7 +3722,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        147
+        159
       ]
     ],
     "translation": "Delete list"
@@ -3638,7 +3734,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        148
+        166
       ]
     ],
     "translation": "Delete template"
@@ -3755,6 +3851,18 @@
     ],
     "translation": "Destination workspace"
   },
+  "+K0AvT": {
+    "translation": "Disconnect",
+    "message": "Disconnect",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordIntegration.tsx",
+        78
+      ]
+    ]
+  },
   "Odv3J6": {
     "message": "Disconnect GitHub",
     "placeholders": {},
@@ -3762,7 +3870,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        223
+        224
       ]
     ],
     "translation": "Disconnect GitHub"
@@ -3774,10 +3882,126 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        177
+        178
       ]
     ],
     "translation": "Disconnect Trello"
+  },
+  "OdPOhy": {
+    "translation": "Discord",
+    "message": "Discord",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordIntegration.tsx",
+        66
+      ]
+    ]
+  },
+  "wBIsjb": {
+    "translation": "Discord channel",
+    "message": "Discord channel",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDiscordChannelModal.tsx",
+        64
+      ],
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        144
+      ]
+    ]
+  },
+  "xNOkt7": {
+    "translation": "Discord channel (threads will be created here)",
+    "message": "Discord channel (threads will be created here)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/NewBoardForm.tsx",
+        163
+      ]
+    ]
+  },
+  "bssfDm": {
+    "translation": "Discord channel updated.",
+    "message": "Discord channel updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDiscordChannelModal.tsx",
+        37
+      ]
+    ]
+  },
+  "CcjikT": {
+    "translation": "Discord connected",
+    "message": "Discord connected",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordIntegration.tsx",
+        29
+      ]
+    ]
+  },
+  "/vDoOq": {
+    "translation": "Discord disconnected",
+    "message": "Discord disconnected",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordIntegration.tsx",
+        47
+      ]
+    ]
+  },
+  "0dYWgo": {
+    "translation": "Discord server ID",
+    "message": "Discord server ID",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordIntegration.tsx",
+        102
+      ]
+    ]
+  },
+  "b1udVA": {
+    "translation": "Discord settings",
+    "message": "Discord settings",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/List.tsx",
+        170
+      ],
+      [
+        "src/views/board/components/ListDiscordSettingsModal.tsx",
+        96
+      ]
+    ]
+  },
+  "Xv4Xxp": {
+    "translation": "Discord settings updated.",
+    "message": "Discord settings updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListDiscordSettingsModal.tsx",
+        56
+      ]
+    ]
   },
   "1sRmLC": {
     "message": "Discuss and collaborate on cards.",
@@ -3998,7 +4222,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        479
+        481
       ],
       [
         "src/views/card/index.tsx",
@@ -4122,7 +4346,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        106
+        113
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
@@ -4446,11 +4670,11 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        77
+        92
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        92
+        107
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -4478,7 +4702,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        106
+        107
       ]
     ],
     "translation": "Error connecting GitHub"
@@ -4550,7 +4774,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        129
+        130
       ]
     ],
     "translation": "Error disconnecting GitHub"
@@ -4562,7 +4786,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        86
+        87
       ]
     ],
     "translation": "Error disconnecting Trello"
@@ -4779,11 +5003,11 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        78
+        93
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        93
+        108
       ]
     ],
     "translation": "Failed to create board"
@@ -5263,7 +5487,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        664
+        707
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -5327,7 +5551,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        186
+        187
       ]
     ],
     "translation": "GitHub"
@@ -5339,7 +5563,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        99
+        100
       ]
     ],
     "translation": "GitHub connected"
@@ -5351,7 +5575,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        122
+        123
       ]
     ],
     "translation": "GitHub disconnected"
@@ -5928,6 +6152,18 @@
     ],
     "translation": "Invite"
   },
+  "t3YIfP": {
+    "translation": "Invite bot to server",
+    "message": "Invite bot to server",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordIntegration.tsx",
+        95
+      ]
+    ]
+  },
   "KLJ4eD": {
     "message": "Invite link copied",
     "placeholders": {},
@@ -5995,6 +6231,18 @@
       ]
     ],
     "translation": "Invite member"
+  },
+  "YFdO8I": {
+    "translation": "Invite the bot to your Discord server, then paste the server ID below.",
+    "message": "Invite the bot to your Discord server, then paste the server ID below.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordIntegration.tsx",
+        84
+      ]
+    ]
   },
   "M2zwdn": {
     "message": "Inviting members requires a Team or Pro plan. You'll be redirected to upgrade your workspace.",
@@ -6128,7 +6376,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        428
+        430
       ],
       [
         "src/views/card/index.tsx",
@@ -6333,7 +6581,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        307
+        309
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -6377,6 +6625,18 @@
       ]
     ],
     "translation": "List name"
+  },
+  "lzMTAR": {
+    "translation": "List updated",
+    "message": "List updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListDiscordSettingsModal.tsx",
+        55
+      ]
+    ]
   },
   "h16FyT": {
     "message": "Lists",
@@ -6505,7 +6765,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        95
+        102
       ]
     ],
     "translation": "Make template"
@@ -6649,7 +6909,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        386
+        388
       ],
       [
         "src/views/card/index.tsx",
@@ -6793,7 +7053,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        126
+        133
       ]
     ],
     "translation": "Move to workspace"
@@ -6856,7 +7116,7 @@
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        134
+        150
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
@@ -6920,7 +7180,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        120
+        136
       ]
     ],
     "translation": "New {0}"
@@ -6944,7 +7204,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        311
+        313
       ]
     ],
     "translation": "New card"
@@ -6996,7 +7256,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        628
+        671
       ]
     ],
     "translation": "New list"
@@ -7149,6 +7409,26 @@
     ],
     "translation": "No boards found"
   },
+  "ydE3k+": {
+    "translation": "No channel",
+    "message": "No channel",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDiscordChannelModal.tsx",
+        52
+      ],
+      [
+        "src/views/boards/components/NewBoardForm.tsx",
+        169
+      ],
+      [
+        "src/views/boards/components/NewBoardForm.tsx",
+        188
+      ]
+    ]
+  },
   "OpNhRn": {
     "message": "No credit card required",
     "placeholders": {},
@@ -7172,6 +7452,18 @@
       ]
     ],
     "translation": "No dates"
+  },
+  "DvO4LM": {
+    "translation": "No Discord activity",
+    "message": "No Discord activity",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListDiscordSettingsModal.tsx",
+        71
+      ]
+    ]
   },
   "sY2lzr": {
     "message": "No download URL available for this attachment.",
@@ -7216,7 +7508,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        660
+        703
       ]
     ],
     "translation": "No lists"
@@ -7228,7 +7520,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        665
+        708
       ]
     ],
     "translation": "No lists have been created yet"
@@ -7261,6 +7553,18 @@
     ],
     "translation": "No results found for \"{debouncedQuery}\"."
   },
+  "s7Snbr": {
+    "translation": "No roles",
+    "message": "No roles",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListDiscordSettingsModal.tsx",
+        147
+      ]
+    ]
+  },
   "Q9pQaX": {
     "message": "No roles found for this workspace yet.",
     "placeholders": {},
@@ -7284,6 +7588,18 @@
       ]
     ],
     "translation": "No webhooks configured. Add a webhook to receive notifications."
+  },
+  "EdQY6l": {
+    "translation": "None",
+    "message": "None",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListDiscordSettingsModal.tsx",
+        71
+      ]
+    ]
   },
   "9h7RDh": {
     "message": "Offer",
@@ -7912,7 +8228,7 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        69
+        76
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -7940,11 +8256,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        219
+        221
       ],
       [
         "src/views/board/index.tsx",
-        275
+        277
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -8128,7 +8444,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        316
+        318
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -8432,7 +8748,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        136
+        154
       ]
     ],
     "translation": "Remove from favorites"
@@ -8527,7 +8843,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        58
+        65
       ]
     ],
     "translation": "Removed from favorites"
@@ -8790,6 +9106,14 @@
         183
       ],
       [
+        "src/views/board/components/BoardDiscordChannelModal.tsx",
+        92
+      ],
+      [
+        "src/views/board/components/ListDiscordSettingsModal.tsx",
+        163
+      ],
+      [
         "src/views/card/components/Comment.tsx",
         202
       ],
@@ -9036,6 +9360,18 @@
     ],
     "translation": "Send feedback"
   },
+  "pi1oME": {
+    "translation": "Send message",
+    "message": "Send message",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListDiscordSettingsModal.tsx",
+        79
+      ]
+    ]
+  },
   "eus61c": {
     "message": "Send test",
     "placeholders": {},
@@ -9199,7 +9535,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        138
+        139
       ]
     ],
     "translation": "Settings | Integrations"
@@ -9577,7 +9913,6 @@
     "translation": "Status"
   },
   "hQRttt": {
-    "translation": "Submit",
     "message": "Submit",
     "placeholders": {},
     "comments": [],
@@ -9586,7 +9921,8 @@
         "src/views/card/components/NewCommentForm.tsx",
         60
       ]
-    ]
+    ],
+    "translation": "Submit"
   },
   "WYDptz": {
     "message": "Subscription Required",
@@ -9680,6 +10016,18 @@
     ],
     "translation": "System"
   },
+  "Osywwn": {
+    "translation": "Tag roles in new threads",
+    "message": "Tag roles in new threads",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListDiscordSettingsModal.tsx",
+        131
+      ]
+    ]
+  },
   "KM6m8p": {
     "message": "Team",
     "placeholders": {},
@@ -9739,11 +10087,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        538
+        581
       ],
       [
         "src/views/board/index.tsx",
-        574
+        617
       ]
     ],
     "translation": "Template"
@@ -9927,7 +10275,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        49
+        56
       ]
     ],
     "translation": "The board has been archived."
@@ -9955,7 +10303,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        50
+        57
       ]
     ],
     "translation": "The board has been unarchived."
@@ -10355,7 +10703,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        19
+        20
       ]
     ],
     "translation": "Token is required"
@@ -10383,7 +10731,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        142
+        143
       ]
     ],
     "translation": "Trello"
@@ -10395,7 +10743,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        79
+        80
       ]
     ],
     "translation": "Trello disconnected"
@@ -10484,6 +10832,18 @@
     ],
     "translation": "Unable to clear overrides"
   },
+  "wHnaT5": {
+    "translation": "Unable to connect Discord",
+    "message": "Unable to connect Discord",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordIntegration.tsx",
+        36
+      ]
+    ]
+  },
   "5MPY04": {
     "message": "Unable to copy ID",
     "placeholders": {},
@@ -10503,7 +10863,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        314
+        316
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -10672,6 +11032,18 @@
     ],
     "translation": "Unable to delete webhook"
   },
+  "H/O9sO": {
+    "translation": "Unable to disconnect Discord",
+    "message": "Unable to disconnect Discord",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordIntegration.tsx",
+        54
+      ]
+    ]
+  },
   "Oo4E6p": {
     "message": "Unable to duplicate card",
     "placeholders": {},
@@ -10794,8 +11166,12 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/BoardDiscordChannelModal.tsx",
+        44
+      ],
+      [
         "src/views/board/components/BoardDropdown.tsx",
-        68
+        75
       ]
     ],
     "translation": "Unable to update board"
@@ -10831,7 +11207,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        274
+        276
       ],
       [
         "src/views/card/index.tsx",
@@ -10906,8 +11282,12 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/ListDiscordSettingsModal.tsx",
+        63
+      ],
+      [
         "src/views/board/index.tsx",
-        218
+        220
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -10975,7 +11355,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        115
+        122
       ]
     ],
     "translation": "Unarchive board"
@@ -11483,7 +11863,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        154
+        203
       ]
     ],
     "translation": "Use template"
@@ -11895,7 +12275,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        538
+        581
       ],
       [
         "src/views/boards/index.tsx",
@@ -12264,7 +12644,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        117
+        128
       ],
       [
         "src/views/board/components/UpdateBoardSlugButton.tsx",
@@ -12276,11 +12656,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        612
+        655
       ],
       [
         "src/views/board/index.tsx",
-        670
+        713
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -12458,6 +12838,18 @@
     ],
     "translation": "Your boards have been imported."
   },
+  "sG/O6j": {
+    "translation": "Your Discord server has been disconnected.",
+    "message": "Your Discord server has been disconnected.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordIntegration.tsx",
+        48
+      ]
+    ]
+  },
   "LqWW5F": {
     "message": "Your display name has been updated.",
     "placeholders": {},
@@ -12489,7 +12881,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        100
+        101
       ]
     ],
     "translation": "Your GitHub account has been connected."
@@ -12501,7 +12893,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        123
+        124
       ]
     ],
     "translation": "Your GitHub account has been disconnected."
@@ -12513,7 +12905,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        220
+        221
       ]
     ],
     "translation": "Your GitHub account is connected."
@@ -12597,7 +12989,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        80
+        81
       ]
     ],
     "translation": "Your Trello account has been disconnected."
@@ -12609,7 +13001,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        171
+        172
       ]
     ],
     "translation": "Your Trello account is connected."
