@@ -107,7 +107,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        462
+        460
       ]
     ],
     "translation": "{0} labels"
@@ -268,8 +268,20 @@
     ],
     "translation": "14 day free trial · Switch plans or cancel anytime"
   },
+  "wWRTIU": {
+    "translation": "404 - Page Not Found | kanban",
+    "message": "404 - Page Not Found | kanban",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/pages/404.tsx",
+        11
+      ]
+    ]
+  },
   "4obmDr": {
-    "message": "404 - Page Not Found | kan.bn",
+    "message": "404 - Page Not Found | kanban",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -278,7 +290,8 @@
         11
       ]
     ],
-    "translation": "404 - Page Not Found | kan.bn"
+    "translation": "404 - Page Not Found | kanban",
+    "obsolete": true
   },
   "/rn4RE": {
     "message": "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.",
@@ -340,8 +353,20 @@
     ],
     "translation": "Actions"
   },
+  "vkYTuQ": {
+    "translation": "Activate | kanban",
+    "message": "Activate | kanban",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/pages/partner/activate.tsx",
+        46
+      ]
+    ]
+  },
   "JEt3q7": {
-    "message": "Activate | kan.bn",
+    "message": "Activate | kanban",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -350,7 +375,8 @@
         46
       ]
     ],
-    "translation": "Activate | kan.bn"
+    "translation": "Activate | kanban",
+    "obsolete": true
   },
   "mkehy7": {
     "message": "Activate your account",
@@ -1681,7 +1707,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        97
+        104
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -2277,7 +2303,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        328
+        326
       ]
     ],
     "translation": "Card title"
@@ -3069,7 +3095,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        527
+        552
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3097,7 +3123,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        537
+        562
       ]
     ],
     "translation": "Create card"
@@ -3189,7 +3215,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        424
+        422
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3998,7 +4024,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        479
+        484
       ],
       [
         "src/views/card/index.tsx",
@@ -5391,7 +5417,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        105
+        112
       ],
       [
         "src/pages/404.tsx",
@@ -5419,7 +5445,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        129
+        136
       ]
     ],
     "translation": "Go to members"
@@ -5431,7 +5457,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        141
+        148
       ]
     ],
     "translation": "Go to settings"
@@ -5443,7 +5469,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        117
+        124
       ]
     ],
     "translation": "Go to templates"
@@ -5551,6 +5577,18 @@
       ]
     ],
     "translation": "Host Kan on your own infrastructure. Ideal for organisations that need complete control over their data."
+  },
+  "yY8wAv": {
+    "translation": "Hours",
+    "message": "Hours",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/TimeSelector.tsx",
+        17
+      ]
+    ]
   },
   "WI4eGo": {
     "message": "How do I get a custom URL?",
@@ -6037,8 +6075,20 @@
     ],
     "translation": "Join workspace"
   },
+  "MQyQ5U": {
+    "translation": "Join workspace | kanban",
+    "message": "Join workspace | kanban",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/invite/index.tsx",
+        102
+      ]
+    ]
+  },
   "A23Y7X": {
-    "message": "Join workspace | kan.bn",
+    "message": "Join workspace | kanban",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -6047,7 +6097,8 @@
         102
       ]
     ],
-    "translation": "Join workspace | kan.bn"
+    "translation": "Join workspace | kanban",
+    "obsolete": true
   },
   "wM8xd8": {
     "message": "Junior",
@@ -6128,7 +6179,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        428
+        426
       ],
       [
         "src/views/card/index.tsx",
@@ -6426,8 +6477,20 @@
     ],
     "translation": "Loading..."
   },
+  "eKC2pP": {
+    "translation": "Login | kanban",
+    "message": "Login | kanban",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/login/index.tsx",
+        33
+      ]
+    ]
+  },
   "N/bcWA": {
-    "message": "Login | kan.bn",
+    "message": "Login | kanban",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -6436,7 +6499,8 @@
         33
       ]
     ],
-    "translation": "Login | kan.bn"
+    "translation": "Login | kanban",
+    "obsolete": true
   },
   "nOhz3x": {
     "message": "Logout",
@@ -6641,7 +6705,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        121
+        128
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -6649,7 +6713,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        386
+        384
       ],
       [
         "src/views/card/index.tsx",
@@ -6693,6 +6757,18 @@
       ]
     ],
     "translation": "Mentions"
+  },
+  "agRWc1": {
+    "translation": "Minutes",
+    "message": "Minutes",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/TimeSelector.tsx",
+        32
+      ]
+    ]
   },
   "hty0d5": {
     "message": "Monday",
@@ -6944,7 +7020,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        311
+        309
       ]
     ],
     "translation": "New card"
@@ -7916,7 +7992,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        193
+        191
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -7992,7 +8068,7 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        64
+        69
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -9087,7 +9163,7 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        121
+        138
       ]
     ],
     "translation": "Set due date"
@@ -9151,7 +9227,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        133
+        140
       ]
     ],
     "translation": "Settings"
@@ -9332,8 +9408,24 @@
     ],
     "translation": "Sign Up"
   },
+  "1kg9uf": {
+    "translation": "Sign up | kanban",
+    "message": "Sign up | kanban",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/signup/index.tsx",
+        36
+      ],
+      [
+        "src/views/auth/signup/index.tsx",
+        61
+      ]
+    ]
+  },
   "sUZo7y": {
-    "message": "Sign up | kan.bn",
+    "message": "Sign up | kanban",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -9346,7 +9438,8 @@
         61
       ]
     ],
-    "translation": "Sign up | kan.bn"
+    "translation": "Sign up | kanban",
+    "obsolete": true
   },
   "WRkpB1": {
     "message": "Sign up disabled",
@@ -9539,15 +9632,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        225
+        254
       ],
       [
         "src/components/SideNavigation.tsx",
-        226
+        255
       ],
       [
         "src/components/SideNavigation.tsx",
-        236
+        265
       ]
     ],
     "translation": "Start free trial"
@@ -9577,7 +9670,6 @@
     "translation": "Status"
   },
   "hQRttt": {
-    "translation": "Submit",
     "message": "Submit",
     "placeholders": {},
     "comments": [],
@@ -9586,7 +9678,8 @@
         "src/views/card/components/NewCommentForm.tsx",
         60
       ]
-    ]
+    ],
+    "translation": "Submit"
   },
   "WYDptz": {
     "message": "Subscription Required",
@@ -9803,7 +9896,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        109
+        116
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -10527,7 +10620,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        190
+        188
       ]
     ],
     "translation": "Unable to create card"
@@ -10883,7 +10976,7 @@
     "origin": [
       [
         "src/views/card/components/DueDateSelector.tsx",
-        63
+        68
       ]
     ],
     "translation": "Unable to update due date"
@@ -12209,8 +12302,20 @@
     ],
     "translation": "You can always change these later in settings."
   },
+  "JIFGFz": {
+    "translation": "You can get a custom workspace URL, like <0>kanban/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
+    "message": "You can get a custom workspace URL, like <0>kanban/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Faqs.tsx",
+        67
+      ]
+    ]
+  },
   "aelko+": {
-    "message": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
+    "message": "You can get a custom workspace URL, like <0>kanban/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -12219,7 +12324,8 @@
         67
       ]
     ],
-    "translation": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!"
+    "translation": "You can get a custom workspace URL, like <0>kanban/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
+    "obsolete": true
   },
   "kSxwQL": {
     "message": "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace.",
@@ -12370,8 +12476,20 @@
     ],
     "translation": "You signed in without a password. Set a password to enable password-based login."
   },
+  "FIIppI": {
+    "translation": "You've been invited to join a workspace on kanban.",
+    "message": "You've been invited to join a workspace on kanban.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/invite/index.tsx",
+        145
+      ]
+    ]
+  },
   "2SePRT": {
-    "message": "You've been invited to join a workspace on kan.bn.",
+    "message": "You've been invited to join a workspace on kanban.",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -12380,7 +12498,8 @@
         145
       ]
     ],
-    "translation": "You've been invited to join a workspace on kan.bn."
+    "translation": "You've been invited to join a workspace on kanban.",
+    "obsolete": true
   },
   "uOqaMC": {
     "message": "You've been invited to join a workspace.",

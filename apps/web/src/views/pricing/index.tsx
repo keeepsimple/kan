@@ -31,7 +31,7 @@ export default function PricingView() {
 
   return (
     <Layout>
-      <PageHead title={`${t`Pricing`} | kan.bn`} />
+      <PageHead title={`${t`Pricing`} | kanban`} />
 
       <div className="flex h-full w-full flex-col lg:pt-[5rem]">
         <div className="w-full pb-10 pt-32">

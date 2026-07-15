@@ -8,7 +8,7 @@ import { usePopup } from "~/providers/popup";
 
 const displayBaseUrl =
   env("NEXT_PUBLIC_KAN_ENV") === "cloud"
-    ? "kan.bn"
+    ? "kanban"
     : env("NEXT_PUBLIC_BASE_URL");
 
 const linkBaseUrl = env("NEXT_PUBLIC_BASE_URL");

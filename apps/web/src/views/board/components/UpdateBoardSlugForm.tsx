@@ -136,7 +136,7 @@ export function UpdateBoardSlugForm({
               ? t`This board URL has already been taken`
               : undefined)
           }
-          prefix={`${env("NEXT_PUBLIC_KAN_ENV") === "cloud" ? "kan.bn" : env("NEXT_PUBLIC_BASE_URL")}/${workspaceSlug}/`}
+          prefix={`${env("NEXT_PUBLIC_KAN_ENV") === "cloud" ? "kanban" : env("NEXT_PUBLIC_BASE_URL")}/${workspaceSlug}/`}
           onKeyDown={async (e) => {
             if (e.key === "Enter") {
               e.preventDefault();
