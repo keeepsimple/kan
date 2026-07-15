@@ -233,11 +233,13 @@ export function NewCardForm({
     })) ?? [];
 
   const formattedLists =
-    boardData?.lists.map((list) => ({
-      key: list.publicId,
-      value: list.name,
-      selected: list.publicId === watch("listPublicId"),
-    })) ?? [];
+    boardData?.lists
+      .filter((list) => list.discordBehaviour !== "notify")
+      .map((list) => ({
+        key: list.publicId,
+        value: list.name,
+        selected: list.publicId === watch("listPublicId"),
+      })) ?? [];
 
   const formattedMembers =
     boardData?.workspace.members.map((member) => ({

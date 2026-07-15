@@ -51,6 +51,7 @@ import { MoveBoardForm } from "./components/MoveBoardForm";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
 import List from "./components/List";
+import ListDiscordSettingsModal from "./components/ListDiscordSettingsModal";
 import { NewCardForm } from "./components/NewCardForm";
 import { NewListForm } from "./components/NewListForm";
 import { NewTemplateForm } from "./components/NewTemplateForm";
@@ -401,6 +402,37 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             boardPublicId={boardId ?? ""}
             currentChannelId={boardData?.discordChannelId ?? null}
           />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "LIST_DISCORD_SETTINGS"}
+        >
+          {(() => {
+            const selectedList = boardData?.lists.find(
+              (list) => list.publicId === selectedPublicListId,
+            );
+            let roleIds: string[] = [];
+            try {
+              const parsed: unknown = JSON.parse(
+                selectedList?.discordRoleIds ?? "[]",
+              );
+              if (Array.isArray(parsed))
+                roleIds = parsed.filter(
+                  (id): id is string => typeof id === "string",
+                );
+            } catch {
+              // ignore malformed config
+            }
+            return (
+              <ListDiscordSettingsModal
+                listPublicId={selectedPublicListId}
+                currentBehaviour={selectedList?.discordBehaviour ?? null}
+                currentRoleIds={roleIds}
+                queryParams={queryParams}
+              />
+            );
+          })()}
         </Modal>
 
         <Modal
