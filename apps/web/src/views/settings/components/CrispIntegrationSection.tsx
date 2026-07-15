@@ -36,6 +36,7 @@ export function CrispIntegrationSection({
     handleSubmit,
     watch,
     reset,
+    resetField,
     formState: { errors },
   } = useForm<CrispFormValues>({
     resolver: zodResolver(crispFormSchema),
@@ -160,7 +161,12 @@ export function CrispIntegrationSection({
               errorMessage={errors.crispWebsiteId?.message}
             />
             <div className="flex flex-col gap-1">
-              <select className={selectClassName} {...register("boardPublicId")}>
+              <select
+                className={selectClassName}
+                {...register("boardPublicId", {
+                  onChange: () => resetField("listPublicId"),
+                })}
+              >
                 <option value="">{t`Select a board`}</option>
                 {(boards ?? []).map((board) => (
                   <option key={board.publicId} value={board.publicId}>

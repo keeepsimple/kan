@@ -153,6 +153,18 @@ describe("handleCrispWebhook", () => {
     expect(mockCardCreate).not.toHaveBeenCalled();
   });
 
+  it("ignores notes not sent by an operator with 200", async () => {
+    mockGetActiveBySecret.mockResolvedValueOnce(mockIntegration);
+
+    const event = noteEvent("#card X");
+    event.data.from = "user";
+
+    const result = await handleCrispWebhook(mockDb, "secret", event);
+
+    expect(result.status).toBe(200);
+    expect(mockCardCreate).not.toHaveBeenCalled();
+  });
+
   it("ignores notes from a different crisp website with 200", async () => {
     mockGetActiveBySecret.mockResolvedValueOnce(mockIntegration);
 
