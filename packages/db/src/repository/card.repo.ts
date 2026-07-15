@@ -259,6 +259,7 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
       description: true,
       listId: true,
       dueDate: true,
+      discordThreadId: true,
     },
     with: {
       list: {

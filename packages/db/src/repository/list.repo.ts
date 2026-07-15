@@ -213,6 +213,7 @@ export const getByPublicId = async (db: dbClient, listPublicId: string) => {
       name: true,
       boardId: true,
       index: true,
+      discordBehaviour: true,
     },
     where: and(eq(lists.publicId, listPublicId), isNull(lists.deletedAt)),
   });
@@ -419,7 +420,7 @@ export const getWorkspaceAndListIdByListPublicId = async (
   listPublicId: string,
 ) => {
   const result = await db.query.lists.findFirst({
-    columns: { id: true, name: true, createdBy: true },
+    columns: { id: true, name: true, createdBy: true, discordBehaviour: true, discordRoleIds: true },
     where: and(eq(lists.publicId, listPublicId), isNull(lists.deletedAt)),
     with: {
       board: {
@@ -427,6 +428,7 @@ export const getWorkspaceAndListIdByListPublicId = async (
           publicId: true,
           workspaceId: true,
           name: true,
+          discordChannelId: true,
         },
       },
     },
@@ -441,6 +443,9 @@ export const getWorkspaceAndListIdByListPublicId = async (
         workspaceId: result.board.workspaceId,
         boardPublicId: result.board.publicId,
         boardName: result.board.name,
+        discordBehaviour: result.discordBehaviour,
+        discordRoleIds: result.discordRoleIds,
+        boardDiscordChannelId: result.board.discordChannelId,
       }
     : null;
 };
