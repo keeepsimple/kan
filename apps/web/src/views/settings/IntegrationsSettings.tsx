@@ -14,6 +14,7 @@ import { PageHead } from "~/components/PageHead";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import DiscordIntegration from "./components/DiscordIntegration";
 
 const githubTokenSchema = z.object({
   token: z.string().min(1, { message: t`Token is required` }),
@@ -225,6 +226,8 @@ export default function IntegrationsSettings() {
           </>
         )}
       </div>
+
+      <DiscordIntegration />
 
       {/* Global modals */}
       <Modal
