@@ -27,6 +27,11 @@ import {
   assertPermission,
 } from "../utils/permissions";
 import {
+  assertListAllowsCardCreation,
+  notifyCardCreated,
+  notifyCardMoved,
+} from "../utils/discord";
+import {
   createCardWebhookPayload,
   sendWebhooksForWorkspace,
 } from "../utils/webhook";
@@ -76,6 +81,8 @@ export const cardRouter = createTRPCRouter({
         });
 
       await assertPermission(ctx.db, userId, list.workspaceId, "card:create");
+
+      assertListAllowsCardCreation(list);
 
       const newCard = await cardRepo.create(ctx.db, {
         title: input.title,
@@ -208,6 +215,19 @@ export const cardRouter = createTRPCRouter({
         ),
       ).catch((error) => {
         console.error("Webhook delivery failed:", error);
+      });
+
+      // Fire Discord thread creation (non-blocking)
+      notifyCardCreated(ctx.db, {
+        cardId: newCard.id,
+        cardTitle: input.title,
+        boardName: list.boardName,
+        workspaceId: list.workspaceId,
+        discordChannelId: list.boardDiscordChannelId,
+        discordBehaviour: list.discordBehaviour,
+        discordRoleIds: list.discordRoleIds,
+      }).catch((error) => {
+        console.error("Discord notification failed:", error);
       });
 
       return newCard;
@@ -906,6 +926,7 @@ export const cardRouter = createTRPCRouter({
             name: string;
             boardId: number;
             index: number;
+            discordBehaviour: string | null;
           }
         | undefined;
 
@@ -1101,6 +1122,21 @@ export const cardRouter = createTRPCRouter({
       ).catch((error) => {
         console.error("Webhook delivery failed:", error);
       });
+
+      // Fire Discord move notification (non-blocking)
+      if (movedToNewList && newList) {
+        notifyCardMoved(ctx.db, {
+          cardTitle: result.title,
+          boardName: card.boardName,
+          userName: ctx.user?.name ?? null,
+          workspaceId: card.workspaceId,
+          newListDiscordBehaviour: newList.discordBehaviour,
+          cardDiscordThreadId: existingCard.discordThreadId,
+          newListBoardId: newList.boardId,
+        }).catch((error) => {
+          console.error("Discord notification failed:", error);
+        });
+      }
 
       return result;
     }),
