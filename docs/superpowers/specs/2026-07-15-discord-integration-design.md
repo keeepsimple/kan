@@ -36,7 +36,9 @@ Lỗi từ Discord: trả về kết quả `{ success, error }`, log qua `@kan/l
 ### Env mới
 
 - `DISCORD_BOT_TOKEN` — token của bot.
-- `DISCORD_CLIENT_ID` — để dựng link invite bot: `https://discord.com/oauth2/authorize?client_id={id}&scope=bot&permissions={perms}`.
+- `DISCORD_BOT_CLIENT_ID` — để dựng link invite bot: `https://discord.com/oauth2/authorize?client_id={id}&scope=bot&permissions={perms}`.
+
+(Không tái sử dụng `DISCORD_CLIENT_ID`/`DISCORD_CLIENT_SECRET` sẵn có — cặp đó đang phục vụ đăng nhập social qua Better Auth.)
 
 Quyền bot tối thiểu: View Channels, Send Messages, Create Public Threads, Send Messages in Threads, Mention Everyone (để tag được role không mentionable).
 
