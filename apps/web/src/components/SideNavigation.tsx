@@ -58,6 +58,13 @@ export default function SideNavigation({
     { enabled: !!workspace.publicId && workspace.publicId.length >= 12 },
   );
 
+  const { data: boards } = api.board.all.useQuery(
+    { workspacePublicId: workspace.publicId, type: "regular" },
+    { enabled: !!workspace.publicId && workspace.publicId.length >= 12 },
+  );
+
+  const favoriteBoards = boards?.filter((board) => board.favorite) ?? [];
+
   const subscriptions = workspaceData?.subscriptions as
     | Subscription[]
     | undefined;
@@ -160,7 +167,7 @@ export default function SideNavigation({
             {!isCollapsed && (
               <Link href="/" className="block">
                 <h1 className="pl-2 text-[16px] font-bold tracking-tight text-neutral-900 dark:text-dark-1000">
-                  kan.bn
+                  kanban
                 </h1>
               </Link>
             )}
@@ -199,6 +206,28 @@ export default function SideNavigation({
                   onCloseSideNav={onCloseSideNav}
                   keyboardShortcut={item.keyboardShortcut}
                 />
+                {item.href === "/boards" &&
+                  !isCollapsed &&
+                  favoriteBoards.length > 0 && (
+                    <ul className="ml-6 mt-1 space-y-1 border-l border-light-300 pl-2 dark:border-dark-400">
+                      {favoriteBoards.map((board) => (
+                        <li key={board.publicId}>
+                          <Link
+                            href={`/boards/${board.publicId}`}
+                            onClick={onCloseSideNav}
+                            className={twMerge(
+                              "block truncate rounded-md px-2 py-1 text-sm leading-6 hover:bg-light-200 hover:text-light-1000 dark:hover:bg-dark-200 dark:hover:text-dark-1000",
+                              router.asPath === `/boards/${board.publicId}`
+                                ? "bg-light-200 text-light-1000 dark:bg-dark-200 dark:text-dark-1000"
+                                : "text-neutral-600 dark:text-dark-900",
+                            )}
+                          >
+                            {board.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
               </li>
             ))}
           </ul>
