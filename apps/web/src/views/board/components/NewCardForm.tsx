@@ -17,6 +17,7 @@ import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
 import DateSelector from "~/components/DateSelector";
+import TimeSelector from "~/components/TimeSelector";
 import Editor from "~/components/Editor";
 import Input from "~/components/Input";
 import LabelIcon from "~/components/LabelIcon";
@@ -162,9 +163,6 @@ export function NewCardForm({
                     ...member,
                     deletedAt: null,
                   })) ?? [],
-              comments: [],
-              checklists: [],
-              attachments: [],
               _filteredLabels: labelPublicIds.map((id) => ({ publicId: id })),
               _filteredMembers: memberPublicIds.map((id) => ({ publicId: id })),
               index: position === "start" ? 0 : list.cards.length,
@@ -476,7 +474,14 @@ export function NewCardForm({
               className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500"
             >
               {dueDate ? (
-                <span>{format(dueDate, "MMM d, yyyy")}</span>
+                <span>
+                  {format(
+                    dueDate,
+                    dueDate.getHours() !== 0 || dueDate.getMinutes() !== 0
+                      ? "MMM d, yyyy, HH:mm"
+                      : "MMM d, yyyy",
+                  )}
+                </span>
               ) : (
                 <>{t`Due date`}</>
               )}
@@ -499,11 +504,31 @@ export function NewCardForm({
                   <DateSelector
                     selectedDate={dueDate ?? undefined}
                     onDateSelect={(date) => {
+                      if (date && dueDate) {
+                        // Preserve previously selected time of day
+                        date = new Date(date);
+                        date.setHours(
+                          dueDate.getHours(),
+                          dueDate.getMinutes(),
+                          0,
+                          0,
+                        );
+                      }
                       setValue("dueDate", date ?? null);
-                      setIsDateSelectorOpen(false);
                     }}
                     weekStartsOn={workspace.weekStartDay}
                   />
+                  <div className="border-t border-light-200 px-4 py-3 dark:border-dark-200">
+                    <TimeSelector
+                      value={dueDate}
+                      onChange={(hours, minutes) => {
+                        if (!dueDate) return;
+                        const next = new Date(dueDate);
+                        next.setHours(hours, minutes, 0, 0);
+                        setValue("dueDate", next);
+                      }}
+                    />
+                  </div>
                 </div>
               </>
             )}

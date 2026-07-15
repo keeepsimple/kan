@@ -1,6 +1,6 @@
 {
-  "id": "4d479ab0-3d7e-45ed-b167-a3eef5b42706",
-  "prevId": "d769cb85-3b44-4375-bc1c-d97f866f8748",
+  "id": "51bbac10-36ea-4dcd-a1b2-ec421f1a1f0f",
+  "prevId": "baf0ee8e-8aa9-4817-be5d-5fb8b3a7f66a",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -1818,6 +1818,143 @@
           "nullsNotDistinct": false,
           "columns": [
             "publicId"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": true
+    },
+    "public.crisp_integrations": {
+      "name": "crisp_integrations",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "publicId": {
+          "name": "publicId",
+          "type": "varchar(12)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "workspaceId": {
+          "name": "workspaceId",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "crispWebsiteId": {
+          "name": "crispWebsiteId",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "listId": {
+          "name": "listId",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "webhookSecret": {
+          "name": "webhookSecret",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdBy": {
+          "name": "createdBy",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "crisp_integrations_workspaceId_workspace_id_fk": {
+          "name": "crisp_integrations_workspaceId_workspace_id_fk",
+          "tableFrom": "crisp_integrations",
+          "tableTo": "workspace",
+          "columnsFrom": [
+            "workspaceId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "crisp_integrations_listId_list_id_fk": {
+          "name": "crisp_integrations_listId_list_id_fk",
+          "tableFrom": "crisp_integrations",
+          "tableTo": "list",
+          "columnsFrom": [
+            "listId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "crisp_integrations_createdBy_user_id_fk": {
+          "name": "crisp_integrations_createdBy_user_id_fk",
+          "tableFrom": "crisp_integrations",
+          "tableTo": "user",
+          "columnsFrom": [
+            "createdBy"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "crisp_integrations_publicId_unique": {
+          "name": "crisp_integrations_publicId_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "publicId"
+          ]
+        },
+        "crisp_integrations_workspaceId_unique": {
+          "name": "crisp_integrations_workspaceId_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "workspaceId"
+          ]
+        },
+        "crisp_integrations_webhookSecret_unique": {
+          "name": "crisp_integrations_webhookSecret_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "webhookSecret"
           ]
         }
       },

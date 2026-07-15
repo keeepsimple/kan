@@ -69,7 +69,7 @@ export default function UnsubscribePage() {
 
   return (
     <>
-      <PageHead title={`${title} | kan.bn`} />
+      <PageHead title={`${title} | kanban`} />
       <div className="relative flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
         <PatternedBackground />
         <div className="z-10 w-full max-w-md space-y-6">

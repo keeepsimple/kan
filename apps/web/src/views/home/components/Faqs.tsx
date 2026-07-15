@@ -67,7 +67,7 @@ const Faqs = () => {
           <Trans>
             You can get a custom workspace URL, like{" "}
             <Link href="https://kan.bn/kan" className="underline">
-              kan.bn/kan
+              kanban/kan
             </Link>
             , by going into your{" "}
             <Link href="https://kan.bn/settings" className="underline">

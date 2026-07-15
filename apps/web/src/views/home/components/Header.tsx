@@ -76,7 +76,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
             <div className="my-auto flex items-center justify-between">
               <Link href="/">
                 <h1 className="text-lg font-bold tracking-tight text-neutral-900 dark:text-dark-1000 lg:w-[200px]">
-                  kan.bn
+                  kanban
                 </h1>
               </Link>
             </div>

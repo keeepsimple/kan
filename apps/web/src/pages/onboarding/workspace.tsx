@@ -21,7 +21,7 @@ export default function WorkspaceDetailsPage() {
 
   return (
     <>
-      <PageHead title="Create workspace | kan.bn" />
+      <PageHead title="Create workspace | kanban" />
       <WorkspaceDetailsView />
     </>
   );

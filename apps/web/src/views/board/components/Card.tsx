@@ -50,6 +50,9 @@ const Card = ({
 }) => {
   const { dateLocale } = useLocalisation();
   const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;
+  const showTime = dueDate
+    ? dueDate.getHours() !== 0 || dueDate.getMinutes() !== 0
+    : false;
   const isOverdue = dueDate ? isBefore(dueDate, startOfDay(new Date())) : false;
   const completedItems = checklists.reduce((acc, checklist) => {
     return acc + checklist.items.filter((item) => item.completed).length;
@@ -109,9 +112,12 @@ const Card = ({
                 >
                   <HiOutlineClock className="h-4 w-4" />
                   <span className="text-[11px]">
-                    {format(dueDate, showYear ? "do MMM yyyy" : "do MMM", {
-                      locale: dateLocale,
-                    })}
+                    {format(
+                      dueDate,
+                      (showYear ? "do MMM yyyy" : "do MMM") +
+                        (showTime ? ", HH:mm" : ""),
+                      { locale: dateLocale },
+                    )}
                   </span>
                 </div>
               )}

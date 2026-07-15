@@ -49,7 +49,7 @@ export default function OSSFriendsView() {
 
   return (
     <Layout>
-      <PageHead title={`${t`OSS Friends`} | kan.bn`} />
+      <PageHead title={`${t`OSS Friends`} | kanban`} />
 
       <div className="flex h-full w-full flex-col lg:pt-[5rem]">
         <div className="w-full pb-10 pt-32">

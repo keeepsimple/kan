@@ -24,7 +24,7 @@ export default function UpgradeSelectPlanPage() {
 
   return (
     <>
-      <PageHead title="Upgrade | kan.bn" />
+      <PageHead title="Upgrade | kanban" />
       <SelectPlanView />
     </>
   );

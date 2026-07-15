@@ -99,7 +99,7 @@ export default function InvitePage() {
   const PageWrapper = ({ children }: { children: React.ReactNode }) => {
     return (
       <>
-        <PageHead title={t`Join workspace | kan.bn`} />
+        <PageHead title={t`Join workspace | kanban`} />
         {children}
       </>
     );
@@ -142,7 +142,7 @@ export default function InvitePage() {
             {!error ? (
               <p className="mt-4 text-center text-sm text-light-900 dark:text-dark-800">
                 {isCloudEnv
-                  ? t`You've been invited to join a workspace on kan.bn.`
+                  ? t`You've been invited to join a workspace on kanban.`
                   : t`You've been invited to join a workspace.`}
               </p>
             ) : (

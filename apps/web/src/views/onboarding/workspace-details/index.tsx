@@ -229,7 +229,7 @@ export default function WorkspaceNameView() {
                         );
                       }}
                       disabled={!isProToggle}
-                      prefix="kan.bn/"
+                      prefix="kanban/"
                       className={
                         !isProToggle ? "cursor-not-allowed opacity-50" : ""
                       }
@@ -330,7 +330,7 @@ export default function WorkspaceNameView() {
               <div className="flex flex-1 items-center gap-1.5 rounded-md bg-light-200 px-2.5 py-1 dark:bg-dark-300">
                 <HiLockClosed className="h-3 w-3 flex-shrink-0 text-light-700 dark:text-dark-700" />
                 <span className="truncate text-xs text-light-900 dark:text-dark-900">
-                  kan.bn/
+                  kanban/
                   <span className="text-light-1000 dark:text-dark-1000">
                     {previewSlug}
                   </span>
@@ -375,7 +375,7 @@ export default function WorkspaceNameView() {
 
               {/* Footer */}
               <p className="mt-2 text-[10px] font-semibold text-light-900 dark:text-dark-900">
-                kan.bn
+                kanban
               </p>
             </div>
           </div>

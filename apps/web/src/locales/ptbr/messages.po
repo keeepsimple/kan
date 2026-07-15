@@ -1400,8 +1400,8 @@ msgid "Join workspace"
 msgstr "Entrar no workspace"
 
 #: src/views/invite/index.tsx:91
-msgid "Join workspace | kan.bn"
-msgstr "Entrar no workspace | kan.bn"
+msgid "Join workspace | kanban"
+msgstr "Entrar no workspace | kanban"
 
 #: src/views/boards/components/TemplateBoards.tsx:70
 msgid "Junior"
@@ -1501,8 +1501,8 @@ msgid "Lists"
 msgstr "Listas"
 
 #: src/views/auth/login/index.tsx:33
-msgid "Login | kan.bn"
-msgstr "Login | kan.bn"
+msgid "Login | kanban"
+msgstr "Login | kanban"
 
 #: src/components/UserMenu.tsx:224
 msgid "Logout"
@@ -2161,8 +2161,8 @@ msgstr "Cadastrar"
 
 #: src/views/auth/signup/index.tsx:34
 #: src/views/auth/signup/index.tsx:59
-msgid "Sign up | kan.bn"
-msgstr "Cadastre-se | kan.bn"
+msgid "Sign up | kanban"
+msgstr "Cadastre-se | kanban"
 
 #: src/views/auth/signup/index.tsx:44
 msgid "Sign up disabled"
@@ -2811,8 +2811,8 @@ msgid "You are about to change your password."
 msgstr "Você está prestes a alterar sua senha."
 
 #: src/views/home/components/Faqs.tsx:67
-msgid "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!"
-msgstr "Você pode obter uma URL personalizada do workspace, como <0>kan.bn/kan</0>, indo nas <1>configurações do workspace</1> e comprando uma assinatura pro. Todas as assinaturas ajudam a financiar o desenvolvimento do projeto!"
+msgid "You can get a custom workspace URL, like <0>kanban/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!"
+msgstr "Você pode obter uma URL personalizada do workspace, como <0>kanban/kan</0>, indo nas <1>configurações do workspace</1> e comprando uma assinatura pro. Todas as assinaturas ajudam a financiar o desenvolvimento do projeto!"
 
 #: src/views/home/components/Faqs.tsx:111
 msgid "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace."
@@ -2839,8 +2839,8 @@ msgid "You have unlimited seats with your Pro Plan. There is no additional charg
 msgstr "Você tem assentos ilimitados com seu Plano Pro. Não há custo adicional para novos membros!"
 
 #: src/views/invite/index.tsx:134
-msgid "You've been invited to join a workspace on kan.bn."
-msgstr "Você foi convidado para entrar em um workspace no kan.bn."
+msgid "You've been invited to join a workspace on kanban."
+msgstr "Você foi convidado para entrar em um workspace no kanban."
 
 #: src/views/invite/index.tsx:135
 msgid "You've been invited to join a workspace."

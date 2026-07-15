@@ -24,7 +24,7 @@ export default function SelectPlanPage() {
 
   return (
     <>
-      <PageHead title="Select plan | kan.bn" />
+      <PageHead title="Select plan | kanban" />
       <SelectPlanView />
     </>
   );

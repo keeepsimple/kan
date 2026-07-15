@@ -107,7 +107,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        464
+        462
       ]
     ],
     "translation": "{0} labels"
@@ -268,8 +268,8 @@
     ],
     "translation": "14 day free trial · Switch plans or cancel anytime"
   },
-  "4obmDr": {
-    "message": "404 - Page Not Found | kan.bn",
+  "wWRTIU": {
+    "message": "404 - Page Not Found | kanban",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -278,7 +278,20 @@
         11
       ]
     ],
-    "translation": "404 - Page Not Found | kan.bn"
+    "translation": "404 - Page Not Found | kanban"
+  },
+  "4obmDr": {
+    "message": "404 - Page Not Found | kanban",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/pages/404.tsx",
+        11
+      ]
+    ],
+    "translation": "404 - Page Not Found | kanban",
+    "obsolete": true
   },
   "/rn4RE": {
     "message": "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.",
@@ -340,8 +353,8 @@
     ],
     "translation": "Actions"
   },
-  "JEt3q7": {
-    "message": "Activate | kan.bn",
+  "vkYTuQ": {
+    "message": "Activate | kanban",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -350,7 +363,20 @@
         46
       ]
     ],
-    "translation": "Activate | kan.bn"
+    "translation": "Activate | kanban"
+  },
+  "JEt3q7": {
+    "message": "Activate | kanban",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/pages/partner/activate.tsx",
+        46
+      ]
+    ],
+    "translation": "Activate | kanban",
+    "obsolete": true
   },
   "mkehy7": {
     "message": "Activate your account",
@@ -918,6 +944,18 @@
     ],
     "translation": "Already have an account? <0><1>Sign in</1></0>"
   },
+  "GjPNIV": {
+    "translation": "An error occurred while connecting Crisp.",
+    "message": "An error occurred while connecting Crisp.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        73
+      ]
+    ]
+  },
   "j1+HPc": {
     "message": "An error occurred while connecting your GitHub account.",
     "placeholders": {},
@@ -925,10 +963,22 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        108
+        111
       ]
     ],
     "translation": "An error occurred while connecting your GitHub account."
+  },
+  "5xFDbn": {
+    "translation": "An error occurred while disconnecting Crisp.",
+    "message": "An error occurred while disconnecting Crisp.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        92
+      ]
+    ]
   },
   "Dz63YI": {
     "message": "An error occurred while disconnecting your GitHub account.",
@@ -937,7 +987,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        131
+        134
       ]
     ],
     "translation": "An error occurred while disconnecting your GitHub account."
@@ -949,7 +999,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        88
+        91
       ]
     ],
     "translation": "An error occurred while disconnecting your Trello account."
@@ -1522,6 +1572,18 @@
     ],
     "translation": "Board archived"
   },
+  "h6ViRF": {
+    "translation": "Board is required",
+    "message": "Board is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        13
+      ]
+    ]
+  },
   "wE3hGS": {
     "message": "Board moved",
     "placeholders": {},
@@ -1693,7 +1755,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        97
+        104
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -2149,7 +2211,7 @@
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        267
+        269
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
@@ -2233,7 +2295,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        67
+        69
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2301,7 +2363,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        330
+        328
       ]
     ],
     "translation": "Card title"
@@ -2334,7 +2396,7 @@
     "origin": [
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
-        80
+        85
       ]
     ]
   },
@@ -2798,6 +2860,18 @@
     ],
     "translation": "Connect"
   },
+  "/TNAU6": {
+    "translation": "Connect Crisp",
+    "message": "Connect Crisp",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        209
+      ]
+    ]
+  },
   "3jod3l": {
     "message": "Connect GitHub",
     "placeholders": {},
@@ -2805,7 +2879,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        213
+        216
       ]
     ],
     "translation": "Connect GitHub"
@@ -2817,7 +2891,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        163
+        166
       ]
     ],
     "translation": "Connect Trello"
@@ -2841,7 +2915,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        192
+        195
       ]
     ],
     "translation": "Connect your GitHub account to import projects."
@@ -2853,7 +2927,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        150
+        153
       ]
     ],
     "translation": "Connect your Trello account to import boards."
@@ -3018,6 +3092,30 @@
     ],
     "translation": "Convert to link"
   },
+  "6V3Ea3": {
+    "translation": "Copied",
+    "message": "Copied",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        110
+      ]
+    ]
+  },
+  "he3ygx": {
+    "translation": "Copy",
+    "message": "Copy",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        133
+      ]
+    ]
+  },
   "5RkSzq": {
     "message": "Copy board link",
     "placeholders": {},
@@ -3049,7 +3147,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        257
+        259
       ]
     ],
     "translation": "Copy checklists"
@@ -3061,7 +3159,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        221
+        223
       ]
     ],
     "translation": "Copy labels"
@@ -3085,10 +3183,22 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        239
+        241
       ]
     ],
     "translation": "Copy members"
+  },
+  "VlNydw": {
+    "translation": "Copy the webhook URL into your Crisp dashboard to finish setup.",
+    "message": "Copy the webhook URL into your Crisp dashboard to finish setup.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        66
+      ]
+    ]
   },
   "7mrkyO": {
     "message": "Copy ticket ID",
@@ -3141,7 +3251,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        529
+        554
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3169,10 +3279,22 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        539
+        564
       ]
     ],
     "translation": "Create card"
+  },
+  "e2Swue": {
+    "translation": "Create cards from Crisp conversations: choose a target board and list, then paste the generated webhook URL into your Crisp dashboard.",
+    "message": "Create cards from Crisp conversations: choose a target board and list, then paste the generated webhook URL into your Crisp dashboard.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        152
+      ]
+    ]
   },
   "d33Usy": {
     "message": "Create checklist",
@@ -3261,7 +3383,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        426
+        424
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3306,7 +3428,7 @@
     "origin": [
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
-        74
+        79
       ]
     ]
   },
@@ -3370,7 +3492,67 @@
     "origin": [
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
-        75
+        80
+      ]
+    ]
+  },
+  "ZHkrEQ": {
+    "translation": "Crisp",
+    "message": "Crisp",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        119
+      ]
+    ]
+  },
+  "YI9zTX": {
+    "translation": "Crisp connected",
+    "message": "Crisp connected",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        65
+      ]
+    ]
+  },
+  "tsoWgs": {
+    "translation": "Crisp disconnected",
+    "message": "Crisp disconnected",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        84
+      ]
+    ]
+  },
+  "j7J5wV": {
+    "translation": "Crisp is connected. Operator notes starting with #card create cards in",
+    "message": "Crisp is connected. Operator notes starting with #card create cards in",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        124
+      ]
+    ]
+  },
+  "0a1IGT": {
+    "translation": "Crisp Website ID",
+    "message": "Crisp Website ID",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        159
       ]
     ]
   },
@@ -3863,6 +4045,18 @@
       ]
     ]
   },
+  "3VeJOX": {
+    "translation": "Disconnect Crisp",
+    "message": "Disconnect Crisp",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        146
+      ]
+    ]
+  },
   "Odv3J6": {
     "message": "Disconnect GitHub",
     "placeholders": {},
@@ -3870,7 +4064,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        224
+        227
       ]
     ],
     "translation": "Disconnect GitHub"
@@ -3882,7 +4076,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        178
+        181
       ]
     ],
     "translation": "Disconnect Trello"
@@ -3987,7 +4181,7 @@
       ],
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
-        96
+        101
       ]
     ]
   },
@@ -3999,7 +4193,7 @@
     "origin": [
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
-        56
+        61
       ]
     ]
   },
@@ -4222,7 +4416,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        481
+        486
       ],
       [
         "src/views/card/index.tsx",
@@ -4286,7 +4480,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        279
+        281
       ]
     ],
     "translation": "Duplicate"
@@ -4298,7 +4492,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        111
+        113
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -4318,7 +4512,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        279
+        281
       ]
     ],
     "translation": "Duplicating…"
@@ -4514,7 +4708,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        200
+        202
       ]
     ],
     "translation": "End of list"
@@ -4695,6 +4889,18 @@
     ],
     "translation": "Error Changing Password"
   },
+  "jAe8N7": {
+    "translation": "Error connecting Crisp",
+    "message": "Error connecting Crisp",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        72
+      ]
+    ]
+  },
   "yhLUU8": {
     "message": "Error connecting GitHub",
     "placeholders": {},
@@ -4702,7 +4908,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        107
+        110
       ]
     ],
     "translation": "Error connecting GitHub"
@@ -4767,6 +4973,18 @@
     ],
     "translation": "Error deleting workspace"
   },
+  "wNGk6p": {
+    "translation": "Error disconnecting Crisp",
+    "message": "Error disconnecting Crisp",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        91
+      ]
+    ]
+  },
   "gQ/02p": {
     "message": "Error disconnecting GitHub",
     "placeholders": {},
@@ -4774,7 +4992,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        130
+        133
       ]
     ],
     "translation": "Error disconnecting GitHub"
@@ -4786,7 +5004,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        87
+        90
       ]
     ],
     "translation": "Error disconnecting Trello"
@@ -5551,7 +5769,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        187
+        190
       ]
     ],
     "translation": "GitHub"
@@ -5563,7 +5781,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        100
+        103
       ]
     ],
     "translation": "GitHub connected"
@@ -5575,7 +5793,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        123
+        126
       ]
     ],
     "translation": "GitHub disconnected"
@@ -5615,7 +5833,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        105
+        112
       ],
       [
         "src/pages/404.tsx",
@@ -5643,7 +5861,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        129
+        136
       ]
     ],
     "translation": "Go to members"
@@ -5655,7 +5873,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        141
+        148
       ]
     ],
     "translation": "Go to settings"
@@ -5667,7 +5885,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        117
+        124
       ]
     ],
     "translation": "Go to templates"
@@ -5775,6 +5993,18 @@
       ]
     ],
     "translation": "Host Kan on your own infrastructure. Ideal for organisations that need complete control over their data."
+  },
+  "yY8wAv": {
+    "message": "Hours",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/TimeSelector.tsx",
+        17
+      ]
+    ],
+    "translation": "Hours"
   },
   "WI4eGo": {
     "message": "How do I get a custom URL?",
@@ -6023,6 +6253,30 @@
       ]
     ],
     "translation": "in"
+  },
+  "OTnexY": {
+    "translation": "In a conversation, write a private note starting with #card followed by the card title.",
+    "message": "In a conversation, write a private note starting with #card followed by the card title.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        139
+      ]
+    ]
+  },
+  "u13RJt": {
+    "translation": "In Crisp, go to Settings → Websites → your website → Web Hooks and paste this URL.",
+    "message": "In Crisp, go to Settings → Websites → your website → Web Hooks and paste this URL.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        137
+      ]
+    ]
   },
   "WbTDwg": {
     "message": "In Progress",
@@ -6285,8 +6539,8 @@
     ],
     "translation": "Join workspace"
   },
-  "A23Y7X": {
-    "message": "Join workspace | kan.bn",
+  "MQyQ5U": {
+    "message": "Join workspace | kanban",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -6295,7 +6549,20 @@
         102
       ]
     ],
-    "translation": "Join workspace | kan.bn"
+    "translation": "Join workspace | kanban"
+  },
+  "A23Y7X": {
+    "message": "Join workspace | kanban",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/invite/index.tsx",
+        102
+      ]
+    ],
+    "translation": "Join workspace | kanban",
+    "obsolete": true
   },
   "wM8xd8": {
     "message": "Junior",
@@ -6376,7 +6643,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        430
+        428
       ],
       [
         "src/views/card/index.tsx",
@@ -6605,7 +6872,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        117
+        119
       ],
       [
         "src/views/card/index.tsx",
@@ -6613,6 +6880,18 @@
       ]
     ],
     "translation": "List"
+  },
+  "6baK1y": {
+    "translation": "List is required",
+    "message": "List is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        14
+      ]
+    ]
   },
   "zQX5Dj": {
     "message": "List name",
@@ -6634,7 +6913,7 @@
     "origin": [
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
-        55
+        60
       ]
     ]
   },
@@ -6686,8 +6965,8 @@
     ],
     "translation": "Loading..."
   },
-  "N/bcWA": {
-    "message": "Login | kan.bn",
+  "eKC2pP": {
+    "message": "Login | kanban",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -6696,7 +6975,20 @@
         33
       ]
     ],
-    "translation": "Login | kan.bn"
+    "translation": "Login | kanban"
+  },
+  "N/bcWA": {
+    "message": "Login | kanban",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/login/index.tsx",
+        33
+      ]
+    ],
+    "translation": "Login | kanban",
+    "obsolete": true
   },
   "nOhz3x": {
     "message": "Logout",
@@ -6901,7 +7193,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        121
+        128
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -6909,7 +7201,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        388
+        386
       ],
       [
         "src/views/card/index.tsx",
@@ -6953,6 +7245,18 @@
       ]
     ],
     "translation": "Mentions"
+  },
+  "agRWc1": {
+    "message": "Minutes",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/TimeSelector.tsx",
+        32
+      ]
+    ],
+    "translation": "Minutes"
   },
   "hty0d5": {
     "message": "Monday",
@@ -7204,7 +7508,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        313
+        311
       ]
     ],
     "translation": "New card"
@@ -7461,7 +7765,7 @@
     "origin": [
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
-        71
+        76
       ]
     ]
   },
@@ -7561,7 +7865,7 @@
     "origin": [
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
-        147
+        152
       ]
     ]
   },
@@ -7597,7 +7901,7 @@
     "origin": [
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
-        71
+        76
       ]
     ]
   },
@@ -7720,6 +8024,18 @@
       ]
     ],
     "translation": "Open Source Friends"
+  },
+  "V4Am/U": {
+    "translation": "Optional: create a Crisp shortcut !card that expands to #card for faster typing.",
+    "message": "Optional: create a Crisp shortcut !card that expands to #card for faster typing.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        140
+      ]
+    ]
   },
   "BzEFor": {
     "message": "or",
@@ -8232,7 +8548,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        193
+        191
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -8308,7 +8624,7 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        64
+        69
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -8436,7 +8752,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        76
+        78
       ],
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
@@ -8476,7 +8792,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        193
+        195
       ]
     ],
     "translation": "Position in list (0 = first, leave empty for end)"
@@ -9111,7 +9427,7 @@
       ],
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
-        163
+        168
       ],
       [
         "src/views/card/components/Comment.tsx",
@@ -9248,6 +9564,18 @@
     ],
     "translation": "See what our users are saying about Kan"
   },
+  "ksgFyQ": {
+    "translation": "Select a board",
+    "message": "Select a board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        170
+      ]
+    ]
+  },
   "zYRVNp": {
     "message": "Select a list",
     "placeholders": {},
@@ -9255,7 +9583,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        131
+        133
+      ],
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        189
       ]
     ],
     "translation": "Select a list"
@@ -9368,7 +9700,7 @@
     "origin": [
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
-        79
+        84
       ]
     ]
   },
@@ -9423,7 +9755,7 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        121
+        138
       ]
     ],
     "translation": "Set due date"
@@ -9487,7 +9819,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        133
+        140
       ]
     ],
     "translation": "Settings"
@@ -9535,7 +9867,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        139
+        142
       ]
     ],
     "translation": "Settings | Integrations"
@@ -9668,8 +10000,8 @@
     ],
     "translation": "Sign Up"
   },
-  "sUZo7y": {
-    "message": "Sign up | kan.bn",
+  "1kg9uf": {
+    "message": "Sign up | kanban",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -9682,7 +10014,24 @@
         61
       ]
     ],
-    "translation": "Sign up | kan.bn"
+    "translation": "Sign up | kanban"
+  },
+  "sUZo7y": {
+    "message": "Sign up | kanban",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/signup/index.tsx",
+        36
+      ],
+      [
+        "src/views/auth/signup/index.tsx",
+        61
+      ]
+    ],
+    "translation": "Sign up | kanban",
+    "obsolete": true
   },
   "WRkpB1": {
     "message": "Sign up disabled",
@@ -9875,15 +10224,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        225
+        254
       ],
       [
         "src/components/SideNavigation.tsx",
-        226
+        255
       ],
       [
         "src/components/SideNavigation.tsx",
-        236
+        265
       ]
     ],
     "translation": "Start free trial"
@@ -9923,6 +10272,18 @@
       ]
     ],
     "translation": "Submit"
+  },
+  "aj0LH5": {
+    "translation": "Subscribe the hook to message events.",
+    "message": "Subscribe the hook to message events.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        138
+      ]
+    ]
   },
   "WYDptz": {
     "message": "Subscription Required",
@@ -10024,7 +10385,7 @@
     "origin": [
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
-        131
+        136
       ]
     ]
   },
@@ -10151,7 +10512,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        109
+        116
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -10315,10 +10676,22 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        69
+        71
       ]
     ],
     "translation": "The card has been duplicated."
+  },
+  "pNULhX": {
+    "translation": "The Crisp integration has been removed.",
+    "message": "The Crisp integration has been removed.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        85
+      ]
+    ]
   },
   "jlB2RY": {
     "message": "The current password you entered is incorrect.",
@@ -10663,7 +11036,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        180
+        182
       ]
     ],
     "translation": "Title (optional)"
@@ -10703,7 +11076,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        20
+        22
       ]
     ],
     "translation": "Token is required"
@@ -10731,7 +11104,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        143
+        146
       ]
     ],
     "translation": "Trello"
@@ -10743,7 +11116,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        80
+        83
       ]
     ],
     "translation": "Trello disconnected"
@@ -10887,7 +11260,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        190
+        188
       ]
     ],
     "translation": "Unable to create card"
@@ -11051,7 +11424,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        75
+        77
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11259,7 +11632,7 @@
     "origin": [
       [
         "src/views/card/components/DueDateSelector.tsx",
-        63
+        68
       ]
     ],
     "translation": "Unable to update due date"
@@ -11283,7 +11656,7 @@
     "origin": [
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
-        63
+        68
       ],
       [
         "src/views/board/index.tsx",
@@ -12164,6 +12537,18 @@
     ],
     "translation": "Webhook updated successfully"
   },
+  "0ICiZY": {
+    "translation": "Webhook URL copied to clipboard.",
+    "message": "Webhook URL copied to clipboard.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        111
+      ]
+    ]
+  },
   "Hf1cEZ": {
     "message": "Webhook URL is required",
     "placeholders": {},
@@ -12191,6 +12576,18 @@
       ]
     ],
     "translation": "Webhooks"
+  },
+  "Y+pVrs": {
+    "translation": "Website ID is required",
+    "message": "Website ID is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        12
+      ]
+    ]
   },
   "xLTZVf": {
     "message": "Week start day",
@@ -12589,8 +12986,8 @@
     ],
     "translation": "You can always change these later in settings."
   },
-  "aelko+": {
-    "message": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
+  "JIFGFz": {
+    "message": "You can get a custom workspace URL, like <0>kanban/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -12599,7 +12996,20 @@
         67
       ]
     ],
-    "translation": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!"
+    "translation": "You can get a custom workspace URL, like <0>kanban/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!"
+  },
+  "aelko+": {
+    "message": "You can get a custom workspace URL, like <0>kanban/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Faqs.tsx",
+        67
+      ]
+    ],
+    "translation": "You can get a custom workspace URL, like <0>kanban/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
+    "obsolete": true
   },
   "kSxwQL": {
     "message": "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace.",
@@ -12750,8 +13160,8 @@
     ],
     "translation": "You signed in without a password. Set a password to enable password-based login."
   },
-  "2SePRT": {
-    "message": "You've been invited to join a workspace on kan.bn.",
+  "FIIppI": {
+    "message": "You've been invited to join a workspace on kanban.",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -12760,7 +13170,20 @@
         145
       ]
     ],
-    "translation": "You've been invited to join a workspace on kan.bn."
+    "translation": "You've been invited to join a workspace on kanban."
+  },
+  "2SePRT": {
+    "message": "You've been invited to join a workspace on kanban.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/invite/index.tsx",
+        145
+      ]
+    ],
+    "translation": "You've been invited to join a workspace on kanban.",
+    "obsolete": true
   },
   "uOqaMC": {
     "message": "You've been invited to join a workspace.",
@@ -12881,7 +13304,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        101
+        104
       ]
     ],
     "translation": "Your GitHub account has been connected."
@@ -12893,7 +13316,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        124
+        127
       ]
     ],
     "translation": "Your GitHub account has been disconnected."
@@ -12905,7 +13328,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        221
+        224
       ]
     ],
     "translation": "Your GitHub account is connected."
@@ -12989,7 +13412,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        81
+        84
       ]
     ],
     "translation": "Your Trello account has been disconnected."
@@ -13001,7 +13424,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        172
+        175
       ]
     ],
     "translation": "Your Trello account is connected."

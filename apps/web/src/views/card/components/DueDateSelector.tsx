@@ -4,10 +4,15 @@ import { useEffect, useState } from "react";
 import { HiMiniPlus } from "react-icons/hi2";
 
 import DateSelector from "~/components/DateSelector";
+import TimeSelector from "~/components/TimeSelector";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { invalidateCard } from "~/utils/cardInvalidation";
+
+// ponytail: midnight is treated as "no time set" — a due time of exactly 00:00 won't display
+const hasTime = (date: Date) =>
+  date.getHours() !== 0 || date.getMinutes() !== 0;
 
 interface DueDateSelectorProps {
   cardPublicId: string;
@@ -73,7 +78,19 @@ export function DueDateSelector({
 
   const handleDateSelect = (date: Date | undefined) => {
     // Only update local state, don't fire mutation
+    if (date && pendingDate) {
+      // Preserve previously selected time of day
+      date = new Date(date);
+      date.setHours(pendingDate.getHours(), pendingDate.getMinutes(), 0, 0);
+    }
     setPendingDate(date ?? null);
+  };
+
+  const handleTimeChange = (hours: number, minutes: number) => {
+    if (!pendingDate) return;
+    const next = new Date(pendingDate);
+    next.setHours(hours, minutes, 0, 0);
+    setPendingDate(next);
   };
 
   const handleBackdropClick = () => {
@@ -114,7 +131,7 @@ export function DueDateSelector({
         className={`flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 py-1 pl-2 text-left text-xs text-neutral-900 dark:border-dark-50 dark:text-dark-1000 ${disabled ? "cursor-not-allowed opacity-60" : "hover:border-light-300 hover:bg-light-200 dark:hover:border-dark-200 dark:hover:bg-dark-100"}`}
       >
         {dueDate ? (
-          <span>{format(dueDate, "MMM d, yyyy")}</span>
+          <span>{format(dueDate, hasTime(dueDate) ? "MMM d, yyyy, HH:mm" : "MMM d, yyyy")}</span>
         ) : (
           <>
             <HiMiniPlus size={22} className="pr-2" />
@@ -139,6 +156,9 @@ export function DueDateSelector({
               onDateSelect={handleDateSelect}
               weekStartsOn={workspace.weekStartDay}
             />
+            <div className="border-t border-light-200 px-4 py-3 dark:border-dark-200">
+              <TimeSelector value={pendingDate} onChange={handleTimeChange} />
+            </div>
           </div>
         </>
       )}
