@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/kanbn/kan/compare/v0.2.4...HEAD)
 
+### Added
+
+- Crisp integration: operators can create cards from a Crisp conversation by writing a private note starting with `#card`, configured per workspace in Settings → Integrations
+
 ## [0.2.4](https://github.com/kanbn/kan/compare/v0.2.3...v0.2.4) - 2025-01-14
 
 ### Added
