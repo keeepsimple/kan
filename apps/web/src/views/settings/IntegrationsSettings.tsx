@@ -13,7 +13,9 @@ import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
+import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { CrispIntegrationSection } from "./components/CrispIntegrationSection";
 
 const githubTokenSchema = z.object({
   token: z.string().min(1, { message: t`Token is required` }),
@@ -24,6 +26,7 @@ type GitHubTokenFormValues = z.infer<typeof githubTokenSchema>;
 export default function IntegrationsSettings() {
   const { modalContentType, isOpen } = useModal();
   const { showPopup } = usePopup();
+  const { workspace } = useWorkspace();
 
   const {
     register,
@@ -225,6 +228,10 @@ export default function IntegrationsSettings() {
           </>
         )}
       </div>
+
+      {workspace && (
+        <CrispIntegrationSection workspacePublicId={workspace.publicId} />
+      )}
 
       {/* Global modals */}
       <Modal
