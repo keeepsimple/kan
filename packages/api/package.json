@@ -39,6 +39,10 @@
     "./utils/workspace": {
       "types": "./src/utils/workspace.ts",
       "default": "./src/utils/workspace.ts"
+    },
+    "./utils/crisp": {
+      "types": "./src/utils/crisp.ts",
+      "default": "./src/utils/crisp.ts"
     }
   },
   "license": "GPL-3.0",
