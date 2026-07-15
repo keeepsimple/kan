@@ -4,6 +4,7 @@ import {
   bigserial,
   integer,
   pgTable,
+  text,
   timestamp,
   uuid,
   varchar,
@@ -32,6 +33,8 @@ export const lists = pgTable("list", {
     .notNull()
     .references(() => boards.id, { onDelete: "cascade" }),
   importId: bigint("importId", { mode: "number" }).references(() => imports.id),
+  discordBehaviour: varchar("discordBehaviour", { length: 16 }),
+  discordRoleIds: text("discordRoleIds"), // JSON array of Discord role ids
 }).enableRLS();
 
 export const listsRelations = relations(lists, ({ one, many }) => ({

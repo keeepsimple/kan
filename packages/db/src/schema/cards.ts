@@ -80,6 +80,7 @@ export const cards = pgTable(
       () => imports.id,
     ),
     dueDate: timestamp("dueDate"),
+    discordThreadId: varchar("discordThreadId", { length: 32 }),
   },
   (table) => [
     index("card_list_number_idx").on(table.listId, table.cardNumber),

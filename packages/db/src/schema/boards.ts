@@ -57,6 +57,7 @@ export const boards = pgTable(
     type: boardTypeEnum("type").notNull().default("regular"),
     isArchived: boolean("isArchived").notNull().default(false),
     sourceBoardId: bigint("sourceBoardId", { mode: "number" }),
+    discordChannelId: varchar("discordChannelId", { length: 32 }),
   },
   (table) => [
     index("board_is_archived_idx").on(table.isArchived),
