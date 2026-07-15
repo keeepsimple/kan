@@ -5,6 +5,7 @@ import {
   HiEllipsisHorizontal,
   HiLink,
   HiOutlineDocumentDuplicate,
+  HiOutlineHashtag,
   HiOutlineTrash,
   HiOutlineStar,
   HiStar,
@@ -14,6 +15,7 @@ import Dropdown from "~/components/Dropdown";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
+import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
 export default function BoardDropdown({
@@ -37,6 +39,11 @@ export default function BoardDropdown({
   const { canEditBoard, canDeleteBoard, canCreateBoard, canArchiveBoard } =
     usePermissions();
   const utils = api.useUtils();
+  const { workspace } = useWorkspace();
+  const { data: discordStatus } = api.discord.getStatus.useQuery(
+    { workspacePublicId: workspace.publicId },
+    { enabled: !!workspace.publicId },
+  );
 
   const updateBoard = api.board.update.useMutation({
     onSuccess: (_data, variables) => {
@@ -130,6 +137,17 @@ export default function BoardDropdown({
           ),
         },
       ]
+      : []),
+    ...(canEditBoard && discordStatus?.connected
+      ? [
+          {
+            label: t`Discord channel`,
+            action: () => openModal("BOARD_DISCORD_CHANNEL"),
+            icon: (
+              <HiOutlineHashtag className="h-[16px] w-[16px] text-dark-900" />
+            ),
+          },
+        ]
       : []),
     {
       label: isFavorite

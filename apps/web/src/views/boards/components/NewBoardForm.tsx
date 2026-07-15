@@ -8,6 +8,7 @@ import { z } from "zod";
 
 import type { Template } from "./TemplateBoards";
 import Button from "~/components/Button";
+import CheckboxDropdown from "~/components/CheckboxDropdown";
 import Input from "~/components/Input";
 import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
@@ -41,6 +42,20 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
   const { data: templates } = api.board.all.useQuery(
     { workspacePublicId: workspace.publicId ?? "", type: "template" },
     { enabled: !!workspace.publicId },
+  );
+
+  const [discordChannelId, setDiscordChannelId] = useState<string | null>(
+    null,
+  );
+
+  const { data: discordStatus } = api.discord.getStatus.useQuery(
+    { workspacePublicId: workspace.publicId },
+    { enabled: !!workspace.publicId },
+  );
+
+  const { data: discordChannels } = api.discord.listChannels.useQuery(
+    { workspacePublicId: workspace.publicId },
+    { enabled: !!workspace.publicId && !!discordStatus?.connected },
   );
 
   const formattedTemplates = templates?.map((template) => ({
@@ -104,6 +119,7 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
       lists: data.template?.lists ?? [],
       labels: data.template?.labels ?? [],
       type: isTemplate ? "template" : "regular",
+      discordChannelId: discordChannelId ?? undefined,
     });
   };
 
@@ -141,6 +157,39 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
             }
           }}
         />
+        {discordStatus?.connected && (
+          <div className="mt-3">
+            <label className="mb-1 block text-xs font-medium text-neutral-700 dark:text-dark-900">
+              {t`Discord channel (threads will be created here)`}
+            </label>
+            <CheckboxDropdown
+              items={[
+                {
+                  key: "",
+                  value: t`No channel`,
+                  selected: !discordChannelId,
+                },
+                ...(discordChannels ?? []).map((channel) => ({
+                  key: channel.id,
+                  value: `#${channel.name}`,
+                  selected: channel.id === discordChannelId,
+                })),
+              ]}
+              handleSelect={(_groupKey, item) =>
+                setDiscordChannelId(item.key || null)
+              }
+            >
+              <div className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-neutral-900 dark:border-dark-600 dark:bg-dark-200 dark:text-dark-1000">
+                {discordChannelId
+                  ? `#${
+                      discordChannels?.find((c) => c.id === discordChannelId)
+                        ?.name ?? discordChannelId
+                    }`
+                  : t`No channel`}
+              </div>
+            </CheckboxDropdown>
+          </div>
+        )}
       </div>
       <TemplateBoards
         currentBoard={currentTemplate}
