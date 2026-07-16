@@ -459,7 +459,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
         </Modal>
 
         <Modal
-          modalSize="md"
+          modalSize="lg"
           isVisible={isOpen && modalContentType === "NEW_CARD"}
         >
           <NewCardForm

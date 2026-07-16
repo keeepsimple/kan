@@ -1,5 +1,6 @@
 import { t } from "@lingui/core/macro";
 
+import Select from "~/components/Select";
 import { api } from "~/utils/api";
 
 interface Props {
@@ -11,9 +12,6 @@ interface Props {
   onMemberChange: (v: string | undefined) => void;
   workspacePublicId: string;
 }
-
-const selectClassName =
-  "block w-full rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-sm ring-1 ring-inset ring-light-600 placeholder:text-dark-800 focus:ring-2 focus:ring-inset focus:ring-light-700 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:leading-6";
 
 export default function AnalyticsFilters(props: Props) {
   const enabled = props.workspacePublicId.length >= 12;
@@ -48,42 +46,43 @@ export default function AnalyticsFilters(props: Props) {
 
   return (
     <div className="flex flex-wrap gap-3">
-      <select
-        value={props.range}
-        onChange={(e) => props.onRangeChange(Number(e.target.value))}
-        className={selectClassName}
-      >
-        <option value={7}>{t`Last 7 days`}</option>
-        <option value={30}>{t`Last 30 days`}</option>
-        <option value={90}>{t`Last 90 days`}</option>
-      </select>
+      <Select
+        wrapperClassName="min-w-[150px] flex-1"
+        value={String(props.range)}
+        onChange={(v) => props.onRangeChange(Number(v))}
+        options={[
+          { value: "7", label: t`Last 7 days` },
+          { value: "30", label: t`Last 30 days` },
+          { value: "90", label: t`Last 90 days` },
+        ]}
+      />
 
-      <select
+      <Select
+        wrapperClassName="min-w-[150px] flex-1"
         value={props.boardPublicId ?? ""}
-        onChange={(e) => props.onBoardChange(e.target.value || undefined)}
-        className={selectClassName}
-      >
-        <option value="">{t`All boards`}</option>
-        {boards.data?.map((board) => (
-          <option key={board.publicId} value={board.publicId}>
-            {board.name}
-          </option>
-        ))}
-      </select>
+        onChange={(v) => props.onBoardChange(v || undefined)}
+        options={[
+          { value: "", label: t`All boards` },
+          ...(boards.data ?? []).map((board) => ({
+            value: board.publicId,
+            label: board.name,
+          })),
+        ]}
+      />
 
       {canViewAllMembers && (
-        <select
+        <Select
+          wrapperClassName="min-w-[150px] flex-1"
           value={props.memberPublicId ?? ""}
-          onChange={(e) => props.onMemberChange(e.target.value || undefined)}
-          className={selectClassName}
-        >
-          <option value="">{t`All members`}</option>
-          {members.map((member) => (
-            <option key={member.publicId} value={member.publicId}>
-              {member.email}
-            </option>
-          ))}
-        </select>
+          onChange={(v) => props.onMemberChange(v || undefined)}
+          options={[
+            { value: "", label: t`All members` },
+            ...members.map((member) => ({
+              value: member.publicId,
+              label: member.email,
+            })),
+          ]}
+        />
       )}
     </div>
   );

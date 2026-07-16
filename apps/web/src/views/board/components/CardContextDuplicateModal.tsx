@@ -57,7 +57,6 @@ export function CardContextDuplicateModal({
   const listOptions = lists
     .filter((list) => list.discordBehaviour !== "notify")
     .map((l) => ({ publicId: l.publicId, name: l.name }));
-  const currentListPublicId = card?.list?.publicId;
   const hasLabels = (card?.labels?.length ?? 0) > 0;
   const hasMembers = (card?.members?.length ?? 0) > 0;
   const hasChecklists = (card?.checklists?.length ?? 0) > 0;
@@ -146,30 +145,22 @@ export function CardContextDuplicateModal({
               >
                 <ListboxOptions className="absolute z-50 mt-1 w-full overflow-hidden rounded-md border border-light-200 bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-400 dark:bg-dark-200">
                   <div className="max-h-60 overflow-y-auto py-1 pr-1 scrollbar scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600">
-                    {listOptions.map((option) => {
-                      const isCurrentList =
-                        option.publicId === currentListPublicId;
-                      return (
-                        <ListboxOption
-                          key={option.publicId}
-                          value={option.publicId}
-                          disabled={isCurrentList}
-                          className={({ focus }) =>
-                            twMerge(
-                              "relative select-none py-2 pl-3 pr-9 text-sm",
-                              isCurrentList
-                                ? "cursor-default opacity-50"
-                                : "cursor-pointer",
-                              !isCurrentList && focus
-                                ? "bg-light-200 text-light-1000 dark:bg-dark-400 dark:text-dark-1000"
-                                : "text-light-900 dark:text-dark-900",
-                            )
-                          }
-                        >
-                          {option.name}
-                        </ListboxOption>
-                      );
-                    })}
+                    {listOptions.map((option) => (
+                      <ListboxOption
+                        key={option.publicId}
+                        value={option.publicId}
+                        className={({ focus }) =>
+                          twMerge(
+                            "relative cursor-pointer select-none py-2 pl-3 pr-9 text-sm",
+                            focus
+                              ? "bg-light-200 text-light-1000 dark:bg-dark-400 dark:text-dark-1000"
+                              : "text-light-900 dark:text-dark-900",
+                          )
+                        }
+                      >
+                        {option.name}
+                      </ListboxOption>
+                    ))}
                   </div>
                 </ListboxOptions>
               </Transition>

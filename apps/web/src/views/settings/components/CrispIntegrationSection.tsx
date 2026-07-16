@@ -1,10 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
+import Select from "~/components/Select";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
@@ -15,9 +16,6 @@ const crispFormSchema = z.object({
 });
 
 type CrispFormValues = z.infer<typeof crispFormSchema>;
-
-const selectClassName =
-  "block w-full rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-sm ring-1 ring-inset ring-light-600 focus:ring-2 focus:ring-inset focus:ring-light-700 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:leading-6";
 
 export function CrispIntegrationSection({
   workspacePublicId,
@@ -33,6 +31,7 @@ export function CrispIntegrationSection({
 
   const {
     register,
+    control,
     handleSubmit,
     watch,
     reset,
@@ -161,19 +160,26 @@ export function CrispIntegrationSection({
               errorMessage={errors.crispWebsiteId?.message}
             />
             <div className="flex flex-col gap-1">
-              <select
-                className={selectClassName}
-                {...register("boardPublicId", {
-                  onChange: () => resetField("listPublicId"),
-                })}
-              >
-                <option value="">{t`Select a board`}</option>
-                {(boards ?? []).map((board) => (
-                  <option key={board.publicId} value={board.publicId}>
-                    {board.name}
-                  </option>
-                ))}
-              </select>
+              <Controller
+                control={control}
+                name="boardPublicId"
+                render={({ field }) => (
+                  <Select
+                    value={field.value}
+                    onChange={(v) => {
+                      field.onChange(v);
+                      resetField("listPublicId");
+                    }}
+                    options={[
+                      { value: "", label: t`Select a board` },
+                      ...(boards ?? []).map((board) => ({
+                        value: board.publicId,
+                        label: board.name,
+                      })),
+                    ]}
+                  />
+                )}
+              />
               {errors.boardPublicId && (
                 <div className="text-xs text-red-500">
                   {errors.boardPublicId.message}
@@ -181,18 +187,24 @@ export function CrispIntegrationSection({
               )}
             </div>
             <div className="flex flex-col gap-1">
-              <select
-                className={selectClassName}
-                disabled={!lists.length}
-                {...register("listPublicId")}
-              >
-                <option value="">{t`Select a list`}</option>
-                {lists.map((list) => (
-                  <option key={list.publicId} value={list.publicId}>
-                    {list.name}
-                  </option>
-                ))}
-              </select>
+              <Controller
+                control={control}
+                name="listPublicId"
+                render={({ field }) => (
+                  <Select
+                    value={field.value}
+                    onChange={field.onChange}
+                    disabled={!lists.length}
+                    options={[
+                      { value: "", label: t`Select a list` },
+                      ...lists.map((list) => ({
+                        value: list.publicId,
+                        label: list.name,
+                      })),
+                    ]}
+                  />
+                )}
+              />
               {errors.listPublicId && (
                 <div className="text-xs text-red-500">
                   {errors.listPublicId.message}

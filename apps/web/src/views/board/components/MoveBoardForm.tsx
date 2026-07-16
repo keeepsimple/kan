@@ -3,6 +3,7 @@ import { t } from "@lingui/core/macro";
 import { useState } from "react";
 
 import Button from "~/components/Button";
+import Select from "~/components/Select";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
@@ -75,19 +76,18 @@ export function MoveBoardForm({
             >
               {t`Destination workspace`}
             </label>
-            <select
+            <Select
               id="target-workspace"
               value={targetWorkspacePublicId}
-              onChange={(e) => setTargetWorkspacePublicId(e.target.value)}
-              className="block w-full rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-sm ring-1 ring-inset ring-light-600 placeholder:text-dark-800 focus:ring-2 focus:ring-inset focus:ring-light-700 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:leading-6"
-            >
-              <option value="">{t`Select a workspace`}</option>
-              {otherWorkspaces.map((ws) => (
-                <option key={ws.publicId} value={ws.publicId}>
-                  {ws.name}
-                </option>
-              ))}
-            </select>
+              onChange={setTargetWorkspacePublicId}
+              options={[
+                { value: "", label: t`Select a workspace` },
+                ...otherWorkspaces.map((ws) => ({
+                  value: ws.publicId,
+                  label: ws.name,
+                })),
+              ]}
+            />
             <p className="mt-3 text-sm text-light-800 dark:text-dark-800">
               {t`Card member assignments will be cleared when moving to a different workspace.`}
             </p>

@@ -24,6 +24,7 @@ import FeedbackModal from "~/components/FeedbackModal";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
+import Select from "~/components/Select";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -198,32 +199,36 @@ export default function MembersPage() {
                   )}
                 />
               ) : (
-                <div className="relative inline-flex items-center">
-                  <span className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 ring-1 ring-inset ring-emerald-500/20 sm:text-[11px]">
-                    {memberRole &&
-                      memberRole.charAt(0).toUpperCase() + memberRole.slice(1)}
-                    {canEditMember && session?.user.id !== memberId && (
-                      <HiChevronDown className="h-3 w-3" />
-                    )}
-                  </span>
-
-                  {canEditMember && session?.user.id !== memberId && (
-                    <select
-                      value={memberRole}
-                      onChange={(e) =>
-                        handleRoleChange(
-                          e.target.value as "admin" | "member" | "guest",
-                        )
+                (() => {
+                  const canChangeRole =
+                    canEditMember && session?.user.id !== memberId;
+                  const badge = (
+                    <span className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 ring-1 ring-inset ring-emerald-500/20 sm:text-[11px]">
+                      {memberRole &&
+                        memberRole.charAt(0).toUpperCase() +
+                          memberRole.slice(1)}
+                      {canChangeRole && <HiChevronDown className="h-3 w-3" />}
+                    </span>
+                  );
+                  return canChangeRole ? (
+                    <Select
+                      wrapperClassName="inline-flex items-center"
+                      value={memberRole ?? ""}
+                      onChange={(v) =>
+                        handleRoleChange(v as "admin" | "member" | "guest")
                       }
                       disabled={updateRoleMutation.isPending}
-                      className="absolute inset-0 h-full w-full cursor-pointer appearance-none border-none bg-transparent p-0 text-[10px] leading-none opacity-0 focus:outline-none focus-visible:outline-none sm:text-[11px]"
-                    >
-                      <option value="admin">{t`Admin`}</option>
-                      <option value="member">{t`Member`}</option>
-                      <option value="guest">{t`Guest`}</option>
-                    </select>
-                  )}
-                </div>
+                      trigger={badge}
+                      options={[
+                        { value: "admin", label: t`Admin` },
+                        { value: "member", label: t`Member` },
+                        { value: "guest", label: t`Guest` },
+                      ]}
+                    />
+                  ) : (
+                    badge
+                  );
+                })()
               )}
               {(memberStatus === "invited" || memberStatus === "paused") && (
                 <span className="inline-flex items-center rounded-md bg-gray-500/10 px-1.5 py-0.5 text-[10px] font-medium text-gray-400 ring-1 ring-inset ring-gray-500/20 sm:text-[11px]">
