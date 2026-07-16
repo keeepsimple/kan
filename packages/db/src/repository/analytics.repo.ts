@@ -1,4 +1,5 @@
 import { and, desc, eq, gte, isNotNull, isNull, lte, sql } from "drizzle-orm";
+import { alias } from "drizzle-orm/pg-core";
 
 import type { dbClient } from "../client";
 import {
@@ -18,36 +19,33 @@ interface Filter {
   memberId?: number;
 }
 
-// Canonical member: one row per (userId, workspaceId), preferring the active
-// membership, then the most recent id. A user can have multiple
-// workspace_members rows for the same workspace (e.g. remove-then-reinvite
-// leaves a soft-deleted row alongside a new active one, since there is no
-// unique constraint on (userId, workspaceId)). Joining cardActivities
-// directly to workspaceMembers would fan out one activity into multiple
-// rows in that case, double-counting and mis-attributing activity. This
-// subquery collapses those duplicates down to a single canonical row before
-// joining.
-const getCanonicalMemberSubquery = (db: dbClient) =>
+// Canonical member: one row per userId within the given workspace,
+// preferring the active membership, then the most recent id. A user can
+// have multiple workspace_members rows for the same workspace (e.g.
+// remove-then-reinvite leaves a soft-deleted row alongside a new active
+// one, since there is no unique constraint on (userId, workspaceId)).
+// Joining cardActivities directly to workspaceMembers would fan out one
+// activity into multiple rows in that case, double-counting and
+// mis-attributing activity. This subquery collapses those duplicates down
+// to a single canonical row before joining. Scoped to a single workspaceId,
+// so DISTINCT ON userId alone suffices.
+const getCanonicalMemberSubquery = (db: dbClient, workspaceId: number) =>
   db
-    .selectDistinctOn(
-      [workspaceMembers.userId, workspaceMembers.workspaceId],
-      {
-        id: workspaceMembers.id,
-        userId: workspaceMembers.userId,
-        workspaceId: workspaceMembers.workspaceId,
-      },
-    )
+    .selectDistinctOn([workspaceMembers.userId], {
+      id: workspaceMembers.id,
+      userId: workspaceMembers.userId,
+    })
     .from(workspaceMembers)
+    .where(eq(workspaceMembers.workspaceId, workspaceId))
     .orderBy(
       workspaceMembers.userId,
-      workspaceMembers.workspaceId,
       sql`(${workspaceMembers.deletedAt} is null) desc`,
       desc(workspaceMembers.id),
     )
     .as("canonical_member");
 
 export const getActivityCountsByMember = (db: dbClient, f: Filter) => {
-  const canonicalMember = getCanonicalMemberSubquery(db);
+  const canonicalMember = getCanonicalMemberSubquery(db, f.workspaceId);
 
   return db
     .select({
@@ -60,10 +58,7 @@ export const getActivityCountsByMember = (db: dbClient, f: Filter) => {
     .innerJoin(boards, eq(boards.id, lists.boardId))
     .innerJoin(
       canonicalMember,
-      and(
-        eq(canonicalMember.userId, cardActivities.createdBy),
-        eq(canonicalMember.workspaceId, boards.workspaceId),
-      ),
+      eq(canonicalMember.userId, cardActivities.createdBy),
     )
     .where(
       and(
@@ -78,15 +73,26 @@ export const getActivityCountsByMember = (db: dbClient, f: Filter) => {
 };
 
 export const getCompletedCountByMember = (db: dbClient, f: Filter) => {
+  const assignedMember = alias(workspaceMembers, "assigned_member");
+  const canonicalMember = getCanonicalMemberSubquery(db, f.workspaceId);
+
   return db
     .select({
-      workspaceMemberId: cardToWorkspaceMembers.workspaceMemberId,
+      workspaceMemberId: canonicalMember.id,
       count: sql<number>`count(*)::int`,
     })
     .from(cards)
     .innerJoin(
       cardToWorkspaceMembers,
       eq(cardToWorkspaceMembers.cardId, cards.id),
+    )
+    .innerJoin(
+      assignedMember,
+      eq(assignedMember.id, cardToWorkspaceMembers.workspaceMemberId),
+    )
+    .innerJoin(
+      canonicalMember,
+      eq(canonicalMember.userId, assignedMember.userId),
     )
     .innerJoin(lists, eq(lists.id, cards.listId))
     .innerJoin(boards, eq(boards.id, lists.boardId))
@@ -97,18 +103,19 @@ export const getCompletedCountByMember = (db: dbClient, f: Filter) => {
         gte(cards.completedAt, f.from),
         lte(cards.completedAt, f.to),
         f.boardId ? eq(boards.id, f.boardId) : undefined,
-        f.memberId
-          ? eq(cardToWorkspaceMembers.workspaceMemberId, f.memberId)
-          : undefined,
+        f.memberId ? eq(canonicalMember.id, f.memberId) : undefined,
       ),
     )
-    .groupBy(cardToWorkspaceMembers.workspaceMemberId);
+    .groupBy(canonicalMember.id);
 };
 
 export const getOnTimeStatsByMember = (db: dbClient, f: Filter) => {
+  const assignedMember = alias(workspaceMembers, "assigned_member");
+  const canonicalMember = getCanonicalMemberSubquery(db, f.workspaceId);
+
   return db
     .select({
-      workspaceMemberId: cardToWorkspaceMembers.workspaceMemberId,
+      workspaceMemberId: canonicalMember.id,
       onTime: sql<number>`count(*) filter (where ${cards.completedAt} <= ${cards.dueDate})::int`,
       late: sql<number>`count(*) filter (where ${cards.completedAt} > ${cards.dueDate})::int`,
     })
@@ -116,6 +123,14 @@ export const getOnTimeStatsByMember = (db: dbClient, f: Filter) => {
     .innerJoin(
       cardToWorkspaceMembers,
       eq(cardToWorkspaceMembers.cardId, cards.id),
+    )
+    .innerJoin(
+      assignedMember,
+      eq(assignedMember.id, cardToWorkspaceMembers.workspaceMemberId),
+    )
+    .innerJoin(
+      canonicalMember,
+      eq(canonicalMember.userId, assignedMember.userId),
     )
     .innerJoin(lists, eq(lists.id, cards.listId))
     .innerJoin(boards, eq(boards.id, lists.boardId))
@@ -127,27 +142,36 @@ export const getOnTimeStatsByMember = (db: dbClient, f: Filter) => {
         gte(cards.completedAt, f.from),
         lte(cards.completedAt, f.to),
         f.boardId ? eq(boards.id, f.boardId) : undefined,
-        f.memberId
-          ? eq(cardToWorkspaceMembers.workspaceMemberId, f.memberId)
-          : undefined,
+        f.memberId ? eq(canonicalMember.id, f.memberId) : undefined,
       ),
     )
-    .groupBy(cardToWorkspaceMembers.workspaceMemberId);
+    .groupBy(canonicalMember.id);
 };
 
 export const getCurrentlyOverdueByMember = (
   db: dbClient,
   f: { workspaceId: number; boardId?: number; memberId?: number },
 ) => {
+  const assignedMember = alias(workspaceMembers, "assigned_member");
+  const canonicalMember = getCanonicalMemberSubquery(db, f.workspaceId);
+
   return db
     .select({
-      workspaceMemberId: cardToWorkspaceMembers.workspaceMemberId,
+      workspaceMemberId: canonicalMember.id,
       count: sql<number>`count(*)::int`,
     })
     .from(cards)
     .innerJoin(
       cardToWorkspaceMembers,
       eq(cardToWorkspaceMembers.cardId, cards.id),
+    )
+    .innerJoin(
+      assignedMember,
+      eq(assignedMember.id, cardToWorkspaceMembers.workspaceMemberId),
+    )
+    .innerJoin(
+      canonicalMember,
+      eq(canonicalMember.userId, assignedMember.userId),
     )
     .innerJoin(lists, eq(lists.id, cards.listId))
     .innerJoin(boards, eq(boards.id, lists.boardId))
@@ -159,24 +183,33 @@ export const getCurrentlyOverdueByMember = (
         isNotNull(cards.dueDate),
         sql`${cards.dueDate} < now()`,
         f.boardId ? eq(boards.id, f.boardId) : undefined,
-        f.memberId
-          ? eq(cardToWorkspaceMembers.workspaceMemberId, f.memberId)
-          : undefined,
+        f.memberId ? eq(canonicalMember.id, f.memberId) : undefined,
       ),
     )
-    .groupBy(cardToWorkspaceMembers.workspaceMemberId);
+    .groupBy(canonicalMember.id);
 };
 
 export const getAvgCycleTimeByMember = (db: dbClient, f: Filter) => {
+  const assignedMember = alias(workspaceMembers, "assigned_member");
+  const canonicalMember = getCanonicalMemberSubquery(db, f.workspaceId);
+
   return db
     .select({
-      workspaceMemberId: cardToWorkspaceMembers.workspaceMemberId,
+      workspaceMemberId: canonicalMember.id,
       avgSeconds: sql<number>`coalesce(avg(extract(epoch from (${cards.completedAt} - ${cards.createdAt}))), 0)::float`,
     })
     .from(cards)
     .innerJoin(
       cardToWorkspaceMembers,
       eq(cardToWorkspaceMembers.cardId, cards.id),
+    )
+    .innerJoin(
+      assignedMember,
+      eq(assignedMember.id, cardToWorkspaceMembers.workspaceMemberId),
+    )
+    .innerJoin(
+      canonicalMember,
+      eq(canonicalMember.userId, assignedMember.userId),
     )
     .innerJoin(lists, eq(lists.id, cards.listId))
     .innerJoin(boards, eq(boards.id, lists.boardId))
@@ -187,16 +220,14 @@ export const getAvgCycleTimeByMember = (db: dbClient, f: Filter) => {
         gte(cards.completedAt, f.from),
         lte(cards.completedAt, f.to),
         f.boardId ? eq(boards.id, f.boardId) : undefined,
-        f.memberId
-          ? eq(cardToWorkspaceMembers.workspaceMemberId, f.memberId)
-          : undefined,
+        f.memberId ? eq(canonicalMember.id, f.memberId) : undefined,
       ),
     )
-    .groupBy(cardToWorkspaceMembers.workspaceMemberId);
+    .groupBy(canonicalMember.id);
 };
 
 export const getActivityTimeSeries = (db: dbClient, f: Filter) => {
-  const canonicalMember = getCanonicalMemberSubquery(db);
+  const canonicalMember = getCanonicalMemberSubquery(db, f.workspaceId);
 
   return db
     .select({
@@ -209,10 +240,7 @@ export const getActivityTimeSeries = (db: dbClient, f: Filter) => {
     .innerJoin(boards, eq(boards.id, lists.boardId))
     .innerJoin(
       canonicalMember,
-      and(
-        eq(canonicalMember.userId, cardActivities.createdBy),
-        eq(canonicalMember.workspaceId, boards.workspaceId),
-      ),
+      eq(canonicalMember.userId, cardActivities.createdBy),
     )
     .where(
       and(
