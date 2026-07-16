@@ -416,6 +416,14 @@
     "comments": [],
     "origin": [
       [
+        "src/views/analytics/components/MemberTable.tsx",
+        36
+      ],
+      [
+        "src/views/analytics/components/TrendChart.tsx",
+        113
+      ],
+      [
         "src/views/card/index.tsx",
         476
       ],
@@ -449,6 +457,18 @@
       ]
     ],
     "translation": "Activity logs"
+  },
+  "LAJFbK": {
+    "translation": "Activity over time",
+    "message": "Activity over time",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/TrendChart.tsx",
+        67
+      ]
+    ]
   },
   "UGCIzB": {
     "message": "Add / edit label",
@@ -857,16 +877,16 @@
     "translation": "Advanced security, compliance, and dedicated support for large organizations."
   },
   "me3LEG": {
-    "translation": "All boards",
     "message": "All boards",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        42
+        64
       ]
-    ]
+    ],
+    "translation": "All boards"
   },
   "h2ztFt": {
     "message": "All Free features +",
@@ -891,6 +911,18 @@
       ]
     ],
     "translation": "All member permission overrides have been reset to their role defaults."
+  },
+  "RevbX8": {
+    "translation": "All members",
+    "message": "All members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/AnalyticsFilters.tsx",
+        78
+      ]
+    ]
   },
   "ZAs2NN": {
     "message": "All Pro features +",
@@ -1039,7 +1071,7 @@
       ],
       [
         "src/views/analytics/index.tsx",
-        38
+        44
       ]
     ],
     "translation": "Analytics"
@@ -1391,6 +1423,18 @@
       ]
     ],
     "translation": "Automatically archive cards a set number of days after completion"
+  },
+  "hbKP/G": {
+    "translation": "Avg cycle time",
+    "message": "Avg cycle time",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/KpiRow.tsx",
+        92
+      ]
+    ]
   },
   "1rWxEw": {
     "message": "Awaiting Customer",
@@ -1863,6 +1907,18 @@
       ]
     ],
     "translation": "Bug Report"
+  },
+  "dH0nsO": {
+    "translation": "By member",
+    "message": "By member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/MemberTable.tsx",
+        29
+      ]
+    ]
   },
   "t6FvJH": {
     "message": "Can add comments",
@@ -2852,6 +2908,18 @@
     ],
     "translation": "Complete control and ownership:"
   },
+  "qqWcBV": {
+    "translation": "Completed",
+    "message": "Completed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/MemberTable.tsx",
+        37
+      ]
+    ]
+  },
   "Lt+ZP3": {
     "message": "completed a checklist item",
     "placeholders": {},
@@ -2863,6 +2931,18 @@
       ]
     ],
     "translation": "completed a checklist item"
+  },
+  "srtRe0": {
+    "translation": "Completed cards",
+    "message": "Completed cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/KpiRow.tsx",
+        72
+      ]
+    ]
   },
   "29sSki": {
     "message": "completed checklist item <0>{0}</0>",
@@ -6849,40 +6929,40 @@
     "translation": "Large"
   },
   "uq2BmQ": {
-    "translation": "Last 30 days",
     "message": "Last 30 days",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        33
+        55
       ]
-    ]
+    ],
+    "translation": "Last 30 days"
   },
   "ct2SYD": {
-    "translation": "Last 7 days",
     "message": "Last 7 days",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        32
+        54
       ]
-    ]
+    ],
+    "translation": "Last 7 days"
   },
   "XgOuA7": {
-    "translation": "Last 90 days",
     "message": "Last 90 days",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        34
+        56
       ]
-    ]
+    ],
+    "translation": "Last 90 days"
   },
   "8Is1ih": {
     "message": "Launch offer",
@@ -7359,6 +7439,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/analytics/components/MemberTable.tsx",
+        35
+      ],
       [
         "src/views/card/components/ActivityList.tsx",
         55
@@ -8141,6 +8225,30 @@
     ],
     "translation": "On-premise deployment option"
   },
+  "BpX6pp": {
+    "translation": "On-time",
+    "message": "On-time",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/MemberTable.tsx",
+        38
+      ]
+    ]
+  },
+  "1lPQwG": {
+    "translation": "On-time rate",
+    "message": "On-time rate",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/KpiRow.tsx",
+        82
+      ]
+    ]
+  },
   "gukxZ5": {
     "message": "Onboarding",
     "placeholders": {},
@@ -8282,6 +8390,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/analytics/components/MemberTable.tsx",
+        40
+      ],
       [
         "src/views/board/components/Filters.tsx",
         112
@@ -11285,6 +11397,18 @@
     ],
     "translation": "Token is required"
   },
+  "mknIgY": {
+    "translation": "Total activity",
+    "message": "Total activity",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/KpiRow.tsx",
+        65
+      ]
+    ]
+  },
   "eEQyz+": {
     "message": "Track all card changes with detailed activity history.",
     "placeholders": {},
@@ -12580,6 +12704,18 @@
       ]
     ],
     "translation": "Visibility"
+  },
+  "hVTuuF": {
+    "translation": "vs previous period",
+    "message": "vs previous period",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/KpiRow.tsx",
+        127
+      ]
+    ]
   },
   "BJbLe4": {
     "message": "We are using the <0>AGPL-3.0 license</0>.",

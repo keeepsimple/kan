@@ -22,6 +22,28 @@ export default function AnalyticsFilters(props: Props) {
     { enabled },
   );
 
+  // The member filter only makes sense for whoever can see everyone else's
+  // analytics — resolveScope() on the server forces memberId to the caller
+  // for everyone without analytics:view:all, so a member without that
+  // permission would only ever see themself in the list anyway. Gate on the
+  // explicit permission rather than a row-count heuristic (e.g. "more than
+  // one member returned"), since that would misfire for a two-person
+  // workspace where neither member has the permission.
+  const permissions = api.permission.getMyPermissions.useQuery(
+    { workspacePublicId: props.workspacePublicId },
+    { enabled },
+  );
+  const canViewAllMembers =
+    permissions.data?.permissions.includes("analytics:view:all") ?? false;
+
+  const workspace = api.workspace.byId.useQuery(
+    { workspacePublicId: props.workspacePublicId },
+    { enabled: enabled && canViewAllMembers },
+  );
+  const members = (workspace.data?.members ?? []).filter(
+    (member) => member.status === "active",
+  );
+
   return (
     <div className="flex flex-wrap gap-3">
       <select
@@ -46,6 +68,21 @@ export default function AnalyticsFilters(props: Props) {
           </option>
         ))}
       </select>
+
+      {canViewAllMembers && (
+        <select
+          value={props.memberPublicId ?? ""}
+          onChange={(e) => props.onMemberChange(e.target.value || undefined)}
+          className={selectClassName}
+        >
+          <option value="">{t`All members`}</option>
+          {members.map((member) => (
+            <option key={member.publicId} value={member.publicId}>
+              {member.email ?? member.publicId}
+            </option>
+          ))}
+        </select>
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { startOfDay, subDays } from "date-fns";
 
 import { t } from "@lingui/core/macro";
@@ -6,6 +6,9 @@ import { t } from "@lingui/core/macro";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import AnalyticsFilters from "./components/AnalyticsFilters";
+import KpiRow from "./components/KpiRow";
+import MemberTable from "./components/MemberTable";
+import TrendChart from "./components/TrendChart";
 
 function daysAgo(n: number) {
   return startOfDay(subDays(new Date(), n));
@@ -17,13 +20,16 @@ export default function AnalyticsView() {
   const [boardPublicId, setBoardPublicId] = useState<string | undefined>();
   const [memberPublicId, setMemberPublicId] = useState<string | undefined>();
 
-  const filter = {
-    workspacePublicId: workspace.publicId,
-    from: daysAgo(range),
-    to: new Date(),
-    boardPublicId,
-    memberPublicId,
-  };
+  const filter = useMemo(
+    () => ({
+      workspacePublicId: workspace.publicId,
+      from: daysAgo(range),
+      to: new Date(),
+      boardPublicId,
+      memberPublicId,
+    }),
+    [workspace.publicId, range, boardPublicId, memberPublicId],
+  );
   const enabled = !!workspace.publicId && workspace.publicId.length >= 12;
 
   const overview = api.analytics.getOverview.useQuery(filter, { enabled });
@@ -46,18 +52,11 @@ export default function AnalyticsView() {
         onMemberChange={setMemberPublicId}
         workspacePublicId={workspace.publicId}
       />
-      {/* KpiRow, TrendChart, MemberTable added in Task 10 */}
-      <pre className="mt-4 text-xs opacity-50">
-        {JSON.stringify(
-          {
-            overview: overview.data,
-            breakdown: breakdown.data,
-            series: series.data,
-          },
-          null,
-          2,
-        )}
-      </pre>
+      <div className="mt-4">
+        <KpiRow data={overview.data} />
+      </div>
+      <TrendChart points={series.data?.points} />
+      <MemberTable rows={breakdown.data?.members} />
     </div>
   );
 }
