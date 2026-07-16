@@ -945,7 +945,6 @@
     "translation": "Vous avez déjà un compte ? <0><1>Se connecter</1></0>"
   },
   "GjPNIV": {
-    "translation": "",
     "message": "An error occurred while connecting Crisp.",
     "placeholders": {},
     "comments": [],
@@ -954,7 +953,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         73
       ]
-    ]
+    ],
+    "translation": ""
   },
   "j1+HPc": {
     "message": "An error occurred while connecting your GitHub account.",
@@ -969,7 +969,6 @@
     "translation": "Une erreur s'est produite lors de la connexion de votre compte GitHub."
   },
   "5xFDbn": {
-    "translation": "",
     "message": "An error occurred while disconnecting Crisp.",
     "placeholders": {},
     "comments": [],
@@ -978,7 +977,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         92
       ]
-    ]
+    ],
+    "translation": ""
   },
   "Dz63YI": {
     "message": "An error occurred while disconnecting your GitHub account.",
@@ -1573,7 +1573,6 @@
     "translation": "Tableau archivé"
   },
   "h6ViRF": {
-    "translation": "",
     "message": "Board is required",
     "placeholders": {},
     "comments": [],
@@ -1582,7 +1581,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         13
       ]
-    ]
+    ],
+    "translation": ""
   },
   "wE3hGS": {
     "message": "Board moved",
@@ -1657,7 +1657,6 @@
     "translation": "Tableau désarchivé"
   },
   "NVurEd": {
-    "translation": "",
     "message": "Board updated",
     "placeholders": {},
     "comments": [],
@@ -1666,7 +1665,8 @@
         "src/views/board/components/BoardDiscordChannelModal.tsx",
         36
       ]
-    ]
+    ],
+    "translation": ""
   },
   "Xid3K6": {
     "message": "Board URL can only contain letters, numbers, and hyphens",
@@ -2100,6 +2100,22 @@
     ],
     "translation": "Peut supprimer des membres"
   },
+  "1ZpvFl": {
+    "translation": "",
+    "message": "Can view all members' analytics",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/components/EditMemberPermissionsModal.tsx",
+        156
+      ],
+      [
+        "src/views/settings/components/RolePermissions.tsx",
+        45
+      ]
+    ]
+  },
   "MKAScN": {
     "message": "Can view boards",
     "placeholders": {},
@@ -2179,6 +2195,22 @@
       ]
     ],
     "translation": "Peut voir les membres"
+  },
+  "Ur/G5w": {
+    "translation": "",
+    "message": "Can view own analytics",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/components/EditMemberPermissionsModal.tsx",
+        155
+      ],
+      [
+        "src/views/settings/components/RolePermissions.tsx",
+        44
+      ]
+    ]
   },
   "SNfg0e": {
     "message": "Can view workspace",
@@ -2345,7 +2377,6 @@
     "translation": "Carte introuvable"
   },
   "0LwNjp": {
-    "translation": "",
     "message": "Card threads for this board are created in the selected channel.",
     "placeholders": {},
     "comments": [],
@@ -2354,7 +2385,8 @@
         "src/views/board/components/BoardDiscordChannelModal.tsx",
         75
       ]
-    ]
+    ],
+    "translation": ""
   },
   "ZH7TVS": {
     "message": "Card title",
@@ -2389,7 +2421,6 @@
     "translation": "URL de la carte copiée dans le presse-papiers"
   },
   "plEbd2": {
-    "translation": "",
     "message": "Cards cannot be created here; moving a card here posts to its thread",
     "placeholders": {},
     "comments": [],
@@ -2398,7 +2429,8 @@
         "src/views/board/components/ListDiscordSettingsModal.tsx",
         85
       ]
-    ]
+    ],
+    "translation": ""
   },
   "VhMDMg": {
     "message": "Change Password",
@@ -2643,7 +2675,7 @@
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        172
+        175
       ],
       [
         "src/views/settings/components/NewApiKeyModal.tsx",
@@ -2861,7 +2893,6 @@
     "translation": "Connecter"
   },
   "/TNAU6": {
-    "translation": "",
     "message": "Connect Crisp",
     "placeholders": {},
     "comments": [],
@@ -2870,7 +2901,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         209
       ]
-    ]
+    ],
+    "translation": ""
   },
   "3jod3l": {
     "message": "Connect GitHub",
@@ -2933,7 +2965,6 @@
     "translation": "Connectez votre compte Trello pour importer des tableaux."
   },
   "bCW+p2": {
-    "translation": "",
     "message": "Connected to {0}",
     "placeholders": {
       "0": [
@@ -2946,10 +2977,10 @@
         "src/views/settings/components/DiscordIntegration.tsx",
         71
       ]
-    ]
+    ],
+    "translation": ""
   },
   "wJHHRt": {
-    "translation": "",
     "message": "Connected to {0}.",
     "placeholders": {
       "0": [
@@ -2962,7 +2993,8 @@
         "src/views/settings/components/DiscordIntegration.tsx",
         30
       ]
-    ]
+    ],
+    "translation": ""
   },
   "jfC/xh": {
     "message": "Contact",
@@ -3093,7 +3125,6 @@
     "translation": "Convertir en lien"
   },
   "6V3Ea3": {
-    "translation": "",
     "message": "Copied",
     "placeholders": {},
     "comments": [],
@@ -3102,10 +3133,10 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         110
       ]
-    ]
+    ],
+    "translation": ""
   },
   "he3ygx": {
-    "translation": "",
     "message": "Copy",
     "placeholders": {},
     "comments": [],
@@ -3114,7 +3145,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         133
       ]
-    ]
+    ],
+    "translation": ""
   },
   "5RkSzq": {
     "message": "Copy board link",
@@ -3189,7 +3221,6 @@
     "translation": "Copier les membres"
   },
   "VlNydw": {
-    "translation": "",
     "message": "Copy the webhook URL into your Crisp dashboard to finish setup.",
     "placeholders": {},
     "comments": [],
@@ -3198,7 +3229,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         66
       ]
-    ]
+    ],
+    "translation": ""
   },
   "7mrkyO": {
     "message": "Copy ticket ID",
@@ -3285,7 +3317,6 @@
     "translation": "Créer une carte"
   },
   "e2Swue": {
-    "translation": "",
     "message": "Create cards from Crisp conversations: choose a target board and list, then paste the generated webhook URL into your Crisp dashboard.",
     "placeholders": {},
     "comments": [],
@@ -3294,7 +3325,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         152
       ]
-    ]
+    ],
+    "translation": ""
   },
   "d33Usy": {
     "message": "Create checklist",
@@ -3421,7 +3453,6 @@
     "translation": "Créer un modèle"
   },
   "5rnYtO": {
-    "translation": "",
     "message": "Create thread",
     "placeholders": {},
     "comments": [],
@@ -3430,7 +3461,8 @@
         "src/views/board/components/ListDiscordSettingsModal.tsx",
         79
       ]
-    ]
+    ],
+    "translation": ""
   },
   "SiPp29": {
     "message": "Create webhook",
@@ -3485,7 +3517,6 @@
     "translation": "a créé la carte"
   },
   "kXWZZT": {
-    "translation": "",
     "message": "Creating a card here creates a Discord thread",
     "placeholders": {},
     "comments": [],
@@ -3494,10 +3525,10 @@
         "src/views/board/components/ListDiscordSettingsModal.tsx",
         80
       ]
-    ]
+    ],
+    "translation": ""
   },
   "ZHkrEQ": {
-    "translation": "",
     "message": "Crisp",
     "placeholders": {},
     "comments": [],
@@ -3506,10 +3537,10 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         119
       ]
-    ]
+    ],
+    "translation": ""
   },
   "YI9zTX": {
-    "translation": "",
     "message": "Crisp connected",
     "placeholders": {},
     "comments": [],
@@ -3518,10 +3549,10 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         65
       ]
-    ]
+    ],
+    "translation": ""
   },
   "tsoWgs": {
-    "translation": "",
     "message": "Crisp disconnected",
     "placeholders": {},
     "comments": [],
@@ -3530,10 +3561,10 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         84
       ]
-    ]
+    ],
+    "translation": ""
   },
   "j7J5wV": {
-    "translation": "",
     "message": "Crisp is connected. Operator notes starting with #card create cards in",
     "placeholders": {},
     "comments": [],
@@ -3542,10 +3573,10 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         124
       ]
-    ]
+    ],
+    "translation": ""
   },
   "0a1IGT": {
-    "translation": "",
     "message": "Crisp Website ID",
     "placeholders": {},
     "comments": [],
@@ -3554,7 +3585,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         159
       ]
-    ]
+    ],
+    "translation": ""
   },
   "J5nbej": {
     "message": "Critical",
@@ -4034,7 +4066,6 @@
     "translation": "Espace de travail de destination"
   },
   "+K0AvT": {
-    "translation": "",
     "message": "Disconnect",
     "placeholders": {},
     "comments": [],
@@ -4043,10 +4074,10 @@
         "src/views/settings/components/DiscordIntegration.tsx",
         78
       ]
-    ]
+    ],
+    "translation": ""
   },
   "3VeJOX": {
-    "translation": "",
     "message": "Disconnect Crisp",
     "placeholders": {},
     "comments": [],
@@ -4055,7 +4086,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         146
       ]
-    ]
+    ],
+    "translation": ""
   },
   "Odv3J6": {
     "message": "Disconnect GitHub",
@@ -4082,7 +4114,6 @@
     "translation": "Déconnecter Trello"
   },
   "OdPOhy": {
-    "translation": "",
     "message": "Discord",
     "placeholders": {},
     "comments": [],
@@ -4091,10 +4122,10 @@
         "src/views/settings/components/DiscordIntegration.tsx",
         66
       ]
-    ]
+    ],
+    "translation": ""
   },
   "wBIsjb": {
-    "translation": "",
     "message": "Discord channel",
     "placeholders": {},
     "comments": [],
@@ -4107,10 +4138,10 @@
         "src/views/board/components/BoardDropdown.tsx",
         144
       ]
-    ]
+    ],
+    "translation": ""
   },
   "xNOkt7": {
-    "translation": "",
     "message": "Discord channel (threads will be created here)",
     "placeholders": {},
     "comments": [],
@@ -4119,10 +4150,10 @@
         "src/views/boards/components/NewBoardForm.tsx",
         163
       ]
-    ]
+    ],
+    "translation": ""
   },
   "bssfDm": {
-    "translation": "",
     "message": "Discord channel updated.",
     "placeholders": {},
     "comments": [],
@@ -4131,10 +4162,10 @@
         "src/views/board/components/BoardDiscordChannelModal.tsx",
         37
       ]
-    ]
+    ],
+    "translation": ""
   },
   "CcjikT": {
-    "translation": "",
     "message": "Discord connected",
     "placeholders": {},
     "comments": [],
@@ -4143,10 +4174,10 @@
         "src/views/settings/components/DiscordIntegration.tsx",
         29
       ]
-    ]
+    ],
+    "translation": ""
   },
   "/vDoOq": {
-    "translation": "",
     "message": "Discord disconnected",
     "placeholders": {},
     "comments": [],
@@ -4155,10 +4186,10 @@
         "src/views/settings/components/DiscordIntegration.tsx",
         47
       ]
-    ]
+    ],
+    "translation": ""
   },
   "0dYWgo": {
-    "translation": "",
     "message": "Discord server ID",
     "placeholders": {},
     "comments": [],
@@ -4167,10 +4198,10 @@
         "src/views/settings/components/DiscordIntegration.tsx",
         102
       ]
-    ]
+    ],
+    "translation": ""
   },
   "b1udVA": {
-    "translation": "",
     "message": "Discord settings",
     "placeholders": {},
     "comments": [],
@@ -4183,10 +4214,10 @@
         "src/views/board/components/ListDiscordSettingsModal.tsx",
         101
       ]
-    ]
+    ],
+    "translation": ""
   },
   "Xv4Xxp": {
-    "translation": "",
     "message": "Discord settings updated.",
     "placeholders": {},
     "comments": [],
@@ -4195,7 +4226,8 @@
         "src/views/board/components/ListDiscordSettingsModal.tsx",
         61
       ]
-    ]
+    ],
+    "translation": ""
   },
   "1sRmLC": {
     "message": "Discuss and collaborate on cards.",
@@ -4580,7 +4612,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        162
+        165
       ],
       [
         "src/views/members/index.tsx",
@@ -4890,7 +4922,6 @@
     "translation": "Erreur lors du changement de mot de passe"
   },
   "jAe8N7": {
-    "translation": "",
     "message": "Error connecting Crisp",
     "placeholders": {},
     "comments": [],
@@ -4899,7 +4930,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         72
       ]
-    ]
+    ],
+    "translation": ""
   },
   "yhLUU8": {
     "message": "Error connecting GitHub",
@@ -4974,7 +5006,6 @@
     "translation": "Erreur lors de la suppression de l'espace de travail"
   },
   "wNGk6p": {
-    "translation": "",
     "message": "Error disconnecting Crisp",
     "placeholders": {},
     "comments": [],
@@ -4983,7 +5014,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         91
       ]
-    ]
+    ],
+    "translation": ""
   },
   "gQ/02p": {
     "message": "Error disconnecting GitHub",
@@ -6255,7 +6287,6 @@
     "translation": "dans"
   },
   "OTnexY": {
-    "translation": "",
     "message": "In a conversation, write a private note starting with #card followed by the card title.",
     "placeholders": {},
     "comments": [],
@@ -6264,10 +6295,10 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         139
       ]
-    ]
+    ],
+    "translation": ""
   },
   "u13RJt": {
-    "translation": "",
     "message": "In Crisp, go to Settings → Websites → your website → Web Hooks and paste this URL.",
     "placeholders": {},
     "comments": [],
@@ -6276,7 +6307,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         137
       ]
-    ]
+    ],
+    "translation": ""
   },
   "WbTDwg": {
     "message": "In Progress",
@@ -6407,7 +6439,6 @@
     "translation": "Inviter"
   },
   "t3YIfP": {
-    "translation": "",
     "message": "Invite bot to server",
     "placeholders": {},
     "comments": [],
@@ -6416,7 +6447,8 @@
         "src/views/settings/components/DiscordIntegration.tsx",
         95
       ]
-    ]
+    ],
+    "translation": ""
   },
   "KLJ4eD": {
     "message": "Invite link copied",
@@ -6487,7 +6519,6 @@
     "translation": "Inviter un membre"
   },
   "YFdO8I": {
-    "translation": "",
     "message": "Invite the bot to your Discord server, then paste the server ID below.",
     "placeholders": {},
     "comments": [],
@@ -6496,7 +6527,8 @@
         "src/views/settings/components/DiscordIntegration.tsx",
         84
       ]
-    ]
+    ],
+    "translation": ""
   },
   "M2zwdn": {
     "message": "Inviting members requires a Team or Pro plan. You'll be redirected to upgrade your workspace.",
@@ -6882,7 +6914,6 @@
     "translation": "Liste"
   },
   "6baK1y": {
-    "translation": "",
     "message": "List is required",
     "placeholders": {},
     "comments": [],
@@ -6891,7 +6922,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         14
       ]
-    ]
+    ],
+    "translation": ""
   },
   "zQX5Dj": {
     "message": "List name",
@@ -6906,7 +6938,6 @@
     "translation": "Nom de la liste"
   },
   "lzMTAR": {
-    "translation": "",
     "message": "List updated",
     "placeholders": {},
     "comments": [],
@@ -6915,7 +6946,8 @@
         "src/views/board/components/ListDiscordSettingsModal.tsx",
         60
       ]
-    ]
+    ],
+    "translation": ""
   },
   "h16FyT": {
     "message": "Lists",
@@ -6948,7 +6980,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        180
+        183
       ]
     ],
     "translation": "Chargement des permissions..."
@@ -7714,7 +7746,6 @@
     "translation": "Aucun tableau trouvé"
   },
   "ydE3k+": {
-    "translation": "",
     "message": "No channel",
     "placeholders": {},
     "comments": [],
@@ -7731,7 +7762,8 @@
         "src/views/boards/components/NewBoardForm.tsx",
         188
       ]
-    ]
+    ],
+    "translation": ""
   },
   "OpNhRn": {
     "message": "No credit card required",
@@ -7758,7 +7790,6 @@
     "translation": "Aucune date"
   },
   "DvO4LM": {
-    "translation": "",
     "message": "No Discord activity",
     "placeholders": {},
     "comments": [],
@@ -7767,7 +7798,8 @@
         "src/views/board/components/ListDiscordSettingsModal.tsx",
         76
       ]
-    ]
+    ],
+    "translation": ""
   },
   "sY2lzr": {
     "message": "No download URL available for this attachment.",
@@ -7858,7 +7890,6 @@
     "translation": "Aucun résultat trouvé pour « {debouncedQuery} »."
   },
   "s7Snbr": {
-    "translation": "",
     "message": "No roles",
     "placeholders": {},
     "comments": [],
@@ -7867,7 +7898,8 @@
         "src/views/board/components/ListDiscordSettingsModal.tsx",
         152
       ]
-    ]
+    ],
+    "translation": ""
   },
   "Q9pQaX": {
     "message": "No roles found for this workspace yet.",
@@ -7876,7 +7908,7 @@
     "origin": [
       [
         "src/views/settings/components/RolePermissions.tsx",
-        110
+        113
       ]
     ],
     "translation": "Aucun rôle trouvé pour cet espace de travail pour le moment."
@@ -7894,7 +7926,6 @@
     "translation": "Aucun webhook configuré. Ajoutez un webhook pour recevoir des notifications."
   },
   "EdQY6l": {
-    "translation": "",
     "message": "None",
     "placeholders": {},
     "comments": [],
@@ -7903,7 +7934,8 @@
         "src/views/board/components/ListDiscordSettingsModal.tsx",
         76
       ]
-    ]
+    ],
+    "translation": ""
   },
   "9h7RDh": {
     "message": "Offer",
@@ -8026,7 +8058,6 @@
     "translation": "Amis open source"
   },
   "V4Am/U": {
-    "translation": "",
     "message": "Optional: create a Crisp shortcut !card that expands to #card for faster typing.",
     "placeholders": {},
     "comments": [],
@@ -8035,7 +8066,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         140
       ]
-    ]
+    ],
+    "translation": ""
   },
   "BzEFor": {
     "message": "or",
@@ -8316,7 +8348,7 @@
     "origin": [
       [
         "src/views/settings/components/RolePermissions.tsx",
-        119
+        122
       ]
     ],
     "translation": "Permission"
@@ -9275,7 +9307,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        245
+        248
       ]
     ],
     "translation": "Réinitialiser aux valeurs par défaut du rôle"
@@ -9565,7 +9597,6 @@
     "translation": "Découvrez ce que nos utilisateurs disent de Kan"
   },
   "ksgFyQ": {
-    "translation": "",
     "message": "Select a board",
     "placeholders": {},
     "comments": [],
@@ -9574,7 +9605,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         170
       ]
-    ]
+    ],
+    "translation": ""
   },
   "zYRVNp": {
     "message": "Select a list",
@@ -9693,7 +9725,6 @@
     "translation": "Envoyer un commentaire"
   },
   "pi1oME": {
-    "translation": "",
     "message": "Send message",
     "placeholders": {},
     "comments": [],
@@ -9702,7 +9733,8 @@
         "src/views/board/components/ListDiscordSettingsModal.tsx",
         84
       ]
-    ]
+    ],
+    "translation": ""
   },
   "eus61c": {
     "message": "Send test",
@@ -10274,7 +10306,6 @@
     "translation": "Soumettre"
   },
   "aj0LH5": {
-    "translation": "",
     "message": "Subscribe the hook to message events.",
     "placeholders": {},
     "comments": [],
@@ -10283,7 +10314,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         138
       ]
-    ]
+    ],
+    "translation": ""
   },
   "WYDptz": {
     "message": "Subscription Required",
@@ -10378,7 +10410,6 @@
     "translation": "Système"
   },
   "Osywwn": {
-    "translation": "",
     "message": "Tag roles in new threads",
     "placeholders": {},
     "comments": [],
@@ -10387,7 +10418,8 @@
         "src/views/board/components/ListDiscordSettingsModal.tsx",
         136
       ]
-    ]
+    ],
+    "translation": ""
   },
   "KM6m8p": {
     "message": "Team",
@@ -10682,7 +10714,6 @@
     "translation": "La carte a été dupliquée."
   },
   "pNULhX": {
-    "translation": "",
     "message": "The Crisp integration has been removed.",
     "placeholders": {},
     "comments": [],
@@ -10691,7 +10722,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         85
       ]
-    ]
+    ],
+    "translation": ""
   },
   "jlB2RY": {
     "message": "The current password you entered is incorrect.",
@@ -11206,7 +11238,6 @@
     "translation": "Impossible d'effacer les remplacements"
   },
   "wHnaT5": {
-    "translation": "",
     "message": "Unable to connect Discord",
     "placeholders": {},
     "comments": [],
@@ -11215,7 +11246,8 @@
         "src/views/settings/components/DiscordIntegration.tsx",
         36
       ]
-    ]
+    ],
+    "translation": ""
   },
   "5MPY04": {
     "message": "Unable to copy ID",
@@ -11406,7 +11438,6 @@
     "translation": "Impossible de supprimer le webhook"
   },
   "H/O9sO": {
-    "translation": "",
     "message": "Unable to disconnect Discord",
     "placeholders": {},
     "comments": [],
@@ -11415,7 +11446,8 @@
         "src/views/settings/components/DiscordIntegration.tsx",
         54
       ]
-    ]
+    ],
+    "translation": ""
   },
   "Oo4E6p": {
     "message": "Unable to duplicate card",
@@ -12538,7 +12570,6 @@
     "translation": "Webhook mis à jour avec succès"
   },
   "0ICiZY": {
-    "translation": "",
     "message": "Webhook URL copied to clipboard.",
     "placeholders": {},
     "comments": [],
@@ -12547,7 +12578,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         111
       ]
-    ]
+    ],
+    "translation": ""
   },
   "Hf1cEZ": {
     "message": "Webhook URL is required",
@@ -12578,7 +12610,6 @@
     "translation": "Webhooks"
   },
   "Y+pVrs": {
-    "translation": "",
     "message": "Website ID is required",
     "placeholders": {},
     "comments": [],
@@ -12587,7 +12618,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         12
       ]
-    ]
+    ],
+    "translation": ""
   },
   "xLTZVf": {
     "message": "Week start day",
@@ -13262,7 +13294,6 @@
     "translation": "Vos tableaux ont été importés."
   },
   "sG/O6j": {
-    "translation": "",
     "message": "Your Discord server has been disconnected.",
     "placeholders": {},
     "comments": [],
@@ -13271,7 +13302,8 @@
         "src/views/settings/components/DiscordIntegration.tsx",
         48
       ]
-    ]
+    ],
+    "translation": ""
   },
   "LqWW5F": {
     "message": "Your display name has been updated.",
