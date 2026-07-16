@@ -1,10 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import * as analyticsRepo from "@kan/db/repository/analytics.repo";
+import * as boardRepo from "@kan/db/repository/board.repo";
+import * as memberRepo from "@kan/db/repository/member.repo";
 import * as permissionRepo from "@kan/db/repository/permission.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
-import { hasPermission } from "../utils/permissions";
+import { memberHasPermission } from "../utils/permissions";
 
 vi.mock("@kan/db/repository/analytics.repo", () => ({
   getActivityCountsByMember: vi.fn(() => []),
@@ -28,18 +30,24 @@ vi.mock("@kan/db/repository/board.repo", () => ({
   getWorkspaceAndBoardIdByBoardPublicId: vi.fn(),
 }));
 vi.mock("../utils/permissions", () => ({
-  assertPermission: vi.fn(),
-  hasPermission: vi.fn(),
+  memberHasPermission: vi.fn(),
 }));
 
 const mockWsGet = workspaceRepo.getByPublicId as ReturnType<typeof vi.fn>;
 const mockGetMemberWithRole = permissionRepo.getMemberWithRole as ReturnType<
   typeof vi.fn
 >;
-const mockHasPermission = hasPermission as ReturnType<typeof vi.fn>;
+const mockMemberHasPermission = memberHasPermission as ReturnType<
+  typeof vi.fn
+>;
 const mockCompleted = analyticsRepo.getCompletedCountByMember as ReturnType<
   typeof vi.fn
 >;
+const mockMemberGetByPublicId = memberRepo.getByPublicId as ReturnType<
+  typeof vi.fn
+>;
+const mockBoardGetWorkspaceAndBoardId =
+  boardRepo.getWorkspaceAndBoardIdByBoardPublicId as ReturnType<typeof vi.fn>;
 
 describe("analytics.getMemberBreakdown access control", () => {
   const mockDb = {} as never;
@@ -63,7 +71,10 @@ describe("analytics.getMemberBreakdown access control", () => {
 
   it("forces a non-admin member to their own memberId", async () => {
     const { analyticsRouter } = await import("./analytics");
-    mockHasPermission.mockResolvedValue(false); // lacks analytics:view:all
+    // lacks analytics:view:all, has analytics:view
+    mockMemberHasPermission.mockImplementation((_db, _wmId, _roleId, _role, permission) =>
+      Promise.resolve(permission === "analytics:view"),
+    );
     const ctx = { user: mockUser, db: mockDb } as never;
 
     await analyticsRouter.createCaller(ctx).getMemberBreakdown(input);
@@ -77,7 +88,7 @@ describe("analytics.getMemberBreakdown access control", () => {
 
   it("lets an admin with view:all query the whole team (no member filter)", async () => {
     const { analyticsRouter } = await import("./analytics");
-    mockHasPermission.mockResolvedValue(true);
+    mockMemberHasPermission.mockResolvedValue(true);
     const ctx = { user: mockUser, db: mockDb } as never;
 
     await analyticsRouter.createCaller(ctx).getMemberBreakdown(input);
@@ -94,5 +105,40 @@ describe("analytics.getMemberBreakdown access control", () => {
     await expect(
       analyticsRouter.createCaller(ctx).getMemberBreakdown(input),
     ).rejects.toThrow();
+  });
+
+  it("rejects a memberPublicId that resolves to a different workspace", async () => {
+    const { analyticsRouter } = await import("./analytics");
+    mockMemberHasPermission.mockResolvedValue(true); // admin, view + view:all
+    mockMemberGetByPublicId.mockResolvedValue({
+      id: 123,
+      workspaceId: 999, // different workspace than caller's (7)
+      deletedAt: null,
+    });
+    const ctx = { user: mockUser, db: mockDb } as never;
+
+    const call = analyticsRouter
+      .createCaller(ctx)
+      .getMemberBreakdown({ ...input, memberPublicId: "mem-other0001" });
+
+    await expect(call).rejects.toThrow();
+    await expect(call).rejects.toMatchObject({ code: "NOT_FOUND" });
+  });
+
+  it("rejects a boardPublicId that resolves to a different workspace", async () => {
+    const { analyticsRouter } = await import("./analytics");
+    mockMemberHasPermission.mockResolvedValue(true); // admin, view + view:all
+    mockBoardGetWorkspaceAndBoardId.mockResolvedValue({
+      id: 456,
+      workspaceId: 999, // different workspace than caller's (7)
+    });
+    const ctx = { user: mockUser, db: mockDb } as never;
+
+    const call = analyticsRouter
+      .createCaller(ctx)
+      .getMemberBreakdown({ ...input, boardPublicId: "brd-other0001" });
+
+    await expect(call).rejects.toThrow();
+    await expect(call).rejects.toMatchObject({ code: "NOT_FOUND" });
   });
 });

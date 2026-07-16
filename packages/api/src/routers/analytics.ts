@@ -14,7 +14,7 @@ import {
   timeSeriesResponseSchema,
 } from "../schemas/analytics";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertPermission, hasPermission } from "../utils/permissions";
+import { memberHasPermission } from "../utils/permissions";
 
 // Resolve workspace + enforce member-vs-admin scoping. Returns the numeric
 // filter object the repo expects, with memberId forced to the caller unless
@@ -39,20 +39,35 @@ async function resolveScope(
   if (!workspace)
     throw new TRPCError({ code: "NOT_FOUND", message: "Workspace not found" });
 
-  await assertPermission(ctx.db, userId, workspace.id, "analytics:view");
-
   const caller = await permissionRepo.getMemberWithRole(
     ctx.db,
     userId,
     workspace.id,
   );
   if (!caller)
-    throw new TRPCError({ code: "FORBIDDEN", message: "Not a member" });
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Not a member of this workspace",
+    });
 
-  const canViewAll = await hasPermission(
+  const canView = await memberHasPermission(
     ctx.db,
-    userId,
-    workspace.id,
+    caller.id,
+    caller.roleId,
+    caller.role,
+    "analytics:view",
+  );
+  if (!canView)
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "You do not have permission to view analytics",
+    });
+
+  const canViewAll = await memberHasPermission(
+    ctx.db,
+    caller.id,
+    caller.roleId,
+    caller.role,
     "analytics:view:all",
   );
 
@@ -61,7 +76,11 @@ async function resolveScope(
     memberId = caller.id; // forced to self
   } else if (input.memberPublicId) {
     const target = await memberRepo.getByPublicId(ctx.db, input.memberPublicId);
-    if (!target || target.workspaceId !== workspace.id)
+    if (
+      !target ||
+      target.workspaceId !== workspace.id ||
+      target.deletedAt
+    )
       throw new TRPCError({ code: "NOT_FOUND", message: "Member not found" });
     memberId = target.id;
   }
