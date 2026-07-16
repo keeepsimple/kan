@@ -1,5 +1,4 @@
 import { and, desc, eq, gte, isNotNull, isNull, lte, sql } from "drizzle-orm";
-import { alias } from "drizzle-orm/pg-core";
 
 import type { dbClient } from "../client";
 import {
@@ -72,27 +71,21 @@ export const getActivityCountsByMember = (db: dbClient, f: Filter) => {
     .groupBy(canonicalMember.id);
 };
 
+// Outcome metrics attribute to the workspace member the card was ASSIGNED to
+// (cardToWorkspaceMembers). Unlike activity metrics, these are NOT de-duplicated
+// across a user's multiple membership rows: if a member is removed and re-invited,
+// outcomes earned under the prior membership stay attributed to that prior member id.
+// This avoids dropping cards assigned to not-yet-accepted invitees (whose userId is null).
 export const getCompletedCountByMember = (db: dbClient, f: Filter) => {
-  const assignedMember = alias(workspaceMembers, "assigned_member");
-  const canonicalMember = getCanonicalMemberSubquery(db, f.workspaceId);
-
   return db
     .select({
-      workspaceMemberId: canonicalMember.id,
+      workspaceMemberId: cardToWorkspaceMembers.workspaceMemberId,
       count: sql<number>`count(*)::int`,
     })
     .from(cards)
     .innerJoin(
       cardToWorkspaceMembers,
       eq(cardToWorkspaceMembers.cardId, cards.id),
-    )
-    .innerJoin(
-      assignedMember,
-      eq(assignedMember.id, cardToWorkspaceMembers.workspaceMemberId),
-    )
-    .innerJoin(
-      canonicalMember,
-      eq(canonicalMember.userId, assignedMember.userId),
     )
     .innerJoin(lists, eq(lists.id, cards.listId))
     .innerJoin(boards, eq(boards.id, lists.boardId))
@@ -103,19 +96,18 @@ export const getCompletedCountByMember = (db: dbClient, f: Filter) => {
         gte(cards.completedAt, f.from),
         lte(cards.completedAt, f.to),
         f.boardId ? eq(boards.id, f.boardId) : undefined,
-        f.memberId ? eq(canonicalMember.id, f.memberId) : undefined,
+        f.memberId
+          ? eq(cardToWorkspaceMembers.workspaceMemberId, f.memberId)
+          : undefined,
       ),
     )
-    .groupBy(canonicalMember.id);
+    .groupBy(cardToWorkspaceMembers.workspaceMemberId);
 };
 
 export const getOnTimeStatsByMember = (db: dbClient, f: Filter) => {
-  const assignedMember = alias(workspaceMembers, "assigned_member");
-  const canonicalMember = getCanonicalMemberSubquery(db, f.workspaceId);
-
   return db
     .select({
-      workspaceMemberId: canonicalMember.id,
+      workspaceMemberId: cardToWorkspaceMembers.workspaceMemberId,
       onTime: sql<number>`count(*) filter (where ${cards.completedAt} <= ${cards.dueDate})::int`,
       late: sql<number>`count(*) filter (where ${cards.completedAt} > ${cards.dueDate})::int`,
     })
@@ -123,14 +115,6 @@ export const getOnTimeStatsByMember = (db: dbClient, f: Filter) => {
     .innerJoin(
       cardToWorkspaceMembers,
       eq(cardToWorkspaceMembers.cardId, cards.id),
-    )
-    .innerJoin(
-      assignedMember,
-      eq(assignedMember.id, cardToWorkspaceMembers.workspaceMemberId),
-    )
-    .innerJoin(
-      canonicalMember,
-      eq(canonicalMember.userId, assignedMember.userId),
     )
     .innerJoin(lists, eq(lists.id, cards.listId))
     .innerJoin(boards, eq(boards.id, lists.boardId))
@@ -142,36 +126,27 @@ export const getOnTimeStatsByMember = (db: dbClient, f: Filter) => {
         gte(cards.completedAt, f.from),
         lte(cards.completedAt, f.to),
         f.boardId ? eq(boards.id, f.boardId) : undefined,
-        f.memberId ? eq(canonicalMember.id, f.memberId) : undefined,
+        f.memberId
+          ? eq(cardToWorkspaceMembers.workspaceMemberId, f.memberId)
+          : undefined,
       ),
     )
-    .groupBy(canonicalMember.id);
+    .groupBy(cardToWorkspaceMembers.workspaceMemberId);
 };
 
 export const getCurrentlyOverdueByMember = (
   db: dbClient,
   f: { workspaceId: number; boardId?: number; memberId?: number },
 ) => {
-  const assignedMember = alias(workspaceMembers, "assigned_member");
-  const canonicalMember = getCanonicalMemberSubquery(db, f.workspaceId);
-
   return db
     .select({
-      workspaceMemberId: canonicalMember.id,
+      workspaceMemberId: cardToWorkspaceMembers.workspaceMemberId,
       count: sql<number>`count(*)::int`,
     })
     .from(cards)
     .innerJoin(
       cardToWorkspaceMembers,
       eq(cardToWorkspaceMembers.cardId, cards.id),
-    )
-    .innerJoin(
-      assignedMember,
-      eq(assignedMember.id, cardToWorkspaceMembers.workspaceMemberId),
-    )
-    .innerJoin(
-      canonicalMember,
-      eq(canonicalMember.userId, assignedMember.userId),
     )
     .innerJoin(lists, eq(lists.id, cards.listId))
     .innerJoin(boards, eq(boards.id, lists.boardId))
@@ -183,33 +158,24 @@ export const getCurrentlyOverdueByMember = (
         isNotNull(cards.dueDate),
         sql`${cards.dueDate} < now()`,
         f.boardId ? eq(boards.id, f.boardId) : undefined,
-        f.memberId ? eq(canonicalMember.id, f.memberId) : undefined,
+        f.memberId
+          ? eq(cardToWorkspaceMembers.workspaceMemberId, f.memberId)
+          : undefined,
       ),
     )
-    .groupBy(canonicalMember.id);
+    .groupBy(cardToWorkspaceMembers.workspaceMemberId);
 };
 
 export const getAvgCycleTimeByMember = (db: dbClient, f: Filter) => {
-  const assignedMember = alias(workspaceMembers, "assigned_member");
-  const canonicalMember = getCanonicalMemberSubquery(db, f.workspaceId);
-
   return db
     .select({
-      workspaceMemberId: canonicalMember.id,
+      workspaceMemberId: cardToWorkspaceMembers.workspaceMemberId,
       avgSeconds: sql<number>`coalesce(avg(extract(epoch from (${cards.completedAt} - ${cards.createdAt}))), 0)::float`,
     })
     .from(cards)
     .innerJoin(
       cardToWorkspaceMembers,
       eq(cardToWorkspaceMembers.cardId, cards.id),
-    )
-    .innerJoin(
-      assignedMember,
-      eq(assignedMember.id, cardToWorkspaceMembers.workspaceMemberId),
-    )
-    .innerJoin(
-      canonicalMember,
-      eq(canonicalMember.userId, assignedMember.userId),
     )
     .innerJoin(lists, eq(lists.id, cards.listId))
     .innerJoin(boards, eq(boards.id, lists.boardId))
@@ -220,10 +186,12 @@ export const getAvgCycleTimeByMember = (db: dbClient, f: Filter) => {
         gte(cards.completedAt, f.from),
         lte(cards.completedAt, f.to),
         f.boardId ? eq(boards.id, f.boardId) : undefined,
-        f.memberId ? eq(canonicalMember.id, f.memberId) : undefined,
+        f.memberId
+          ? eq(cardToWorkspaceMembers.workspaceMemberId, f.memberId)
+          : undefined,
       ),
     )
-    .groupBy(canonicalMember.id);
+    .groupBy(cardToWorkspaceMembers.workspaceMemberId);
 };
 
 export const getActivityTimeSeries = (db: dbClient, f: Filter) => {
