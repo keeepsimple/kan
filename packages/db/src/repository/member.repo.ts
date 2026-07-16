@@ -19,6 +19,25 @@ export const getActiveCount = async (db: dbClient) => {
   return result[0]?.count ?? 0;
 };
 
+export const getAllByWorkspaceId = async (
+  db: dbClient,
+  workspaceId: number,
+): Promise<{ id: number; publicId: string; email: string }[]> => {
+  return db
+    .select({
+      id: workspaceMembers.id,
+      publicId: workspaceMembers.publicId,
+      email: workspaceMembers.email,
+    })
+    .from(workspaceMembers)
+    .where(
+      and(
+        eq(workspaceMembers.workspaceId, workspaceId),
+        isNull(workspaceMembers.deletedAt),
+      ),
+    );
+};
+
 export const getCountByWorkspaceId = async (
   db: dbClient,
   workspaceId: number,
