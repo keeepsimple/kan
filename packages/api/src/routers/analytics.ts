@@ -129,24 +129,22 @@ export const analyticsRouter = createTRPCRouter({
 
       const compute = async (from: Date, to: Date) => {
         const f = { ...scope, from, to };
-        const [activity, completed, onTime, cycle] = await Promise.all([
+        const [activity, totalsRows] = await Promise.all([
           analyticsRepo.getActivityCountsByMember(ctx.db, f),
-          analyticsRepo.getCompletedCountByMember(ctx.db, f),
-          analyticsRepo.getOnTimeStatsByMember(ctx.db, f),
-          analyticsRepo.getAvgCycleTimeByMember(ctx.db, f),
+          analyticsRepo.getOverviewOutcomeTotals(ctx.db, f),
         ]);
-        const onTimeTotal = onTime.reduce((a, r) => a + r.onTime, 0);
-        const lateTotal = onTime.reduce((a, r) => a + r.late, 0);
-        const denom = onTimeTotal + lateTotal;
-        const avg =
-          cycle.length > 0
-            ? cycle.reduce((a, r) => a + r.avgSeconds, 0) / cycle.length
-            : 0;
+        const totals = totalsRows[0] ?? {
+          completed: 0,
+          onTime: 0,
+          late: 0,
+          avgCycleSeconds: 0,
+        };
+        const denom = totals.onTime + totals.late;
         return {
           totalActivity: sum(activity),
-          completedCards: sum(completed),
-          onTimeRate: denom > 0 ? onTimeTotal / denom : 0,
-          avgCycleTimeSeconds: avg,
+          completedCards: totals.completed,
+          onTimeRate: denom > 0 ? totals.onTime / denom : 0,
+          avgCycleTimeSeconds: totals.avgCycleSeconds,
         };
       };
 

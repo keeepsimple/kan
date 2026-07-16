@@ -62,6 +62,8 @@ export const getActivityCountsByMember = (db: dbClient, f: Filter) => {
     .where(
       and(
         eq(boards.workspaceId, f.workspaceId),
+        isNull(boards.deletedAt),
+        isNull(lists.deletedAt),
         gte(cardActivities.createdAt, f.from),
         lte(cardActivities.createdAt, f.to),
         f.boardId ? eq(boards.id, f.boardId) : undefined,
@@ -92,6 +94,8 @@ export const getCompletedCountByMember = (db: dbClient, f: Filter) => {
     .where(
       and(
         eq(boards.workspaceId, f.workspaceId),
+        isNull(boards.deletedAt),
+        isNull(lists.deletedAt),
         isNotNull(cards.completedAt),
         gte(cards.completedAt, f.from),
         lte(cards.completedAt, f.to),
@@ -121,6 +125,8 @@ export const getOnTimeStatsByMember = (db: dbClient, f: Filter) => {
     .where(
       and(
         eq(boards.workspaceId, f.workspaceId),
+        isNull(boards.deletedAt),
+        isNull(lists.deletedAt),
         isNotNull(cards.completedAt),
         isNotNull(cards.dueDate),
         gte(cards.completedAt, f.from),
@@ -153,6 +159,8 @@ export const getCurrentlyOverdueByMember = (
     .where(
       and(
         eq(boards.workspaceId, f.workspaceId),
+        isNull(boards.deletedAt),
+        isNull(lists.deletedAt),
         isNull(cards.completedAt),
         isNull(cards.deletedAt),
         isNotNull(cards.dueDate),
@@ -182,6 +190,8 @@ export const getAvgCycleTimeByMember = (db: dbClient, f: Filter) => {
     .where(
       and(
         eq(boards.workspaceId, f.workspaceId),
+        isNull(boards.deletedAt),
+        isNull(lists.deletedAt),
         isNotNull(cards.completedAt),
         gte(cards.completedAt, f.from),
         lte(cards.completedAt, f.to),
@@ -213,6 +223,8 @@ export const getActivityTimeSeries = (db: dbClient, f: Filter) => {
     .where(
       and(
         eq(boards.workspaceId, f.workspaceId),
+        isNull(boards.deletedAt),
+        isNull(lists.deletedAt),
         gte(cardActivities.createdAt, f.from),
         lte(cardActivities.createdAt, f.to),
         f.boardId ? eq(boards.id, f.boardId) : undefined,
@@ -221,4 +233,37 @@ export const getActivityTimeSeries = (db: dbClient, f: Filter) => {
     )
     .groupBy(sql`date_trunc('day', ${cardActivities.createdAt})`)
     .orderBy(sql`date_trunc('day', ${cardActivities.createdAt})`);
+};
+
+// Workspace-level overview totals over DISTINCT completed cards, not joined
+// through cardToWorkspaceMembers. Summing the per-member outcome functions
+// above double-counts cards with multiple assignees and drops completed
+// cards with no assignee at all; this query counts each completed card
+// exactly once regardless of assignment, and applies the optional memberId
+// filter via an EXISTS subquery instead of a join so it can't fan out rows.
+export const getOverviewOutcomeTotals = (db: dbClient, f: Filter) => {
+  return db
+    .select({
+      completed: sql<number>`count(*)::int`,
+      onTime: sql<number>`count(*) filter (where ${cards.completedAt} <= ${cards.dueDate})::int`,
+      late: sql<number>`count(*) filter (where ${cards.completedAt} > ${cards.dueDate})::int`,
+      avgCycleSeconds: sql<number>`coalesce(avg(extract(epoch from (${cards.completedAt} - ${cards.createdAt}))), 0)::float`,
+    })
+    .from(cards)
+    .innerJoin(lists, eq(lists.id, cards.listId))
+    .innerJoin(boards, eq(boards.id, lists.boardId))
+    .where(
+      and(
+        eq(boards.workspaceId, f.workspaceId),
+        isNull(boards.deletedAt),
+        isNull(lists.deletedAt),
+        isNotNull(cards.completedAt),
+        gte(cards.completedAt, f.from),
+        lte(cards.completedAt, f.to),
+        f.boardId ? eq(boards.id, f.boardId) : undefined,
+        f.memberId
+          ? sql`exists (select 1 from ${cardToWorkspaceMembers} where ${cardToWorkspaceMembers.cardId} = ${cards.id} and ${cardToWorkspaceMembers.workspaceMemberId} = ${f.memberId})`
+          : undefined,
+      ),
+    );
 };
