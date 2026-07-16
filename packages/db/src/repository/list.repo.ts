@@ -291,6 +291,31 @@ export const updateDiscordConfig = async (
   return result;
 };
 
+export const updateCompletionConfig = async (
+  db: dbClient,
+  args: {
+    listPublicId: string;
+    isCompleted?: boolean;
+    autoArchiveEnabled?: boolean;
+    autoArchiveDays?: number | null;
+  },
+) => {
+  const [result] = await db
+    .update(lists)
+    .set({
+      ...(args.isCompleted !== undefined && { isCompleted: args.isCompleted }),
+      ...(args.autoArchiveEnabled !== undefined && {
+        autoArchiveEnabled: args.autoArchiveEnabled,
+      }),
+      ...(args.autoArchiveDays !== undefined && {
+        autoArchiveDays: args.autoArchiveDays,
+      }),
+    })
+    .where(and(eq(lists.publicId, args.listPublicId), isNull(lists.deletedAt)))
+    .returning({ publicId: lists.publicId, name: lists.name });
+  return result;
+};
+
 export const reorder = async (
   db: dbClient,
   args: {

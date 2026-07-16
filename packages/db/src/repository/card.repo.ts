@@ -249,6 +249,33 @@ export const clearCompletedAt = async (
     .where(eq(cards.id, args.cardId));
 };
 
+export const backfillCompletedAtForList = async (
+  db: dbClient,
+  args: { listId: number; completedBy: string },
+) => {
+  await db.execute(sql`
+    UPDATE "card" SET
+      "completedAt" = COALESCE(
+        (SELECT MAX(a."createdAt") FROM "card_activity" a
+          WHERE a."cardId" = "card"."id" AND a."toListId" = ${args.listId}),
+        "card"."createdAt"),
+      "completedBy" = ${args.completedBy}
+    WHERE "card"."listId" = ${args.listId}
+      AND "card"."deletedAt" IS NULL
+      AND "card"."completedAt" IS NULL
+  `);
+};
+
+export const clearCompletedAtForList = async (
+  db: dbClient,
+  args: { listId: number },
+) => {
+  await db
+    .update(cards)
+    .set({ completedAt: null, completedBy: null })
+    .where(and(eq(cards.listId, args.listId), isNull(cards.deletedAt)));
+};
+
 export const getCardWithListByPublicId = (
   db: dbClient,
   cardPublicId: string,

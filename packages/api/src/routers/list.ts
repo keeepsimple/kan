@@ -164,6 +164,9 @@ export const listRouter = createTRPCRouter({
         index: z.number().optional(),
         discordBehaviour: z.enum(["create_thread", "notify"]).nullable().optional(),
         discordRoleIds: z.array(z.string().max(32).regex(/^\d+$/)).max(25).optional(),
+        isCompleted: z.boolean().optional(),
+        autoArchiveEnabled: z.boolean().optional(),
+        autoArchiveDays: z.number().int().min(1).max(365).nullable().optional(),
       }),
     )
     .output(listUpdateResponseSchema)
@@ -221,6 +224,28 @@ export const listRouter = createTRPCRouter({
           discordBehaviour: input.discordBehaviour,
           discordRoleIds: input.discordRoleIds,
         });
+      }
+
+      if (
+        input.isCompleted !== undefined ||
+        input.autoArchiveEnabled !== undefined ||
+        input.autoArchiveDays !== undefined
+      ) {
+        result = await listRepo.updateCompletionConfig(ctx.db, {
+          listPublicId: input.listPublicId,
+          isCompleted: input.isCompleted,
+          autoArchiveEnabled: input.autoArchiveEnabled,
+          autoArchiveDays: input.autoArchiveDays,
+        });
+
+        if (input.isCompleted === true) {
+          await cardRepo.backfillCompletedAtForList(ctx.db, {
+            listId: list.id,
+            completedBy: userId,
+          });
+        } else if (input.isCompleted === false) {
+          await cardRepo.clearCompletedAtForList(ctx.db, { listId: list.id });
+        }
       }
 
       if (!result)
