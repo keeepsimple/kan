@@ -9,7 +9,6 @@ import { HiArrowDownTray, HiChevronDown, HiOutlinePlusSmall } from "react-icons/
 import { useState } from "react";
 
 import Button from "~/components/Button";
-import FeedbackModal from "~/components/FeedbackModal";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
@@ -99,12 +98,6 @@ export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
         </div>
 
         <>
-          <Modal
-            modalSize="md"
-            isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
-          >
-            <FeedbackModal />
-          </Modal>
 
           <Modal
             modalSize="sm"

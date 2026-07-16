@@ -2,7 +2,6 @@ import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
 
 import Button from "~/components/Button";
-import FeedbackModal from "~/components/FeedbackModal";
 import { FontSizeSelector } from "~/components/FontSizeSelector";
 import { LanguageSelector } from "~/components/LanguageSelector";
 import Modal from "~/components/modal";
@@ -119,12 +118,6 @@ export default function AccountSettings() {
       </Modal>
 
       {/* Global modals */}
-      <Modal
-        modalSize="md"
-        isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
-      >
-        <FeedbackModal />
-      </Modal>
       <Modal
         modalSize="sm"
         isVisible={isOpen && modalContentType === "NEW_WORKSPACE"}

@@ -21,7 +21,8 @@
         102
       ]
     ],
-    "translation": ", ou veja nosso"
+    "translation": ", ou veja nosso",
+    "obsolete": true
   },
   "J/hVSQ": {
     "message": "{0}",
@@ -34,7 +35,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        53
+        52
       ]
     ],
     "translation": "{0}"
@@ -55,11 +56,11 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        48
+        47
       ],
       [
         "src/views/card/index.tsx",
-        321
+        320
       ]
     ],
     "translation": "{0} | {1}"
@@ -397,7 +398,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        26
+        25
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
@@ -425,7 +426,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        476
+        475
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -609,7 +610,7 @@
     "origin": [
       [
         "src/views/settings/WebhookSettings.tsx",
-        36
+        35
       ]
     ],
     "translation": "Adicionar webhook"
@@ -807,7 +808,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        221
+        222
       ]
     ],
     "translation": "Administrador"
@@ -883,7 +884,7 @@
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        66
+        65
       ]
     ],
     "translation": ""
@@ -919,7 +920,7 @@
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        80
+        79
       ]
     ],
     "translation": ""
@@ -995,7 +996,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        73
+        72
       ]
     ],
     "translation": ""
@@ -1007,7 +1008,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        111
+        110
       ]
     ],
     "translation": "Ocorreu um erro ao conectar sua conta do GitHub."
@@ -1019,7 +1020,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        92
+        91
       ]
     ],
     "translation": ""
@@ -1031,7 +1032,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        134
+        133
       ]
     ],
     "translation": "Ocorreu um erro ao desconectar sua conta do GitHub."
@@ -1043,7 +1044,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        91
+        90
       ]
     ],
     "translation": "Ocorreu um erro ao desconectar sua conta do Trello."
@@ -1171,7 +1172,7 @@
     "origin": [
       [
         "src/views/settings/ApiSettings.tsx",
-        22
+        21
       ]
     ],
     "translation": "Chaves de API"
@@ -1231,7 +1232,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        27
+        26
       ]
     ],
     "translation": "Arquivado"
@@ -1595,7 +1596,7 @@
       ],
       [
         "src/views/settings/BillingSettings.tsx",
-        88
+        87
       ]
     ],
     "translation": "Cobrança"
@@ -1607,7 +1608,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        98
+        97
       ]
     ],
     "translation": "Portal de cobrança"
@@ -1635,7 +1636,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        321
+        320
       ],
       [
         "src/views/public/board/index.tsx",
@@ -1675,7 +1676,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        13
+        14
       ]
     ],
     "translation": ""
@@ -1687,7 +1688,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        33
+        34
       ]
     ],
     "translation": "Quadro movido"
@@ -2351,7 +2352,7 @@
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        269
+        260
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
@@ -2423,7 +2424,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        321
+        320
       ]
     ],
     "translation": "Cartão"
@@ -2435,7 +2436,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        69
+        68
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2475,11 +2476,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        384
+        383
       ],
       [
         "src/views/card/index.tsx",
-        421
+        420
       ]
     ],
     "translation": "Cartão não encontrado"
@@ -2559,11 +2560,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        87
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        99
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2583,7 +2584,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        63
+        62
       ]
     ],
     "translation": "Altere o tamanho da fonte do aplicativo."
@@ -2595,7 +2596,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        53
+        52
       ]
     ],
     "translation": "Altere suas preferências de idioma."
@@ -2703,7 +2704,7 @@
       ],
       [
         "src/views/settings/BillingSettings.tsx",
-        80
+        79
       ]
     ],
     "translation": "Escolher plano"
@@ -2791,7 +2792,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        375
+        374
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3007,7 +3008,7 @@
     "origin": [
       [
         "src/views/settings/WebhookSettings.tsx",
-        31
+        30
       ]
     ],
     "translation": "Configure webhooks para receber notificações quando cartões forem criados, atualizados, movidos ou excluídos."
@@ -3071,7 +3072,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        209
+        221
       ]
     ],
     "translation": ""
@@ -3083,7 +3084,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        216
+        215
       ]
     ],
     "translation": "Conectar GitHub"
@@ -3095,7 +3096,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        166
+        165
       ]
     ],
     "translation": "Conectar Trello"
@@ -3119,7 +3120,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        195
+        194
       ]
     ],
     "translation": "Conecte sua conta do GitHub para importar projetos."
@@ -3131,7 +3132,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        153
+        152
       ]
     ],
     "translation": "Conecte sua conta do Trello para importar quadros."
@@ -3201,10 +3202,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      [
-        "src/components/FeedbackModal.tsx",
-        100
-      ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
         96
@@ -3303,7 +3300,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        110
+        109
       ]
     ],
     "translation": ""
@@ -3315,7 +3312,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        133
+        132
       ]
     ],
     "translation": ""
@@ -3351,7 +3348,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        259
+        250
       ]
     ],
     "translation": "Copiar checklists"
@@ -3363,7 +3360,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        223
+        214
       ]
     ],
     "translation": "Copiar etiquetas"
@@ -3387,7 +3384,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        241
+        232
       ]
     ],
     "translation": "Copiar membros"
@@ -3399,7 +3396,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        66
+        65
       ]
     ],
     "translation": ""
@@ -3495,7 +3492,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        152
+        151
       ]
     ],
     "translation": ""
@@ -3563,7 +3560,7 @@
       ],
       [
         "src/views/boards/index.tsx",
-        41
+        40
       ]
     ],
     "translation": "Criar novo {0}"
@@ -3575,7 +3572,7 @@
     "origin": [
       [
         "src/views/settings/ApiSettings.tsx",
-        30
+        29
       ]
     ],
     "translation": "Criar nova chave"
@@ -3707,7 +3704,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        119
+        118
       ]
     ],
     "translation": ""
@@ -3719,7 +3716,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        65
+        64
       ]
     ],
     "translation": ""
@@ -3731,7 +3728,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        84
+        83
       ]
     ],
     "translation": ""
@@ -3743,7 +3740,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        124
+        123
       ]
     ],
     "translation": ""
@@ -3755,7 +3752,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        159
+        158
       ]
     ],
     "translation": ""
@@ -3952,7 +3949,7 @@
     "origin": [
       [
         "src/components/UserMenu.tsx",
-        158
+        149
       ]
     ],
     "translation": "Escuro"
@@ -4060,11 +4057,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        70
+        69
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        80
+        79
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -4160,11 +4157,11 @@
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        85
+        84
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        96
+        95
       ]
     ],
     "translation": "Excluir workspace"
@@ -4244,7 +4241,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        76
+        77
       ]
     ],
     "translation": "Workspace de destino"
@@ -4268,7 +4265,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        146
+        145
       ]
     ],
     "translation": ""
@@ -4280,7 +4277,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        227
+        226
       ]
     ],
     "translation": "Desconectar GitHub"
@@ -4292,7 +4289,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        181
+        180
       ]
     ],
     "translation": "Desconectar Trello"
@@ -4432,7 +4429,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        36
+        35
       ]
     ],
     "translation": "Nome de exibição"
@@ -4507,7 +4504,8 @@
         109
       ]
     ],
-    "translation": "docs"
+    "translation": "docs",
+    "obsolete": true
   },
   "TbjyhA": {
     "message": "Docs",
@@ -4526,10 +4524,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      [
-        "src/components/UserMenu.tsx",
-        209
-      ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
         24
@@ -4636,7 +4630,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        153
+        152
       ]
     ],
     "translation": "Data de vencimento"
@@ -4696,7 +4690,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        281
+        272
       ]
     ],
     "translation": "Duplicar"
@@ -4708,7 +4702,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        113
+        112
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -4728,7 +4722,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        281
+        272
       ]
     ],
     "translation": "Duplicando…"
@@ -4800,7 +4794,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        244
+        248
       ]
     ],
     "translation": "Editar permissões"
@@ -4876,7 +4870,7 @@
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        43
+        42
       ]
     ],
     "translation": "Email"
@@ -4912,7 +4906,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        73
+        72
       ]
     ],
     "translation": "Visibilidade do email"
@@ -4924,7 +4918,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        202
+        193
       ]
     ],
     "translation": "Fim da lista"
@@ -5112,7 +5106,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        72
+        71
       ]
     ],
     "translation": ""
@@ -5124,7 +5118,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        110
+        109
       ]
     ],
     "translation": "Erro ao conectar GitHub"
@@ -5196,7 +5190,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        91
+        90
       ]
     ],
     "translation": ""
@@ -5208,7 +5202,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        133
+        132
       ]
     ],
     "translation": "Erro ao desconectar GitHub"
@@ -5220,7 +5214,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        90
+        89
       ]
     ],
     "translation": "Erro ao desconectar Trello"
@@ -5636,7 +5630,8 @@
         217
       ]
     ],
-    "translation": "Feedback"
+    "translation": "Feedback",
+    "obsolete": true
   },
   "2roTVj": {
     "message": "Feedback sent",
@@ -5648,7 +5643,8 @@
         33
       ]
     ],
-    "translation": "Feedback enviado"
+    "translation": "Feedback enviado",
+    "obsolete": true
   },
   "F6m23G": {
     "message": "File uploads",
@@ -5693,7 +5689,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        60
+        59
       ]
     ],
     "translation": "Tamanho da fonte"
@@ -5749,7 +5745,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        31
+        30
       ]
     ],
     "translation": "Gratuito (1 membro)"
@@ -5777,7 +5773,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        311
+        315
       ]
     ],
     "translation": "Plano gratuito"
@@ -5985,7 +5981,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        190
+        189
       ]
     ],
     "translation": "GitHub"
@@ -5997,7 +5993,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        103
+        102
       ]
     ],
     "translation": "GitHub conectado"
@@ -6009,7 +6005,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        126
+        125
       ]
     ],
     "translation": "GitHub desconectado"
@@ -6169,7 +6165,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        223
+        224
       ]
     ],
     "translation": "Convidado"
@@ -6229,7 +6225,7 @@
     "origin": [
       [
         "src/components/TimeSelector.tsx",
-        17
+        18
       ]
     ],
     "translation": "Horas"
@@ -6364,7 +6360,8 @@
         75
       ]
     ],
-    "translation": "Ideias para melhorar esta página..."
+    "translation": "Ideias para melhorar esta página...",
+    "obsolete": true
   },
   "l3s5ri": {
     "message": "Import",
@@ -6373,7 +6370,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        73
+        72
       ]
     ],
     "translation": "Importar"
@@ -6489,7 +6486,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        139
+        138
       ]
     ],
     "translation": ""
@@ -6501,7 +6498,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        137
+        136
       ]
     ],
     "translation": ""
@@ -6629,7 +6626,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        330
+        334
       ]
     ],
     "translation": "Convidar"
@@ -6875,7 +6872,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        133
+        132
       ]
     ],
     "translation": "Etiquetas"
@@ -6911,7 +6908,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        50
+        49
       ]
     ],
     "translation": "Idioma"
@@ -6923,7 +6920,7 @@
     "origin": [
       [
         "src/components/FontSizeSelector.tsx",
-        9
+        11
       ]
     ],
     "translation": "Grande"
@@ -6935,7 +6932,7 @@
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        57
+        55
       ]
     ],
     "translation": ""
@@ -6947,7 +6944,7 @@
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        56
+        54
       ]
     ],
     "translation": ""
@@ -6959,7 +6956,7 @@
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        58
+        56
       ]
     ],
     "translation": ""
@@ -7084,7 +7081,7 @@
     "origin": [
       [
         "src/components/UserMenu.tsx",
-        172
+        163
       ]
     ],
     "translation": "Claro"
@@ -7136,11 +7133,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        119
+        118
       ],
       [
         "src/views/card/index.tsx",
-        124
+        123
       ]
     ],
     "translation": "Lista"
@@ -7152,7 +7149,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        14
+        15
       ]
     ],
     "translation": ""
@@ -7265,7 +7262,7 @@
     "origin": [
       [
         "src/components/UserMenu.tsx",
-        227
+        188
       ]
     ],
     "translation": "Sair"
@@ -7405,7 +7402,7 @@
     "origin": [
       [
         "src/components/FontSizeSelector.tsx",
-        8
+        10
       ]
     ],
     "translation": "Médio"
@@ -7429,7 +7426,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        40
+        39
       ]
     ],
     "translation": "membro"
@@ -7453,7 +7450,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        222
+        223
       ]
     ],
     "translation": "Membro"
@@ -7465,7 +7462,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        40
+        39
       ]
     ],
     "translation": "membros"
@@ -7489,11 +7486,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        143
+        142
       ],
       [
         "src/views/members/index.tsx",
-        283
+        287
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -7513,7 +7510,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        278
+        282
       ]
     ],
     "translation": "Membros | {0}"
@@ -7537,7 +7534,7 @@
     "origin": [
       [
         "src/components/TimeSelector.tsx",
-        32
+        31
       ]
     ],
     "translation": "Minutos"
@@ -7605,7 +7602,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        64
+        65
       ]
     ],
     "translation": "Mover quadro para outro workspace"
@@ -7739,7 +7736,8 @@
         95
       ]
     ],
-    "translation": "Precisa de ajuda?"
+    "translation": "Precisa de ajuda?",
+    "obsolete": true
   },
   "isRobC": {
     "message": "New",
@@ -7748,7 +7746,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        95
+        94
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -8268,7 +8266,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        73
+        72
       ]
     ],
     "translation": "Depois de excluir sua conta, não há como voltar atrás. Esta ação não pode ser desfeita."
@@ -8280,7 +8278,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        88
+        87
       ]
     ],
     "translation": "Depois de excluir seu workspace, não há como voltar atrás. Esta ação não pode ser desfeita."
@@ -8340,7 +8338,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        140
+        139
       ]
     ],
     "translation": ""
@@ -8540,7 +8538,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        230
+        234
       ]
     ],
     "translation": "Pausado"
@@ -8568,7 +8566,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        230
+        234
       ]
     ],
     "translation": "Pendente"
@@ -8704,7 +8702,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        66
+        65
       ]
     ],
     "translation": "Plano"
@@ -8847,10 +8845,6 @@
         26
       ],
       [
-        "src/components/FeedbackModal.tsx",
-        41
-      ],
-      [
         "src/components/NewWorkspaceForm.tsx",
         110
       ],
@@ -8964,11 +8958,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        236
+        235
       ],
       [
         "src/views/card/index.tsx",
-        249
+        248
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -9064,7 +9058,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        78
+        77
       ],
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
@@ -9104,7 +9098,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        195
+        186
       ]
     ],
     "translation": "Posição na lista (0 = primeira, deixe vazio para o final)"
@@ -9220,7 +9214,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        308
+        312
       ]
     ],
     "translation": "Plano Pro"
@@ -9256,7 +9250,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        30
+        29
       ]
     ],
     "translation": "Foto de perfil"
@@ -9388,7 +9382,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        253
+        257
       ]
     ],
     "translation": "Remover membro"
@@ -9659,7 +9653,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        352
+        356
       ]
     ],
     "translation": "Função"
@@ -9827,7 +9821,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        319
+        323
       ]
     ],
     "translation": "vagas"
@@ -9887,7 +9881,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        170
+        174
       ]
     ],
     "translation": ""
@@ -9899,11 +9893,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        133
+        132
       ],
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        189
+        199
       ]
     ],
     "translation": "Selecione uma lista"
@@ -10006,7 +10000,8 @@
         116
       ]
     ],
-    "translation": "Enviar feedback"
+    "translation": "Enviar feedback",
+    "obsolete": true
   },
   "pi1oME": {
     "message": "Send message",
@@ -10051,7 +10046,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        93
+        92
       ]
     ],
     "translation": "Defina uma senha para habilitar o login por senha."
@@ -10083,11 +10078,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        87
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        99
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -10147,7 +10142,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        26
+        25
       ]
     ],
     "translation": "Configurações | Conta"
@@ -10159,7 +10154,7 @@
     "origin": [
       [
         "src/views/settings/ApiSettings.tsx",
-        18
+        17
       ]
     ],
     "translation": "Configurações | API"
@@ -10171,7 +10166,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        62
+        61
       ]
     ],
     "translation": "Configurações | Faturamento"
@@ -10183,7 +10178,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        142
+        141
       ]
     ],
     "translation": "Configurações | Integrações"
@@ -10207,7 +10202,7 @@
     "origin": [
       [
         "src/views/settings/WebhookSettings.tsx",
-        24
+        23
       ]
     ],
     "translation": "Configurações | Webhooks"
@@ -10219,7 +10214,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        32
+        31
       ]
     ],
     "translation": "Configurações | Workspace"
@@ -10231,7 +10226,7 @@
     "origin": [
       [
         "src/components/UserMenu.tsx",
-        187
+        178
       ]
     ],
     "translation": "Atalhos"
@@ -10432,7 +10427,7 @@
     "origin": [
       [
         "src/components/FontSizeSelector.tsx",
-        7
+        9
       ]
     ],
     "translation": "Pequeno"
@@ -10596,7 +10591,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        138
+        137
       ]
     ],
     "translation": ""
@@ -10659,10 +10654,6 @@
     "comments": [],
     "origin": [
       [
-        "src/components/UserMenu.tsx",
-        198
-      ],
-      [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
         325
       ]
@@ -10688,7 +10679,7 @@
     "origin": [
       [
         "src/components/UserMenu.tsx",
-        144
+        135
       ]
     ],
     "translation": "Sistema"
@@ -10732,7 +10723,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        310
+        314
       ]
     ],
     "translation": "Plano de equipe"
@@ -10931,7 +10922,8 @@
         34
       ]
     ],
-    "translation": "Obrigado pelo seu feedback!"
+    "translation": "Obrigado pelo seu feedback!",
+    "obsolete": true
   },
   "ssK7k+": {
     "message": "That license key could not be found. Please contact support.",
@@ -10968,7 +10960,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        34
+        35
       ]
     ],
     "translation": "O quadro foi movido para {0}."
@@ -10992,7 +10984,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        71
+        70
       ]
     ],
     "translation": "O cartão foi duplicado."
@@ -11004,7 +10996,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        85
+        84
       ]
     ],
     "translation": ""
@@ -11108,7 +11100,7 @@
     "origin": [
       [
         "src/components/UserMenu.tsx",
-        131
+        122
       ]
     ],
     "translation": "Tema"
@@ -11352,7 +11344,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        182
+        173
       ]
     ],
     "translation": "Título (opcional)"
@@ -11392,7 +11384,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        22
+        21
       ]
     ],
     "translation": "Token é obrigatório"
@@ -11432,7 +11424,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        146
+        145
       ]
     ],
     "translation": "Trello"
@@ -11444,7 +11436,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        83
+        82
       ]
     ],
     "translation": "Trello desconectado"
@@ -11516,7 +11508,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        248
+        247
       ]
     ],
     "translation": "Não foi possível adicionar etiqueta"
@@ -11752,7 +11744,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        77
+        76
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11768,7 +11760,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        45
+        46
       ]
     ],
     "translation": "Não foi possível mover o quadro"
@@ -11831,7 +11823,8 @@
         40
       ]
     ],
-    "translation": "Não foi possível enviar o feedback"
+    "translation": "Não foi possível enviar o feedback",
+    "obsolete": true
   },
   "Q60WUZ": {
     "message": "Unable to start checkout",
@@ -11912,7 +11905,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        235
+        234
       ]
     ],
     "translation": "Não foi possível atualizar o cartão"
@@ -12232,7 +12225,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        35
+        34
       ]
     ],
     "translation": "membros ilimitados"
@@ -12280,7 +12273,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        318
+        322
       ]
     ],
     "translation": "Vagas ilimitadas"
@@ -12424,7 +12417,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        295
+        299
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
@@ -12592,7 +12585,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        346
+        350
       ]
     ],
     "translation": "Usuário"
@@ -12628,7 +12621,7 @@
     "origin": [
       [
         "src/views/settings/ApiSettings.tsx",
-        25
+        24
       ]
     ],
     "translation": "Visualize e gerencie suas chaves de API."
@@ -12640,7 +12633,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        91
+        90
       ]
     ],
     "translation": "Visualize e gerencie sua cobrança e assinatura."
@@ -12888,7 +12881,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        111
+        110
       ]
     ],
     "translation": ""
@@ -12916,7 +12909,7 @@
       ],
       [
         "src/views/settings/WebhookSettings.tsx",
-        28
+        27
       ]
     ],
     "translation": "Webhooks"
@@ -12928,7 +12921,7 @@
     "origin": [
       [
         "src/views/settings/components/CrispIntegrationSection.tsx",
-        12
+        13
       ]
     ],
     "translation": ""
@@ -12940,7 +12933,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        64
+        63
       ]
     ],
     "translation": "Dia de início da semana"
@@ -13020,11 +13013,11 @@
       ],
       [
         "src/views/boards/index.tsx",
-        48
+        47
       ],
       [
         "src/views/members/index.tsx",
-        278
+        282
       ],
       [
         "src/views/public/board/index.tsx",
@@ -13073,7 +13066,7 @@
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        55
+        54
       ]
     ],
     "translation": "Descrição do workspace"
@@ -13149,7 +13142,7 @@
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        36
+        35
       ]
     ],
     "translation": "Nome do workspace"
@@ -13237,7 +13230,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        45
+        44
       ]
     ],
     "translation": "URL do workspace"
@@ -13313,7 +13306,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        92
+        91
       ]
     ],
     "translation": "Você está prestes a alterar sua senha."
@@ -13386,7 +13379,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        68
+        69
       ]
     ],
     "translation": "Você não tem outros workspaces para mover este quadro."
@@ -13422,11 +13415,11 @@
       ],
       [
         "src/views/boards/index.tsx",
-        59
+        58
       ],
       [
         "src/views/boards/index.tsx",
-        80
+        79
       ]
     ],
     "translation": "Você não tem permissão"
@@ -13648,7 +13641,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        104
+        103
       ]
     ],
     "translation": "Sua conta do GitHub foi conectada."
@@ -13660,7 +13653,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        127
+        126
       ]
     ],
     "translation": "Sua conta do GitHub foi desconectada."
@@ -13672,7 +13665,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        224
+        223
       ]
     ],
     "translation": "Sua conta do GitHub está conectada."
@@ -13756,7 +13749,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        84
+        83
       ]
     ],
     "translation": "Sua conta do Trello foi desconectada."
@@ -13768,7 +13761,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        175
+        174
       ]
     ],
     "translation": "Sua conta do Trello está conectada."

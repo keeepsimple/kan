@@ -6,7 +6,6 @@ import { HiMiniArrowTopRightOnSquare } from "react-icons/hi2";
 import { z } from "zod";
 
 import Button from "~/components/Button";
-import FeedbackModal from "~/components/FeedbackModal";
 import Input from "~/components/Input";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
@@ -237,12 +236,6 @@ export default function IntegrationsSettings() {
       )}
 
       {/* Global modals */}
-      <Modal
-        modalSize="md"
-        isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
-      >
-        <FeedbackModal />
-      </Modal>
       <Modal
         modalSize="sm"
         isVisible={isOpen && modalContentType === "NEW_WORKSPACE"}

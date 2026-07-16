@@ -10,7 +10,6 @@ import { authClient } from "@kan/auth/client";
 
 import Avatar from "~/components/Avatar";
 import Editor from "~/components/Editor";
-import FeedbackModal from "~/components/FeedbackModal";
 import { LabelForm } from "~/components/LabelForm";
 import LabelIcon from "~/components/LabelIcon";
 import Modal from "~/components/modal";
@@ -498,12 +497,6 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
         </div>
 
         <>
-          <Modal
-            modalSize="md"
-            isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
-          >
-            <FeedbackModal />
-          </Modal>
 
           <Modal
             modalSize="sm"

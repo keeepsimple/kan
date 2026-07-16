@@ -12,7 +12,6 @@ import { authClient } from "@kan/auth/client";
 import { env } from "~/env";
 import { useIsMobile } from "~/hooks/useMediaQuery";
 import { useKeyboardShortcuts } from "~/providers/keyboard-shortcuts";
-import { useModal } from "~/providers/modal";
 import { getAvatarUrl } from "~/utils/helpers";
 
 interface UserMenuProps {
@@ -34,7 +33,6 @@ export default function UserMenu({
 }: UserMenuProps) {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
-  const { openModal } = useModal();
   const { openLegend } = useKeyboardShortcuts();
   const isMobile = useIsMobile();
 
@@ -50,13 +48,6 @@ export default function UserMenu({
     if (onCloseSideNav && isMobile) {
       onCloseSideNav();
     }
-  };
-
-  const handleModalOpen = (modalType: string) => {
-    if (onCloseSideNav && isMobile) {
-      onCloseSideNav();
-    }
-    openModal(modalType);
   };
 
   const avatarUrl = imageUrl ? getAvatarUrl(imageUrl) : null;
@@ -185,36 +176,6 @@ export default function UserMenu({
                   className="flex w-full items-center rounded-[5px] px-3 py-2 text-left text-xs hover:bg-light-200 dark:hover:bg-dark-400"
                 >
                   {t`Shortcuts`}
-                </button>
-              </Menu.Item>
-              <Menu.Item>
-                <Link
-                  href="mailto:support@kan.bn"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={handleLinkClick}
-                  className="flex w-full items-center rounded-[5px] px-3 py-2 text-left text-xs hover:bg-light-200 dark:hover:bg-dark-400"
-                >
-                  {t`Support`}
-                </Link>
-              </Menu.Item>
-              <Menu.Item>
-                <Link
-                  href="https://docs.kan.bn"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={handleLinkClick}
-                  className="flex w-full items-center rounded-[5px] px-3 py-2 text-left text-xs hover:bg-light-200 dark:hover:bg-dark-400"
-                >
-                  {t`Documentation`}
-                </Link>
-              </Menu.Item>
-              <Menu.Item>
-                <button
-                  onClick={() => handleModalOpen("NEW_FEEDBACK")}
-                  className="flex w-full items-center rounded-[5px] px-3 py-2 text-left text-xs hover:bg-light-200 dark:hover:bg-dark-400"
-                >
-                  {t`Feedback`}
                 </button>
               </Menu.Item>
             </div>

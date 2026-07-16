@@ -3,7 +3,6 @@ import { t } from "@lingui/core/macro";
 import type { Subscription } from "@kan/shared/utils";
 
 import Button from "~/components/Button";
-import FeedbackModal from "~/components/FeedbackModal";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
@@ -107,12 +106,6 @@ export default function WorkspaceSettings() {
         <DeleteWorkspaceConfirmation />
       </Modal>
       {/* Global modals */}
-      <Modal
-        modalSize="md"
-        isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
-      >
-        <FeedbackModal />
-      </Modal>
       <Modal
         modalSize="sm"
         isVisible={isOpen && modalContentType === "NEW_WORKSPACE"}
