@@ -15,6 +15,7 @@ vi.mock("@kan/db/repository/analytics.repo", () => ({
   getCurrentlyOverdueByMember: vi.fn(() => []),
   getAvgCycleTimeByMember: vi.fn(() => []),
   getActivityTimeSeries: vi.fn(() => []),
+  getOverviewOutcomeTotals: vi.fn(() => []),
 }));
 vi.mock("@kan/db/repository/workspace.repo", () => ({
   getByPublicId: vi.fn(),
