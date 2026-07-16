@@ -54,6 +54,7 @@ export const env = createEnv({
     LINKEDIN_CLIENT_SECRET: z.string().optional(),
     NOVU_API_KEY: z.string().optional(),
     EMAIL_UNSUBSCRIBE_SECRET: z.string().optional(),
+    CRON_SECRET: z.string().optional(),
     // Generic OIDC Provider
     OIDC_CLIENT_ID: z.string().optional(),
     OIDC_CLIENT_SECRET: z.string().optional(),

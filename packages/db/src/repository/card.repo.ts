@@ -6,6 +6,7 @@ import {
   eq,
   gt,
   inArray,
+  isNotNull,
   isNull,
   sql,
 } from "drizzle-orm";
@@ -1087,4 +1088,21 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
         boardName: result.list.board.name,
       }
     : null;
+};
+
+export const getStaleCompletedCards = (db: dbClient) => {
+  return db
+    .select({ id: cards.id })
+    .from(cards)
+    .innerJoin(lists, eq(lists.id, cards.listId))
+    .where(
+      and(
+        isNull(cards.deletedAt),
+        isNotNull(cards.completedAt),
+        eq(lists.isCompleted, true),
+        eq(lists.autoArchiveEnabled, true),
+        isNotNull(lists.autoArchiveDays),
+        sql`${cards.completedAt} < now() - (${lists.autoArchiveDays} * interval '1 day')`,
+      ),
+    );
 };
