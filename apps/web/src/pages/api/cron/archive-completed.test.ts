@@ -10,6 +10,7 @@ vi.mock("@kan/db/repository/card.repo", () => ({
 }));
 vi.mock("@kan/db/repository/cardActivity.repo", () => ({ create: vi.fn() }));
 
+import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 
 import handler from "./archive-completed";
@@ -18,6 +19,7 @@ const mockGetStale = cardRepo.getStaleCompletedCards as ReturnType<
   typeof vi.fn
 >;
 const mockSoftDelete = cardRepo.softDelete as ReturnType<typeof vi.fn>;
+const mockCreateActivity = cardActivityRepo.create as ReturnType<typeof vi.fn>;
 
 interface MockResponse {
   status: ReturnType<typeof vi.fn>;
@@ -62,10 +64,24 @@ describe("archive-completed cron", () => {
     const res = mockRes();
     await handler(req, res as unknown as NextApiResponse);
     expect(mockSoftDelete).toHaveBeenCalledTimes(2);
+    // each archived card must also get a card.archived activity (system action → createdBy null)
+    expect(mockCreateActivity).toHaveBeenCalledTimes(2);
+    expect(mockCreateActivity).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({ type: "card.archived", createdBy: null }),
+    );
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith(
       expect.objectContaining({ archived: 2 }),
     );
+  });
+
+  it("rejects a fully absent Authorization header with 401", async () => {
+    const req = mockReq({ method: "POST", headers: {} });
+    const res = mockRes();
+    await handler(req, res as unknown as NextApiResponse);
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(mockGetStale).not.toHaveBeenCalled();
   });
 
   it("rejects non-POST methods with 405", async () => {
