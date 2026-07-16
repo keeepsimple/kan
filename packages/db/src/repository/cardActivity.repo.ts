@@ -26,7 +26,7 @@ export const create = async (
     toTitle?: string;
     fromDescription?: string;
     toDescription?: string;
-    createdBy: string;
+    createdBy: string | null;
     commentId?: number;
     fromComment?: string;
     toComment?: string;

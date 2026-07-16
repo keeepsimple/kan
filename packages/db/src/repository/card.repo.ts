@@ -942,7 +942,7 @@ export const softDelete = async (
   args: {
     cardId: number;
     deletedAt: Date;
-    deletedBy: string;
+    deletedBy: string | null;
   },
 ) => {
   return db.transaction(async (tx) => {
