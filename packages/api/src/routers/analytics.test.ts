@@ -125,6 +125,24 @@ describe("analytics.getMemberBreakdown access control", () => {
     await expect(call).rejects.toMatchObject({ code: "NOT_FOUND" });
   });
 
+  it("rejects a memberPublicId of a soft-deleted member in the same workspace", async () => {
+    const { analyticsRouter } = await import("./analytics");
+    mockMemberHasPermission.mockResolvedValue(true); // admin, view + view:all
+    mockMemberGetByPublicId.mockResolvedValue({
+      id: 123,
+      workspaceId: 7, // same workspace as caller
+      deletedAt: new Date(), // but removed
+    });
+    const ctx = { user: mockUser, db: mockDb } as never;
+
+    const call = analyticsRouter
+      .createCaller(ctx)
+      .getMemberBreakdown({ ...input, memberPublicId: "mem-gone00001" });
+
+    await expect(call).rejects.toThrow();
+    await expect(call).rejects.toMatchObject({ code: "NOT_FOUND" });
+  });
+
   it("rejects a boardPublicId that resolves to a different workspace", async () => {
     const { analyticsRouter } = await import("./analytics");
     mockMemberHasPermission.mockResolvedValue(true); // admin, view + view:all
