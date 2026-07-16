@@ -46,6 +46,8 @@ const mockCompleted = analyticsRepo.getCompletedCountByMember as ReturnType<
 const mockMemberGetByPublicId = memberRepo.getByPublicId as ReturnType<
   typeof vi.fn
 >;
+const mockMemberGetAllByWorkspaceId =
+  memberRepo.getAllByWorkspaceId as ReturnType<typeof vi.fn>;
 const mockBoardGetWorkspaceAndBoardId =
   boardRepo.getWorkspaceAndBoardIdByBoardPublicId as ReturnType<typeof vi.fn>;
 
@@ -158,5 +160,24 @@ describe("analytics.getMemberBreakdown access control", () => {
 
     await expect(call).rejects.toThrow();
     await expect(call).rejects.toMatchObject({ code: "NOT_FOUND" });
+  });
+
+  it("rejects getMembers for a caller without analytics:view:all", async () => {
+    const { analyticsRouter } = await import("./analytics");
+    // has analytics:view but lacks analytics:view:all
+    mockMemberHasPermission.mockImplementation(
+      (_db, _wmId, _roleId, _role, permission) =>
+        Promise.resolve(permission === "analytics:view"),
+    );
+    mockMemberGetAllByWorkspaceId.mockResolvedValue([
+      { id: 99, publicId: "mem-self0001", email: "self@e.com" },
+    ]);
+    const ctx = { user: mockUser, db: mockDb } as never;
+
+    const call = analyticsRouter.createCaller(ctx).getMembers(input);
+
+    await expect(call).rejects.toThrow();
+    await expect(call).rejects.toMatchObject({ code: "FORBIDDEN" });
+    expect(mockMemberGetAllByWorkspaceId).not.toHaveBeenCalled();
   });
 });

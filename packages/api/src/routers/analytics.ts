@@ -7,8 +7,11 @@ import * as memberRepo from "@kan/db/repository/member.repo";
 import * as permissionRepo from "@kan/db/repository/permission.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
+import { z } from "zod";
+
 import {
   analyticsFilterSchema,
+  analyticsMembersResponseSchema,
   memberBreakdownResponseSchema,
   overviewResponseSchema,
   timeSeriesResponseSchema,
@@ -223,5 +226,70 @@ export const analyticsRouter = createTRPCRouter({
       const scope = await resolveScope(ctx, input);
       const points = await analyticsRepo.getActivityTimeSeries(ctx.db, scope);
       return { points };
+    }),
+
+  getMembers: protectedProcedure
+    .meta({
+      openapi: {
+        method: "GET",
+        path: "/workspaces/{workspacePublicId}/analytics/members-list",
+        summary: "Get workspace member list for analytics filtering",
+        description:
+          "Lightweight member list (publicId + email) for populating the analytics member filter. Only available to callers with analytics:view:all.",
+        tags: ["Analytics"],
+        protect: true,
+      },
+    })
+    .input(z.object({ workspacePublicId: z.string().min(12) }))
+    .output(analyticsMembersResponseSchema)
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+      if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+      if (!workspace)
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Workspace not found",
+        });
+
+      const caller = await permissionRepo.getMemberWithRole(
+        ctx.db,
+        userId,
+        workspace.id,
+      );
+      if (!caller)
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "Not a member of this workspace",
+        });
+
+      const canViewAll = await memberHasPermission(
+        ctx.db,
+        caller.id,
+        caller.roleId,
+        caller.role,
+        "analytics:view:all",
+      );
+      if (!canViewAll)
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "You do not have permission to view all members",
+        });
+
+      const members = await memberRepo.getAllByWorkspaceId(
+        ctx.db,
+        workspace.id,
+      );
+
+      return {
+        members: members.map((m) => ({
+          publicId: m.publicId,
+          email: m.email,
+        })),
+      };
     }),
 });

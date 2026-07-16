@@ -459,7 +459,6 @@
     "translation": "Activity logs"
   },
   "LAJFbK": {
-    "translation": "Activity over time",
     "message": "Activity over time",
     "placeholders": {},
     "comments": [],
@@ -468,7 +467,8 @@
         "src/views/analytics/components/TrendChart.tsx",
         67
       ]
-    ]
+    ],
+    "translation": "Activity over time"
   },
   "UGCIzB": {
     "message": "Add / edit label",
@@ -883,7 +883,7 @@
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        64
+        66
       ]
     ],
     "translation": "All boards"
@@ -913,16 +913,16 @@
     "translation": "All member permission overrides have been reset to their role defaults."
   },
   "RevbX8": {
-    "translation": "All members",
     "message": "All members",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        78
+        80
       ]
-    ]
+    ],
+    "translation": "All members"
   },
   "ZAs2NN": {
     "message": "All Pro features +",
@@ -1425,7 +1425,6 @@
     "translation": "Automatically archive cards a set number of days after completion"
   },
   "hbKP/G": {
-    "translation": "Avg cycle time",
     "message": "Avg cycle time",
     "placeholders": {},
     "comments": [],
@@ -1434,7 +1433,8 @@
         "src/views/analytics/components/KpiRow.tsx",
         92
       ]
-    ]
+    ],
+    "translation": "Avg cycle time"
   },
   "1rWxEw": {
     "message": "Awaiting Customer",
@@ -1909,7 +1909,6 @@
     "translation": "Bug Report"
   },
   "dH0nsO": {
-    "translation": "By member",
     "message": "By member",
     "placeholders": {},
     "comments": [],
@@ -1918,7 +1917,8 @@
         "src/views/analytics/components/MemberTable.tsx",
         29
       ]
-    ]
+    ],
+    "translation": "By member"
   },
   "t6FvJH": {
     "message": "Can add comments",
@@ -2909,7 +2909,6 @@
     "translation": "Complete control and ownership:"
   },
   "qqWcBV": {
-    "translation": "Completed",
     "message": "Completed",
     "placeholders": {},
     "comments": [],
@@ -2918,7 +2917,8 @@
         "src/views/analytics/components/MemberTable.tsx",
         37
       ]
-    ]
+    ],
+    "translation": "Completed"
   },
   "Lt+ZP3": {
     "message": "completed a checklist item",
@@ -2933,7 +2933,6 @@
     "translation": "completed a checklist item"
   },
   "srtRe0": {
-    "translation": "Completed cards",
     "message": "Completed cards",
     "placeholders": {},
     "comments": [],
@@ -2942,7 +2941,8 @@
         "src/views/analytics/components/KpiRow.tsx",
         72
       ]
-    ]
+    ],
+    "translation": "Completed cards"
   },
   "29sSki": {
     "message": "completed checklist item <0>{0}</0>",
@@ -6935,7 +6935,7 @@
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        55
+        57
       ]
     ],
     "translation": "Last 30 days"
@@ -6947,7 +6947,7 @@
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        54
+        56
       ]
     ],
     "translation": "Last 7 days"
@@ -6959,7 +6959,7 @@
     "origin": [
       [
         "src/views/analytics/components/AnalyticsFilters.tsx",
-        56
+        58
       ]
     ],
     "translation": "Last 90 days"
@@ -8226,7 +8226,6 @@
     "translation": "On-premise deployment option"
   },
   "BpX6pp": {
-    "translation": "On-time",
     "message": "On-time",
     "placeholders": {},
     "comments": [],
@@ -8235,10 +8234,10 @@
         "src/views/analytics/components/MemberTable.tsx",
         38
       ]
-    ]
+    ],
+    "translation": "On-time"
   },
   "1lPQwG": {
-    "translation": "On-time rate",
     "message": "On-time rate",
     "placeholders": {},
     "comments": [],
@@ -8247,7 +8246,8 @@
         "src/views/analytics/components/KpiRow.tsx",
         82
       ]
-    ]
+    ],
+    "translation": "On-time rate"
   },
   "gukxZ5": {
     "message": "Onboarding",
@@ -11398,7 +11398,6 @@
     "translation": "Token is required"
   },
   "mknIgY": {
-    "translation": "Total activity",
     "message": "Total activity",
     "placeholders": {},
     "comments": [],
@@ -11407,7 +11406,8 @@
         "src/views/analytics/components/KpiRow.tsx",
         65
       ]
-    ]
+    ],
+    "translation": "Total activity"
   },
   "eEQyz+": {
     "message": "Track all card changes with detailed activity history.",
@@ -12706,7 +12706,6 @@
     "translation": "Visibility"
   },
   "hVTuuF": {
-    "translation": "vs previous period",
     "message": "vs previous period",
     "placeholders": {},
     "comments": [],
@@ -12715,7 +12714,8 @@
         "src/views/analytics/components/KpiRow.tsx",
         127
       ]
-    ]
+    ],
+    "translation": "vs previous period"
   },
   "BJbLe4": {
     "message": "We are using the <0>AGPL-3.0 license</0>.",

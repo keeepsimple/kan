@@ -36,13 +36,15 @@ export default function AnalyticsFilters(props: Props) {
   const canViewAllMembers =
     permissions.data?.permissions.includes("analytics:view:all") ?? false;
 
-  const workspace = api.workspace.byId.useQuery(
+  // Dedicated lightweight endpoint (not api.workspace.byId): that query
+  // privacy-strips member emails for non-admins, which would render this
+  // select's options as raw publicIds for a non-admin holding
+  // analytics:view:all via a permission override.
+  const membersQuery = api.analytics.getMembers.useQuery(
     { workspacePublicId: props.workspacePublicId },
     { enabled: enabled && canViewAllMembers },
   );
-  const members = (workspace.data?.members ?? []).filter(
-    (member) => member.status === "active",
-  );
+  const members = membersQuery.data?.members ?? [];
 
   return (
     <div className="flex flex-wrap gap-3">
@@ -78,7 +80,7 @@ export default function AnalyticsFilters(props: Props) {
           <option value="">{t`All members`}</option>
           {members.map((member) => (
             <option key={member.publicId} value={member.publicId}>
-              {member.email ?? member.publicId}
+              {member.email}
             </option>
           ))}
         </select>

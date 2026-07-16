@@ -39,3 +39,7 @@ export const memberBreakdownResponseSchema = z.object({
 export const timeSeriesResponseSchema = z.object({
   points: z.array(z.object({ day: z.string(), count: z.number() })),
 });
+
+export const analyticsMembersResponseSchema = z.object({
+  members: z.array(z.object({ publicId: z.string(), email: z.string() })),
+});
