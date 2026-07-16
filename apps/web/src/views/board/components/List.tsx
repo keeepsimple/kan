@@ -4,6 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
 import {
   HiEllipsisHorizontal,
+  HiOutlineCheckCircle,
   HiOutlineHashtag,
   HiOutlinePlusSmall,
   HiOutlineSquaresPlus,
@@ -31,6 +32,9 @@ interface List {
   name: string;
   createdBy?: string | null;
   discordBehaviour?: string | null;
+  isCompleted?: boolean;
+  autoArchiveEnabled?: boolean;
+  autoArchiveDays?: number | null;
 }
 
 interface FormValues {
@@ -174,6 +178,20 @@ export default function List({
                           },
                           icon: (
                             <HiOutlineHashtag className="h-[16px] w-[16px] text-dark-900" />
+                          ),
+                        },
+                      ]
+                    : []),
+                  ...(canEdit
+                    ? [
+                        {
+                          label: t`Completion settings`,
+                          action: () => {
+                            setSelectedPublicListId(list.publicId);
+                            openModal("LIST_COMPLETION_SETTINGS");
+                          },
+                          icon: (
+                            <HiOutlineCheckCircle className="h-[16px] w-[16px] text-dark-900" />
                           ),
                         },
                       ]

@@ -51,6 +51,7 @@ import { MoveBoardForm } from "./components/MoveBoardForm";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
 import List from "./components/List";
+import ListCompletionSettingsModal from "./components/ListCompletionSettingsModal";
 import ListDiscordSettingsModal from "./components/ListDiscordSettingsModal";
 import { NewCardForm } from "./components/NewCardForm";
 import { NewListForm } from "./components/NewListForm";
@@ -429,6 +430,28 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 listPublicId={selectedPublicListId}
                 currentBehaviour={selectedList?.discordBehaviour ?? null}
                 currentRoleIds={roleIds}
+                queryParams={queryParams}
+              />
+            );
+          })()}
+        </Modal>
+
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "LIST_COMPLETION_SETTINGS"}
+        >
+          {(() => {
+            const selectedList = boardData?.lists.find(
+              (list) => list.publicId === selectedPublicListId,
+            );
+            return (
+              <ListCompletionSettingsModal
+                listPublicId={selectedPublicListId}
+                currentIsCompleted={selectedList?.isCompleted ?? false}
+                currentAutoArchiveEnabled={
+                  selectedList?.autoArchiveEnabled ?? false
+                }
+                currentAutoArchiveDays={selectedList?.autoArchiveDays ?? null}
                 queryParams={queryParams}
               />
             );

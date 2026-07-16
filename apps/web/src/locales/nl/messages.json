@@ -123,7 +123,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        608
+        631
       ]
     ],
     "translation": "{0} niet gevonden"
@@ -469,7 +469,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        148
+        152
       ]
     ],
     "translation": "Kaart toevoegen"
@@ -1340,6 +1340,30 @@
     ],
     "translation": "Bijlage geüpload"
   },
+  "4Cuptx": {
+    "translation": "",
+    "message": "Auto-archive completed cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListCompletionSettingsModal.tsx",
+        112
+      ]
+    ]
+  },
+  "N7pr3Q": {
+    "translation": "",
+    "message": "Automatically archive cards a set number of days after completion",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListCompletionSettingsModal.tsx",
+        114
+      ]
+    ]
+  },
   "1rWxEw": {
     "message": "Awaiting Customer",
     "placeholders": {},
@@ -1535,7 +1559,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        581
+        604
       ],
       [
         "src/views/card/index.tsx",
@@ -2101,7 +2125,6 @@
     "translation": "Kan leden verwijderen"
   },
   "1ZpvFl": {
-    "translation": "",
     "message": "Can view all members' analytics",
     "placeholders": {},
     "comments": [],
@@ -2114,7 +2137,8 @@
         "src/views/settings/components/RolePermissions.tsx",
         45
       ]
-    ]
+    ],
+    "translation": ""
   },
   "MKAScN": {
     "message": "Can view boards",
@@ -2197,7 +2221,6 @@
     "translation": "Kan leden bekijken"
   },
   "Ur/G5w": {
-    "translation": "",
     "message": "Can view own analytics",
     "placeholders": {},
     "comments": [],
@@ -2210,7 +2233,8 @@
         "src/views/settings/components/RolePermissions.tsx",
         44
       ]
-    ]
+    ],
+    "translation": ""
   },
   "SNfg0e": {
     "message": "Can view workspace",
@@ -2407,7 +2431,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        311
+        312
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2431,6 +2455,18 @@
       ]
     ],
     "translation": ""
+  },
+  "nSGVOO": {
+    "translation": "",
+    "message": "Cards moved into this list are marked as completed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListCompletionSettingsModal.tsx",
+        98
+      ]
+    ]
   },
   "VhMDMg": {
     "message": "Change Password",
@@ -2815,6 +2851,34 @@
       ]
     ],
     "translation": "heeft checklistitem <0>{0}</0> voltooid"
+  },
+  "R2HdUE": {
+    "translation": "",
+    "message": "Completion settings",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/List.tsx",
+        188
+      ],
+      [
+        "src/views/board/components/ListCompletionSettingsModal.tsx",
+        78
+      ]
+    ]
+  },
+  "7h8olA": {
+    "translation": "",
+    "message": "Completion settings updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListCompletionSettingsModal.tsx",
+        49
+      ]
+    ]
   },
   "tOZp9v": {
     "message": "Configurable user roles and permissions",
@@ -3287,7 +3351,7 @@
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        141
+        144
       ]
     ],
     "translation": "Maak nog een"
@@ -3371,7 +3435,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        153
+        156
       ]
     ],
     "translation": "Maak lijst"
@@ -3431,11 +3495,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        95
+        96
       ],
       [
         "src/views/board/index.tsx",
-        722
+        745
       ]
     ],
     "translation": "Maak nieuwe lijst"
@@ -3785,6 +3849,18 @@
     ],
     "translation": "Donker"
   },
+  "HuVZMK": {
+    "translation": "",
+    "message": "Days",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListCompletionSettingsModal.tsx",
+        124
+      ]
+    ]
+  },
   "cp1rsD": {
     "message": "Deactivate invite link",
     "placeholders": {},
@@ -3936,7 +4012,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        159
+        163
       ]
     ],
     "translation": "Lijst verwijderen"
@@ -4208,7 +4284,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        170
+        174
       ],
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
@@ -5737,7 +5813,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        707
+        730
       ]
     ],
     "translation": "Ga aan de slag door een nieuwe lijst te maken"
@@ -6880,7 +6956,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        309
+        310
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -6932,7 +7008,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        129
+        132
       ]
     ],
     "translation": "Lijstnaam"
@@ -6942,6 +7018,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/ListCompletionSettingsModal.tsx",
+        48
+      ],
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
         60
@@ -7109,6 +7189,18 @@
       ]
     ],
     "translation": "Leden beheren"
+  },
+  "LKLg7g": {
+    "translation": "",
+    "message": "Mark as completed column",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/ListCompletionSettingsModal.tsx",
+        96
+      ]
+    ]
   },
   "IDvohQ": {
     "message": "marked a checklist item as incomplete",
@@ -7588,11 +7680,11 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        113
+        116
       ],
       [
         "src/views/board/index.tsx",
-        671
+        694
       ]
     ],
     "translation": "Nieuwe lijst"
@@ -7844,7 +7936,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        703
+        726
       ]
     ],
     "translation": "Geen lijsten"
@@ -7856,7 +7948,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        708
+        731
       ]
     ],
     "translation": "Er zijn nog geen lijsten aangemaakt"
@@ -8584,7 +8676,7 @@
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        79
+        82
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
@@ -8604,11 +8696,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        221
+        222
       ],
       [
         "src/views/board/index.tsx",
-        277
+        278
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -8792,7 +8884,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        318
+        319
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -9456,6 +9548,10 @@
       [
         "src/views/board/components/BoardDiscordChannelModal.tsx",
         92
+      ],
+      [
+        "src/views/board/components/ListCompletionSettingsModal.tsx",
+        141
       ],
       [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
@@ -10480,11 +10576,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        581
+        604
       ],
       [
         "src/views/board/index.tsx",
-        617
+        640
       ]
     ],
     "translation": "Sjabloon"
@@ -11268,7 +11364,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        316
+        317
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11316,7 +11412,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        78
+        81
       ]
     ],
     "translation": "Kan lijst niet aanmaken"
@@ -11612,7 +11708,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        276
+        277
       ],
       [
         "src/views/card/index.tsx",
@@ -11687,12 +11783,16 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/ListCompletionSettingsModal.tsx",
+        56
+      ],
+      [
         "src/views/board/components/ListDiscordSettingsModal.tsx",
         68
       ],
       [
         "src/views/board/index.tsx",
-        220
+        221
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -12704,7 +12804,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        581
+        604
       ],
       [
         "src/views/boards/index.tsx",
@@ -13086,7 +13186,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        128
+        132
       ],
       [
         "src/views/board/components/UpdateBoardSlugButton.tsx",
@@ -13098,11 +13198,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        655
+        678
       ],
       [
         "src/views/board/index.tsx",
-        713
+        736
       ],
       [
         "src/views/boards/components/BoardsList.tsx",

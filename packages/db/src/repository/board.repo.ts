@@ -249,6 +249,9 @@ export const getByPublicId = async (
           index: true,
           discordBehaviour: true,
           discordRoleIds: true,
+          isCompleted: true,
+          autoArchiveEnabled: true,
+          autoArchiveDays: true,
         },
         with: {
           cards: {
