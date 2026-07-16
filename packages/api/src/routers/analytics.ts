@@ -1,4 +1,5 @@
 import { TRPCError } from "@trpc/server";
+import { z } from "zod";
 
 import type { dbClient } from "@kan/db/client";
 import * as analyticsRepo from "@kan/db/repository/analytics.repo";
@@ -6,8 +7,6 @@ import * as boardRepo from "@kan/db/repository/board.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as permissionRepo from "@kan/db/repository/permission.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-
-import { z } from "zod";
 
 import {
   analyticsFilterSchema,
@@ -79,11 +78,7 @@ async function resolveScope(
     memberId = caller.id; // forced to self
   } else if (input.memberPublicId) {
     const target = await memberRepo.getByPublicId(ctx.db, input.memberPublicId);
-    if (
-      !target ||
-      target.workspaceId !== workspace.id ||
-      target.deletedAt
-    )
+    if (!target || target.workspaceId !== workspace.id || target.deletedAt)
       throw new TRPCError({ code: "NOT_FOUND", message: "Member not found" });
     memberId = target.id;
   }
