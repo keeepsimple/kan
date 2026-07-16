@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import {
   bigint,
   bigserial,
+  boolean,
   integer,
   pgTable,
   text,
@@ -35,6 +36,9 @@ export const lists = pgTable("list", {
   importId: bigint("importId", { mode: "number" }).references(() => imports.id),
   discordBehaviour: varchar("discordBehaviour", { length: 16 }),
   discordRoleIds: text("discordRoleIds"), // JSON array of Discord role ids
+  isCompleted: boolean("isCompleted").notNull().default(false),
+  autoArchiveEnabled: boolean("autoArchiveEnabled").notNull().default(false),
+  autoArchiveDays: integer("autoArchiveDays"),
 }).enableRLS();
 
 export const listsRelations = relations(lists, ({ one, many }) => ({

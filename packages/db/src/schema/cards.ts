@@ -81,6 +81,10 @@ export const cards = pgTable(
     ),
     dueDate: timestamp("dueDate"),
     discordThreadId: varchar("discordThreadId", { length: 32 }),
+    completedAt: timestamp("completedAt"),
+    completedBy: uuid("completedBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
   },
   (table) => [
     index("card_list_number_idx").on(table.listId, table.cardNumber),

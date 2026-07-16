@@ -260,6 +260,13 @@
       "when": 1784141532996,
       "tag": "20260715185212_AddDiscordIntegration",
       "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1784172267976,
+      "tag": "20260716032427_AddAnalyticsFields",
+      "breakpoints": true
     }
   ]
 }
