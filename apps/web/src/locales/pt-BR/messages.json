@@ -856,6 +856,18 @@
     ],
     "translation": "Segurança avançada, conformidade e suporte dedicado para grandes organizações."
   },
+  "me3LEG": {
+    "translation": "",
+    "message": "All boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/AnalyticsFilters.tsx",
+        42
+      ]
+    ]
+  },
   "h2ztFt": {
     "message": "All Free features +",
     "placeholders": {},
@@ -1017,7 +1029,6 @@
     "translation": "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde."
   },
   "ZlwDi6": {
-    "translation": "",
     "message": "Analytics",
     "placeholders": {},
     "comments": [],
@@ -1025,8 +1036,13 @@
       [
         "src/components/SideNavigation.tsx",
         142
+      ],
+      [
+        "src/views/analytics/index.tsx",
+        38
       ]
-    ]
+    ],
+    "translation": ""
   },
   "YkfDoz": {
     "message": "Annual",
@@ -5931,7 +5947,6 @@
     "translation": "Ir para a página inicial"
   },
   "YeDLys": {
-    "translation": "",
     "message": "Go to analytics",
     "placeholders": {},
     "comments": [],
@@ -5940,7 +5955,8 @@
         "src/components/SideNavigation.tsx",
         150
       ]
-    ]
+    ],
+    "translation": ""
   },
   "UveK6V": {
     "message": "Go to app",
@@ -6831,6 +6847,42 @@
       ]
     ],
     "translation": "Grande"
+  },
+  "uq2BmQ": {
+    "translation": "",
+    "message": "Last 30 days",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/AnalyticsFilters.tsx",
+        33
+      ]
+    ]
+  },
+  "ct2SYD": {
+    "translation": "",
+    "message": "Last 7 days",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/AnalyticsFilters.tsx",
+        32
+      ]
+    ]
+  },
+  "XgOuA7": {
+    "translation": "",
+    "message": "Last 90 days",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/analytics/components/AnalyticsFilters.tsx",
+        34
+      ]
+    ]
   },
   "8Is1ih": {
     "message": "Launch offer",
