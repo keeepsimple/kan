@@ -42,6 +42,8 @@ export const allPermissions = [
   "member:invite",
   "member:edit",
   "member:remove",
+  "analytics:view",
+  "analytics:view:all",
 ] as const;
 
 export type Permission = (typeof allPermissions)[number];
@@ -74,6 +76,7 @@ export const defaultRolePermissions: Record<Role, readonly Permission[]> = {
     "comment:edit",
     "comment:delete",
     "member:view",
+    "analytics:view",
   ],
 
   guest: [
