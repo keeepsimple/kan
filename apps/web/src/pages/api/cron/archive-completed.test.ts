@@ -84,12 +84,26 @@ describe("archive-completed cron", () => {
     expect(mockGetStale).not.toHaveBeenCalled();
   });
 
-  it("rejects non-POST methods with 405", async () => {
-    const req = mockReq({ method: "GET", headers: {} });
+  it("rejects unsupported methods with 405", async () => {
+    const req = mockReq({ method: "DELETE", headers: {} });
     const res = mockRes();
     await handler(req, res as unknown as NextApiResponse);
-    expect(res.setHeader).toHaveBeenCalledWith("Allow", "POST");
+    expect(res.setHeader).toHaveBeenCalledWith("Allow", "GET, POST");
     expect(res.status).toHaveBeenCalledWith(405);
     expect(mockGetStale).not.toHaveBeenCalled();
+  });
+
+  it("archives stale cards with a valid token via GET (Vercel Cron)", async () => {
+    const req = mockReq({
+      method: "GET",
+      headers: { authorization: "Bearer s3cret" },
+    });
+    const res = mockRes();
+    await handler(req, res as unknown as NextApiResponse);
+    expect(mockSoftDelete).toHaveBeenCalledTimes(2);
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith(
+      expect.objectContaining({ archived: 2 }),
+    );
   });
 });

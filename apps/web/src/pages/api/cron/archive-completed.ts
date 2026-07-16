@@ -27,8 +27,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
+  // Vercel Cron issues GET requests (with an auto-attached bearer header when
+  // CRON_SECRET is set); self-host schedulers typically use POST. Both are
+  // accepted here and bearer-guarded identically below.
+  if (req.method !== "GET" && req.method !== "POST") {
+    res.setHeader("Allow", "GET, POST");
     return res.status(405).json({ message: "Method not allowed" });
   }
 

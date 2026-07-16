@@ -217,6 +217,25 @@ pnpm dev
 
 See `.env.example` for a complete list of supported environment variables.
 
+## Auto-archiving completed cards (optional) 🗄️
+
+Cards sitting in a list marked "completed" with auto-archive enabled are
+archived once they have been complete for the configured number of days.
+Archiving runs via the `/api/cron/archive-completed` endpoint, which accepts
+both `GET` and `POST` and requires a bearer token matching `CRON_SECRET`.
+
+**Self-host:** set `CRON_SECRET` in your environment, then schedule a daily
+request to the endpoint, e.g. via crontab (runs at 03:00):
+
+```bash
+0 3 * * * curl -fsS -X POST -H "Authorization: Bearer $CRON_SECRET" https://your-kan-host/api/cron/archive-completed
+```
+
+**Vercel:** set `CRON_SECRET` as a Vercel environment variable. The included
+`apps/web/vercel.json` defines a daily cron that hits the endpoint — Vercel
+automatically sends the request as a `GET` with the `Authorization: Bearer
+$CRON_SECRET` header attached, which the endpoint accepts.
+
 ## MCP Server (AI Control) 🤖
 
 Kan ships with a [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that lets any MCP-compatible AI client — GitHub Copilot, Claude Desktop, Cursor, Codex, and others — read and control your Kan instance using natural language.

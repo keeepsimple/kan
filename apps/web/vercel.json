@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/archive-completed",
+      "schedule": "0 3 * * *"
+    }
+  ]
+}
