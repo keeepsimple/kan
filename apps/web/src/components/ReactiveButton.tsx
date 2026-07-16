@@ -1,3 +1,4 @@
+import type { IconType } from "react-icons";
 import Link from "next/link";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -11,7 +12,8 @@ const Button: React.FC<{
   href: string;
   current: boolean;
   name: string;
-  json: object;
+  json?: object;
+  iconComponent?: IconType;
   isCollapsed?: boolean;
   onCloseSideNav?: () => void;
   keyboardShortcut: KeyboardShortcut;
@@ -20,6 +22,7 @@ const Button: React.FC<{
   current,
   name,
   json,
+  iconComponent: Icon,
   isCollapsed = false,
   keyboardShortcut,
   onCloseSideNav,
@@ -62,7 +65,11 @@ const Button: React.FC<{
             : "gap-x-3",
         )}
       >
-        <LottieIcon index={index} json={json} isPlaying={isHovered} />
+        {json ? (
+          <LottieIcon index={index} json={json} isPlaying={isHovered} />
+        ) : Icon ? (
+          <Icon className="h-5 w-5" />
+        ) : null}
         <span className={twMerge(isCollapsed && "md:hidden")}>{name}</span>
       </div>
       {!isCollapsed && (

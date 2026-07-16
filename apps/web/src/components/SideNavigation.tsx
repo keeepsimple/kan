@@ -1,3 +1,4 @@
+import type { IconType } from "react-icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button } from "@headlessui/react";
@@ -5,7 +6,7 @@ import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { HiBolt } from "react-icons/hi2";
+import { HiBolt, HiChartBar } from "react-icons/hi2";
 import {
   TbLayoutSidebarLeftCollapse,
   TbLayoutSidebarLeftExpand,
@@ -97,7 +98,8 @@ export default function SideNavigation({
   const navigation: {
     name: string;
     href: string;
-    icon: object;
+    icon?: object;
+    iconComponent?: IconType;
     keyboardShortcut: KeyboardShortcut;
   }[] = [
     {
@@ -134,6 +136,18 @@ export default function SideNavigation({
         action: () => router.push("/members"),
         group: "NAVIGATION",
         description: t`Go to members`,
+      },
+    },
+    {
+      name: t`Analytics`,
+      href: "/analytics",
+      iconComponent: HiChartBar,
+      keyboardShortcut: {
+        type: "SEQUENCE",
+        strokes: [{ key: "G" }, { key: "A" }],
+        action: () => router.push("/analytics"),
+        group: "NAVIGATION",
+        description: t`Go to analytics`,
       },
     },
     {
@@ -202,6 +216,7 @@ export default function SideNavigation({
                   current={pathname.includes(item.href)}
                   name={item.name}
                   json={item.icon}
+                  iconComponent={item.iconComponent}
                   isCollapsed={isCollapsed}
                   onCloseSideNav={onCloseSideNav}
                   keyboardShortcut={item.keyboardShortcut}

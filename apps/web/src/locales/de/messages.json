@@ -1016,6 +1016,18 @@
     ],
     "translation": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
   },
+  "ZlwDi6": {
+    "translation": "",
+    "message": "Analytics",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/SideNavigation.tsx",
+        142
+      ]
+    ]
+  },
   "YkfDoz": {
     "message": "Annual",
     "placeholders": {},
@@ -1341,7 +1353,6 @@
     "translation": "Anhang hochgeladen"
   },
   "4Cuptx": {
-    "translation": "",
     "message": "Auto-archive completed cards",
     "placeholders": {},
     "comments": [],
@@ -1350,10 +1361,10 @@
         "src/views/board/components/ListCompletionSettingsModal.tsx",
         112
       ]
-    ]
+    ],
+    "translation": ""
   },
   "N7pr3Q": {
-    "translation": "",
     "message": "Automatically archive cards a set number of days after completion",
     "placeholders": {},
     "comments": [],
@@ -1362,7 +1373,8 @@
         "src/views/board/components/ListCompletionSettingsModal.tsx",
         114
       ]
-    ]
+    ],
+    "translation": ""
   },
   "1rWxEw": {
     "message": "Awaiting Customer",
@@ -1779,7 +1791,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        104
+        106
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -2457,7 +2469,6 @@
     "translation": ""
   },
   "nSGVOO": {
-    "translation": "",
     "message": "Cards moved into this list are marked as completed",
     "placeholders": {},
     "comments": [],
@@ -2466,7 +2477,8 @@
         "src/views/board/components/ListCompletionSettingsModal.tsx",
         98
       ]
-    ]
+    ],
+    "translation": ""
   },
   "VhMDMg": {
     "message": "Change Password",
@@ -2853,7 +2865,6 @@
     "translation": "hat Checklistenpunkt <0>{0}</0> abgeschlossen"
   },
   "R2HdUE": {
-    "translation": "",
     "message": "Completion settings",
     "placeholders": {},
     "comments": [],
@@ -2866,10 +2877,10 @@
         "src/views/board/components/ListCompletionSettingsModal.tsx",
         78
       ]
-    ]
+    ],
+    "translation": ""
   },
   "7h8olA": {
-    "translation": "",
     "message": "Completion settings updated.",
     "placeholders": {},
     "comments": [],
@@ -2878,7 +2889,8 @@
         "src/views/board/components/ListCompletionSettingsModal.tsx",
         49
       ]
-    ]
+    ],
+    "translation": ""
   },
   "tOZp9v": {
     "message": "Configurable user roles and permissions",
@@ -3850,7 +3862,6 @@
     "translation": "Dunkel"
   },
   "HuVZMK": {
-    "translation": "",
     "message": "Days",
     "placeholders": {},
     "comments": [],
@@ -3859,7 +3870,8 @@
         "src/views/board/components/ListCompletionSettingsModal.tsx",
         124
       ]
-    ]
+    ],
+    "translation": ""
   },
   "cp1rsD": {
     "message": "Deactivate invite link",
@@ -5918,6 +5930,18 @@
     ],
     "translation": "Zur Startseite"
   },
+  "YeDLys": {
+    "translation": "",
+    "message": "Go to analytics",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/SideNavigation.tsx",
+        150
+      ]
+    ]
+  },
   "UveK6V": {
     "message": "Go to app",
     "placeholders": {},
@@ -5941,7 +5965,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        112
+        114
       ],
       [
         "src/pages/404.tsx",
@@ -5969,7 +5993,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        136
+        138
       ]
     ],
     "translation": "Zu den Mitgliedern"
@@ -5981,7 +6005,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        148
+        162
       ]
     ],
     "translation": "Zu den Einstellungen"
@@ -5993,7 +6017,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        124
+        126
       ]
     ],
     "translation": "Zu Vorlagen gehen"
@@ -7191,7 +7215,6 @@
     "translation": "Mitglieder verwalten"
   },
   "LKLg7g": {
-    "translation": "",
     "message": "Mark as completed column",
     "placeholders": {},
     "comments": [],
@@ -7200,7 +7223,8 @@
         "src/views/board/components/ListCompletionSettingsModal.tsx",
         96
       ]
-    ]
+    ],
+    "translation": ""
   },
   "IDvohQ": {
     "message": "marked a checklist item as incomplete",
@@ -7317,7 +7341,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        128
+        130
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -9947,7 +9971,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        140
+        154
       ]
     ],
     "translation": "Einstellungen"
@@ -10352,15 +10376,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        254
+        269
       ],
       [
         "src/components/SideNavigation.tsx",
-        255
+        270
       ],
       [
         "src/components/SideNavigation.tsx",
-        265
+        280
       ]
     ],
     "translation": "Kostenlose Testversion starten"
@@ -10640,7 +10664,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        116
+        118
       ],
       [
         "src/views/home/components/Features.tsx",
