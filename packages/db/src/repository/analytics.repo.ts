@@ -1,4 +1,4 @@
-import { and, eq, gte, isNotNull, isNull, lte, sql } from "drizzle-orm";
+import { and, desc, eq, gte, isNotNull, isNull, lte, sql } from "drizzle-orm";
 
 import type { dbClient } from "../client";
 import {
@@ -18,10 +18,40 @@ interface Filter {
   memberId?: number;
 }
 
+// Canonical member: one row per (userId, workspaceId), preferring the active
+// membership, then the most recent id. A user can have multiple
+// workspace_members rows for the same workspace (e.g. remove-then-reinvite
+// leaves a soft-deleted row alongside a new active one, since there is no
+// unique constraint on (userId, workspaceId)). Joining cardActivities
+// directly to workspaceMembers would fan out one activity into multiple
+// rows in that case, double-counting and mis-attributing activity. This
+// subquery collapses those duplicates down to a single canonical row before
+// joining.
+const getCanonicalMemberSubquery = (db: dbClient) =>
+  db
+    .selectDistinctOn(
+      [workspaceMembers.userId, workspaceMembers.workspaceId],
+      {
+        id: workspaceMembers.id,
+        userId: workspaceMembers.userId,
+        workspaceId: workspaceMembers.workspaceId,
+      },
+    )
+    .from(workspaceMembers)
+    .orderBy(
+      workspaceMembers.userId,
+      workspaceMembers.workspaceId,
+      sql`(${workspaceMembers.deletedAt} is null) desc`,
+      desc(workspaceMembers.id),
+    )
+    .as("canonical_member");
+
 export const getActivityCountsByMember = (db: dbClient, f: Filter) => {
+  const canonicalMember = getCanonicalMemberSubquery(db);
+
   return db
     .select({
-      workspaceMemberId: workspaceMembers.id,
+      workspaceMemberId: canonicalMember.id,
       count: sql<number>`count(*)::int`,
     })
     .from(cardActivities)
@@ -29,10 +59,10 @@ export const getActivityCountsByMember = (db: dbClient, f: Filter) => {
     .innerJoin(lists, eq(lists.id, cards.listId))
     .innerJoin(boards, eq(boards.id, lists.boardId))
     .innerJoin(
-      workspaceMembers,
+      canonicalMember,
       and(
-        eq(workspaceMembers.userId, cardActivities.createdBy),
-        eq(workspaceMembers.workspaceId, boards.workspaceId),
+        eq(canonicalMember.userId, cardActivities.createdBy),
+        eq(canonicalMember.workspaceId, boards.workspaceId),
       ),
     )
     .where(
@@ -41,10 +71,10 @@ export const getActivityCountsByMember = (db: dbClient, f: Filter) => {
         gte(cardActivities.createdAt, f.from),
         lte(cardActivities.createdAt, f.to),
         f.boardId ? eq(boards.id, f.boardId) : undefined,
-        f.memberId ? eq(workspaceMembers.id, f.memberId) : undefined,
+        f.memberId ? eq(canonicalMember.id, f.memberId) : undefined,
       ),
     )
-    .groupBy(workspaceMembers.id);
+    .groupBy(canonicalMember.id);
 };
 
 export const getCompletedCountByMember = (db: dbClient, f: Filter) => {
@@ -166,6 +196,8 @@ export const getAvgCycleTimeByMember = (db: dbClient, f: Filter) => {
 };
 
 export const getActivityTimeSeries = (db: dbClient, f: Filter) => {
+  const canonicalMember = getCanonicalMemberSubquery(db);
+
   return db
     .select({
       day: sql<string>`to_char(date_trunc('day', ${cardActivities.createdAt}), 'YYYY-MM-DD')`,
@@ -176,10 +208,10 @@ export const getActivityTimeSeries = (db: dbClient, f: Filter) => {
     .innerJoin(lists, eq(lists.id, cards.listId))
     .innerJoin(boards, eq(boards.id, lists.boardId))
     .innerJoin(
-      workspaceMembers,
+      canonicalMember,
       and(
-        eq(workspaceMembers.userId, cardActivities.createdBy),
-        eq(workspaceMembers.workspaceId, boards.workspaceId),
+        eq(canonicalMember.userId, cardActivities.createdBy),
+        eq(canonicalMember.workspaceId, boards.workspaceId),
       ),
     )
     .where(
@@ -188,7 +220,7 @@ export const getActivityTimeSeries = (db: dbClient, f: Filter) => {
         gte(cardActivities.createdAt, f.from),
         lte(cardActivities.createdAt, f.to),
         f.boardId ? eq(boards.id, f.boardId) : undefined,
-        f.memberId ? eq(workspaceMembers.id, f.memberId) : undefined,
+        f.memberId ? eq(canonicalMember.id, f.memberId) : undefined,
       ),
     )
     .groupBy(sql`date_trunc('day', ${cardActivities.createdAt})`)
