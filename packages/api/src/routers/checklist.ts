@@ -7,7 +7,17 @@ import * as checklistRepo from "@kan/db/repository/checklist.repo";
 import { stripHtml } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { notifyCardUpdated } from "../utils/discord";
 import { assertPermission } from "../utils/permissions";
+
+const syncDiscord = (
+  db: Parameters<typeof notifyCardUpdated>[0],
+  cardPublicId: string,
+) => {
+  notifyCardUpdated(db, cardPublicId).catch((error) => {
+    console.error("Discord notification failed:", error);
+  });
+};
 
 const checklistSchema = z.object({
   publicId: z.string().length(12),
@@ -79,6 +89,8 @@ export const checklistRouter = createTRPCRouter({
         createdBy: userId,
       });
 
+      syncDiscord(ctx.db, input.cardPublicId);
+
       return newChecklist;
     }),
   update: protectedProcedure
@@ -144,6 +156,8 @@ export const checklistRouter = createTRPCRouter({
         createdBy: userId,
       });
 
+      syncDiscord(ctx.db, checklist.card.publicId);
+
       return updated;
     }),
   delete: protectedProcedure
@@ -207,6 +221,8 @@ export const checklistRouter = createTRPCRouter({
         fromTitle: checklist.name,
         createdBy: userId,
       });
+
+      syncDiscord(ctx.db, checklist.card.publicId);
 
       return { success: true };
     }),
@@ -272,6 +288,8 @@ export const checklistRouter = createTRPCRouter({
         toTitle: newChecklistItem.title,
         createdBy: userId,
       });
+
+      syncDiscord(ctx.db, checklist.card.publicId);
 
       return newChecklistItem;
     }),
@@ -370,6 +388,8 @@ export const checklistRouter = createTRPCRouter({
         });
       }
 
+      syncDiscord(ctx.db, item.checklist.card.publicId);
+
       return updatedItem;
     }),
   deleteItem: protectedProcedure
@@ -427,6 +447,8 @@ export const checklistRouter = createTRPCRouter({
         fromTitle: item.title,
         createdBy: userId,
       });
+
+      syncDiscord(ctx.db, item.checklist.card.publicId);
 
       return { success: true };
     }),

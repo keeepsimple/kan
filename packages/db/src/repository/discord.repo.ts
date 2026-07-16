@@ -50,6 +50,17 @@ export const setCardDiscordThreadId = async (
     .where(eq(cards.id, cardId));
 };
 
+export const setCardDiscordMessageId = async (
+  db: dbClient,
+  cardId: number,
+  messageId: string,
+) => {
+  await db
+    .update(cards)
+    .set({ discordMessageId: messageId })
+    .where(eq(cards.id, cardId));
+};
+
 export const getBoardDiscordChannelId = async (
   db: dbClient,
   boardId: number,

@@ -62,8 +62,9 @@ vi.mock("../utils/permissions", () => ({
 
 vi.mock("../utils/discord", () => ({
   assertListAllowsCardCreation: vi.fn(),
-  notifyCardCreated: vi.fn(),
-  notifyCardMoved: vi.fn(),
+  notifyCardCreated: vi.fn(() => Promise.resolve()),
+  notifyCardMoved: vi.fn(() => Promise.resolve()),
+  notifyCardUpdated: vi.fn(() => Promise.resolve()),
 }));
 
 vi.mock("../utils/webhook", () => ({

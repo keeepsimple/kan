@@ -103,6 +103,9 @@ importers:
       '@kan/db':
         specifier: workspace:^
         version: link:../../packages/db
+      '@kan/discord':
+        specifier: workspace:*
+        version: link:../../packages/discord
       '@kan/logger':
         specifier: workspace:^
         version: link:../../packages/logger

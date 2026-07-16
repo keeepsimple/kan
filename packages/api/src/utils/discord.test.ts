@@ -1,5 +1,18 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import * as cardRepo from "@kan/db/repository/card.repo";
+import * as discordRepo from "@kan/db/repository/discord.repo";
+import * as discordClient from "@kan/discord";
+
+import {
+  assertListAllowsCardCreation,
+  htmlToDiscordMarkdown,
+  notifyCardCreated,
+  notifyCardMoved,
+  notifyCardUpdated,
+  parseRoleIds,
+} from "./discord";
+
 const { mockLogger } = vi.hoisted(() => ({
   mockLogger: { error: vi.fn(), info: vi.fn() },
 }));
@@ -7,35 +20,28 @@ const { mockLogger } = vi.hoisted(() => ({
 vi.mock("@kan/discord", () => ({
   createThread: vi.fn(),
   postMessage: vi.fn(),
-  buildRoleMentions: (ids: string[]) =>
-    ids.map((id) => `<@&${id}>`).join(" "),
+  editMessage: vi.fn(),
+  buildRoleMentions: (ids: string[]) => ids.map((id) => `<@&${id}>`).join(" "),
 }));
 
 vi.mock("@kan/db/repository/discord.repo", () => ({
   getByWorkspaceId: vi.fn(),
   setCardDiscordThreadId: vi.fn(),
+  setCardDiscordMessageId: vi.fn(),
   getBoardDiscordChannelId: vi.fn(),
+}));
+
+vi.mock("@kan/db/repository/card.repo", () => ({
+  getDiscordContextByPublicId: vi.fn(),
 }));
 
 vi.mock("@kan/logger", () => ({
   createLogger: vi.fn(() => mockLogger),
 }));
 
-import * as discordClient from "@kan/discord";
-import * as discordRepo from "@kan/db/repository/discord.repo";
-
-import {
-  assertListAllowsCardCreation,
-  notifyCardCreated,
-  notifyCardMoved,
-  parseRoleIds,
-} from "./discord";
-
 const mockDb = {} as Parameters<typeof notifyCardCreated>[0];
 
-const mockCreateThread = discordClient.createThread as ReturnType<
-  typeof vi.fn
->;
+const mockCreateThread = discordClient.createThread as ReturnType<typeof vi.fn>;
 const mockPostMessage = discordClient.postMessage as ReturnType<typeof vi.fn>;
 const mockGetByWorkspaceId = discordRepo.getByWorkspaceId as ReturnType<
   typeof vi.fn
@@ -46,11 +52,35 @@ const mockSetThreadId = discordRepo.setCardDiscordThreadId as ReturnType<
 const mockGetBoardChannel = discordRepo.getBoardDiscordChannelId as ReturnType<
   typeof vi.fn
 >;
+const mockSetMessageId = discordRepo.setCardDiscordMessageId as ReturnType<
+  typeof vi.fn
+>;
+const mockEditMessage = discordClient.editMessage as ReturnType<typeof vi.fn>;
+const mockGetDiscordContext =
+  cardRepo.getDiscordContextByPublicId as ReturnType<typeof vi.fn>;
 
 const connection = { id: 1, workspaceId: 7, guildId: "g1" };
 
 beforeEach(() => {
   vi.clearAllMocks();
+  process.env.NEXT_PUBLIC_BASE_URL = "https://kan.test";
+});
+
+describe("htmlToDiscordMarkdown", () => {
+  it("mirrors headings, paragraphs, lists, and inline styles", () => {
+    const html =
+      "<h1>Hello my friend</h1><p>Lorem ipsum <strong>dolor</strong> sit <em>amet</em>.</p><ul><li><p>Nam aliquet odio elit</p></li><li><p>Morbi rutrum eu sem ut</p></li></ul>";
+    expect(htmlToDiscordMarkdown(html)).toBe(
+      [
+        "**Hello my friend**",
+        "Lorem ipsum **dolor** sit *amet*.",
+        "",
+        "• Nam aliquet odio elit",
+        "",
+        "• Morbi rutrum eu sem ut",
+      ].join("\n"),
+    );
+  });
 });
 
 describe("parseRoleIds", () => {
@@ -103,12 +133,66 @@ describe("notifyCardCreated", () => {
 
     await notifyCardCreated(mockDb, args);
 
-    expect(mockCreateThread).toHaveBeenCalledWith("chan1", "Fix login");
+    expect(mockCreateThread).toHaveBeenCalledWith(
+      "chan1",
+      "Fix login - 📋 Sprint 1",
+    );
     expect(mockSetThreadId).toHaveBeenCalledWith(mockDb, 5, "t9");
     expect(mockPostMessage).toHaveBeenCalledWith(
       "t9",
-      "<@&r1> Fix login — Sprint 1",
+      "<@&r1>",
       ["r1"],
+      [{ title: "📌 Fix login" }],
+    );
+    expect(mockSetMessageId).toHaveBeenCalledWith(mockDb, 5, "m1");
+  });
+
+  it("includes description, list, labels, members, due date, and checklists in an embed", async () => {
+    mockGetByWorkspaceId.mockResolvedValue(connection);
+    mockCreateThread.mockResolvedValue({
+      success: true,
+      data: { id: "t9", name: "Fix login" },
+    });
+    mockPostMessage.mockResolvedValue({ success: true, data: { id: "m1" } });
+
+    const due = new Date("2026-07-17T02:00:00Z");
+    await notifyCardCreated(mockDb, {
+      ...args,
+      cardPublicId: "cardpub00001",
+      description: "<p>Hello <strong>world</strong></p>",
+      listName: "Task",
+      labelNames: ["Urgent"],
+      labelColour: "#dc2626",
+      memberNames: ["An Nguyen"],
+      dueDate: due,
+      checklists: [{ name: "Todo", items: ["Step 1", "Step 2"] }],
+      createdBy: "An",
+    });
+
+    expect(mockPostMessage).toHaveBeenCalledWith(
+      "t9",
+      "<@&r1>",
+      ["r1"],
+      [
+        {
+          color: 0xdc2626,
+          title: "📌 Fix login",
+          url: "https://kan.test/cards/cardpub00001",
+          description: "Hello **world**",
+          fields: [
+            { name: "✨ Created by", value: "**An**", inline: true },
+            { name: "📂 List", value: "Task", inline: true },
+            { name: "🏷️ Labels", value: "Urgent", inline: true },
+            {
+              name: "⏰ Due",
+              value: `<t:${Math.floor(due.getTime() / 1000)}:f>`,
+              inline: true,
+            },
+            { name: "✅ Todo", value: "• Step 1\n• Step 2" },
+            { name: "👥 Members", value: "An Nguyen" },
+          ],
+        },
+      ],
     );
   });
 
@@ -141,10 +225,56 @@ describe("notifyCardCreated", () => {
   });
 });
 
+describe("notifyCardUpdated", () => {
+  it("re-renders the thread's first embed from current card state", async () => {
+    mockGetDiscordContext.mockResolvedValue({
+      id: 5,
+      title: "Fix login v2",
+      description: "<p>Updated</p>",
+      dueDate: null,
+      discordThreadId: "t9",
+      discordMessageId: "m1",
+      createdBy: { name: "An" },
+      labels: [{ label: { name: "Urgent", colourCode: "#dc2626" } }],
+      members: [{ member: { email: "a@b.co", user: { name: "An Nguyen" } } }],
+      checklists: [{ name: "Todo", items: [{ title: "Step 1" }] }],
+      list: { name: "Task", board: { name: "Sprint 1" } },
+    });
+    mockEditMessage.mockResolvedValue({ success: true, data: { id: "m1" } });
+
+    await notifyCardUpdated(mockDb, "card00000001");
+
+    expect(mockEditMessage).toHaveBeenCalledWith("t9", "m1", [
+      {
+        color: 0xdc2626,
+        title: "📌 Fix login v2",
+        url: "https://kan.test/cards/card00000001",
+        description: "Updated",
+        fields: [
+          { name: "✨ Created by", value: "**An**", inline: true },
+          { name: "📂 List", value: "Task", inline: true },
+          { name: "🏷️ Labels", value: "Urgent", inline: true },
+          { name: "✅ Todo", value: "• Step 1" },
+          { name: "👥 Members", value: "An Nguyen" },
+        ],
+      },
+    ]);
+  });
+
+  it("does nothing when the card has no thread or message", async () => {
+    mockGetDiscordContext.mockResolvedValue({
+      discordThreadId: "t9",
+      discordMessageId: null,
+    });
+    await notifyCardUpdated(mockDb, "card00000001");
+    expect(mockEditMessage).not.toHaveBeenCalled();
+  });
+});
+
 describe("notifyCardMoved", () => {
   const args = {
     cardTitle: "Fix login",
-    boardName: "Sprint 1",
+    newListName: "Done",
     userName: "An",
     workspaceId: 7,
     newListDiscordBehaviour: "notify",
@@ -158,7 +288,18 @@ describe("notifyCardMoved", () => {
 
     await notifyCardMoved(mockDb, args);
 
-    expect(mockPostMessage).toHaveBeenCalledWith("t9", "Fix login Sprint 1 - An");
+    expect(mockPostMessage).toHaveBeenCalledWith(
+      "t9",
+      "",
+      [],
+      [
+        {
+          color: 0xadd8e6,
+          title: "📌 Fix login",
+          description: "📊 Status: Done\n👤 Moved by: **An**",
+        },
+      ],
+    );
   });
 
   it("falls back to the board channel when the card has no thread", async () => {
@@ -171,7 +312,15 @@ describe("notifyCardMoved", () => {
     expect(mockGetBoardChannel).toHaveBeenCalledWith(mockDb, 3);
     expect(mockPostMessage).toHaveBeenCalledWith(
       "chan1",
-      "Fix login Sprint 1 - An",
+      "",
+      [],
+      [
+        {
+          color: 0xadd8e6,
+          title: "📌 Fix login",
+          description: "📊 Status: Done\n👤 Moved by: **An**",
+        },
+      ],
     );
   });
 

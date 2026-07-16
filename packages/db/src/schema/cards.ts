@@ -80,15 +80,16 @@ export const cards = pgTable(
       () => imports.id,
     ),
     dueDate: timestamp("dueDate"),
+    dueReminderSentAt: timestamp("dueReminderSentAt"),
+    dueArrivedReminderSentAt: timestamp("dueArrivedReminderSentAt"),
     discordThreadId: varchar("discordThreadId", { length: 32 }),
+    discordMessageId: varchar("discordMessageId", { length: 32 }),
     completedAt: timestamp("completedAt"),
     completedBy: uuid("completedBy").references(() => users.id, {
       onDelete: "set null",
     }),
   },
-  (table) => [
-    index("card_list_number_idx").on(table.listId, table.cardNumber),
-  ],
+  (table) => [index("card_list_number_idx").on(table.listId, table.cardNumber)],
 ).enableRLS();
 
 export const cardsRelations = relations(cards, ({ one, many }) => ({

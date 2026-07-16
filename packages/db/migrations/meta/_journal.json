@@ -267,6 +267,20 @@
       "when": 1784172267976,
       "tag": "20260716032427_AddAnalyticsFields",
       "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1784228982198,
+      "tag": "20260716190942_AddDiscordMessageAndDueReminder",
+      "breakpoints": true
+    },
+    {
+      "idx": 39,
+      "version": "7",
+      "when": 1784230727699,
+      "tag": "20260716193847_AddDueArrivedReminder",
+      "breakpoints": true
     }
   ]
 }

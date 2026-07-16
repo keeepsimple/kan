@@ -45,6 +45,16 @@ export interface DiscordMessage {
   channel_id: string;
 }
 
+export interface DiscordEmbed {
+  title?: string;
+  /** Makes the embed title a clickable link. */
+  url?: string;
+  description?: string;
+  color?: number;
+  author?: { name: string };
+  fields?: { name: string; value: string; inline?: boolean }[];
+}
+
 const discordFetch = async <T>(
   path: string,
   init?: RequestInit,
@@ -127,14 +137,30 @@ export const postMessage = (
   channelOrThreadId: string,
   content: string,
   mentionRoleIds: string[] = [],
+  embeds: DiscordEmbed[] = [],
 ) =>
   discordFetch<DiscordMessage>(`/channels/${channelOrThreadId}/messages`, {
     method: "POST",
     body: JSON.stringify({
       content,
       allowed_mentions: { parse: [], roles: mentionRoleIds },
+      ...(embeds.length ? { embeds } : {}),
     }),
   });
+
+/** Edits only the embeds of a previously posted message (content untouched). */
+export const editMessage = (
+  channelOrThreadId: string,
+  messageId: string,
+  embeds: DiscordEmbed[],
+) =>
+  discordFetch<DiscordMessage>(
+    `/channels/${channelOrThreadId}/messages/${messageId}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({ embeds }),
+    },
+  );
 
 export const buildRoleMentions = (roleIds: string[]) =>
   roleIds.map((id) => `<@&${id}>`).join(" ");

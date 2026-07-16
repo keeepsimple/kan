@@ -20,17 +20,18 @@ import {
 } from "../schemas";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
+import {
+  assertListAllowsCardCreation,
+  notifyCardCreated,
+  notifyCardMoved,
+  notifyCardUpdated,
+} from "../utils/discord";
 import { sendMentionEmails } from "../utils/notifications";
 import {
   assertCanDelete,
   assertCanEdit,
   assertPermission,
 } from "../utils/permissions";
-import {
-  assertListAllowsCardCreation,
-  notifyCardCreated,
-  notifyCardMoved,
-} from "../utils/discord";
 import {
   createCardWebhookPayload,
   sendWebhooksForWorkspace,
@@ -102,11 +103,17 @@ export const cardRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
+      let labelNames: string[] = [];
+      let labelColour: string | null = null;
+      let memberNames: string[] = [];
+
       if (newCardId && input.labelPublicIds.length) {
         const labels = await labelRepo.getAllByPublicIds(
           ctx.db,
           input.labelPublicIds,
         );
+        labelNames = labels.map((label) => label.name);
+        labelColour = labels[0]?.colourCode ?? null;
 
         if (!labels.length)
           throw new TRPCError({
@@ -144,6 +151,9 @@ export const cardRouter = createTRPCRouter({
         const members = await workspaceRepo.getAllMembersByPublicIds(
           ctx.db,
           input.memberPublicIds,
+        );
+        memberNames = members.map(
+          (member) => member.user?.name ?? member.email,
         );
 
         if (!members.length)
@@ -220,12 +230,20 @@ export const cardRouter = createTRPCRouter({
       // Fire Discord thread creation (non-blocking)
       notifyCardCreated(ctx.db, {
         cardId: newCard.id,
+        cardPublicId: newCard.publicId,
         cardTitle: input.title,
         boardName: list.boardName,
         workspaceId: list.workspaceId,
         discordChannelId: list.boardDiscordChannelId,
         discordBehaviour: list.discordBehaviour,
         discordRoleIds: list.discordRoleIds,
+        description: input.description,
+        listName: list.name,
+        labelNames,
+        labelColour,
+        memberNames,
+        dueDate: input.dueDate ?? null,
+        createdBy: ctx.user?.name ?? null,
       }).catch((error) => {
         console.error("Discord notification failed:", error);
       });
@@ -548,6 +566,10 @@ export const cardRouter = createTRPCRouter({
           createdBy: userId,
         });
 
+        notifyCardUpdated(ctx.db, input.cardPublicId).catch((error) => {
+          console.error("Discord notification failed:", error);
+        });
+
         return { newLabel: false };
       }
 
@@ -565,6 +587,10 @@ export const cardRouter = createTRPCRouter({
         cardId: card.id,
         labelId: label.id,
         createdBy: userId,
+      });
+
+      notifyCardUpdated(ctx.db, input.cardPublicId).catch((error) => {
+        console.error("Discord notification failed:", error);
       });
 
       return { newLabel: true };
@@ -646,6 +672,10 @@ export const cardRouter = createTRPCRouter({
           createdBy: userId,
         });
 
+        notifyCardUpdated(ctx.db, input.cardPublicId).catch((error) => {
+          console.error("Discord notification failed:", error);
+        });
+
         return { newMember: false };
       }
 
@@ -663,6 +693,10 @@ export const cardRouter = createTRPCRouter({
         cardId: card.id,
         workspaceMemberId: member.id,
         createdBy: userId,
+      });
+
+      notifyCardUpdated(ctx.db, input.cardPublicId).catch((error) => {
+        console.error("Discord notification failed:", error);
       });
 
       return { newMember: true };
@@ -1140,7 +1174,7 @@ export const cardRouter = createTRPCRouter({
       if (movedToNewList && newList) {
         notifyCardMoved(ctx.db, {
           cardTitle: result.title,
-          boardName: card.boardName,
+          newListName: newList.name,
           userName: ctx.user?.name ?? null,
           workspaceId: card.workspaceId,
           newListDiscordBehaviour: newList.discordBehaviour,
@@ -1150,6 +1184,11 @@ export const cardRouter = createTRPCRouter({
           console.error("Discord notification failed:", error);
         });
       }
+
+      // Keep the thread's first embed in sync with the card (non-blocking)
+      notifyCardUpdated(ctx.db, input.cardPublicId).catch((error) => {
+        console.error("Discord notification failed:", error);
+      });
 
       return result;
     }),
@@ -1348,12 +1387,18 @@ export const cardRouter = createTRPCRouter({
         });
       }
 
+      let labelNames: string[] = [];
+      let labelColour: string | null = null;
+      let memberNames: string[] = [];
+
       if (input.copyLabels && sourceCard.labels?.length) {
         const labelPublicIds = sourceCard.labels.map((l) => l.publicId);
         const labels = await labelRepo.getAllByPublicIds(
           ctx.db,
           labelPublicIds,
         );
+        labelNames = labels.map((label) => label.name);
+        labelColour = labels[0]?.colourCode ?? null;
         if (labels.length) {
           const labelsInsert = labels.map((label) => ({
             cardId: newCard.id,
@@ -1375,6 +1420,9 @@ export const cardRouter = createTRPCRouter({
         const members = await workspaceRepo.getAllMembersByPublicIds(
           ctx.db,
           memberPublicIds,
+        );
+        memberNames = members.map(
+          (member) => member.user?.name ?? member.email,
         );
         if (members.length) {
           const membersInsert = members.map((member) => ({
@@ -1421,6 +1469,33 @@ export const cardRouter = createTRPCRouter({
           });
         }
       }
+
+      // Duplicating into a create_thread list is still a card creation
+      notifyCardCreated(ctx.db, {
+        cardId: newCard.id,
+        cardPublicId: newCard.publicId,
+        cardTitle: input.title ?? sourceCard.title,
+        boardName: targetList.boardName,
+        workspaceId: targetList.workspaceId,
+        discordChannelId: targetList.boardDiscordChannelId,
+        discordBehaviour: targetList.discordBehaviour,
+        discordRoleIds: targetList.discordRoleIds,
+        description: sourceCard.description,
+        listName: targetList.name,
+        labelNames,
+        labelColour,
+        memberNames,
+        dueDate: sourceCard.dueDate ?? null,
+        checklists: input.copyChecklists
+          ? (sourceCard.checklists ?? []).map((checklist) => ({
+              name: checklist.name,
+              items: (checklist.items ?? []).map((item) => item.title),
+            }))
+          : [],
+        createdBy: ctx.user?.name ?? null,
+      }).catch((error) => {
+        console.error("Discord notification failed:", error);
+      });
 
       return { publicId: newCard.publicId };
     }),

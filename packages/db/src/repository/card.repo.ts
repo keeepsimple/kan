@@ -8,6 +8,7 @@ import {
   inArray,
   isNotNull,
   isNull,
+  lte,
   sql,
 } from "drizzle-orm";
 
@@ -216,6 +217,10 @@ export const update = async (
       title: cardInput.title,
       description: cardInput.description,
       dueDate: cardInput.dueDate !== undefined ? cardInput.dueDate : undefined,
+      // A changed due date deserves fresh reminders
+      dueReminderSentAt: cardInput.dueDate !== undefined ? null : undefined,
+      dueArrivedReminderSentAt:
+        cardInput.dueDate !== undefined ? null : undefined,
       updatedAt: new Date(),
     })
     .where(and(eq(cards.publicId, args.cardPublicId), isNull(cards.deletedAt)))
@@ -228,6 +233,104 @@ export const update = async (
     });
 
   return result;
+};
+
+const DUE_REMINDER_WINDOW_MS = 10 * 60 * 1000;
+// Don't spam cards that were already long overdue when the server came up
+const DUE_ARRIVED_GRACE_MS = 60 * 60 * 1000;
+
+export const getCardsNeedingDueSoonReminder = (db: dbClient) => {
+  const now = new Date();
+  const cutoff = new Date(now.getTime() + DUE_REMINDER_WINDOW_MS);
+  return db.query.cards.findMany({
+    columns: { id: true, title: true, dueDate: true, discordThreadId: true },
+    where: and(
+      isNull(cards.deletedAt),
+      isNull(cards.dueReminderSentAt),
+      isNotNull(cards.discordThreadId),
+      gt(cards.dueDate, now),
+      lte(cards.dueDate, cutoff),
+    ),
+  });
+};
+
+export const getCardsNeedingDueNowReminder = (db: dbClient) => {
+  const now = new Date();
+  const oldest = new Date(now.getTime() - DUE_ARRIVED_GRACE_MS);
+  return db.query.cards.findMany({
+    columns: { id: true, title: true, dueDate: true, discordThreadId: true },
+    where: and(
+      isNull(cards.deletedAt),
+      isNull(cards.dueArrivedReminderSentAt),
+      isNotNull(cards.discordThreadId),
+      gt(cards.dueDate, oldest),
+      lte(cards.dueDate, now),
+    ),
+  });
+};
+
+export const markDueReminderSent = async (db: dbClient, cardId: number) => {
+  await db
+    .update(cards)
+    .set({ dueReminderSentAt: new Date() })
+    .where(eq(cards.id, cardId));
+};
+
+export const markDueArrivedReminderSent = async (
+  db: dbClient,
+  cardId: number,
+) => {
+  await db
+    .update(cards)
+    .set({ dueArrivedReminderSentAt: new Date() })
+    .where(eq(cards.id, cardId));
+};
+
+export const getDiscordContextByPublicId = (
+  db: dbClient,
+  cardPublicId: string,
+) => {
+  return db.query.cards.findFirst({
+    columns: {
+      id: true,
+      title: true,
+      description: true,
+      dueDate: true,
+      discordThreadId: true,
+      discordMessageId: true,
+    },
+    where: and(eq(cards.publicId, cardPublicId), isNull(cards.deletedAt)),
+    with: {
+      createdBy: { columns: { name: true } },
+      labels: {
+        with: { label: { columns: { name: true, colourCode: true } } },
+      },
+      members: {
+        with: {
+          member: {
+            columns: { email: true },
+            with: { user: { columns: { name: true } } },
+          },
+        },
+      },
+      checklists: {
+        columns: { name: true },
+        where: isNull(checklists.deletedAt),
+        orderBy: asc(checklists.index),
+        with: {
+          items: {
+            columns: { title: true },
+            where: isNull(checklistItems.deletedAt),
+            orderBy: asc(checklistItems.index),
+          },
+        },
+      },
+      list: {
+        columns: { name: true },
+        with: { board: { columns: { name: true } } },
+      },
+    },
+  });
 };
 
 export const setCompletedAt = async (

@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   buildRoleMentions,
   createThread,
+  editMessage,
   getTextChannels,
   postMessage,
 } from "./index";
@@ -50,9 +51,9 @@ describe("createThread", () => {
     };
     expect(body.name).toHaveLength(100);
     expect(body.type).toBe(11);
-    expect(
-      (call[1].headers as Record<string, string>).Authorization,
-    ).toBe("Bot test-token");
+    expect((call[1].headers as Record<string, string>).Authorization).toBe(
+      "Bot test-token",
+    );
   });
 
   it("returns an error without calling fetch when the bot token is missing", async () => {
@@ -103,6 +104,20 @@ describe("postMessage", () => {
       allowed_mentions: unknown;
     };
     expect(body.allowed_mentions).toEqual({ parse: [], roles: [] });
+  });
+});
+
+describe("editMessage", () => {
+  it("PATCHes only the embeds of the message", async () => {
+    mockFetch.mockResolvedValue(jsonResponse({ id: "m1", channel_id: "42" }));
+
+    await editMessage("42", "m1", [{ title: "t" }]);
+
+    const call = mockFetch.mock.calls[0] as [string, RequestInit];
+    expect(call[0]).toContain("/channels/42/messages/m1");
+    expect(call[1].method).toBe("PATCH");
+    const body = JSON.parse(call[1].body as string) as { embeds: unknown };
+    expect(body).toEqual({ embeds: [{ title: "t" }] });
   });
 });
 

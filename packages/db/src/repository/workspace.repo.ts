@@ -342,6 +342,14 @@ export const getAllMembersByPublicIds = (
   return db.query.workspaceMembers.findMany({
     columns: {
       id: true,
+      email: true,
+    },
+    with: {
+      user: {
+        columns: {
+          name: true,
+        },
+      },
     },
     where: inArray(workspaceMembers.publicId, memberPublicIds),
   });
