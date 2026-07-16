@@ -214,6 +214,9 @@ export const getByPublicId = async (db: dbClient, listPublicId: string) => {
       boardId: true,
       index: true,
       discordBehaviour: true,
+      isCompleted: true,
+      autoArchiveEnabled: true,
+      autoArchiveDays: true,
     },
     where: and(eq(lists.publicId, listPublicId), isNull(lists.deletedAt)),
   });

@@ -229,6 +229,26 @@ export const update = async (
   return result;
 };
 
+export const setCompletedAt = async (
+  db: dbClient,
+  args: { cardId: number; completedAt: Date; completedBy: string },
+) => {
+  await db
+    .update(cards)
+    .set({ completedAt: args.completedAt, completedBy: args.completedBy })
+    .where(eq(cards.id, args.cardId));
+};
+
+export const clearCompletedAt = async (
+  db: dbClient,
+  args: { cardId: number },
+) => {
+  await db
+    .update(cards)
+    .set({ completedAt: null, completedBy: null })
+    .where(eq(cards.id, args.cardId));
+};
+
 export const getCardWithListByPublicId = (
   db: dbClient,
   cardPublicId: string,
@@ -266,6 +286,7 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
         columns: {
           publicId: true,
           name: true,
+          isCompleted: true,
         },
       },
     },

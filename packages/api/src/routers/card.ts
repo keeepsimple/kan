@@ -927,6 +927,9 @@ export const cardRouter = createTRPCRouter({
             boardId: number;
             index: number;
             discordBehaviour: string | null;
+            isCompleted: boolean;
+            autoArchiveEnabled: boolean;
+            autoArchiveDays: number | null;
           }
         | undefined;
 
@@ -1052,6 +1055,16 @@ export const cardRouter = createTRPCRouter({
           fromListId: existingCard.listId,
           toListId: newListId,
         });
+
+        if (newList?.isCompleted) {
+          await cardRepo.setCompletedAt(ctx.db, {
+            cardId: existingCard.id,
+            completedAt: new Date(),
+            completedBy: userId,
+          });
+        } else if (existingCard.list?.isCompleted) {
+          await cardRepo.clearCompletedAt(ctx.db, { cardId: existingCard.id });
+        }
       }
 
       if (activities.length > 0) {
