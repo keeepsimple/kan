@@ -12,6 +12,7 @@ vi.mock("@kan/db/repository/member.repo", () => ({
 
 vi.mock("@kan/db/repository/user.repo", () => ({
   update: vi.fn(),
+  setDiscordMapping: vi.fn(),
 }));
 
 vi.mock("@kan/email", () => ({
@@ -33,11 +34,13 @@ vi.mock("@novu/api/models/components", () => ({
 
 import { env } from "next-runtime-env";
 import * as memberRepo from "@kan/db/repository/member.repo";
-import { createDatabaseHooks } from "./hooks";
+import * as userRepo from "@kan/db/repository/user.repo";
+import { createDatabaseHooks, handleDiscordAccountLink } from "./hooks";
 
 const mockEnv = env as ReturnType<typeof vi.fn>;
 const mockGetByEmailAndStatus =
   memberRepo.getByEmailAndStatus as ReturnType<typeof vi.fn>;
+const mockSetDiscord = userRepo.setDiscordMapping as ReturnType<typeof vi.fn>;
 
 const db = {} as Parameters<typeof createDatabaseHooks>[0];
 
@@ -191,5 +194,46 @@ describe("createDatabaseHooks", () => {
 
       delete process.env.BETTER_AUTH_ALLOWED_DOMAINS;
     });
+  });
+});
+
+describe("handleDiscordAccountLink", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("maps a discord account id to the user (username null)", async () => {
+    await handleDiscordAccountLink(db, {
+      providerId: "discord",
+      accountId: "123456789012",
+      userId: "user1",
+    });
+
+    expect(mockSetDiscord).toHaveBeenCalledWith(db, "user1", {
+      discordUserId: "123456789012",
+      discordUsername: null,
+    });
+  });
+
+  it("ignores non-discord providers", async () => {
+    await handleDiscordAccountLink(db, {
+      providerId: "google",
+      accountId: "g1",
+      userId: "user1",
+    });
+
+    expect(mockSetDiscord).not.toHaveBeenCalled();
+  });
+
+  it("never throws when the repo write fails", async () => {
+    mockSetDiscord.mockRejectedValue(new Error("db down"));
+
+    await expect(
+      handleDiscordAccountLink(db, {
+        providerId: "discord",
+        accountId: "123456789012",
+        userId: "user1",
+      }),
+    ).resolves.toBeUndefined();
   });
 });

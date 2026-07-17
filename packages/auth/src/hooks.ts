@@ -25,6 +25,27 @@ type BetterAuthUser = {
   stripeCustomerId?: string | null | undefined;
 } & Record<string, unknown>;
 
+type BetterAuthAccount = {
+  providerId: string;
+  accountId: string;
+  userId: string;
+};
+
+export async function handleDiscordAccountLink(
+  db: dbClient,
+  account: BetterAuthAccount,
+): Promise<void> {
+  if (account.providerId !== "discord") return;
+  try {
+    await userRepo.setDiscordMapping(db, account.userId, {
+      discordUserId: account.accountId,
+      discordUsername: null,
+    });
+  } catch (error) {
+    console.error("Discord account link failed:", error);
+  }
+}
+
 export function createDatabaseHooks(db: dbClient) {
   return {
     user: {
@@ -142,6 +163,13 @@ export function createDatabaseHooks(db: dbClient) {
               log.error({ err: error }, "Error adding user to notification client");
             }
           }
+        },
+      },
+    },
+    account: {
+      create: {
+        async after(account: BetterAuthAccount, _context: unknown) {
+          await handleDiscordAccountLink(db, account);
         },
       },
     },
