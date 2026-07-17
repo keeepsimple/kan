@@ -62,6 +62,10 @@ export default async function handler(
   });
   res.write(": connected\n\n");
 
+  // Authorization is checked once at connect. We intentionally do not
+  // re-authorize mid-stream: signals carry no entity data, and the client's
+  // follow-up board.byId/card.byId refetch re-enforces permissions (a revoked
+  // viewer's refetch 403s). Worst case is a stale open socket, not a data leak.
   const unsubscribe = subscribeToBoard(boardPublicId, (event) => {
     res.write(`data: ${JSON.stringify(event)}\n\n`);
   });

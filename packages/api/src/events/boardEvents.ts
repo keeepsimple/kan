@@ -10,8 +10,9 @@ export interface BoardEvent {
   cardPublicId?: string;
 }
 
-// Singleton on globalThis so Next.js dev hot-reload can't split emitters
-// across module instances (same pattern as a typical db-client singleton).
+// Singleton on globalThis so Next.js dev hot-reload (and any duplicate
+// module instances across the tRPC handler / SSE route bundles) share one
+// emitter — the standard hot-reload-safe singleton pattern.
 const store = globalThis as unknown as { __kanBoardEvents?: EventEmitter };
 
 function getEmitter(): EventEmitter {
