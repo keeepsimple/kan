@@ -3101,6 +3101,18 @@
     ],
     "translation": "Conectar Trello"
   },
+  "7QrUfn": {
+    "translation": "",
+    "message": "Connect with Discord",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        136
+      ]
+    ]
+  },
   "sDLCvT": {
     "message": "Connect your favorite tools to streamline your workflow.",
     "placeholders": {},
@@ -4375,16 +4387,16 @@
     "translation": ""
   },
   "R4xK38": {
-    "translation": "",
     "message": "Discord linked",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        20
+        24
       ]
-    ]
+    ],
+    "translation": ""
   },
   "0dYWgo": {
     "message": "Discord server ID",
@@ -4427,16 +4439,16 @@
     "translation": ""
   },
   "TM4U24": {
-    "translation": "",
     "message": "Discord unlinked",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        44
+        48
       ]
-    ]
+    ],
+    "translation": ""
   },
   "YZ6gtR": {
     "translation": "",
@@ -4448,7 +4460,8 @@
         "src/views/settings/components/DiscordAccountLink.tsx",
         95
       ]
-    ]
+    ],
+    "obsolete": true
   },
   "1sRmLC": {
     "message": "Discuss and collaborate on cards.",
@@ -5151,6 +5164,18 @@
     ],
     "translation": ""
   },
+  "X8BOdd": {
+    "translation": "",
+    "message": "Error connecting Discord",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        81
+      ]
+    ]
+  },
   "yhLUU8": {
     "message": "Error connecting GitHub",
     "placeholders": {},
@@ -5276,16 +5301,16 @@
     "translation": "Erro ao convidar membro"
   },
   "liNnjX": {
-    "translation": "",
     "message": "Error linking Discord",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        34
+        38
       ]
-    ]
+    ],
+    "translation": ""
   },
   "sZixXc": {
     "message": "Error Setting Password",
@@ -5300,16 +5325,16 @@
     "translation": "Erro ao Definir Senha"
   },
   "1vM7M0": {
-    "translation": "",
     "message": "Error unlinking Discord",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        57
+        61
       ]
-    ]
+    ],
+    "translation": ""
   },
   "sVBn4K": {
     "message": "Error updating display name",
@@ -7163,16 +7188,16 @@
     "translation": "Acesso limitado à API"
   },
   "yzF66j": {
-    "translation": "",
     "message": "Link",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        105
+        154
       ]
-    ]
+    ],
+    "translation": ""
   },
   "edWbV6": {
     "message": "Link copied",
@@ -8431,6 +8456,18 @@
     ],
     "translation": "ou"
   },
+  "gxxSno": {
+    "translation": "",
+    "message": "Or paste your Discord user ID",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        144
+      ]
+    ]
+  },
   "ZqDqbi": {
     "message": "Organize and find cards quickly with powerful filtering tools.",
     "placeholders": {},
@@ -8824,16 +8861,16 @@
     "translation": "Plataforma"
   },
   "jVT7ef": {
-    "translation": "",
     "message": "Please check the Discord user ID and try again.",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        35
+        39
       ]
-    ]
+    ],
+    "translation": ""
   },
   "58AiWX": {
     "message": "Please confirm your new password",
@@ -9098,7 +9135,11 @@
       ],
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        58
+        62
+      ],
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        82
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
@@ -12383,16 +12424,16 @@
     "translation": "Assentos ilimitados e recursos avançados para equipes em crescimento."
   },
   "6dvIbw": {
-    "translation": "",
     "message": "Unlink",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        82
+        120
       ]
-    ]
+    ],
+    "translation": ""
   },
   "SMaFdc": {
     "message": "Unsubscribe",
@@ -13703,28 +13744,28 @@
     "translation": "Seus quadros foram importados."
   },
   "m3l0Cn": {
-    "translation": "",
     "message": "Your Discord account has been linked.",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        21
+        25
       ]
-    ]
+    ],
+    "translation": ""
   },
   "JVceYN": {
-    "translation": "",
     "message": "Your Discord account has been unlinked.",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        45
+        49
       ]
-    ]
+    ],
+    "translation": ""
   },
   "sG/O6j": {
     "message": "Your Discord server has been disconnected.",

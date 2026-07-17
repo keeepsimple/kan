@@ -15,6 +15,8 @@ export const configuredProviders = socialProviderList.reduce<
       // Google-specific optional hints
       hostedDomain?: string;
       hd?: string;
+      // Login/link-only: never auto-create a user on sign-in (Discord).
+      disableImplicitSignUp?: boolean;
     }
   >
 >((acc, provider) => {
@@ -76,6 +78,16 @@ export const configuredProviders = socialProviderList.reduce<
     if (key && key.length > 0) {
       acc[provider].clientKey = key;
     }
+  }
+  // Discord is link/login-only: a sign-in for a user who has no account
+  // will NOT auto-create one (registration must go through the normal flow).
+  // Existing users can still log in, and members can link via profile settings.
+  if (
+    provider === "discord" &&
+    Object.keys(acc).includes("discord") &&
+    acc[provider]
+  ) {
+    acc[provider].disableImplicitSignUp = true;
   }
   return acc;
 }, {});
