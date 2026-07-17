@@ -1,4 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { env } from "next-runtime-env";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import * as memberRepo from "@kan/db/repository/member.repo";
+import * as userRepo from "@kan/db/repository/user.repo";
+
+import { createDatabaseHooks, handleDiscordAccountLink } from "./hooks";
 
 vi.mock("next-runtime-env", () => ({
   env: vi.fn(),
@@ -32,14 +38,10 @@ vi.mock("@novu/api/models/components", () => ({
   ChatOrPushProviderEnum: { Discord: "discord" },
 }));
 
-import { env } from "next-runtime-env";
-import * as memberRepo from "@kan/db/repository/member.repo";
-import * as userRepo from "@kan/db/repository/user.repo";
-import { createDatabaseHooks, handleDiscordAccountLink } from "./hooks";
-
 const mockEnv = env as ReturnType<typeof vi.fn>;
-const mockGetByEmailAndStatus =
-  memberRepo.getByEmailAndStatus as ReturnType<typeof vi.fn>;
+const mockGetByEmailAndStatus = memberRepo.getByEmailAndStatus as ReturnType<
+  typeof vi.fn
+>;
 const mockSetDiscord = userRepo.setDiscordMapping as ReturnType<typeof vi.fn>;
 
 const db = {} as Parameters<typeof createDatabaseHooks>[0];
@@ -235,5 +237,17 @@ describe("handleDiscordAccountLink", () => {
         userId: "user1",
       }),
     ).resolves.toBeUndefined();
+  });
+
+  it("never throws when the account is null/undefined", async () => {
+    await expect(
+      handleDiscordAccountLink(db, undefined as any),
+    ).resolves.toBeUndefined();
+    expect(mockSetDiscord).not.toHaveBeenCalled();
+
+    await expect(
+      handleDiscordAccountLink(db, null as any),
+    ).resolves.toBeUndefined();
+    expect(mockSetDiscord).not.toHaveBeenCalled();
   });
 });

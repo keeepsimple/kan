@@ -10,9 +10,9 @@ import { notificationClient } from "@kan/email";
 import { createLogger } from "@kan/logger";
 import { createEmailUnsubscribeLink, createS3Client } from "@kan/shared";
 
-const log = createLogger("auth");
-
 import { downloadImage } from "./utils";
+
+const log = createLogger("auth");
 
 type BetterAuthUser = {
   id: string;
@@ -35,7 +35,7 @@ export async function handleDiscordAccountLink(
   db: dbClient,
   account: BetterAuthAccount,
 ): Promise<void> {
-  if (account.providerId !== "discord") return;
+  if (!account || account.providerId !== "discord") return;
   try {
     await userRepo.setDiscordMapping(db, account.userId, {
       discordUserId: account.accountId,
@@ -127,7 +127,14 @@ export function createDatabaseHooks(db: dbClient) {
 
               const unsubscribeUrl = await createEmailUnsubscribeLink(user.id);
 
-              log.info({ workflowId: "user-signup", userId: user.id, email: user.email }, "Triggering Novu workflow");
+              log.info(
+                {
+                  workflowId: "user-signup",
+                  userId: user.id,
+                  email: user.email,
+                },
+                "Triggering Novu workflow",
+              );
               await notificationClient.trigger({
                 to: {
                   subscriberId: user.id,
@@ -147,7 +154,10 @@ export function createDatabaseHooks(db: dbClient) {
                 },
                 workflowId: "user-signup",
               });
-              log.info({ workflowId: "user-signup", userId: user.id }, "Novu workflow triggered");
+              log.info(
+                { workflowId: "user-signup", userId: user.id },
+                "Novu workflow triggered",
+              );
 
               await notificationClient.subscribers.credentials.update(
                 {
@@ -160,7 +170,10 @@ export function createDatabaseHooks(db: dbClient) {
                 user.id,
               );
             } catch (error) {
-              log.error({ err: error }, "Error adding user to notification client");
+              log.error(
+                { err: error },
+                "Error adding user to notification client",
+              );
             }
           }
         },

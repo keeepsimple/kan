@@ -341,7 +341,7 @@ export const getDiscordContextByPublicId = (
       },
       list: {
         columns: { name: true },
-        with: { board: { columns: { name: true } } },
+        with: { board: { columns: { name: true, workspaceId: true } } },
       },
     },
   });

@@ -31,7 +31,10 @@ describe("notifyAssigned", () => {
   beforeEach(() => vi.clearAllMocks());
 
   it("pings the assigned member's discord id in the card thread", async () => {
-    mockCtx.mockResolvedValue({ discordThreadId: "thread1" });
+    mockCtx.mockResolvedValue({
+      discordThreadId: "thread1",
+      list: { board: { workspaceId: 7 } },
+    });
     mockMembers.mockResolvedValue([{ user: { discordUserId: "111" } }]);
     await notifyAssigned(db, "card_1", ["mem_1"]);
     expect(mockPost).toHaveBeenCalledWith(
@@ -41,6 +44,7 @@ describe("notifyAssigned", () => {
       [],
       ["111"],
     );
+    expect(mockMembers).toHaveBeenCalledWith(db, ["mem_1"], 7);
   });
 
   it("does nothing when the card has no thread", async () => {
@@ -50,7 +54,10 @@ describe("notifyAssigned", () => {
   });
 
   it("does nothing when the member has no linked discord id", async () => {
-    mockCtx.mockResolvedValue({ discordThreadId: "thread1" });
+    mockCtx.mockResolvedValue({
+      discordThreadId: "thread1",
+      list: { board: { workspaceId: 7 } },
+    });
     mockMembers.mockResolvedValue([{ user: { discordUserId: null } }]);
     await notifyAssigned(db, "card_1", ["mem_1"]);
     expect(mockPost).not.toHaveBeenCalled();
@@ -71,7 +78,10 @@ describe("notifyCommentMentions", () => {
   beforeEach(() => vi.clearAllMocks());
 
   it("pings mentioned members with the author name", async () => {
-    mockCtx.mockResolvedValue({ discordThreadId: "thread1" });
+    mockCtx.mockResolvedValue({
+      discordThreadId: "thread1",
+      list: { board: { workspaceId: 7 } },
+    });
     mockMembers.mockResolvedValue([{ user: { discordUserId: "111" } }]);
     await notifyCommentMentions(db, "card_1", html, "Bob");
     expect(mockPost).toHaveBeenCalledWith(
@@ -81,6 +91,7 @@ describe("notifyCommentMentions", () => {
       [],
       ["111"],
     );
+    expect(mockMembers).toHaveBeenCalledWith(db, ["mem_000000001"], 7);
   });
 
   it("does nothing when the comment has no mentions", async () => {

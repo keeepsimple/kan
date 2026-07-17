@@ -181,7 +181,7 @@ export const userRouter = createTRPCRouter({
     .meta({
       openapi: {
         method: "POST",
-        path: "/user/discord/link",
+        path: "/users/discord/link",
         summary: "Link a Discord account to the current user",
         tags: ["User"],
         protect: true,
@@ -217,7 +217,7 @@ export const userRouter = createTRPCRouter({
     .meta({
       openapi: {
         method: "POST",
-        path: "/user/discord/unlink",
+        path: "/users/discord/unlink",
         summary: "Unlink the current user's Discord account",
         tags: ["User"],
         protect: true,

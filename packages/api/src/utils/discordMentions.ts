@@ -7,9 +7,14 @@ import { parseMentionsFromHTML } from "@kan/shared/utils";
 async function resolveDiscordIds(
   db: dbClient,
   memberPublicIds: string[],
+  workspaceId?: number,
 ): Promise<string[]> {
   if (!memberPublicIds.length) return [];
-  const members = await memberRepo.getByPublicIdsWithUsers(db, memberPublicIds);
+  const members = await memberRepo.getByPublicIdsWithUsers(
+    db,
+    memberPublicIds,
+    workspaceId,
+  );
   return members
     .map((m) => m.user?.discordUserId ?? null)
     .filter((id): id is string => !!id);
@@ -23,7 +28,11 @@ export async function notifyAssigned(
   try {
     const ctx = await cardRepo.getDiscordContextByPublicId(db, cardPublicId);
     if (!ctx?.discordThreadId) return;
-    const ids = await resolveDiscordIds(db, memberPublicIds);
+    const ids = await resolveDiscordIds(
+      db,
+      memberPublicIds,
+      ctx.list.board.workspaceId,
+    );
     if (!ids.length) return;
     await postMessage(
       ctx.discordThreadId,
@@ -48,7 +57,11 @@ export async function notifyCommentMentions(
     if (!memberPublicIds.length) return;
     const ctx = await cardRepo.getDiscordContextByPublicId(db, cardPublicId);
     if (!ctx?.discordThreadId) return;
-    const ids = await resolveDiscordIds(db, memberPublicIds);
+    const ids = await resolveDiscordIds(
+      db,
+      memberPublicIds,
+      ctx.list.board.workspaceId,
+    );
     if (!ids.length) return;
     await postMessage(
       ctx.discordThreadId,
