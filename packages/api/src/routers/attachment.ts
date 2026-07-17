@@ -7,8 +7,9 @@ import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { generateUID } from "@kan/shared/utils";
 
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { emitFromCard } from "../events/boardEvents";
 import { attachmentConfirmResponseSchema } from "../schemas";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
 import { deleteObject, generateUploadUrl } from "@kan/shared/utils";
 
@@ -158,6 +159,8 @@ export const attachmentRouter = createTRPCRouter({
         createdBy: userId,
       });
 
+      emitFromCard(ctx.db, input.cardPublicId);
+
       return attachment;
     }),
   delete: protectedProcedure
@@ -220,6 +223,8 @@ export const attachmentRouter = createTRPCRouter({
         fromTitle: attachment.originalFilename,
         createdBy: userId,
       });
+
+      emitFromCard(ctx.db, attachment.card.publicId);
 
       return { success: true };
     }),

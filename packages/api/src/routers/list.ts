@@ -6,8 +6,9 @@ import * as cardRepo from "@kan/db/repository/card.repo";
 import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { emitBoardEvent, emitFromList } from "../events/boardEvents";
 import { listCreateResponseSchema, listUpdateResponseSchema } from "../schemas";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 
 export const listRouter = createTRPCRouter({
@@ -62,6 +63,8 @@ export const listRouter = createTRPCRouter({
           message: `Failed to create list`,
           code: "INTERNAL_SERVER_ERROR",
         });
+
+      emitBoardEvent({ boardPublicId: input.boardPublicId });
 
       return result;
     }),
@@ -143,6 +146,8 @@ export const listRouter = createTRPCRouter({
       }));
 
       if (activities.length) await activityRepo.bulkCreate(ctx.db, activities);
+
+      emitFromList(ctx.db, input.listPublicId);
 
       return { success: true };
     }),
@@ -253,6 +258,8 @@ export const listRouter = createTRPCRouter({
           message: `Failed to update list`,
           code: "INTERNAL_SERVER_ERROR",
         });
+
+      emitFromList(ctx.db, input.listPublicId);
 
       return result;
     }),

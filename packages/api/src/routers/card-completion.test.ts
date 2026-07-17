@@ -19,6 +19,7 @@ vi.mock("@kan/db/repository/card.repo", () => ({
   update: vi.fn(),
   setCompletedAt: vi.fn(),
   clearCompletedAt: vi.fn(),
+  getBoardPublicIdByCardPublicId: vi.fn(() => Promise.resolve(undefined)),
 }));
 
 vi.mock("@kan/db/repository/cardActivity.repo", () => ({

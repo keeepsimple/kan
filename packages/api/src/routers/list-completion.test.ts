@@ -23,6 +23,7 @@ vi.mock("@kan/db/repository/list.repo", () => ({
   updateCompletionConfig: vi.fn(),
   reorder: vi.fn(),
   softDeleteById: vi.fn(),
+  getBoardPublicIdByListPublicId: vi.fn(() => Promise.resolve(undefined)),
 }));
 
 vi.mock("../utils/permissions", () => ({

@@ -5,6 +5,7 @@ import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 
+import { emitBoardEvent, emitFromLabel } from "../events/boardEvents";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
 
@@ -116,6 +117,8 @@ export const labelRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
+      emitBoardEvent({ boardPublicId: input.boardPublicId });
+
       return {
         publicId: result.publicId,
         name: result.name,
@@ -170,6 +173,8 @@ export const labelRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
+      emitFromLabel(ctx.db, input.labelPublicId);
+
       return {
         publicId: result.publicId,
         name: result.name,
@@ -217,6 +222,8 @@ export const labelRouter = createTRPCRouter({
         deletedAt: new Date(),
         deletedBy: userId,
       });
+
+      emitFromLabel(ctx.db, input.labelPublicId);
 
       return { success: true };
     }),

@@ -15,7 +15,7 @@ import {
   generateUID,
 } from "@kan/shared/utils";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { emitBoardEvent } from "../events/boardEvents";
 import {
   boardListItemSchema,
   boardDetailSchema,
@@ -23,6 +23,7 @@ import {
   boardCreateResponseSchema,
   boardUpdateResponseSchema,
 } from "../schemas";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 
 export const boardRouter = createTRPCRouter({
@@ -553,6 +554,8 @@ export const boardRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
+      emitBoardEvent({ boardPublicId: input.boardPublicId });
+
       return result;
     }),
   delete: protectedProcedure
@@ -647,6 +650,8 @@ export const boardRouter = createTRPCRouter({
           await activityRepo.bulkCreate(ctx.db, activities);
         }
       }
+
+      emitBoardEvent({ boardPublicId: input.boardPublicId });
 
       return { success: true };
     }),
@@ -760,6 +765,8 @@ export const boardRouter = createTRPCRouter({
         targetWorkspace.id,
         slug,
       );
+
+      emitBoardEvent({ boardPublicId: input.boardPublicId });
 
       return { success: true };
     }),

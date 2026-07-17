@@ -10,6 +10,7 @@ import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
 
+import { emitFromCard, emitFromList } from "../events/boardEvents";
 import {
   activityItemSchema,
   cardCreateResponseSchema,
@@ -248,6 +249,8 @@ export const cardRouter = createTRPCRouter({
         console.error("Discord notification failed:", error);
       });
 
+      emitFromList(ctx.db, input.listPublicId);
+
       return newCard;
     }),
   addComment: protectedProcedure
@@ -324,6 +327,8 @@ export const cardRouter = createTRPCRouter({
       }).catch((error) => {
         console.error("Failed to send mention emails:", error);
       });
+
+      emitFromCard(ctx.db, input.cardPublicId);
 
       return newComment;
     }),
@@ -415,6 +420,8 @@ export const cardRouter = createTRPCRouter({
         console.error("Failed to send mention emails:", error);
       });
 
+      emitFromCard(ctx.db, input.cardPublicId);
+
       return updatedComment;
     }),
   deleteComment: protectedProcedure
@@ -491,6 +498,8 @@ export const cardRouter = createTRPCRouter({
         commentId: existingComment.id,
         createdBy: userId,
       });
+
+      emitFromCard(ctx.db, input.cardPublicId);
 
       return { publicId: input.commentPublicId };
     }),
@@ -570,6 +579,8 @@ export const cardRouter = createTRPCRouter({
           console.error("Discord notification failed:", error);
         });
 
+        emitFromCard(ctx.db, input.cardPublicId);
+
         return { newLabel: false };
       }
 
@@ -592,6 +603,8 @@ export const cardRouter = createTRPCRouter({
       notifyCardUpdated(ctx.db, input.cardPublicId).catch((error) => {
         console.error("Discord notification failed:", error);
       });
+
+      emitFromCard(ctx.db, input.cardPublicId);
 
       return { newLabel: true };
     }),
@@ -676,6 +689,8 @@ export const cardRouter = createTRPCRouter({
           console.error("Discord notification failed:", error);
         });
 
+        emitFromCard(ctx.db, input.cardPublicId);
+
         return { newMember: false };
       }
 
@@ -698,6 +713,8 @@ export const cardRouter = createTRPCRouter({
       notifyCardUpdated(ctx.db, input.cardPublicId).catch((error) => {
         console.error("Discord notification failed:", error);
       });
+
+      emitFromCard(ctx.db, input.cardPublicId);
 
       return { newMember: true };
     }),
@@ -1190,6 +1207,8 @@ export const cardRouter = createTRPCRouter({
         console.error("Discord notification failed:", error);
       });
 
+      emitFromCard(ctx.db, input.cardPublicId);
+
       return result;
     }),
   delete: protectedProcedure
@@ -1282,6 +1301,8 @@ export const cardRouter = createTRPCRouter({
           console.error("Webhook delivery failed:", error);
         });
       }
+
+      emitFromCard(ctx.db, input.cardPublicId);
 
       return { success: true };
     }),
@@ -1496,6 +1517,8 @@ export const cardRouter = createTRPCRouter({
       }).catch((error) => {
         console.error("Discord notification failed:", error);
       });
+
+      emitFromList(ctx.db, input.listPublicId);
 
       return { publicId: newCard.publicId };
     }),

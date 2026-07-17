@@ -6,6 +6,7 @@ import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
 import { stripHtml } from "@kan/shared/utils";
 
+import { emitFromCard } from "../events/boardEvents";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { notifyCardUpdated } from "../utils/discord";
 import { assertPermission } from "../utils/permissions";
@@ -90,6 +91,7 @@ export const checklistRouter = createTRPCRouter({
       });
 
       syncDiscord(ctx.db, input.cardPublicId);
+      emitFromCard(ctx.db, input.cardPublicId);
 
       return newChecklist;
     }),
@@ -157,6 +159,7 @@ export const checklistRouter = createTRPCRouter({
       });
 
       syncDiscord(ctx.db, checklist.card.publicId);
+      emitFromCard(ctx.db, checklist.card.publicId);
 
       return updated;
     }),
@@ -223,6 +226,7 @@ export const checklistRouter = createTRPCRouter({
       });
 
       syncDiscord(ctx.db, checklist.card.publicId);
+      emitFromCard(ctx.db, checklist.card.publicId);
 
       return { success: true };
     }),
@@ -290,6 +294,7 @@ export const checklistRouter = createTRPCRouter({
       });
 
       syncDiscord(ctx.db, checklist.card.publicId);
+      emitFromCard(ctx.db, checklist.card.publicId);
 
       return newChecklistItem;
     }),
@@ -389,6 +394,7 @@ export const checklistRouter = createTRPCRouter({
       }
 
       syncDiscord(ctx.db, item.checklist.card.publicId);
+      emitFromCard(ctx.db, item.checklist.card.publicId);
 
       return updatedItem;
     }),
@@ -449,6 +455,7 @@ export const checklistRouter = createTRPCRouter({
       });
 
       syncDiscord(ctx.db, item.checklist.card.publicId);
+      emitFromCard(ctx.db, item.checklist.card.publicId);
 
       return { success: true };
     }),
