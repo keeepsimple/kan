@@ -185,4 +185,47 @@ export const discordRouter = createTRPCRouter({
 
       return roles.data.map(({ id, name }) => ({ id, name }));
     }),
+
+  searchWorkspaceDiscordMembers: protectedProcedure
+    .input(workspaceInput.extend({ query: z.string().min(1).max(100) }))
+    .output(
+      z.array(
+        z.object({
+          id: z.string(),
+          username: z.string(),
+          displayName: z.string(),
+        }),
+      ),
+    )
+    .query(async ({ ctx, input }) => {
+      const { workspace } = await getAuthorizedWorkspace(
+        ctx,
+        input.workspacePublicId,
+        "board:view",
+      );
+
+      const connection = await discordRepo.getByWorkspaceId(
+        ctx.db,
+        workspace.id,
+      );
+
+      if (!connection)
+        throw new TRPCError({
+          message: "Discord is not connected for this workspace",
+          code: "NOT_FOUND",
+        });
+
+      const members = await discordClient.searchGuildMembers(
+        connection.guildId,
+        input.query,
+      );
+
+      if (!members.success || !members.data)
+        throw new TRPCError({
+          message: members.error ?? "Failed to search Discord members",
+          code: "INTERNAL_SERVER_ERROR",
+        });
+
+      return members.data;
+    }),
 });

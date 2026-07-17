@@ -2,6 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import * as userRepo from "@kan/db/repository/user.repo";
+import * as discordClient from "@kan/discord";
 import { generateAvatarUrl } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
@@ -35,6 +36,8 @@ export const userRouter = createTRPCRouter({
             prefix: z.string().nullable(),
           })
           .nullable(),
+        discordUserId: z.string().nullable(),
+        discordUsername: z.string().nullable(),
       }),
     )
     .query(async ({ ctx }) => {
@@ -172,6 +175,66 @@ export const userRouter = createTRPCRouter({
         });
       }
 
+      return { success: true };
+    }),
+  linkDiscord: protectedProcedure
+    .meta({
+      openapi: {
+        method: "POST",
+        path: "/user/discord/link",
+        summary: "Link a Discord account to the current user",
+        tags: ["User"],
+        protect: true,
+      },
+    })
+    .input(z.object({ discordUserId: z.string().regex(/^\d{15,20}$/) }))
+    .output(
+      z.object({
+        discordUserId: z.string(),
+        discordUsername: z.string().nullable(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const info = await discordClient.getUser(input.discordUserId);
+      const discordUsername =
+        info.success && info.data ? info.data.username : null;
+      await userRepo.setDiscordMapping(ctx.db, userId, {
+        discordUserId: input.discordUserId,
+        discordUsername,
+      });
+      return { discordUserId: input.discordUserId, discordUsername };
+    }),
+
+  unlinkDiscord: protectedProcedure
+    .meta({
+      openapi: {
+        method: "POST",
+        path: "/user/discord/unlink",
+        summary: "Unlink the current user's Discord account",
+        tags: ["User"],
+        protect: true,
+      },
+    })
+    .input(z.object({}))
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      await userRepo.clearDiscordMapping(ctx.db, userId);
       return { success: true };
     }),
 });
