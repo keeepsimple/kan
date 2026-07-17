@@ -60,7 +60,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        320
+        323
       ]
     ],
     "translation": "{0} | {1}"
@@ -124,7 +124,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        631
+        634
       ]
     ],
     "translation": "{0} non trovato"
@@ -426,7 +426,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        475
+        478
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -1632,11 +1632,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        604
+        607
       ],
       [
         "src/views/card/index.tsx",
-        320
+        323
       ],
       [
         "src/views/public/board/index.tsx",
@@ -2424,7 +2424,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        320
+        323
       ]
     ],
     "translation": "Card"
@@ -2476,11 +2476,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        383
+        386
       ],
       [
         "src/views/card/index.tsx",
-        420
+        423
       ]
     ],
     "translation": "Card non trovata"
@@ -2516,7 +2516,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        312
+        315
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2560,11 +2560,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        87
+        97
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        99
+        109
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2584,7 +2584,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        62
+        72
       ]
     ],
     "translation": "Modifica la dimensione del carattere dell'applicazione."
@@ -2596,7 +2596,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        52
+        62
       ]
     ],
     "translation": "Modifica le tue preferenze di lingua."
@@ -2792,7 +2792,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        374
+        377
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3600,11 +3600,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        96
+        97
       ],
       [
         "src/views/board/index.tsx",
-        745
+        748
       ]
     ],
     "translation": "Crea nuova lista"
@@ -4057,11 +4057,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        69
+        79
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        79
+        89
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -4300,6 +4300,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/settings/AccountSettings.tsx",
+        52
+      ],
+      [
         "src/views/settings/components/DiscordIntegration.tsx",
         66
       ]
@@ -4370,6 +4374,18 @@
     ],
     "translation": ""
   },
+  "R4xK38": {
+    "translation": "",
+    "message": "Discord linked",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        20
+      ]
+    ]
+  },
   "0dYWgo": {
     "message": "Discord server ID",
     "placeholders": {},
@@ -4410,6 +4426,30 @@
     ],
     "translation": ""
   },
+  "TM4U24": {
+    "translation": "",
+    "message": "Discord unlinked",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        44
+      ]
+    ]
+  },
+  "YZ6gtR": {
+    "translation": "",
+    "message": "Discord user ID",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        95
+      ]
+    ]
+  },
   "1sRmLC": {
     "message": "Discuss and collaborate on cards.",
     "placeholders": {},
@@ -4429,7 +4469,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        35
+        36
       ]
     ],
     "translation": "Nome visualizzato"
@@ -4630,7 +4670,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        152
+        153
       ]
     ],
     "translation": "Data di scadenza"
@@ -4870,7 +4910,7 @@
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        42
+        43
       ]
     ],
     "translation": "Email"
@@ -5235,6 +5275,18 @@
     ],
     "translation": "Errore durante l'invito del membro"
   },
+  "liNnjX": {
+    "translation": "",
+    "message": "Error linking Discord",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        34
+      ]
+    ]
+  },
   "sZixXc": {
     "message": "Error Setting Password",
     "placeholders": {},
@@ -5246,6 +5298,18 @@
       ]
     ],
     "translation": "Errore nell'impostazione della password"
+  },
+  "1vM7M0": {
+    "translation": "",
+    "message": "Error unlinking Discord",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        57
+      ]
+    ]
   },
   "sVBn4K": {
     "message": "Error updating display name",
@@ -5689,7 +5753,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        59
+        69
       ]
     ],
     "translation": "Dimensione del carattere"
@@ -5917,7 +5981,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        730
+        733
       ]
     ],
     "translation": "Inizia creando una nuova lista"
@@ -6872,7 +6936,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        132
+        133
       ]
     ],
     "translation": "Etichette"
@@ -6908,7 +6972,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        49
+        59
       ]
     ],
     "translation": "Lingua"
@@ -7098,6 +7162,18 @@
     ],
     "translation": "Accesso API limitato"
   },
+  "yzF66j": {
+    "translation": "",
+    "message": "Link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        105
+      ]
+    ]
+  },
   "edWbV6": {
     "message": "Link copied",
     "placeholders": {},
@@ -7109,7 +7185,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        310
+        313
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -7137,7 +7213,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        123
+        124
       ]
     ],
     "translation": "Lista"
@@ -7486,7 +7562,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        142
+        143
       ],
       [
         "src/views/members/index.tsx",
@@ -7842,7 +7918,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        694
+        697
       ]
     ],
     "translation": "Nuova lista"
@@ -8094,7 +8170,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        726
+        729
       ]
     ],
     "translation": "Nessuna lista"
@@ -8106,7 +8182,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        731
+        734
       ]
     ],
     "translation": "Nessuna lista è stata ancora creata"
@@ -8266,7 +8342,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        72
+        82
       ]
     ],
     "translation": "Una volta eliminato il tuo account, non si può tornare indietro. Questa azione non può essere annullata."
@@ -8747,6 +8823,18 @@
     ],
     "translation": "Piattaforma"
   },
+  "jVT7ef": {
+    "translation": "",
+    "message": "Please check the Discord user ID and try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        35
+      ]
+    ]
+  },
   "58AiWX": {
     "message": "Please confirm your new password",
     "placeholders": {},
@@ -8878,11 +8966,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        222
+        225
       ],
       [
         "src/views/board/index.tsx",
-        278
+        281
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -8958,11 +9046,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        235
+        238
       ],
       [
         "src/views/card/index.tsx",
-        248
+        251
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -9007,6 +9095,10 @@
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
         46
+      ],
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        58
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
@@ -9066,7 +9158,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        319
+        322
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -9250,7 +9342,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        29
+        30
       ]
     ],
     "translation": "Immagine del profilo"
@@ -10046,7 +10138,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        92
+        102
       ]
     ],
     "translation": "Imposta una password per abilitare l'accesso tramite password."
@@ -10078,11 +10170,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        87
+        97
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        99
+        109
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -10142,7 +10234,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        25
+        26
       ]
     ],
     "translation": "Impostazioni | Account"
@@ -10755,11 +10847,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        604
+        607
       ],
       [
         "src/views/board/index.tsx",
-        640
+        643
       ]
     ],
     "translation": "Template"
@@ -11508,7 +11600,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        247
+        250
       ]
     ],
     "translation": "Impossibile aggiungere l'etichetta"
@@ -11556,7 +11648,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        317
+        320
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11901,11 +11993,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        277
+        280
       ],
       [
         "src/views/card/index.tsx",
-        234
+        237
       ]
     ],
     "translation": "Impossibile aggiornare la card"
@@ -11985,7 +12077,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        221
+        224
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -12289,6 +12381,18 @@
       ]
     ],
     "translation": "Posti illimitati e funzionalità avanzate per team in crescita."
+  },
+  "6dvIbw": {
+    "translation": "",
+    "message": "Unlink",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        82
+      ]
+    ]
   },
   "SMaFdc": {
     "message": "Unsubscribe",
@@ -13009,7 +13113,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        604
+        607
       ],
       [
         "src/views/boards/index.tsx",
@@ -13306,7 +13410,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        91
+        101
       ]
     ],
     "translation": "Stai per modificare la tua password."
@@ -13403,11 +13507,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        678
+        681
       ],
       [
         "src/views/board/index.tsx",
-        736
+        739
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -13597,6 +13701,30 @@
       ]
     ],
     "translation": "Le tue board sono state importate."
+  },
+  "m3l0Cn": {
+    "translation": "",
+    "message": "Your Discord account has been linked.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        21
+      ]
+    ]
+  },
+  "JVceYN": {
+    "translation": "",
+    "message": "Your Discord account has been unlinked.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DiscordAccountLink.tsx",
+        45
+      ]
+    ]
   },
   "sG/O6j": {
     "message": "Your Discord server has been disconnected.",
