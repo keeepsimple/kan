@@ -244,6 +244,13 @@ export const getCardsNeedingDueSoonReminder = (db: dbClient) => {
   const cutoff = new Date(now.getTime() + DUE_REMINDER_WINDOW_MS);
   return db.query.cards.findMany({
     columns: { id: true, title: true, dueDate: true, discordThreadId: true },
+    with: {
+      members: {
+        with: {
+          member: { with: { user: { columns: { discordUserId: true } } } },
+        },
+      },
+    },
     where: and(
       isNull(cards.deletedAt),
       isNull(cards.dueReminderSentAt),
@@ -259,6 +266,13 @@ export const getCardsNeedingDueNowReminder = (db: dbClient) => {
   const oldest = new Date(now.getTime() - DUE_ARRIVED_GRACE_MS);
   return db.query.cards.findMany({
     columns: { id: true, title: true, dueDate: true, discordThreadId: true },
+    with: {
+      members: {
+        with: {
+          member: { with: { user: { columns: { discordUserId: true } } } },
+        },
+      },
+    },
     where: and(
       isNull(cards.deletedAt),
       isNull(cards.dueArrivedReminderSentAt),

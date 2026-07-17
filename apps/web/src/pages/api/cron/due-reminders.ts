@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import type { dbClient } from "@kan/db/client";
 import { createDrizzleClient } from "@kan/db/client";
 import * as cardRepo from "@kan/db/repository/card.repo";
-import { postMessage } from "@kan/discord";
+import { buildUserMentions, postMessage } from "@kan/discord";
 
 const db = createDrizzleClient();
 
@@ -31,9 +31,12 @@ export async function sendDueReminders(client: dbClient): Promise<number> {
   for (const card of soon) {
     if (!card.discordThreadId || !card.dueDate) continue;
     const unix = Math.floor(card.dueDate.getTime() / 1000);
+    const mentionUserIds = card.members
+      .map((m) => m.member.user?.discordUserId ?? null)
+      .filter((id): id is string => !!id);
     const result = await postMessage(
       card.discordThreadId,
-      "",
+      buildUserMentions(mentionUserIds),
       [],
       [
         {
@@ -42,6 +45,7 @@ export async function sendDueReminders(client: dbClient): Promise<number> {
           description: `**${card.title}** — <t:${unix}:R> (<t:${unix}:f>)`,
         },
       ],
+      mentionUserIds,
     );
     // Only mark as sent when Discord accepted it, so failures retry next run
     if (result.success) {
@@ -54,9 +58,12 @@ export async function sendDueReminders(client: dbClient): Promise<number> {
   for (const card of arrived) {
     if (!card.discordThreadId || !card.dueDate) continue;
     const unix = Math.floor(card.dueDate.getTime() / 1000);
+    const mentionUserIds = card.members
+      .map((m) => m.member.user?.discordUserId ?? null)
+      .filter((id): id is string => !!id);
     const result = await postMessage(
       card.discordThreadId,
-      "",
+      buildUserMentions(mentionUserIds),
       [],
       [
         {
@@ -65,6 +72,7 @@ export async function sendDueReminders(client: dbClient): Promise<number> {
           description: `**${card.title}** — <t:${unix}:f>`,
         },
       ],
+      mentionUserIds,
     );
     if (result.success) {
       await cardRepo.markDueArrivedReminderSent(client, card.id);

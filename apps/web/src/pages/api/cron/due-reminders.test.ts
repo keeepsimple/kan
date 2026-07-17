@@ -13,7 +13,10 @@ vi.mock("@kan/db/repository/card.repo", () => ({
   markDueReminderSent: vi.fn(),
   markDueArrivedReminderSent: vi.fn(),
 }));
-vi.mock("@kan/discord", () => ({ postMessage: vi.fn() }));
+vi.mock("@kan/discord", () => ({
+  postMessage: vi.fn(),
+  buildUserMentions: (ids: string[]) => ids.map((id) => `<@${id}>`).join(" "),
+}));
 
 const mockGetDueSoon = cardRepo.getCardsNeedingDueSoonReminder as ReturnType<
   typeof vi.fn
@@ -67,7 +70,13 @@ describe("due-reminders cron", () => {
   it("posts a due-soon reminder and marks the card", async () => {
     const due = new Date("2026-07-17T02:00:00Z");
     mockGetDueSoon.mockResolvedValue([
-      { id: 1, title: "Test", dueDate: due, discordThreadId: "t1" },
+      {
+        id: 1,
+        title: "Test",
+        dueDate: due,
+        discordThreadId: "t1",
+        members: [],
+      },
     ]);
     mockPostMessage.mockResolvedValue({ success: true, data: { id: "m1" } });
 
@@ -89,6 +98,7 @@ describe("due-reminders cron", () => {
           description: `**Test** — <t:${unix}:R> (<t:${unix}:f>)`,
         }),
       ],
+      [],
     );
     expect(mockMarkSoon).toHaveBeenCalledWith(expect.anything(), 1);
     expect(res.json).toHaveBeenCalledWith(
@@ -99,7 +109,13 @@ describe("due-reminders cron", () => {
   it("posts a due-now reminder and marks the card", async () => {
     const due = new Date("2026-07-17T02:00:00Z");
     mockGetDueNow.mockResolvedValue([
-      { id: 2, title: "Test", dueDate: due, discordThreadId: "t1" },
+      {
+        id: 2,
+        title: "Test",
+        dueDate: due,
+        discordThreadId: "t1",
+        members: [],
+      },
     ]);
     mockPostMessage.mockResolvedValue({ success: true, data: { id: "m1" } });
 
@@ -121,6 +137,7 @@ describe("due-reminders cron", () => {
           description: `**Test** — <t:${unix}:f>`,
         }),
       ],
+      [],
     );
     expect(mockMarkNow).toHaveBeenCalledWith(expect.anything(), 2);
     expect(res.json).toHaveBeenCalledWith(
@@ -130,7 +147,13 @@ describe("due-reminders cron", () => {
 
   it("does not mark the card when Discord rejects the message", async () => {
     mockGetDueSoon.mockResolvedValue([
-      { id: 1, title: "Test", dueDate: new Date(), discordThreadId: "t1" },
+      {
+        id: 1,
+        title: "Test",
+        dueDate: new Date(),
+        discordThreadId: "t1",
+        members: [],
+      },
     ]);
     mockPostMessage.mockResolvedValue({ success: false, error: "403" });
 
@@ -144,6 +167,34 @@ describe("due-reminders cron", () => {
     expect(mockMarkSoon).not.toHaveBeenCalled();
     expect(res.json).toHaveBeenCalledWith(
       expect.objectContaining({ reminded: 0 }),
+    );
+  });
+
+  it("pings assignees with linked discord ids", async () => {
+    mockGetDueSoon.mockResolvedValue([
+      {
+        id: 1,
+        title: "Ship it",
+        dueDate: new Date(),
+        discordThreadId: "thread1",
+        members: [{ member: { user: { discordUserId: "111" } } }],
+      },
+    ]);
+    mockPostMessage.mockResolvedValue({ success: true, data: { id: "m1" } });
+
+    const req = mockReq({
+      method: "POST",
+      headers: { authorization: "Bearer s3cret" },
+    });
+    const res = mockRes();
+    await handler(req, res as unknown as NextApiResponse);
+
+    expect(mockPostMessage).toHaveBeenCalledWith(
+      "thread1",
+      expect.stringContaining("<@111>"), // content
+      [],
+      expect.any(Array),
+      ["111"], // mentionUserIds
     );
   });
 });
