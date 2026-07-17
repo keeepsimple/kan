@@ -127,6 +127,7 @@ export const getByPublicIdsWithUsers = async (
           id: true,
           name: true,
           email: true,
+          discordUserId: true,
         },
       },
     },

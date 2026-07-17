@@ -22,6 +22,8 @@ export const getById = async (db: dbClient, userId: string) => {
         email: true,
         image: true,
         stripeCustomerId: true,
+        discordUserId: true,
+        discordUsername: true,
       },
       with: {
         apiKeys: {
@@ -125,4 +127,28 @@ export const update = async (
     });
 
   return result;
+};
+
+export const setDiscordMapping = async (
+  db: dbClient,
+  userId: string,
+  mapping: { discordUserId: string; discordUsername: string | null },
+): Promise<void> => {
+  await db
+    .update(users)
+    .set({
+      discordUserId: mapping.discordUserId,
+      discordUsername: mapping.discordUsername,
+    })
+    .where(eq(users.id, userId));
+};
+
+export const clearDiscordMapping = async (
+  db: dbClient,
+  userId: string,
+): Promise<void> => {
+  await db
+    .update(users)
+    .set({ discordUserId: null, discordUsername: null })
+    .where(eq(users.id, userId));
 };
