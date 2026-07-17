@@ -27,6 +27,7 @@ import PatternedBackground from "~/components/PatternedBackground";
 import { StrictModeDroppable as Droppable } from "~/components/StrictModeDroppable";
 import { Tooltip } from "~/components/Tooltip";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
+import { useBoardEvents } from "~/hooks/useBoardEvents";
 import { useDragToScroll } from "~/hooks/useDragToScroll";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useScrollRestore } from "~/hooks/useScrollRestore";
@@ -102,6 +103,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       ? params.boardId[0]
       : params.boardId
     : null;
+
+  useBoardEvents(boardId);
 
   const updateBoard = api.board.update.useMutation();
 
