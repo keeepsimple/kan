@@ -1,5 +1,10 @@
 import { EventEmitter } from "events";
 
+import type { dbClient } from "@kan/db/client";
+import * as cardRepo from "@kan/db/repository/card.repo";
+import * as labelRepo from "@kan/db/repository/label.repo";
+import * as listRepo from "@kan/db/repository/list.repo";
+
 export interface BoardEvent {
   boardPublicId: string;
   cardPublicId?: string;
@@ -32,4 +37,35 @@ export function subscribeToBoard(
   const channel = `board:${boardPublicId}`;
   emitter.on(channel, listener);
   return () => emitter.off(channel, listener);
+}
+
+// Fire-and-forget: realtime is best-effort and must never fail a mutation.
+function emitResolved(
+  resolve: Promise<string | undefined>,
+  cardPublicId?: string,
+): void {
+  resolve
+    .then((boardPublicId) => {
+      if (boardPublicId)
+        emitBoardEvent({
+          boardPublicId,
+          ...(cardPublicId ? { cardPublicId } : {}),
+        });
+    })
+    .catch(() => undefined);
+}
+
+export function emitFromCard(db: dbClient, cardPublicId: string): void {
+  emitResolved(
+    cardRepo.getBoardPublicIdByCardPublicId(db, cardPublicId),
+    cardPublicId,
+  );
+}
+
+export function emitFromList(db: dbClient, listPublicId: string): void {
+  emitResolved(listRepo.getBoardPublicIdByListPublicId(db, listPublicId));
+}
+
+export function emitFromLabel(db: dbClient, labelPublicId: string): void {
+  emitResolved(labelRepo.getBoardPublicIdByLabelPublicId(db, labelPublicId));
 }

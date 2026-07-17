@@ -504,3 +504,15 @@ export const getWorkspaceAndListIdByListPublicId = async (
       }
     : null;
 };
+
+export const getBoardPublicIdByListPublicId = async (
+  db: dbClient,
+  listPublicId: string,
+): Promise<string | undefined> => {
+  const result = await db.query.lists.findFirst({
+    columns: {},
+    where: eq(lists.publicId, listPublicId),
+    with: { board: { columns: { publicId: true } } },
+  });
+  return result?.board.publicId;
+};

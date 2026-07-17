@@ -1209,3 +1209,20 @@ export const getStaleCompletedCards = (db: dbClient) => {
       ),
     );
 };
+
+export const getBoardPublicIdByCardPublicId = async (
+  db: dbClient,
+  cardPublicId: string,
+): Promise<string | undefined> => {
+  const result = await db.query.cards.findFirst({
+    columns: {},
+    where: eq(cards.publicId, cardPublicId),
+    with: {
+      list: {
+        columns: {},
+        with: { board: { columns: { publicId: true } } },
+      },
+    },
+  });
+  return result?.list.board.publicId;
+};

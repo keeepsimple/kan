@@ -156,3 +156,15 @@ export const getWorkspaceAndLabelIdByLabelPublicId = async (
       }
     : null;
 };
+
+export const getBoardPublicIdByLabelPublicId = async (
+  db: dbClient,
+  labelPublicId: string,
+): Promise<string | undefined> => {
+  const result = await db.query.labels.findFirst({
+    columns: {},
+    where: eq(labels.publicId, labelPublicId),
+    with: { board: { columns: { publicId: true } } },
+  });
+  return result?.board.publicId;
+};
