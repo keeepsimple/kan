@@ -43,6 +43,10 @@
     "./utils/crisp": {
       "types": "./src/utils/crisp.ts",
       "default": "./src/utils/crisp.ts"
+    },
+    "./events/boardEvents": {
+      "types": "./src/events/boardEvents.ts",
+      "default": "./src/events/boardEvents.ts"
     }
   },
   "license": "GPL-3.0",
