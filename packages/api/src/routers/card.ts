@@ -27,7 +27,10 @@ import {
   notifyCardMoved,
   notifyCardUpdated,
 } from "../utils/discord";
-import { notifyAssigned } from "../utils/discordMentions";
+import {
+  notifyAssigned,
+  notifyCommentMentions,
+} from "../utils/discordMentions";
 import { sendMentionEmails } from "../utils/notifications";
 import {
   assertCanDelete,
@@ -329,6 +332,15 @@ export const cardRouter = createTRPCRouter({
         console.error("Failed to send mention emails:", error);
       });
 
+      notifyCommentMentions(
+        ctx.db,
+        input.cardPublicId,
+        input.comment,
+        ctx.user?.name ?? ctx.user?.email ?? "Someone",
+      ).catch((error) =>
+        console.error("Discord comment mention ping failed:", error),
+      );
+
       emitFromCard(ctx.db, input.cardPublicId);
 
       return newComment;
@@ -420,6 +432,15 @@ export const cardRouter = createTRPCRouter({
       }).catch((error) => {
         console.error("Failed to send mention emails:", error);
       });
+
+      notifyCommentMentions(
+        ctx.db,
+        input.cardPublicId,
+        input.comment,
+        ctx.user?.name ?? ctx.user?.email ?? "Someone",
+      ).catch((error) =>
+        console.error("Discord comment mention ping failed:", error),
+      );
 
       emitFromCard(ctx.db, input.cardPublicId);
 

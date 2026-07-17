@@ -1,22 +1,30 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("@kan/db/repository/card.repo", () => ({ getDiscordContextByPublicId: vi.fn() }));
-vi.mock("@kan/db/repository/member.repo", () => ({ getByPublicIdsWithUsers: vi.fn() }));
-vi.mock("@kan/discord", () => ({
-  postMessage: vi.fn(() => Promise.resolve({ success: true })),
-  buildUserMentions: (ids: string[]) => ids.map((id) => `<@${id}>`).join(" "),
-}));
-
 import type { dbClient } from "@kan/db/client";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import { postMessage } from "@kan/discord";
 
-import { notifyAssigned } from "./discordMentions";
+import { notifyAssigned, notifyCommentMentions } from "./discordMentions";
+
+vi.mock("@kan/db/repository/card.repo", () => ({
+  getDiscordContextByPublicId: vi.fn(),
+}));
+vi.mock("@kan/db/repository/member.repo", () => ({
+  getByPublicIdsWithUsers: vi.fn(),
+}));
+vi.mock("@kan/discord", () => ({
+  postMessage: vi.fn(() => Promise.resolve({ success: true })),
+  buildUserMentions: (ids: string[]) => ids.map((id) => `<@${id}>`).join(" "),
+}));
 
 const db = {} as dbClient;
-const mockCtx = cardRepo.getDiscordContextByPublicId as ReturnType<typeof vi.fn>;
-const mockMembers = memberRepo.getByPublicIdsWithUsers as ReturnType<typeof vi.fn>;
+const mockCtx = cardRepo.getDiscordContextByPublicId as ReturnType<
+  typeof vi.fn
+>;
+const mockMembers = memberRepo.getByPublicIdsWithUsers as ReturnType<
+  typeof vi.fn
+>;
 const mockPost = postMessage as ReturnType<typeof vi.fn>;
 
 describe("notifyAssigned", () => {
@@ -26,7 +34,13 @@ describe("notifyAssigned", () => {
     mockCtx.mockResolvedValue({ discordThreadId: "thread1" });
     mockMembers.mockResolvedValue([{ user: { discordUserId: "111" } }]);
     await notifyAssigned(db, "card_1", ["mem_1"]);
-    expect(mockPost).toHaveBeenCalledWith("thread1", expect.stringContaining("<@111>"), [], [], ["111"]);
+    expect(mockPost).toHaveBeenCalledWith(
+      "thread1",
+      expect.stringContaining("<@111>"),
+      [],
+      [],
+      ["111"],
+    );
   });
 
   it("does nothing when the card has no thread", async () => {
@@ -44,6 +58,34 @@ describe("notifyAssigned", () => {
 
   it("never throws when a repo call rejects", async () => {
     mockCtx.mockRejectedValue(new Error("db down"));
-    await expect(notifyAssigned(db, "card_1", ["mem_1"])).resolves.toBeUndefined();
+    await expect(
+      notifyAssigned(db, "card_1", ["mem_1"]),
+    ).resolves.toBeUndefined();
+  });
+});
+
+describe("notifyCommentMentions", () => {
+  const html =
+    '<span data-type="mention" data-id="mem_000000001">@Alice</span> hi';
+
+  beforeEach(() => vi.clearAllMocks());
+
+  it("pings mentioned members with the author name", async () => {
+    mockCtx.mockResolvedValue({ discordThreadId: "thread1" });
+    mockMembers.mockResolvedValue([{ user: { discordUserId: "111" } }]);
+    await notifyCommentMentions(db, "card_1", html, "Bob");
+    expect(mockPost).toHaveBeenCalledWith(
+      "thread1",
+      expect.stringMatching(/<@111>.*Bob/),
+      [],
+      [],
+      ["111"],
+    );
+  });
+
+  it("does nothing when the comment has no mentions", async () => {
+    await notifyCommentMentions(db, "card_1", "<p>plain comment</p>", "Bob");
+    expect(mockCtx).not.toHaveBeenCalled();
+    expect(mockPost).not.toHaveBeenCalled();
   });
 });
