@@ -27,6 +27,7 @@ import {
   notifyCardMoved,
   notifyCardUpdated,
 } from "../utils/discord";
+import { notifyAssigned } from "../utils/discordMentions";
 import { sendMentionEmails } from "../utils/notifications";
 import {
   assertCanDelete,
@@ -712,6 +713,12 @@ export const cardRouter = createTRPCRouter({
 
       notifyCardUpdated(ctx.db, input.cardPublicId).catch((error) => {
         console.error("Discord notification failed:", error);
+      });
+
+      notifyAssigned(ctx.db, input.cardPublicId, [
+        input.workspaceMemberPublicId,
+      ]).catch((error) => {
+        console.error("Discord assignment ping failed:", error);
       });
 
       emitFromCard(ctx.db, input.cardPublicId);
