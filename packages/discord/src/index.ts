@@ -138,12 +138,17 @@ export const postMessage = (
   content: string,
   mentionRoleIds: string[] = [],
   embeds: DiscordEmbed[] = [],
+  mentionUserIds: string[] = [],
 ) =>
   discordFetch<DiscordMessage>(`/channels/${channelOrThreadId}/messages`, {
     method: "POST",
     body: JSON.stringify({
       content,
-      allowed_mentions: { parse: [], roles: mentionRoleIds },
+      allowed_mentions: {
+        parse: [],
+        roles: mentionRoleIds,
+        users: mentionUserIds,
+      },
       ...(embeds.length ? { embeds } : {}),
     }),
   });
@@ -164,3 +169,52 @@ export const editMessage = (
 
 export const buildRoleMentions = (roleIds: string[]) =>
   roleIds.map((id) => `<@&${id}>`).join(" ");
+
+export const buildUserMentions = (userIds: string[]) =>
+  userIds.map((id) => `<@${id}>`).join(" ");
+
+interface DiscordGuildMember {
+  user: { id: string; username: string; global_name: string | null };
+  nick: string | null;
+}
+
+export const searchGuildMembers = async (
+  guildId: string,
+  query: string,
+): Promise<
+  DiscordResult<{ id: string; username: string; displayName: string }[]>
+> => {
+  const res = await discordFetch<DiscordGuildMember[]>(
+    `/guilds/${guildId}/members/search?query=${encodeURIComponent(query)}&limit=25`,
+  );
+  if (!res.success || !res.data) return { success: false, error: res.error };
+  return {
+    success: true,
+    data: res.data.map((m) => ({
+      id: m.user.id,
+      username: m.user.username,
+      displayName: m.nick ?? m.user.global_name ?? m.user.username,
+    })),
+  };
+};
+
+export const getUser = async (
+  userId: string,
+): Promise<
+  DiscordResult<{ id: string; username: string; displayName: string }>
+> => {
+  const res = await discordFetch<{
+    id: string;
+    username: string;
+    global_name: string | null;
+  }>(`/users/${userId}`);
+  if (!res.success || !res.data) return { success: false, error: res.error };
+  return {
+    success: true,
+    data: {
+      id: res.data.id,
+      username: res.data.username,
+      displayName: res.data.global_name ?? res.data.username,
+    },
+  };
+};
