@@ -7,6 +7,7 @@ import * as discordClient from "@kan/discord";
 import {
   assertListAllowsCardCreation,
   htmlToDiscordMarkdown,
+  matchForumTags,
   notifyCardCreated,
   notifyCardMoved,
   notifyCardUpdated,
@@ -19,9 +20,13 @@ const { mockLogger } = vi.hoisted(() => ({
 
 vi.mock("@kan/discord", () => ({
   createThread: vi.fn(),
+  createForumPost: vi.fn(),
+  getChannel: vi.fn(() => Promise.resolve({ success: false })),
   postMessage: vi.fn(),
   editMessage: vi.fn(),
   buildRoleMentions: (ids: string[]) => ids.map((id) => `<@&${id}>`).join(" "),
+  CHANNEL_TYPE_FORUM: 15,
+  FORUM_FLAG_REQUIRE_TAG: 16,
 }));
 
 vi.mock("@kan/db/repository/discord.repo", () => ({
@@ -339,5 +344,33 @@ describe("notifyCardMoved", () => {
     await notifyCardMoved(mockDb, { ...args, cardDiscordThreadId: null });
 
     expect(mockPostMessage).not.toHaveBeenCalled();
+  });
+});
+
+describe("matchForumTags", () => {
+  const tags = [
+    { id: "t1", name: "Bug" },
+    { id: "t2", name: "Feature" },
+  ];
+
+  it("matches label names case-insensitively", () => {
+    expect(matchForumTags(["bug"], tags, 0)).toEqual(["t1"]);
+  });
+
+  it("returns [] when no label matches and tags are optional", () => {
+    expect(matchForumTags(["chore"], tags, 0)).toEqual([]);
+  });
+
+  it("falls back to the first tag when the forum requires a tag", () => {
+    expect(matchForumTags(["chore"], tags, 16)).toEqual(["t1"]);
+  });
+
+  it("caps at 5 tags", () => {
+    const many = Array.from({ length: 7 }, (_, i) => ({
+      id: `t${i}`,
+      name: `L${i}`,
+    }));
+    const labels = many.map((t) => t.name);
+    expect(matchForumTags(labels, many, 0)).toHaveLength(5);
   });
 });

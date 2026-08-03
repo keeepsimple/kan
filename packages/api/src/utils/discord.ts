@@ -139,6 +139,28 @@ export const assertListAllowsCardCreation = (list: {
   }
 };
 
+/** Maps card label names to a forum's tag ids (case-insensitive), max 5. */
+export const matchForumTags = (
+  labelNames: string[],
+  availableTags: { id: string; name: string }[],
+  flags: number,
+): string[] => {
+  const wanted = new Set(labelNames.map((n) => n.trim().toLowerCase()));
+  const matched = availableTags
+    .filter((t) => wanted.has(t.name.trim().toLowerCase()))
+    .map((t) => t.id)
+    .slice(0, 5);
+  // Forums with REQUIRE_TAG reject a post with no tag — fall back to the first.
+  if (
+    matched.length === 0 &&
+    (flags & discordClient.FORUM_FLAG_REQUIRE_TAG) !== 0 &&
+    availableTags[0]
+  ) {
+    return [availableTags[0].id];
+  }
+  return matched;
+};
+
 export const notifyCardCreated = async (
   db: dbClient,
   args: {
@@ -167,9 +189,48 @@ export const notifyCardCreated = async (
     const connection = await discordRepo.getByWorkspaceId(db, args.workspaceId);
     if (!connection) return;
 
+    const roleIds = parseRoleIds(args.discordRoleIds);
+    const mentions = discordClient.buildRoleMentions(roleIds);
+    const embed = buildCardEmbed(args);
+    const threadName = `${args.cardTitle} - 📋 ${args.boardName}`;
+
+    const channel = await discordClient.getChannel(args.discordChannelId);
+
+    if (
+      channel.success &&
+      channel.data?.type === discordClient.CHANNEL_TYPE_FORUM
+    ) {
+      const appliedTagIds = matchForumTags(
+        args.labelNames ?? [],
+        channel.data.availableTags,
+        channel.data.flags,
+      );
+      const post = await discordClient.createForumPost(
+        args.discordChannelId,
+        threadName,
+        {
+          content: mentions,
+          embeds: [embed],
+          mentionRoleIds: roleIds,
+          appliedTagIds,
+        },
+      );
+      if (!post.success || !post.data) {
+        log.error(
+          { error: post.error, cardId: args.cardId },
+          "Failed to create Discord forum post",
+        );
+        return;
+      }
+      // A forum post's starter message id equals the thread id.
+      await discordRepo.setCardDiscordThreadId(db, args.cardId, post.data.id);
+      await discordRepo.setCardDiscordMessageId(db, args.cardId, post.data.id);
+      return;
+    }
+
     const thread = await discordClient.createThread(
       args.discordChannelId,
-      `${args.cardTitle} - 📋 ${args.boardName}`,
+      threadName,
     );
     if (!thread.success || !thread.data) {
       log.error(
@@ -180,10 +241,6 @@ export const notifyCardCreated = async (
     }
 
     await discordRepo.setCardDiscordThreadId(db, args.cardId, thread.data.id);
-
-    const roleIds = parseRoleIds(args.discordRoleIds);
-    const mentions = discordClient.buildRoleMentions(roleIds);
-    const embed = buildCardEmbed(args);
 
     const message = await discordClient.postMessage(
       thread.data.id,
@@ -199,7 +256,6 @@ export const notifyCardCreated = async (
       return;
     }
 
-    // Remember the message so later card edits can update the embed in place
     await discordRepo.setCardDiscordMessageId(db, args.cardId, message.data.id);
   } catch (error) {
     log.error(
@@ -273,10 +329,21 @@ export const notifyCardMoved = async (
     let targetId = args.cardDiscordThreadId ?? null;
     if (!targetId) {
       // Card was created in a plain list and has no thread — fall back to the board channel
-      targetId = await discordRepo.getBoardDiscordChannelId(
+      const boardChannelId = await discordRepo.getBoardDiscordChannelId(
         db,
         args.newListBoardId,
       );
+      if (boardChannelId) {
+        const channel = await discordClient.getChannel(boardChannelId);
+        // Forum channels don't accept direct messages (only posts) — skip fallback.
+        if (
+          channel.success &&
+          channel.data?.type === discordClient.CHANNEL_TYPE_FORUM
+        ) {
+          return;
+        }
+        targetId = boardChannelId;
+      }
     }
     if (!targetId) return;
 
