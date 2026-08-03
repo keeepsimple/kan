@@ -256,6 +256,7 @@ export const notifyCardCreated = async (
       return;
     }
 
+    // Remember the message so later card edits can update the embed in place
     await discordRepo.setCardDiscordMessageId(db, args.cardId, message.data.id);
   } catch (error) {
     log.error(

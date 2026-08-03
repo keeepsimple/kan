@@ -4,12 +4,13 @@ import type { dbClient } from "@kan/db/client";
 import * as discordRepo from "@kan/db/repository/discord.repo";
 import * as discordClient from "@kan/discord";
 
-import { notifyCardCreated } from "./discord";
+import { notifyCardCreated, notifyCardMoved } from "./discord";
 
 vi.mock("@kan/db/repository/discord.repo", () => ({
   getByWorkspaceId: vi.fn(() => Promise.resolve({ id: 1 })),
   setCardDiscordThreadId: vi.fn(),
   setCardDiscordMessageId: vi.fn(),
+  getBoardDiscordChannelId: vi.fn(),
 }));
 vi.mock("@kan/db/repository/card.repo", () => ({}));
 vi.mock("@kan/discord", async (importActual) => {
@@ -95,4 +96,26 @@ it("creates a thread + message when the channel is a text channel", async () => 
     10,
     "thread1",
   );
+});
+
+it("skips the fallback post when the card has no thread and the board channel is a forum", async () => {
+  (
+    discordRepo.getBoardDiscordChannelId as ReturnType<typeof vi.fn>
+  ).mockResolvedValue("forumChan");
+  (discordClient.getChannel as ReturnType<typeof vi.fn>).mockResolvedValue({
+    success: true,
+    data: { id: "forumChan", type: 15, flags: 0, availableTags: [] },
+  });
+
+  await notifyCardMoved(db, {
+    cardTitle: "x",
+    newListName: "Done",
+    userName: "u",
+    workspaceId: 1,
+    newListDiscordBehaviour: "notify",
+    cardDiscordThreadId: null,
+    newListBoardId: 5,
+  });
+
+  expect(discordClient.postMessage).not.toHaveBeenCalled();
 });

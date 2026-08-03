@@ -2,6 +2,8 @@ import { t } from "@lingui/core/macro";
 import { useState } from "react";
 import { HiXMark } from "react-icons/hi2";
 
+import { CHANNEL_TYPE_FORUM } from "@kan/discord";
+
 import Button from "~/components/Button";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
 import { useModal } from "~/providers/modal";
@@ -53,7 +55,9 @@ export default function BoardDiscordChannelModal({
     ...(channels ?? []).map((channel) => ({
       key: channel.id,
       value:
-        channel.type === 15 ? `#${channel.name} (forum)` : `#${channel.name}`,
+        channel.type === CHANNEL_TYPE_FORUM
+          ? `#${channel.name} (forum)`
+          : `#${channel.name}`,
       selected: channel.id === channelId,
     })),
   ];
