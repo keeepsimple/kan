@@ -99,15 +99,18 @@ const discordFetch = async <T>(
 export const getGuild = (guildId: string) =>
   discordFetch<DiscordGuild>(`/guilds/${guildId}`);
 
-export const getTextChannels = async (
+export const getPostableChannels = async (
   guildId: string,
 ): Promise<DiscordResult<DiscordChannel[]>> => {
   const result = await discordFetch<DiscordChannel[]>(
     `/guilds/${guildId}/channels`,
   );
   if (!result.success || !result.data) return result;
-  // type 0 = guild text channel
-  return { success: true, data: result.data.filter((c) => c.type === 0) };
+  // type 0 = text channel, type 15 = forum channel (both accept card posts)
+  return {
+    success: true,
+    data: result.data.filter((c) => c.type === 0 || c.type === 15),
+  };
 };
 
 export const getRoles = async (
@@ -130,6 +133,73 @@ export const createThread = (channelId: string, name: string) =>
       name: name.slice(0, 100),
       type: 11, // public thread
       auto_archive_duration: 10080,
+    }),
+  });
+
+export const CHANNEL_TYPE_FORUM = 15;
+export const FORUM_FLAG_REQUIRE_TAG = 1 << 4; // 16
+
+export interface DiscordChannelDetail {
+  id: string;
+  type: number;
+  availableTags: { id: string; name: string }[];
+  flags: number;
+}
+
+export const getChannel = async (
+  channelId: string,
+): Promise<DiscordResult<DiscordChannelDetail>> => {
+  const res = await discordFetch<{
+    id: string;
+    type: number;
+    flags?: number;
+    available_tags?: { id: string; name: string }[];
+  }>(`/channels/${channelId}`);
+  if (!res.success || !res.data) return { success: false, error: res.error };
+  return {
+    success: true,
+    data: {
+      id: res.data.id,
+      type: res.data.type,
+      flags: res.data.flags ?? 0,
+      availableTags: (res.data.available_tags ?? []).map((t) => ({
+        id: t.id,
+        name: t.name,
+      })),
+    },
+  };
+};
+
+export const createForumPost = (
+  forumChannelId: string,
+  name: string,
+  opts: {
+    content?: string;
+    embeds?: DiscordEmbed[];
+    mentionRoleIds?: string[];
+    mentionUserIds?: string[];
+    appliedTagIds?: string[];
+  },
+) =>
+  discordFetch<DiscordThread>(`/channels/${forumChannelId}/threads`, {
+    method: "POST",
+    body: JSON.stringify({
+      // Discord caps thread names at 100 chars
+      name: name.slice(0, 100),
+      auto_archive_duration: 10080,
+      ...(opts.appliedTagIds?.length
+        ? { applied_tags: opts.appliedTagIds.slice(0, 5) }
+        : {}),
+      // Forum posts require a starter message; its id equals the thread id.
+      message: {
+        content: opts.content ?? "",
+        allowed_mentions: {
+          parse: [],
+          roles: opts.mentionRoleIds ?? [],
+          users: opts.mentionUserIds ?? [],
+        },
+        ...(opts.embeds?.length ? { embeds: opts.embeds } : {}),
+      },
     }),
   });
 
