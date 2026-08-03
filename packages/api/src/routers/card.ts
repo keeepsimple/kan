@@ -337,6 +337,7 @@ export const cardRouter = createTRPCRouter({
         input.cardPublicId,
         input.comment,
         ctx.user?.name ?? ctx.user?.email ?? "Someone",
+        { authorUserId: userId },
       ).catch((error) =>
         console.error("Discord comment mention ping failed:", error),
       );
@@ -438,6 +439,7 @@ export const cardRouter = createTRPCRouter({
         input.cardPublicId,
         input.comment,
         ctx.user?.name ?? ctx.user?.email ?? "Someone",
+        { previousHtml: existingComment.comment, authorUserId: userId },
       ).catch((error) =>
         console.error("Discord comment mention ping failed:", error),
       );

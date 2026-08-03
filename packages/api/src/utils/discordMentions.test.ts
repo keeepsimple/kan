@@ -99,4 +99,52 @@ describe("notifyCommentMentions", () => {
     expect(mockCtx).not.toHaveBeenCalled();
     expect(mockPost).not.toHaveBeenCalled();
   });
+
+  it("does not ping when an edit adds no new mention", async () => {
+    await notifyCommentMentions(db, "card_1", html, "Bob", {
+      previousHtml: html,
+    });
+    expect(mockCtx).not.toHaveBeenCalled();
+    expect(mockPost).not.toHaveBeenCalled();
+  });
+
+  it("pings only newly-added mentions on edit", async () => {
+    const prev =
+      '<span data-type="mention" data-id="mem_000000001">@A</span>';
+    const next =
+      prev +
+      '<span data-type="mention" data-id="mem_000000002">@B</span>';
+    mockCtx.mockResolvedValue({
+      discordThreadId: "thread1",
+      list: { board: { workspaceId: 7 } },
+    });
+    mockMembers.mockResolvedValue([
+      { user: { id: "uB", discordUserId: "222" } },
+    ]);
+    await notifyCommentMentions(db, "card_1", next, "Bob", {
+      previousHtml: prev,
+    });
+    expect(mockMembers).toHaveBeenCalledWith(db, ["mem_000000002"], 7);
+    expect(mockPost).toHaveBeenCalledWith(
+      "thread1",
+      expect.stringContaining("<@222>"),
+      [],
+      [],
+      ["222"],
+    );
+  });
+
+  it("excludes the comment author from the ping", async () => {
+    mockCtx.mockResolvedValue({
+      discordThreadId: "thread1",
+      list: { board: { workspaceId: 7 } },
+    });
+    mockMembers.mockResolvedValue([
+      { user: { id: "uAuthor", discordUserId: "111" } },
+    ]);
+    await notifyCommentMentions(db, "card_1", html, "Bob", {
+      authorUserId: "uAuthor",
+    });
+    expect(mockPost).not.toHaveBeenCalled();
+  });
 });

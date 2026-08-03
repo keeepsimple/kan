@@ -51,17 +51,27 @@ export async function notifyCommentMentions(
   cardPublicId: string,
   commentHtml: string,
   authorName: string,
+  opts?: { previousHtml?: string; authorUserId?: string },
 ): Promise<void> {
   try {
-    const memberPublicIds = parseMentionsFromHTML(commentHtml);
+    const previous = new Set(
+      opts?.previousHtml ? parseMentionsFromHTML(opts.previousHtml) : [],
+    );
+    const memberPublicIds = parseMentionsFromHTML(commentHtml).filter(
+      (id) => !previous.has(id),
+    );
     if (!memberPublicIds.length) return;
     const ctx = await cardRepo.getDiscordContextByPublicId(db, cardPublicId);
     if (!ctx?.discordThreadId) return;
-    const ids = await resolveDiscordIds(
+    const members = await memberRepo.getByPublicIdsWithUsers(
       db,
       memberPublicIds,
       ctx.list.board.workspaceId,
     );
+    const ids = members
+      .filter((m) => !opts?.authorUserId || m.user?.id !== opts.authorUserId)
+      .map((m) => m.user?.discordUserId ?? null)
+      .filter((id): id is string => !!id);
     if (!ids.length) return;
     await postMessage(
       ctx.discordThreadId,
