@@ -288,6 +288,13 @@
       "when": 1784259664922,
       "tag": "20260717034104_discord_user_mapping",
       "breakpoints": true
+    },
+    {
+      "idx": 41,
+      "version": "7",
+      "when": 1785729160621,
+      "tag": "20260803035240_AddUniqueIndexToDiscordUserId",
+      "breakpoints": true
     }
   ]
 }

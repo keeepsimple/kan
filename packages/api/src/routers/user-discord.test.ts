@@ -14,6 +14,7 @@ vi.mock("@kan/db/repository/user.repo", () => ({
   setDiscordMapping: vi.fn(),
   clearDiscordMapping: vi.fn(),
   getById: vi.fn(),
+  getByDiscordUserId: vi.fn(),
 }));
 
 vi.mock("@kan/db/repository/discord.repo", () => ({
@@ -40,6 +41,9 @@ vi.mock("../utils/permissions", () => ({
 
 const mockSet = userRepo.setDiscordMapping as ReturnType<typeof vi.fn>;
 const mockClear = userRepo.clearDiscordMapping as ReturnType<typeof vi.fn>;
+const mockGetByDiscordUserId = userRepo.getByDiscordUserId as ReturnType<
+  typeof vi.fn
+>;
 const mockGetUser = getUser as ReturnType<typeof vi.fn>;
 const mockSearchGuildMembers = searchGuildMembers as ReturnType<typeof vi.fn>;
 const mockGetByWorkspaceId = discordRepo.getByWorkspaceId as ReturnType<
@@ -112,6 +116,30 @@ describe("user.linkDiscord", () => {
       caller.linkDiscord({ discordUserId: "123" }),
     ).rejects.toThrow();
     expect(mockSet).not.toHaveBeenCalled();
+  });
+
+  it("rejects linking a discord id already owned by another user", async () => {
+    mockGetByDiscordUserId.mockResolvedValue({ id: "user2" });
+    await expect(
+      caller.linkDiscord({ discordUserId: VALID_DISCORD_ID }),
+    ).rejects.toThrow(/already linked/i);
+    await expect(
+      caller.linkDiscord({ discordUserId: VALID_DISCORD_ID }),
+    ).rejects.toMatchObject({ code: "CONFLICT" });
+    expect(mockSet).not.toHaveBeenCalled();
+  });
+
+  it("allows re-linking the same discord id to the same user (idempotent)", async () => {
+    mockGetByDiscordUserId.mockResolvedValue({ id: "user1" });
+    mockGetUser.mockResolvedValue({
+      success: true,
+      data: { id: VALID_DISCORD_ID, username: "alice", displayName: "Alice" },
+    });
+    const result = await caller.linkDiscord({
+      discordUserId: VALID_DISCORD_ID,
+    });
+    expect(mockSet).toHaveBeenCalled();
+    expect(result.discordUserId).toBe(VALID_DISCORD_ID);
   });
 });
 

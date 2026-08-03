@@ -203,6 +203,16 @@ export const userRouter = createTRPCRouter({
           code: "UNAUTHORIZED",
         });
 
+      const owner = await userRepo.getByDiscordUserId(
+        ctx.db,
+        input.discordUserId,
+      );
+      if (owner && owner.id !== userId)
+        throw new TRPCError({
+          code: "CONFLICT",
+          message: "This Discord account is already linked to another user.",
+        });
+
       const info = await discordClient.getUser(input.discordUserId);
       const discordUsername =
         info.success && info.data ? info.data.username : null;

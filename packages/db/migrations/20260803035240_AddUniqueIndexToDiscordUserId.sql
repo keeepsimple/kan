@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX IF NOT EXISTS "user_discord_user_id_unique" ON "user" USING btree ("discordUserId") WHERE "user"."discordUserId" IS NOT NULL;

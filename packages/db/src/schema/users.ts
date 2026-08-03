@@ -3,6 +3,7 @@ import {
   boolean,
   pgTable,
   timestamp,
+  uniqueIndex,
   uuid,
   varchar,
 } from "drizzle-orm/pg-core";
@@ -15,21 +16,29 @@ import { lists } from "./lists";
 import { workspaceMembers, workspaces } from "./workspaces";
 import { integrations } from "./integrations";
 
-export const users = pgTable("user", {
-  id: uuid("id")
-    .notNull()
-    .primaryKey()
-    .default(sql`uuid_generate_v4()`),
-  name: varchar("name", { length: 255 }),
-  email: varchar("email", { length: 255 }).notNull().unique(),
-  emailVerified: boolean("emailVerified").notNull(),
-  image: varchar("image", { length: 255 }),
-  createdAt: timestamp("createdAt").notNull().defaultNow(),
-  updatedAt: timestamp("updatedAt").notNull().defaultNow(),
-  stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
-  discordUserId: varchar("discordUserId", { length: 32 }),
-  discordUsername: varchar("discordUsername", { length: 64 }),
-}).enableRLS();
+export const users = pgTable(
+  "user",
+  {
+    id: uuid("id")
+      .notNull()
+      .primaryKey()
+      .default(sql`uuid_generate_v4()`),
+    name: varchar("name", { length: 255 }),
+    email: varchar("email", { length: 255 }).notNull().unique(),
+    emailVerified: boolean("emailVerified").notNull(),
+    image: varchar("image", { length: 255 }),
+    createdAt: timestamp("createdAt").notNull().defaultNow(),
+    updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+    stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
+    discordUserId: varchar("discordUserId", { length: 32 }),
+    discordUsername: varchar("discordUsername", { length: 64 }),
+  },
+  (table) => [
+    uniqueIndex("user_discord_user_id_unique")
+      .on(table.discordUserId)
+      .where(sql`${table.discordUserId} IS NOT NULL`),
+  ],
+).enableRLS();
 
 export const usersRelations = relations(users, ({ many }) => ({
   deletedBoards: many(boards, {

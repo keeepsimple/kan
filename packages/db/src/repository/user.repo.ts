@@ -70,6 +70,16 @@ export const getById = async (db: dbClient, userId: string) => {
   };
 };
 
+export const getByDiscordUserId = async (
+  db: dbClient,
+  discordUserId: string,
+) => {
+  return db.query.users.findFirst({
+    columns: { id: true },
+    where: eq(users.discordUserId, discordUserId),
+  });
+};
+
 export const getByStripeCustomerId = async (
   db: dbClient,
   stripeCustomerId: string,
