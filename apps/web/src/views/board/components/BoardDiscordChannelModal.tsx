@@ -52,7 +52,8 @@ export default function BoardDiscordChannelModal({
     { key: "", value: t`No channel`, selected: !channelId },
     ...(channels ?? []).map((channel) => ({
       key: channel.id,
-      value: `#${channel.name}`,
+      value:
+        channel.type === 15 ? `#${channel.name} (forum)` : `#${channel.name}`,
       selected: channel.id === channelId,
     })),
   ];

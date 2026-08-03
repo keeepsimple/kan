@@ -124,7 +124,9 @@ export const discordRouter = createTRPCRouter({
 
   listChannels: protectedProcedure
     .input(workspaceInput)
-    .output(z.array(z.object({ id: z.string(), name: z.string() })))
+    .output(
+      z.array(z.object({ id: z.string(), name: z.string(), type: z.number() })),
+    )
     .query(async ({ ctx, input }) => {
       const { workspace } = await getAuthorizedWorkspace(
         ctx,
@@ -143,7 +145,9 @@ export const discordRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      const channels = await discordClient.getTextChannels(connection.guildId);
+      const channels = await discordClient.getPostableChannels(
+        connection.guildId,
+      );
 
       if (!channels.success || !channels.data)
         throw new TRPCError({
@@ -151,7 +155,7 @@ export const discordRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
-      return channels.data.map(({ id, name }) => ({ id, name }));
+      return channels.data.map(({ id, name, type }) => ({ id, name, type }));
     }),
 
   listRoles: protectedProcedure

@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import * as discordRepo from "@kan/db/repository/discord.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import { getUser, searchGuildMembers } from "@kan/discord";
+import { getPostableChannels, getUser, searchGuildMembers } from "@kan/discord";
 
 import { assertPermission } from "../utils/permissions";
 import { discordRouter } from "./discord";
@@ -31,7 +31,7 @@ vi.mock("@kan/discord", () => ({
   isDiscordConfigured: vi.fn(),
   getBotInviteUrl: vi.fn(),
   getGuild: vi.fn(),
-  getTextChannels: vi.fn(),
+  getPostableChannels: vi.fn(),
   getRoles: vi.fn(),
 }));
 
@@ -46,6 +46,7 @@ const mockGetByDiscordUserId = userRepo.getByDiscordUserId as ReturnType<
 >;
 const mockGetUser = getUser as ReturnType<typeof vi.fn>;
 const mockSearchGuildMembers = searchGuildMembers as ReturnType<typeof vi.fn>;
+const mockGetPostableChannels = getPostableChannels as ReturnType<typeof vi.fn>;
 const mockGetByWorkspaceId = discordRepo.getByWorkspaceId as ReturnType<
   typeof vi.fn
 >;
@@ -225,5 +226,38 @@ describe("discord.searchWorkspaceDiscordMembers", () => {
       }),
     ).rejects.toThrow();
     expect(mockSearchGuildMembers).not.toHaveBeenCalled();
+  });
+});
+
+describe("discord.listChannels", () => {
+  const ctx = { user: { id: "user1" }, db: mockDb } as never;
+  const caller = discordRouter.createCaller(ctx);
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockGetWorkspaceByPublicId.mockResolvedValue({
+      id: 1,
+      publicId: "ws1234567890",
+    });
+    mockAssertPermission.mockResolvedValue(undefined);
+    mockGetByWorkspaceId.mockResolvedValue({ id: 1, guildId: "guild1" });
+  });
+
+  it("returns id, name and type (text + forum) for the workspace guild", async () => {
+    mockGetPostableChannels.mockResolvedValue({
+      success: true,
+      data: [
+        { id: "1", name: "general", type: 0 },
+        { id: "3", name: "ideas", type: 15 },
+      ],
+    });
+    const result = await caller.listChannels({
+      workspacePublicId: "ws1234567890",
+    });
+    expect(mockGetPostableChannels).toHaveBeenCalledWith("guild1");
+    expect(result).toEqual([
+      { id: "1", name: "general", type: 0 },
+      { id: "3", name: "ideas", type: 15 },
+    ]);
   });
 });
