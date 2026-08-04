@@ -132,7 +132,10 @@ services:
     restart: unless-stopped
 
   postgres:
-    image: postgres:15
+    # Major version bumps are NOT in-place upgrades: a data directory created
+    # by an older major will refuse to start under a newer one. Upgrading an
+    # existing kan_postgres_data volume requires a dump/restore or pg_upgrade.
+    image: postgres:18
     container_name: kan-db
     environment:
       - POSTGRES_DB=kan_db
