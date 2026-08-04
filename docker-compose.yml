@@ -34,8 +34,10 @@ services:
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - POSTGRES_URL=${POSTGRES_URL}
 
-      # Redis (optional - for rate limiting)
-      - REDIS_URL=${REDIS_URL}
+      # Redis (rate limiting). Defaults to the bundled service below; set
+      # REDIS_URL in .env to point at your own instance, or to "" to opt out
+      # and fall back to per-process in-memory rate limiting.
+      - REDIS_URL=${REDIS_URL:-redis://redis:6379}
 
       # Logging (optional - debug, info, warn, error; defaults to debug in dev, info in prod)
       - LOG_LEVEL=${LOG_LEVEL}
@@ -129,6 +131,40 @@ services:
     depends_on:
       migrate:
         condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  redis:
+    image: redis:8-alpine
+    container_name: kan-redis
+    # No volume, and persistence switched off: everything Kan keeps in Redis
+    # (rate-limit counters) is ephemeral and rebuilt on demand, so paying for
+    # RDB snapshots or an AOF would buy nothing.
+    #
+    # maxmemory + allkeys-lru is a backstop, not a tuning knob: rate-limit keys
+    # already expire on their own, so this only matters if Redis is ever put to
+    # another use and someone forgets to set a TTL.
+    command:
+      - redis-server
+      - --save
+      - ""
+      - --appendonly
+      - "no"
+      - --maxmemory
+      - 256mb
+      - --maxmemory-policy
+      - allkeys-lru
+    # Deliberately NOT published to the host. Only the web container talks to
+    # it, and an unauthenticated Redis reachable from outside the compose
+    # network is a well-known way to get a machine owned.
+    networks:
+      - kan-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
     restart: unless-stopped
 
   postgres:
