@@ -52,6 +52,25 @@ describe("createBoardNotifier", () => {
     expect(deps.onUnreadChange).not.toHaveBeenCalled();
   });
 
+  it("disabled calls do not consume the throttle window", () => {
+    const { state, deps, notifier } = setup();
+
+    // Call while disabled at time 0
+    state.enabled = false;
+    notifier.notify(EVENT);
+
+    // Re-enable and call at same time; if throttle was consumed, this would be blocked
+    state.enabled = true;
+    notifier.notify(EVENT);
+
+    // Call again at same time; now it should be throttled since we advanced the clock
+    notifier.notify(EVENT);
+
+    // Sound should fire exactly once (on the re-enabled call), proving the disabled call
+    // did not advance the throttle clock. The third call is throttled by the second.
+    expect(deps.playSound).toHaveBeenCalledTimes(1);
+  });
+
   it("throttles a second notification inside the window", () => {
     const { state, deps, notifier } = setup();
 
