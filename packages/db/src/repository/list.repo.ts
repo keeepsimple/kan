@@ -1,7 +1,7 @@
-import { and, count, desc, eq, gt, isNull, sql } from "drizzle-orm";
+import { and, asc, count, desc, eq, gt, isNull, sql } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
-import { lists } from "@kan/db/schema";
+import { boards, lists } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
 export const getCount = async (db: dbClient) => {
@@ -503,6 +503,45 @@ export const getWorkspaceAndListIdByListPublicId = async (
         boardDiscordChannelId: result.board.discordChannelId,
       }
     : null;
+};
+
+/**
+ * The first (lowest-index) live list of a live board identified by its slug,
+ * scoped to one workspace. Returns the same shape as
+ * getWorkspaceAndListIdByListPublicId so callers can use either
+ * interchangeably. Used by the Crisp `!create-sp #slug` command.
+ */
+export const getFirstListByBoardSlug = async (
+  db: dbClient,
+  args: { boardSlug: string; workspaceId: number },
+) => {
+  const [result] = await db
+    .select({
+      id: lists.id,
+      publicId: lists.publicId,
+      name: lists.name,
+      createdBy: lists.createdBy,
+      workspaceId: boards.workspaceId,
+      boardPublicId: boards.publicId,
+      boardName: boards.name,
+      discordBehaviour: lists.discordBehaviour,
+      discordRoleIds: lists.discordRoleIds,
+      boardDiscordChannelId: boards.discordChannelId,
+    })
+    .from(lists)
+    .innerJoin(boards, eq(boards.id, lists.boardId))
+    .where(
+      and(
+        eq(boards.slug, args.boardSlug),
+        eq(boards.workspaceId, args.workspaceId),
+        isNull(boards.deletedAt),
+        isNull(lists.deletedAt),
+      ),
+    )
+    .orderBy(asc(lists.index))
+    .limit(1);
+
+  return result ?? null;
 };
 
 export const getBoardPublicIdByListPublicId = async (
