@@ -66,8 +66,19 @@ export default async function handler(
   // re-authorize mid-stream: signals carry no entity data, and the client's
   // follow-up board.byId/card.byId refetch re-enforces permissions (a revoked
   // viewer's refetch 403s). Worst case is a stale open socket, not a data leak.
+  // The payload still carries no entity data — only a boolean saying whether
+  // this connection caused the change — so notification text is built
+  // client-side from data the client already holds.
   const unsubscribe = subscribeToBoard(boardPublicId, (event) => {
-    res.write(`data: ${JSON.stringify(event)}\n\n`);
+    // actorUserId identifies who made the change; it must not reach the
+    // browser. Each connection only learns whether the change was its own.
+    const { actorUserId, ...signal } = event;
+    res.write(
+      `data: ${JSON.stringify({
+        ...signal,
+        notify: actorUserId !== session.user.id,
+      })}\n\n`,
+    );
   });
   const heartbeat = setInterval(() => {
     res.write(": ping\n\n");

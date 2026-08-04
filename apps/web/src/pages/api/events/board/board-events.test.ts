@@ -140,9 +140,13 @@ describe("board events SSE endpoint", () => {
       string,
       (e: unknown) => void,
     ];
-    listener({ boardPublicId: "board_aaaaaaaa", cardPublicId: "card_1" });
+    listener({
+      boardPublicId: "board_aaaaaaaa",
+      cardPublicId: "card_1",
+      actorUserId: null,
+    });
     expect(res.write).toHaveBeenCalledWith(
-      `data: ${JSON.stringify({ boardPublicId: "board_aaaaaaaa", cardPublicId: "card_1" })}\n\n`,
+      `data: ${JSON.stringify({ boardPublicId: "board_aaaaaaaa", cardPublicId: "card_1", notify: true })}\n\n`,
     );
 
     // heartbeat fires
@@ -156,5 +160,70 @@ describe("board events SSE endpoint", () => {
     const writesAfterClose = res.write.mock.calls.length;
     vi.advanceTimersByTime(60_000);
     expect(res.write.mock.calls.length).toBe(writesAfterClose);
+  });
+});
+
+describe("notify flag", () => {
+  async function connectAndEmit(
+    sessionUserId: string,
+    event: { boardPublicId: string; actorUserId: string | null },
+  ) {
+    mockGetSession.mockResolvedValue({ user: { id: sessionUserId } });
+    mockGetBoard.mockResolvedValue({ workspaceId: 1, id: 5 });
+    mockHasPermission.mockResolvedValue(true);
+
+    let listener: ((e: unknown) => void) | undefined;
+    mockSubscribe.mockImplementation(
+      (_board: string, cb: (e: unknown) => void) => {
+        listener = cb;
+        return vi.fn();
+      },
+    );
+
+    const { req } = mockReq({});
+    const res = mockRes();
+    await handler(req, res as unknown as NextApiResponse);
+    listener?.({ ...event, cardPublicId: "card_1" });
+
+    const dataWrite = res.write.mock.calls
+      .map((call) => String(call[0]))
+      .find((chunk) => chunk.startsWith("data: "));
+    return JSON.parse(dataWrite!.replace("data: ", "").trim()) as Record<
+      string,
+      unknown
+    >;
+  }
+
+  it("sets notify false for the connection that caused the change", async () => {
+    const payload = await connectAndEmit("user-1", {
+      boardPublicId: "board_aaaaaaaa",
+      actorUserId: "user-1",
+    });
+    expect(payload.notify).toBe(false);
+  });
+
+  it("sets notify true for a change made by someone else", async () => {
+    const payload = await connectAndEmit("user-1", {
+      boardPublicId: "board_aaaaaaaa",
+      actorUserId: "user-2",
+    });
+    expect(payload.notify).toBe(true);
+  });
+
+  it("sets notify true for integration changes with no actor", async () => {
+    const payload = await connectAndEmit("user-1", {
+      boardPublicId: "board_aaaaaaaa",
+      actorUserId: null,
+    });
+    expect(payload.notify).toBe(true);
+  });
+
+  it("never leaks actorUserId to the client", async () => {
+    const payload = await connectAndEmit("user-1", {
+      boardPublicId: "board_aaaaaaaa",
+      actorUserId: "user-2",
+    });
+    expect(payload).not.toHaveProperty("actorUserId");
+    expect(payload.cardPublicId).toBe("card_1");
   });
 });
