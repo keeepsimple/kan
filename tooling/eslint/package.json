@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@eslint/compat": "^1.2.3",
+    "@eslint/js": "^9.12.0",
     "@next/eslint-plugin-next": "^14.2.15",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -27,6 +28,7 @@
     "@kan/prettier-config": "workspace:*",
     "@kan/tsconfig": "workspace:*",
     "@types/eslint__js": "8.42.3",
+    "@types/node": "^20.17.7",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"

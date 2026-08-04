@@ -62,7 +62,9 @@
     "drizzle-kit": "^0.28.1",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "typescript-eslint": "^8.15.0",
+    "vitest": "^3.0.0"
   },
   "prettier": "@kan/prettier-config"
 }

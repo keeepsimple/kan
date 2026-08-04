@@ -34,12 +34,18 @@
     "@kan/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "typescript-eslint": "^8.15.0",
+    "vitest": "^3.0.0"
   },
   "prettier": "@kan/prettier-config",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.802.0",
     "@better-auth/stripe": "^1.4.6",
     "@kan/logger": "workspace:^",
-    "better-auth": "^1.4.6"
+    "@novu/api": "^3.11.0",
+    "better-auth": "^1.4.6",
+    "next-runtime-env": "^1.7.2",
+    "stripe": "^18.2.0"
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "@kan/mcp",
   "version": "0.1.0",
-  "description": "MCP server for Kan — control workspaces, boards, lists, and cards via AI",
+  "description": "MCP server for Kan \u2014 control workspaces, boards, lists, and cards via AI",
   "type": "module",
   "bin": {
     "kan-mcp": "./dist/index.js"
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@kan/tsconfig": "workspace:*",
+    "@types/node": "^20.17.7",
     "typescript": "catalog:"
   }
 }

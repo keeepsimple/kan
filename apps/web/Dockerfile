@@ -11,7 +11,7 @@ RUN apk update && \
     apk add --no-cache libc6-compat && \
     rm -rf /var/cache/apk/* /tmp/* || true && \
     corepack enable && \
-    corepack prepare pnpm@9.14.2 --activate && \
+    corepack prepare pnpm@11.20.0 --activate && \
     npm install turbo@2.3.1 --global && \
     pnpm config set store-dir ~/.pnpm-store
 

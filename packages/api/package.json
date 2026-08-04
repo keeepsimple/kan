@@ -61,6 +61,7 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.802.0",
     "@kan/auth": "workspace:*",
     "@kan/db": "workspace:*",
     "@kan/discord": "workspace:*",
@@ -69,18 +70,24 @@
     "@kan/shared": "workspace:^",
     "@kan/stripe": "workspace:^",
     "@trpc/server": "catalog:",
+    "drizzle-orm": "^0.42.0",
+    "next": "15.5.9",
+    "next-runtime-env": "^1.7.2",
     "rate-limiter-flexible": "^9.0.1",
     "superjson": "2.2.1",
     "trpc-to-openapi": "^2.3.2",
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.3.7",
     "@kan/eslint-config": "workspace:*",
     "@kan/prettier-config": "workspace:*",
     "@kan/tsconfig": "workspace:*",
     "eslint": "catalog:",
+    "pg": "^8.11.3",
     "prettier": "catalog:",
     "typescript": "catalog:",
+    "typescript-eslint": "^8.15.0",
     "vitest": "^3.0.0"
   },
   "prettier": "@kan/prettier-config"

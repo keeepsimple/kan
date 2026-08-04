@@ -3,6 +3,12 @@ packages:
   - packages/*
   - tooling/*
 
+# pnpm 10+ no longer reads the "pnpm" field in package.json; these overrides
+# lived there and were silently ignored after the upgrade until moved here.
+overrides:
+  "@types/minimatch": "npm:minimatch@*"
+  "@types/glob": "npm:@types/glob@^8.1.0"
+
 catalog:
   "@tanstack/react-query": ^5.59.15
   "@trpc/client": ^11.4.3
@@ -20,3 +26,13 @@ catalogs:
     react-dom: 18.3.1
     "@types/react": ^18.3.11
     "@types/react-dom": ^18.3.1
+
+# pnpm 10+ blocks dependency build scripts unless listed here. esbuild and
+# sharp ship native binaries their postinstall must fetch or link — without
+# them, bundling and Next.js image optimisation break. core-js' postinstall
+# only prints a funding notice, so it stays off.
+allowBuilds:
+  core-js: false
+  core-js-pure: false
+  esbuild: true
+  sharp: true
