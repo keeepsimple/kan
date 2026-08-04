@@ -114,49 +114,55 @@ export async function handleCrispWebhook(
   const command = parseCardCommand(data.content);
   if (!command) return { status: 200, message: "Ignored" };
 
-  let resolvedBySlug = false;
-  let target = null as Awaited<
-    ReturnType<typeof listRepo.getWorkspaceAndListIdByListPublicId>
-  >;
-
-  if (command.boardSlug) {
-    target = await listRepo.getFirstListByBoardSlug(db, {
-      boardSlug: command.boardSlug,
-      workspaceId: integration.workspaceId,
-    });
-    resolvedBySlug = target !== null;
-  }
-
-  // Also covers a soft-deleted default list: the repo filters deletedAt.
-  target ??= await listRepo.getWorkspaceAndListIdByListPublicId(
-    db,
-    integration.list.publicId,
-  );
-
-  if (!target) return { status: 200, message: "Ignored" };
-
-  // Mirrors assertListAllowsCardCreation, which the card router enforces for
-  // every other creation path. A webhook must not throw, so log and 200.
-  if (target.discordBehaviour === "notify") {
-    log.warn(
-      { listPublicId: target.publicId },
-      "Crisp note targeted a Discord notify list — skipped",
-    );
-    return { status: 200, message: "Ignored" };
-  }
-
-  // Slug did not resolve: keep the #slug token in the title so no typed
-  // words are silently dropped.
-  const title = resolvedBySlug ? command.title : command.rawTitle;
-
-  const description = buildCardDescription({
-    body: command.body,
-    websiteId: data.website_id,
-    sessionId: data.session_id,
-    operatorNickname: data.user?.nickname,
-  });
-
+  // Everything below hits the DB (list resolution, then card creation) — one
+  // try covers both, so a transient failure in either never throws past this
+  // handler. Expected non-matches (no such board, soft-deleted list) still
+  // return 200 "Ignored" via the null checks below; only an actual thrown
+  // error lands here, so 500 (matching the create-card failure path) is the
+  // right status for it.
   try {
+    let resolvedBySlug = false;
+    let target = null as Awaited<
+      ReturnType<typeof listRepo.getWorkspaceAndListIdByListPublicId>
+    >;
+
+    if (command.boardSlug) {
+      target = await listRepo.getFirstListByBoardSlug(db, {
+        boardSlug: command.boardSlug,
+        workspaceId: integration.workspaceId,
+      });
+      resolvedBySlug = target !== null;
+    }
+
+    // Also covers a soft-deleted default list: the repo filters deletedAt.
+    target ??= await listRepo.getWorkspaceAndListIdByListPublicId(
+      db,
+      integration.list.publicId,
+    );
+
+    if (!target) return { status: 200, message: "Ignored" };
+
+    // Mirrors assertListAllowsCardCreation, which the card router enforces for
+    // every other creation path. A webhook must not throw, so log and 200.
+    if (target.discordBehaviour === "notify") {
+      log.warn(
+        { listPublicId: target.publicId },
+        "Crisp note targeted a Discord notify list — skipped",
+      );
+      return { status: 200, message: "Ignored" };
+    }
+
+    // Slug did not resolve: keep the #slug token in the title so no typed
+    // words are silently dropped.
+    const title = resolvedBySlug ? command.title : command.rawTitle;
+
+    const description = buildCardDescription({
+      body: command.body,
+      websiteId: data.website_id,
+      sessionId: data.session_id,
+      operatorNickname: data.user?.nickname,
+    });
+
     const newCard = await cardRepo.create(db, {
       title,
       description,
@@ -215,7 +221,7 @@ export async function handleCrispWebhook(
 
     return { status: 200, message: "Card created" };
   } catch (error) {
-    log.error({ err: error }, "Failed to create card from Crisp note");
+    log.error({ err: error }, "Failed to handle Crisp note");
     return { status: 500, message: "Internal error" };
   }
 }

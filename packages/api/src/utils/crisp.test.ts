@@ -37,6 +37,7 @@ import {
   handleCrispWebhook,
   parseCardCommand,
 } from "./crisp";
+import * as webhookUtils from "./webhook";
 
 const mockGetActiveBySecret =
   crispIntegrationRepo.getActiveBySecret as ReturnType<typeof vi.fn>;
@@ -47,6 +48,8 @@ const mockGetListByPublicId =
   listRepo.getWorkspaceAndListIdByListPublicId as ReturnType<typeof vi.fn>;
 const mockNotifyCardCreated = notifyCardCreated as ReturnType<typeof vi.fn>;
 const mockEmitFromList = emitFromList as ReturnType<typeof vi.fn>;
+const mockCreateCardWebhookPayload =
+  webhookUtils.createCardWebhookPayload as ReturnType<typeof vi.fn>;
 
 describe("parseCardCommand", () => {
   it("returns null when content does not start with the prefix", () => {
@@ -394,6 +397,18 @@ describe("handleCrispWebhook target resolution", () => {
       {},
       expect.objectContaining({ listId: 20, title: "Payment fails" }),
     );
+    // Sourced from the resolved slug list, not the integration's default
+    // list — DEFAULT_LIST's board/list values differ, so this would fail if
+    // the payload were built from integration.list instead of target.
+    expect(mockCreateCardWebhookPayload).toHaveBeenCalledWith(
+      "card.created",
+      expect.anything(),
+      {
+        boardId: SLUG_LIST.boardPublicId,
+        boardName: SLUG_LIST.boardName,
+        listName: SLUG_LIST.name,
+      },
+    );
   });
 
   it("falls back to the default list and keeps the #slug in the title", async () => {
@@ -486,5 +501,18 @@ describe("handleCrispWebhook target resolution", () => {
     );
 
     expect(mockEmitFromList).toHaveBeenCalledWith({}, "list_support", null);
+  });
+
+  it("returns 500 instead of throwing when list resolution rejects", async () => {
+    mockGetFirstListByBoardSlug.mockRejectedValueOnce(new Error("db down"));
+
+    const result = await handleCrispWebhook(
+      {} as never,
+      "secret",
+      noteBody("!create-sp #support Payment fails"),
+    );
+
+    expect(result).toEqual({ status: 500, message: "Internal error" });
+    expect(mockCardCreate).not.toHaveBeenCalled();
   });
 });
