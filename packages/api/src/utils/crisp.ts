@@ -9,14 +9,24 @@ import { createCardWebhookPayload, sendWebhooksForWorkspace } from "./webhook";
 
 const log = createLogger("crisp");
 
-export const CARD_COMMAND_PREFIX = "#card";
+export const CARD_COMMAND_PREFIX = "!create-sp";
+
+/** A leading `#board-slug` token selects the target board. */
+const BOARD_SLUG_RE = /^#([a-z0-9-]{1,255})$/i;
 
 const MAX_TITLE_LENGTH = 2000;
 const MAX_DESCRIPTION_LENGTH = 10000;
 
-export function parseCardCommand(
-  content: string,
-): { title: string; body: string } | null {
+export interface ParsedCardCommand {
+  boardSlug: string | null;
+  title: string;
+  /** First line verbatim, `#slug` token included — used when the slug
+   *  does not resolve, so no typed words are silently dropped. */
+  rawTitle: string;
+  body: string;
+}
+
+export function parseCardCommand(content: string): ParsedCardCommand | null {
   const trimmed = content.trim();
 
   if (!trimmed.startsWith(`${CARD_COMMAND_PREFIX} `)) return null;
@@ -24,11 +34,24 @@ export function parseCardCommand(
   const rest = trimmed.slice(CARD_COMMAND_PREFIX.length + 1).trim();
   if (!rest) return null;
 
-  const [firstLine = "", ...bodyLines] = rest.split("\n");
-  const title = firstLine.trim().slice(0, MAX_TITLE_LENGTH);
-  if (!title) return null;
+  const [firstLineRaw = "", ...bodyLines] = rest.split("\n");
+  const firstLine = firstLineRaw.trim();
+  const body = bodyLines.join("\n").trim();
 
-  return { title, body: bodyLines.join("\n").trim() };
+  const rawTitle = firstLine.slice(0, MAX_TITLE_LENGTH);
+  if (!rawTitle) return null;
+
+  const [firstToken = ""] = firstLine.split(/\s+/);
+  const slug = BOARD_SLUG_RE.exec(firstToken)?.[1];
+
+  if (slug) {
+    // slice, not split/join — keeps the title's internal spacing intact
+    const title = firstLine.slice(firstToken.length).trim().slice(0, MAX_TITLE_LENGTH);
+    if (!title) return null;
+    return { boardSlug: slug.toLowerCase(), title, rawTitle, body };
+  }
+
+  return { boardSlug: null, title: rawTitle, rawTitle, body };
 }
 
 export function buildCardDescription(input: {

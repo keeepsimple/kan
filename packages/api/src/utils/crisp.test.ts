@@ -27,42 +27,97 @@ const mockGetActiveBySecret =
 const mockCardCreate = cardRepo.create as ReturnType<typeof vi.fn>;
 
 describe("parseCardCommand", () => {
-  it("returns null when content does not start with #card", () => {
+  it("returns null when content does not start with the prefix", () => {
     expect(parseCardCommand("hello world")).toBeNull();
-    expect(parseCardCommand("please #card do thing")).toBeNull();
+    expect(parseCardCommand("please !create-sp do thing")).toBeNull();
   });
 
-  it("returns null for a bare #card with no title", () => {
-    expect(parseCardCommand("#card")).toBeNull();
-    expect(parseCardCommand("#card    ")).toBeNull();
+  it("no longer accepts the old #card prefix", () => {
+    expect(parseCardCommand("#card Fix login bug")).toBeNull();
   });
 
-  it("extracts a single-line title with empty body", () => {
-    expect(parseCardCommand("#card Fix login bug")).toEqual({
+  it("returns null for a bare prefix with no title", () => {
+    expect(parseCardCommand("!create-sp")).toBeNull();
+    expect(parseCardCommand("!create-sp    ")).toBeNull();
+  });
+
+  it("extracts a single-line title with empty body and no slug", () => {
+    expect(parseCardCommand("!create-sp Fix login bug")).toEqual({
+      boardSlug: null,
       title: "Fix login bug",
+      rawTitle: "Fix login bug",
       body: "",
     });
   });
 
   it("trims surrounding whitespace before matching the prefix", () => {
-    expect(parseCardCommand("  #card Fix login bug  ")).toEqual({
+    expect(parseCardCommand("  !create-sp Fix login bug  ")).toEqual({
+      boardSlug: null,
       title: "Fix login bug",
+      rawTitle: "Fix login bug",
       body: "",
     });
   });
 
   it("uses the first line as title and the rest as body", () => {
     expect(
-      parseCardCommand("#card Fix login bug\nUser cannot sign in\nwith SSO"),
+      parseCardCommand(
+        "!create-sp Fix login bug\nUser cannot sign in\nwith SSO",
+      ),
     ).toEqual({
+      boardSlug: null,
       title: "Fix login bug",
+      rawTitle: "Fix login bug",
       body: "User cannot sign in\nwith SSO",
     });
   });
 
-  it("truncates the title at 2000 characters", () => {
-    const result = parseCardCommand(`#card ${"a".repeat(3000)}`);
-    expect(result?.title).toHaveLength(2000);
+  it("extracts a board slug from the first token", () => {
+    expect(parseCardCommand("!create-sp #support Fix login bug\nbody")).toEqual({
+      boardSlug: "support",
+      title: "Fix login bug",
+      rawTitle: "#support Fix login bug",
+      body: "body",
+    });
+  });
+
+  it("lowercases the slug and accepts hyphens and digits", () => {
+    expect(parseCardCommand("!create-sp #Bug-Tracker-2 Crash")).toEqual({
+      boardSlug: "bug-tracker-2",
+      title: "Crash",
+      rawTitle: "#Bug-Tracker-2 Crash",
+      body: "",
+    });
+  });
+
+  it("preserves internal spacing of the title after a slug", () => {
+    expect(parseCardCommand("!create-sp #support Fix   login  bug")).toEqual({
+      boardSlug: "support",
+      title: "Fix   login  bug",
+      rawTitle: "#support Fix   login  bug",
+      body: "",
+    });
+  });
+
+  it("returns null for a slug with no title after it", () => {
+    expect(parseCardCommand("!create-sp #support")).toBeNull();
+    expect(parseCardCommand("!create-sp #support   ")).toBeNull();
+  });
+
+  it("keeps a non-slug-shaped # token as part of the title", () => {
+    expect(parseCardCommand("!create-sp #lỗi nặng ở checkout")).toEqual({
+      boardSlug: null,
+      title: "#lỗi nặng ở checkout",
+      rawTitle: "#lỗi nặng ở checkout",
+      body: "",
+    });
+  });
+
+  it("caps the title at 2000 characters", () => {
+    const long = "a".repeat(2500);
+    const parsed = parseCardCommand(`!create-sp ${long}`);
+    expect(parsed?.title).toHaveLength(2000);
+    expect(parsed?.rawTitle).toHaveLength(2000);
   });
 });
 
