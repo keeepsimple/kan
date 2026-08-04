@@ -120,7 +120,7 @@ export function CrispIntegrationSection({
       {integration ? (
         <>
           <p className="mb-4 text-sm text-neutral-500 dark:text-dark-900">
-            {t`Crisp is connected. Operator notes starting with #card create cards in`}{" "}
+            {t`Crisp is connected. Operator notes starting with !create-sp create cards in`}{" "}
             <span className="font-medium">
               {integration.board.name} / {integration.list.name}
             </span>
@@ -135,8 +135,8 @@ export function CrispIntegrationSection({
           <ol className="mb-8 list-decimal pl-5 text-sm text-neutral-500 dark:text-dark-900">
             <li>{t`In Crisp, go to Settings → Websites → your website → Web Hooks and paste this URL.`}</li>
             <li>{t`Subscribe the hook to message events.`}</li>
-            <li>{t`In a conversation, write a private note starting with #card followed by the card title.`}</li>
-            <li>{t`Optional: create a Crisp shortcut !card that expands to #card for faster typing.`}</li>
+            <li>{t`In a conversation, write a private note starting with !create-sp followed by the card title.`}</li>
+            <li>{t`Add #board-slug before the title to send the card to that board's first list, for example: !create-sp #support Payment failed.`}</li>
           </ol>
           <Button
             variant="secondary"
@@ -148,7 +148,7 @@ export function CrispIntegrationSection({
       ) : (
         <>
           <p className="mb-4 text-sm text-neutral-500 dark:text-dark-900">
-            {t`Create cards from Crisp conversations: choose a target board and list, then paste the generated webhook URL into your Crisp dashboard.`}
+            {t`Create cards from Crisp conversations: choose the default board and list used when no #board-slug is given, then paste the generated webhook URL into your Crisp dashboard.`}
           </p>
           <form
             onSubmit={handleSubmit(onSubmit)}

@@ -483,6 +483,18 @@
     ],
     "translation": "Add / edit label"
   },
+  "uIFtq7": {
+    "translation": "Add #board-slug before the title to send the card to that board's first list, for example: !create-sp #support Payment failed.",
+    "message": "Add #board-slug before the title to send the card to that board's first list, for example: !create-sp #support Payment failed.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        139
+      ]
+    ]
+  },
   "B3xxao": {
     "message": "Add a card",
     "placeholders": {},
@@ -1760,7 +1772,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDiscordChannelModal.tsx",
-        36
+        38
       ]
     ],
     "translation": "Board updated"
@@ -2492,7 +2504,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDiscordChannelModal.tsx",
-        75
+        80
       ]
     ],
     "translation": "Card threads for this board are created in the selected channel."
@@ -3102,16 +3114,16 @@
     "translation": "Connect Trello"
   },
   "7QrUfn": {
-    "translation": "Connect with Discord",
     "message": "Connect with Discord",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        136
+        152
       ]
-    ]
+    ],
+    "translation": "Connect with Discord"
   },
   "sDLCvT": {
     "message": "Connect your favorite tools to streamline your workflow.",
@@ -3507,7 +3519,20 @@
         151
       ]
     ],
-    "translation": "Create cards from Crisp conversations: choose a target board and list, then paste the generated webhook URL into your Crisp dashboard."
+    "translation": "Create cards from Crisp conversations: choose a target board and list, then paste the generated webhook URL into your Crisp dashboard.",
+    "obsolete": true
+  },
+  "sW14sW": {
+    "translation": "Create cards from Crisp conversations: choose the default board and list used when no #board-slug is given, then paste the generated webhook URL into your Crisp dashboard.",
+    "message": "Create cards from Crisp conversations: choose the default board and list used when no #board-slug is given, then paste the generated webhook URL into your Crisp dashboard.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        151
+      ]
+    ]
   },
   "d33Usy": {
     "message": "Create checklist",
@@ -3745,6 +3770,18 @@
     ],
     "translation": "Crisp disconnected"
   },
+  "rrhgTx": {
+    "translation": "Crisp is connected. Operator notes starting with !create-sp create cards in",
+    "message": "Crisp is connected. Operator notes starting with !create-sp create cards in",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        123
+      ]
+    ]
+  },
   "j7J5wV": {
     "message": "Crisp is connected. Operator notes starting with #card create cards in",
     "placeholders": {},
@@ -3755,7 +3792,8 @@
         123
       ]
     ],
-    "translation": "Crisp is connected. Operator notes starting with #card create cards in"
+    "translation": "Crisp is connected. Operator notes starting with #card create cards in",
+    "obsolete": true
   },
   "0a1IGT": {
     "message": "Crisp Website ID",
@@ -4329,7 +4367,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDiscordChannelModal.tsx",
-        64
+        69
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
@@ -4357,7 +4395,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDiscordChannelModal.tsx",
-        37
+        39
       ]
     ],
     "translation": "Discord channel updated."
@@ -4393,7 +4431,7 @@
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        24
+        33
       ]
     ],
     "translation": "Discord linked"
@@ -4445,7 +4483,7 @@
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        48
+        57
       ]
     ],
     "translation": "Discord unlinked"
@@ -5165,16 +5203,16 @@
     "translation": "Error connecting Crisp"
   },
   "X8BOdd": {
-    "translation": "Error connecting Discord",
     "message": "Error connecting Discord",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        81
+        84
       ]
-    ]
+    ],
+    "translation": "Error connecting Discord"
   },
   "yhLUU8": {
     "message": "Error connecting GitHub",
@@ -5307,7 +5345,7 @@
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        38
+        47
       ]
     ],
     "translation": "Error linking Discord"
@@ -5331,7 +5369,7 @@
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        61
+        70
       ]
     ],
     "translation": "Error unlinking Discord"
@@ -6568,6 +6606,18 @@
     ],
     "translation": "in"
   },
+  "JAtoYG": {
+    "translation": "In a conversation, write a private note starting with !create-sp followed by the card title.",
+    "message": "In a conversation, write a private note starting with !create-sp followed by the card title.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CrispIntegrationSection.tsx",
+        138
+      ]
+    ]
+  },
   "OTnexY": {
     "message": "In a conversation, write a private note starting with #card followed by the card title.",
     "placeholders": {},
@@ -6578,7 +6628,8 @@
         138
       ]
     ],
-    "translation": "In a conversation, write a private note starting with #card followed by the card title."
+    "translation": "In a conversation, write a private note starting with #card followed by the card title.",
+    "obsolete": true
   },
   "u13RJt": {
     "message": "In Crisp, go to Settings → Websites → your website → Web Hooks and paste this URL.",
@@ -7194,7 +7245,7 @@
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        154
+        171
       ]
     ],
     "translation": "Link"
@@ -8103,7 +8154,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDiscordChannelModal.tsx",
-        52
+        54
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
@@ -8442,7 +8493,8 @@
         139
       ]
     ],
-    "translation": "Optional: create a Crisp shortcut !card that expands to #card for faster typing."
+    "translation": "Optional: create a Crisp shortcut !card that expands to #card for faster typing.",
+    "obsolete": true
   },
   "BzEFor": {
     "message": "or",
@@ -8457,16 +8509,16 @@
     "translation": "or"
   },
   "gxxSno": {
-    "translation": "Or paste your Discord user ID",
     "message": "Or paste your Discord user ID",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        144
+        161
       ]
-    ]
+    ],
+    "translation": "Or paste your Discord user ID"
   },
   "ZqDqbi": {
     "message": "Organize and find cards quickly with powerful filtering tools.",
@@ -8867,7 +8919,7 @@
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        39
+        48
       ]
     ],
     "translation": "Please check the Discord user ID and try again."
@@ -9135,11 +9187,11 @@
       ],
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        62
+        71
       ],
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        82
+        85
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
@@ -9862,7 +9914,7 @@
       ],
       [
         "src/views/board/components/BoardDiscordChannelModal.tsx",
-        92
+        97
       ],
       [
         "src/views/board/components/ListCompletionSettingsModal.tsx",
@@ -11994,7 +12046,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDiscordChannelModal.tsx",
-        44
+        46
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
@@ -12430,7 +12482,7 @@
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        120
+        135
       ]
     ],
     "translation": "Unlink"
@@ -13750,7 +13802,7 @@
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        25
+        34
       ]
     ],
     "translation": "Your Discord account has been linked."
@@ -13762,7 +13814,7 @@
     "origin": [
       [
         "src/views/settings/components/DiscordAccountLink.tsx",
-        49
+        58
       ]
     ],
     "translation": "Your Discord account has been unlinked."
