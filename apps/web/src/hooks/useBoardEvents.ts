@@ -72,6 +72,13 @@ export function useBoardEvents(
       cardChanged = Boolean(openCardRef.current);
       // A reconnect is not a change — never chime for it.
       shouldNotify = false;
+      // A stale debounce timer from just before the reconnect would otherwise
+      // fire refresh() again later with nothing to chime for, silently
+      // dropping the pending notification for a genuine change.
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
       refresh();
     };
 

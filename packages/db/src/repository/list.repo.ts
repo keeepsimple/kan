@@ -506,8 +506,10 @@ export const getWorkspaceAndListIdByListPublicId = async (
 };
 
 /**
- * The first (lowest-index) live list of a live board identified by its slug,
- * scoped to one workspace. Returns the same shape as
+ * The first (lowest-index) live list of a live, regular (non-template) board
+ * identified by its slug, scoped to one workspace. Template boards share the
+ * same (workspaceId, slug) space but are excluded — a slug match there would
+ * write a card into the template itself. Returns the same shape as
  * getWorkspaceAndListIdByListPublicId so callers can use either
  * interchangeably. Used by the Crisp `!create-sp #slug` command.
  */
@@ -534,6 +536,7 @@ export const getFirstListByBoardSlug = async (
       and(
         eq(boards.slug, args.boardSlug),
         eq(boards.workspaceId, args.workspaceId),
+        eq(boards.type, "regular"),
         isNull(boards.deletedAt),
         isNull(lists.deletedAt),
       ),

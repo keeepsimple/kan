@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { t } from "@lingui/core/macro";
+import { useEffect, useState } from "react";
 import { HiOutlineBell, HiOutlineBellSlash } from "react-icons/hi2";
 
 import Button from "~/components/Button";
@@ -33,7 +33,11 @@ export default function BoardNotificationToggle() {
     // Browsers require requestPermission() to run inside a user gesture, so
     // this must stay in the click handler. Turning on succeeds either way —
     // sound and badge work without permission.
-    if (next && typeof Notification !== "undefined" && Notification.permission === "default") {
+    if (
+      next &&
+      typeof Notification !== "undefined" &&
+      Notification.permission === "default"
+    ) {
       try {
         setPermission(await Notification.requestPermission());
       } catch {
@@ -47,10 +51,12 @@ export default function BoardNotificationToggle() {
   };
 
   const label = !enabled
-    ? t`Turn on notifications for this board`
+    ? t`Turn on board change notifications`
     : permission === "denied"
       ? t`Desktop notifications are blocked by your browser — sound and tab badge still work.`
-      : t`Turn off notifications for this board`;
+      : permission === "unsupported"
+        ? t`This browser doesn't support desktop notifications — sound and tab badge still work.`
+        : t`Turn off board change notifications`;
 
   return (
     <Tooltip content={label}>

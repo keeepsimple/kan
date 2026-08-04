@@ -411,6 +411,11 @@ describe("handleCrispWebhook target resolution", () => {
     );
   });
 
+  // getFirstListByBoardSlug is mocked in this file, so this also stands in
+  // for the case that motivated the repo's `boards.type = "regular"` filter:
+  // a slug that names a template board now resolves to null here exactly
+  // like an unknown slug. The filter's SQL itself is not exercised by this
+  // test — see list.repo.ts.
   it("falls back to the default list and keeps the #slug in the title", async () => {
     mockGetFirstListByBoardSlug.mockResolvedValue(null);
 

@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Crisp integration: operators can create cards from a Crisp conversation by writing a private note starting with `#card`, configured per workspace in Settings → Integrations
+- Crisp integration: operators can create cards from a Crisp conversation by writing a private note starting with `!create-sp`, optionally targeting a specific board with a `#board-slug` prefix, configured per workspace in Settings → Integrations
+- Board notifications: a sound, unread tab-title counter, and desktop notification for changes made by others while a board is open, controlled by a bell toggle in the board header
 
 ## [0.2.4](https://github.com/kanbn/kan/compare/v0.2.3...v0.2.4) - 2025-01-14
 

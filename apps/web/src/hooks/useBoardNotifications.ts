@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { t } from "@lingui/core/macro";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import type { BoardNotifier } from "~/utils/boardNotifier";
 import { createBoardNotifier, readNotifyPref } from "~/utils/boardNotifier";

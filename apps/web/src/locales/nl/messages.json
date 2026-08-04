@@ -4285,7 +4285,6 @@
     "translation": "Ontwerp"
   },
   "ltv1xq": {
-    "translation": "",
     "message": "Desktop notifications are blocked by your browser — sound and tab badge still work.",
     "placeholders": {},
     "comments": [],
@@ -4294,7 +4293,8 @@
         "src/views/board/components/BoardNotificationToggle.tsx",
         52
       ]
-    ]
+    ],
+    "translation": ""
   },
   "Uf+1DF": {
     "message": "Destination workspace",
@@ -6954,7 +6954,6 @@
     "translation": "Junior"
   },
   "tHjBUm": {
-    "translation": "",
     "message": "Kan",
     "placeholders": {},
     "comments": [],
@@ -6963,7 +6962,8 @@
         "src/hooks/useBoardNotifications.ts",
         96
       ]
-    ]
+    ],
+    "translation": ""
   },
   "aWDhU5": {
     "message": "Kanban is better with a team. Perfect for small and growing teams looking to collaborate.",
@@ -11367,7 +11367,6 @@
     "translation": "Deze API-sleutel wordt slechts één keer getoond. Bewaar deze op een veilige locatie."
   },
   "tenpvP": {
-    "translation": "",
     "message": "This board has new changes",
     "placeholders": {},
     "comments": [],
@@ -11376,7 +11375,8 @@
         "src/hooks/useBoardNotifications.ts",
         97
       ]
-    ]
+    ],
+    "translation": ""
   },
   "l4asa1": {
     "message": "This board is private or does not exist",
@@ -11401,6 +11401,18 @@
       ]
     ],
     "translation": "Deze bord-URL is al in gebruik"
+  },
+  "msrz3y": {
+    "translation": "",
+    "message": "This browser doesn't support desktop notifications — sound and tab badge still work.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardNotificationToggle.tsx",
+        54
+      ]
+    ]
   },
   "mTwGOf": {
     "message": "This invitation link is invalid or has expired.",
@@ -11698,6 +11710,18 @@
     ],
     "translation": "Vertrouwd door snelle teams<0/>over de hele wereld"
   },
+  "pYLr2D": {
+    "translation": "",
+    "message": "Turn off board change notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardNotificationToggle.tsx",
+        55
+      ]
+    ]
+  },
   "euk6kh": {
     "translation": "",
     "message": "Turn off notifications for this board",
@@ -11707,6 +11731,19 @@
       [
         "src/views/board/components/BoardNotificationToggle.tsx",
         53
+      ]
+    ],
+    "obsolete": true
+  },
+  "MMifqV": {
+    "translation": "",
+    "message": "Turn on board change notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardNotificationToggle.tsx",
+        50
       ]
     ]
   },
@@ -11720,7 +11757,8 @@
         "src/views/board/components/BoardNotificationToggle.tsx",
         50
       ]
-    ]
+    ],
+    "obsolete": true
   },
   "bZSICm": {
     "message": "Unable to add checklist item",

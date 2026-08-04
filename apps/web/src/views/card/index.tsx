@@ -214,7 +214,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const workspaceMembers = board?.workspace.members;
   const boardId = board?.publicId;
 
-  const { unreadCount } = useBoardEvents(boardId, cardId);
+  const { unreadCount } = useBoardEvents(boardId, cardId, board?.name);
 
   const editorWorkspaceMembers =
     workspaceMembers
