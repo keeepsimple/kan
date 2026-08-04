@@ -7,12 +7,17 @@ describe("boardEvents bus", () => {
     const listener = vi.fn();
     const unsubscribe = subscribeToBoard("board_aaaaaaaa", listener);
 
-    emitBoardEvent({ boardPublicId: "board_aaaaaaaa", cardPublicId: "card_11111111" });
+    emitBoardEvent({
+      boardPublicId: "board_aaaaaaaa",
+      cardPublicId: "card_11111111",
+      actorUserId: "user_11111111",
+    });
 
     expect(listener).toHaveBeenCalledTimes(1);
     expect(listener).toHaveBeenCalledWith({
       boardPublicId: "board_aaaaaaaa",
       cardPublicId: "card_11111111",
+      actorUserId: "user_11111111",
     });
     unsubscribe();
   });
@@ -21,7 +26,7 @@ describe("boardEvents bus", () => {
     const listener = vi.fn();
     const unsubscribe = subscribeToBoard("board_aaaaaaaa", listener);
 
-    emitBoardEvent({ boardPublicId: "board_bbbbbbbb" });
+    emitBoardEvent({ boardPublicId: "board_bbbbbbbb", actorUserId: null });
 
     expect(listener).not.toHaveBeenCalled();
     unsubscribe();
@@ -32,7 +37,7 @@ describe("boardEvents bus", () => {
     const unsubscribe = subscribeToBoard("board_aaaaaaaa", listener);
     unsubscribe();
 
-    emitBoardEvent({ boardPublicId: "board_aaaaaaaa" });
+    emitBoardEvent({ boardPublicId: "board_aaaaaaaa", actorUserId: null });
 
     expect(listener).not.toHaveBeenCalled();
   });
@@ -43,7 +48,7 @@ describe("boardEvents bus", () => {
     const unsubA = subscribeToBoard("board_aaaaaaaa", a);
     const unsubB = subscribeToBoard("board_aaaaaaaa", b);
 
-    emitBoardEvent({ boardPublicId: "board_aaaaaaaa" });
+    emitBoardEvent({ boardPublicId: "board_aaaaaaaa", actorUserId: null });
 
     expect(a).toHaveBeenCalledTimes(1);
     expect(b).toHaveBeenCalledTimes(1);

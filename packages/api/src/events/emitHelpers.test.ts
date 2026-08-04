@@ -46,13 +46,14 @@ describe("emit helpers", () => {
     const listener = vi.fn();
     const unsubscribe = subscribeToBoard("board_aaaaaaaa", listener);
 
-    emitFromCard(db, "card_11111111");
+    emitFromCard(db, "card_11111111", "user_11111111");
     await flush();
 
     expect(mockByCard).toHaveBeenCalledWith(db, "card_11111111");
     expect(listener).toHaveBeenCalledWith({
       boardPublicId: "board_aaaaaaaa",
       cardPublicId: "card_11111111",
+      actorUserId: "user_11111111",
     });
     unsubscribe();
   });
@@ -62,10 +63,13 @@ describe("emit helpers", () => {
     const listener = vi.fn();
     const unsubscribe = subscribeToBoard("board_aaaaaaaa", listener);
 
-    emitFromList(db, "list_22222222");
+    emitFromList(db, "list_22222222", null);
     await flush();
 
-    expect(listener).toHaveBeenCalledWith({ boardPublicId: "board_aaaaaaaa" });
+    expect(listener).toHaveBeenCalledWith({
+      boardPublicId: "board_aaaaaaaa",
+      actorUserId: null,
+    });
     unsubscribe();
   });
 
@@ -74,10 +78,13 @@ describe("emit helpers", () => {
     const listener = vi.fn();
     const unsubscribe = subscribeToBoard("board_aaaaaaaa", listener);
 
-    emitFromLabel(db, "label_33333333");
+    emitFromLabel(db, "label_33333333", null);
     await flush();
 
-    expect(listener).toHaveBeenCalledWith({ boardPublicId: "board_aaaaaaaa" });
+    expect(listener).toHaveBeenCalledWith({
+      boardPublicId: "board_aaaaaaaa",
+      actorUserId: null,
+    });
     unsubscribe();
   });
 
@@ -86,7 +93,7 @@ describe("emit helpers", () => {
     const listener = vi.fn();
     const unsubscribe = subscribeToBoard("board_aaaaaaaa", listener);
 
-    emitFromCard(db, "card_missing1");
+    emitFromCard(db, "card_missing1", null);
     await flush();
 
     expect(listener).not.toHaveBeenCalled();
@@ -96,7 +103,7 @@ describe("emit helpers", () => {
   it("swallows repo errors (never throws into the mutation)", async () => {
     mockByCard.mockRejectedValue(new Error("db down"));
 
-    expect(() => emitFromCard(db, "card_11111111")).not.toThrow();
+    expect(() => emitFromCard(db, "card_11111111", null)).not.toThrow();
     await flush(); // would surface an unhandled rejection if not caught
   });
 });

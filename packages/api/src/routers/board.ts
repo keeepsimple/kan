@@ -554,7 +554,10 @@ export const boardRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
-      emitBoardEvent({ boardPublicId: input.boardPublicId });
+      emitBoardEvent({
+        boardPublicId: input.boardPublicId,
+        actorUserId: ctx.user?.id ?? null,
+      });
 
       return result;
     }),
@@ -651,7 +654,10 @@ export const boardRouter = createTRPCRouter({
         }
       }
 
-      emitBoardEvent({ boardPublicId: input.boardPublicId });
+      emitBoardEvent({
+        boardPublicId: input.boardPublicId,
+        actorUserId: ctx.user?.id ?? null,
+      });
 
       return { success: true };
     }),
@@ -766,7 +772,10 @@ export const boardRouter = createTRPCRouter({
         slug,
       );
 
-      emitBoardEvent({ boardPublicId: input.boardPublicId });
+      emitBoardEvent({
+        boardPublicId: input.boardPublicId,
+        actorUserId: ctx.user?.id ?? null,
+      });
 
       return { success: true };
     }),

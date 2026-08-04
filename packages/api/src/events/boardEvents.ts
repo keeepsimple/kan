@@ -8,6 +8,9 @@ import * as listRepo from "@kan/db/repository/list.repo";
 export interface BoardEvent {
   boardPublicId: string;
   cardPublicId?: string;
+  /** Who caused the change; null for integrations (Crisp) and cron jobs.
+   *  The SSE route uses this to tell a connection "this was you". */
+  actorUserId: string | null;
 }
 
 // Singleton on globalThis so Next.js dev hot-reload (and any duplicate
@@ -43,6 +46,7 @@ export function subscribeToBoard(
 // Fire-and-forget: realtime is best-effort and must never fail a mutation.
 function emitResolved(
   resolve: Promise<string | undefined>,
+  actorUserId: string | null,
   cardPublicId?: string,
 ): void {
   resolve
@@ -50,23 +54,43 @@ function emitResolved(
       if (boardPublicId)
         emitBoardEvent({
           boardPublicId,
+          actorUserId,
           ...(cardPublicId ? { cardPublicId } : {}),
         });
     })
     .catch(() => undefined);
 }
 
-export function emitFromCard(db: dbClient, cardPublicId: string): void {
+export function emitFromCard(
+  db: dbClient,
+  cardPublicId: string,
+  actorUserId: string | null,
+): void {
   emitResolved(
     cardRepo.getBoardPublicIdByCardPublicId(db, cardPublicId),
+    actorUserId,
     cardPublicId,
   );
 }
 
-export function emitFromList(db: dbClient, listPublicId: string): void {
-  emitResolved(listRepo.getBoardPublicIdByListPublicId(db, listPublicId));
+export function emitFromList(
+  db: dbClient,
+  listPublicId: string,
+  actorUserId: string | null,
+): void {
+  emitResolved(
+    listRepo.getBoardPublicIdByListPublicId(db, listPublicId),
+    actorUserId,
+  );
 }
 
-export function emitFromLabel(db: dbClient, labelPublicId: string): void {
-  emitResolved(labelRepo.getBoardPublicIdByLabelPublicId(db, labelPublicId));
+export function emitFromLabel(
+  db: dbClient,
+  labelPublicId: string,
+  actorUserId: string | null,
+): void {
+  emitResolved(
+    labelRepo.getBoardPublicIdByLabelPublicId(db, labelPublicId),
+    actorUserId,
+  );
 }

@@ -253,7 +253,7 @@ export const cardRouter = createTRPCRouter({
         console.error("Discord notification failed:", error);
       });
 
-      emitFromList(ctx.db, input.listPublicId);
+      emitFromList(ctx.db, input.listPublicId, ctx.user?.id ?? null);
 
       return newCard;
     }),
@@ -342,7 +342,7 @@ export const cardRouter = createTRPCRouter({
         console.error("Discord comment mention ping failed:", error),
       );
 
-      emitFromCard(ctx.db, input.cardPublicId);
+      emitFromCard(ctx.db, input.cardPublicId, ctx.user?.id ?? null);
 
       return newComment;
     }),
@@ -444,7 +444,7 @@ export const cardRouter = createTRPCRouter({
         console.error("Discord comment mention ping failed:", error),
       );
 
-      emitFromCard(ctx.db, input.cardPublicId);
+      emitFromCard(ctx.db, input.cardPublicId, ctx.user?.id ?? null);
 
       return updatedComment;
     }),
@@ -523,7 +523,7 @@ export const cardRouter = createTRPCRouter({
         createdBy: userId,
       });
 
-      emitFromCard(ctx.db, input.cardPublicId);
+      emitFromCard(ctx.db, input.cardPublicId, ctx.user?.id ?? null);
 
       return { publicId: input.commentPublicId };
     }),
@@ -603,7 +603,7 @@ export const cardRouter = createTRPCRouter({
           console.error("Discord notification failed:", error);
         });
 
-        emitFromCard(ctx.db, input.cardPublicId);
+        emitFromCard(ctx.db, input.cardPublicId, ctx.user?.id ?? null);
 
         return { newLabel: false };
       }
@@ -628,7 +628,7 @@ export const cardRouter = createTRPCRouter({
         console.error("Discord notification failed:", error);
       });
 
-      emitFromCard(ctx.db, input.cardPublicId);
+      emitFromCard(ctx.db, input.cardPublicId, ctx.user?.id ?? null);
 
       return { newLabel: true };
     }),
@@ -713,7 +713,7 @@ export const cardRouter = createTRPCRouter({
           console.error("Discord notification failed:", error);
         });
 
-        emitFromCard(ctx.db, input.cardPublicId);
+        emitFromCard(ctx.db, input.cardPublicId, ctx.user?.id ?? null);
 
         return { newMember: false };
       }
@@ -744,7 +744,7 @@ export const cardRouter = createTRPCRouter({
         console.error("Discord assignment ping failed:", error);
       });
 
-      emitFromCard(ctx.db, input.cardPublicId);
+      emitFromCard(ctx.db, input.cardPublicId, ctx.user?.id ?? null);
 
       return { newMember: true };
     }),
@@ -1237,7 +1237,7 @@ export const cardRouter = createTRPCRouter({
         console.error("Discord notification failed:", error);
       });
 
-      emitFromCard(ctx.db, input.cardPublicId);
+      emitFromCard(ctx.db, input.cardPublicId, ctx.user?.id ?? null);
 
       return result;
     }),
@@ -1332,7 +1332,7 @@ export const cardRouter = createTRPCRouter({
         });
       }
 
-      emitFromCard(ctx.db, input.cardPublicId);
+      emitFromCard(ctx.db, input.cardPublicId, ctx.user?.id ?? null);
 
       return { success: true };
     }),
@@ -1548,7 +1548,7 @@ export const cardRouter = createTRPCRouter({
         console.error("Discord notification failed:", error);
       });
 
-      emitFromList(ctx.db, input.listPublicId);
+      emitFromList(ctx.db, input.listPublicId, ctx.user?.id ?? null);
 
       return { publicId: newCard.publicId };
     }),

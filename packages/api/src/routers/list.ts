@@ -64,7 +64,10 @@ export const listRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
-      emitBoardEvent({ boardPublicId: input.boardPublicId });
+      emitBoardEvent({
+        boardPublicId: input.boardPublicId,
+        actorUserId: ctx.user?.id ?? null,
+      });
 
       return result;
     }),
@@ -147,7 +150,7 @@ export const listRouter = createTRPCRouter({
 
       if (activities.length) await activityRepo.bulkCreate(ctx.db, activities);
 
-      emitFromList(ctx.db, input.listPublicId);
+      emitFromList(ctx.db, input.listPublicId, ctx.user?.id ?? null);
 
       return { success: true };
     }),
@@ -259,7 +262,7 @@ export const listRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
-      emitFromList(ctx.db, input.listPublicId);
+      emitFromList(ctx.db, input.listPublicId, ctx.user?.id ?? null);
 
       return result;
     }),

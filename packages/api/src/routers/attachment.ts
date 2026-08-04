@@ -159,7 +159,7 @@ export const attachmentRouter = createTRPCRouter({
         createdBy: userId,
       });
 
-      emitFromCard(ctx.db, input.cardPublicId);
+      emitFromCard(ctx.db, input.cardPublicId, ctx.user?.id ?? null);
 
       return attachment;
     }),
@@ -224,7 +224,7 @@ export const attachmentRouter = createTRPCRouter({
         createdBy: userId,
       });
 
-      emitFromCard(ctx.db, attachment.card.publicId);
+      emitFromCard(ctx.db, attachment.card.publicId, ctx.user?.id ?? null);
 
       return { success: true };
     }),

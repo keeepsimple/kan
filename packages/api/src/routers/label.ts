@@ -117,7 +117,10 @@ export const labelRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
-      emitBoardEvent({ boardPublicId: input.boardPublicId });
+      emitBoardEvent({
+        boardPublicId: input.boardPublicId,
+        actorUserId: ctx.user?.id ?? null,
+      });
 
       return {
         publicId: result.publicId,
@@ -173,7 +176,7 @@ export const labelRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
-      emitFromLabel(ctx.db, input.labelPublicId);
+      emitFromLabel(ctx.db, input.labelPublicId, ctx.user?.id ?? null);
 
       return {
         publicId: result.publicId,
@@ -223,7 +226,7 @@ export const labelRouter = createTRPCRouter({
         deletedBy: userId,
       });
 
-      emitFromLabel(ctx.db, input.labelPublicId);
+      emitFromLabel(ctx.db, input.labelPublicId, ctx.user?.id ?? null);
 
       return { success: true };
     }),

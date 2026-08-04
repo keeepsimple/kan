@@ -91,7 +91,7 @@ export const checklistRouter = createTRPCRouter({
       });
 
       syncDiscord(ctx.db, input.cardPublicId);
-      emitFromCard(ctx.db, input.cardPublicId);
+      emitFromCard(ctx.db, input.cardPublicId, ctx.user?.id ?? null);
 
       return newChecklist;
     }),
@@ -159,7 +159,7 @@ export const checklistRouter = createTRPCRouter({
       });
 
       syncDiscord(ctx.db, checklist.card.publicId);
-      emitFromCard(ctx.db, checklist.card.publicId);
+      emitFromCard(ctx.db, checklist.card.publicId, ctx.user?.id ?? null);
 
       return updated;
     }),
@@ -226,7 +226,7 @@ export const checklistRouter = createTRPCRouter({
       });
 
       syncDiscord(ctx.db, checklist.card.publicId);
-      emitFromCard(ctx.db, checklist.card.publicId);
+      emitFromCard(ctx.db, checklist.card.publicId, ctx.user?.id ?? null);
 
       return { success: true };
     }),
@@ -294,7 +294,7 @@ export const checklistRouter = createTRPCRouter({
       });
 
       syncDiscord(ctx.db, checklist.card.publicId);
-      emitFromCard(ctx.db, checklist.card.publicId);
+      emitFromCard(ctx.db, checklist.card.publicId, ctx.user?.id ?? null);
 
       return newChecklistItem;
     }),
@@ -394,7 +394,7 @@ export const checklistRouter = createTRPCRouter({
       }
 
       syncDiscord(ctx.db, item.checklist.card.publicId);
-      emitFromCard(ctx.db, item.checklist.card.publicId);
+      emitFromCard(ctx.db, item.checklist.card.publicId, ctx.user?.id ?? null);
 
       return updatedItem;
     }),
@@ -455,7 +455,7 @@ export const checklistRouter = createTRPCRouter({
       });
 
       syncDiscord(ctx.db, item.checklist.card.publicId);
-      emitFromCard(ctx.db, item.checklist.card.publicId);
+      emitFromCard(ctx.db, item.checklist.card.publicId, ctx.user?.id ?? null);
 
       return { success: true };
     }),
