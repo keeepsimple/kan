@@ -163,6 +163,7 @@ export function Auth({
     useState<null | AuthProvider>(null);
   const [isCredentialsEnabled, setIsCredentialsEnabled] = useState(false);
   const [isEmailSendingEnabled, setIsEmailSendingEnabled] = useState(false);
+  const [isMagicLinkDisabled, setIsMagicLinkDisabled] = useState(false);
   const [isLoginWithEmailPending, setIsLoginWithEmailPending] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
   const { showPopup } = usePopup();
@@ -182,6 +183,9 @@ export function Auth({
     setIsCloudEnv(isCloudEnv);
     setIsEmailSendingEnabled(emailSendingEnabled);
     setIsCredentialsEnabled(credentialsAllowed);
+    setIsMagicLinkDisabled(
+      env("NEXT_PUBLIC_DISABLE_MAGIC_LINK")?.toLowerCase() === "true",
+    );
   }, []);
 
   const {
@@ -243,8 +247,12 @@ export function Auth({
         );
       }
     } else {
-      // Only allow magic link if email sending is enabled and not in sign up mode
-      if (isCloudEnv || (isEmailSendingEnabled && !isSignUp)) {
+      // Only allow magic link if the operator has not switched it off, email
+      // sending is enabled, and we are not in sign up mode
+      if (
+        !isMagicLinkDisabled &&
+        (isCloudEnv || (isEmailSendingEnabled && !isSignUp))
+      ) {
         await authClient.signIn.magicLink(
           {
             email,
@@ -309,18 +317,27 @@ export function Auth({
   const password = watch("password");
 
   const isMagicLinkAvailable = useMemo(() => {
+    if (isMagicLinkDisabled) return false;
     return isCloudEnv || (isEmailSendingEnabled && !isSignUp);
-  }, [isCloudEnv, isEmailSendingEnabled, isSignUp]);
+  }, [isMagicLinkDisabled, isCloudEnv, isEmailSendingEnabled, isSignUp]);
 
   // Determine if we should operate in magic link mode for current form state (login only)
   const isMagicLinkMode = useMemo(() => {
+    // Operator switched magic links off entirely.
+    if (isMagicLinkDisabled) return false;
     // Magic link only viable when email sending enabled AND not sign up.
     if (!isEmailSendingEnabled || isSignUp) return false;
     // If credentials disabled we always default to magic link.
     if (!isCredentialsEnabled) return true;
     // Credentials enabled: user chooses magic link by leaving password blank.
     return !password;
-  }, [isEmailSendingEnabled, isSignUp, isCredentialsEnabled, password]);
+  }, [
+    isMagicLinkDisabled,
+    isEmailSendingEnabled,
+    isSignUp,
+    isCredentialsEnabled,
+    password,
+  ]);
 
   // Auto-focus password field when an error indicates it's required
   useEffect(() => {

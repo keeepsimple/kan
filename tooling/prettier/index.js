@@ -6,9 +6,14 @@ import { fileURLToPath } from "url";
 
 /** @type { PrettierConfig | SortImportsConfig | TailwindConfig } */
 const config = {
+  // Resolved from this file rather than named, because prettier resolves bare
+  // plugin names relative to the file being formatted. Under pnpm's strict
+  // isolation these plugins only exist in this package's node_modules, so
+  // every consumer failed with "Cannot find package ... imported from
+  // <consumer>/noop.js". Resolving here makes it independent of the caller.
   plugins: [
-    "@ianvs/prettier-plugin-sort-imports",
-    "prettier-plugin-tailwindcss",
+    fileURLToPath(import.meta.resolve("@ianvs/prettier-plugin-sort-imports")),
+    fileURLToPath(import.meta.resolve("prettier-plugin-tailwindcss")),
   ],
   tailwindConfig: fileURLToPath(
     new URL("../../tooling/tailwind/web.ts", import.meta.url),

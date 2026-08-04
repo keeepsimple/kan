@@ -119,6 +119,13 @@ export const env = createEnv({
         (s) => !s || s.toLowerCase() === "true" || s.toLowerCase() === "false",
       )
       .optional(),
+    NEXT_PUBLIC_DISABLE_MAGIC_LINK: z
+      .string()
+      .transform((s) => (s === "" ? undefined : s))
+      .refine(
+        (s) => !s || s.toLowerCase() === "true" || s.toLowerCase() === "false",
+      )
+      .optional(),
     NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY: z
       .string()
       .transform((s) => (s === "" ? undefined : s))
@@ -147,6 +154,7 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_VERSION: process.env.NEXT_PUBLIC_APP_VERSION,
     NEXT_PUBLIC_ALLOW_CREDENTIALS: process.env.NEXT_PUBLIC_ALLOW_CREDENTIALS,
     NEXT_PUBLIC_DISABLE_SIGN_UP: process.env.NEXT_PUBLIC_DISABLE_SIGN_UP,
+    NEXT_PUBLIC_DISABLE_MAGIC_LINK: process.env.NEXT_PUBLIC_DISABLE_MAGIC_LINK,
     NEXT_PUBLIC_USE_STANDALONE_OUTPUT:
       process.env.NEXT_PUBLIC_USE_STANDALONE_OUTPUT,
     NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY:
