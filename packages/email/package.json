@@ -35,6 +35,7 @@
     "@kan/eslint-config": "workspace:*",
     "@kan/prettier-config": "workspace:*",
     "@kan/tsconfig": "workspace:*",
+    "@types/node": "^20.17.7",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "catalog:react18",
     "eslint": "catalog:",

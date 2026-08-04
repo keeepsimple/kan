@@ -27,6 +27,7 @@
     "@kan/eslint-config": "workspace:*",
     "@kan/prettier-config": "workspace:*",
     "@kan/tsconfig": "workspace:*",
+    "@types/node": "^20.17.7",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"

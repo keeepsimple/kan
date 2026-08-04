@@ -83,6 +83,7 @@
     "@kan/eslint-config": "workspace:*",
     "@kan/prettier-config": "workspace:*",
     "@kan/tsconfig": "workspace:*",
+    "@types/node": "^20.17.7",
     "eslint": "catalog:",
     "pg": "^8.11.3",
     "prettier": "catalog:",

@@ -393,6 +393,9 @@ importers:
       '@kan/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      '@types/node':
+        specifier: ^20.17.7
+        version: 20.19.26
       eslint:
         specifier: 'catalog:'
         version: 9.34.0(jiti@2.6.1)(supports-color@8.1.1)
@@ -410,7 +413,7 @@ importers:
         version: 8.41.0(eslint@9.34.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.9.2)
       vitest:
         specifier: ^3.0.0
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@25.0.0)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.26)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1)
 
   packages/auth:
     dependencies:
@@ -419,7 +422,7 @@ importers:
         version: 3.879.0
       '@better-auth/stripe':
         specifier: ^1.4.6
-        version: 1.4.6(@better-auth/core@1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5(zod@4.1.13))(jose@6.1.3)(kysely@0.28.8)(nanostores@1.1.0))(better-auth@1.4.6(next@16.0.8(@babel/core@7.28.3(supports-color@8.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(stripe@18.5.0(@types/node@25.0.0))
+        version: 1.4.6(@better-auth/core@1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5(zod@4.1.13))(jose@6.1.3)(kysely@0.28.8)(nanostores@1.1.0))(better-auth@1.4.6(next@16.0.8(@babel/core@7.28.3(supports-color@8.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(stripe@18.5.0(@types/node@20.19.26))
       '@kan/logger':
         specifier: workspace:^
         version: link:../logger
@@ -434,7 +437,7 @@ importers:
         version: 1.8.0
       stripe:
         specifier: ^18.2.0
-        version: 18.5.0(@types/node@25.0.0)
+        version: 18.5.0(@types/node@20.19.26)
     devDependencies:
       '@kan/db':
         specifier: workspace:*
@@ -457,6 +460,9 @@ importers:
       '@kan/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      '@types/node':
+        specifier: ^20.17.7
+        version: 20.19.26
       eslint:
         specifier: 'catalog:'
         version: 9.34.0(jiti@2.6.1)(supports-color@8.1.1)
@@ -471,7 +477,7 @@ importers:
         version: 8.41.0(eslint@9.34.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.9.2)
       vitest:
         specifier: ^3.0.0
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@25.0.0)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.26)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1)
 
   packages/db:
     dependencies:
@@ -512,6 +518,9 @@ importers:
       '@kan/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      '@types/node':
+        specifier: ^20.17.7
+        version: 20.19.26
       '@types/pg':
         specifier: ^8.10.9
         version: 8.15.5
@@ -535,7 +544,7 @@ importers:
         version: 8.41.0(eslint@9.34.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.9.2)
       vitest:
         specifier: ^3.0.0
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@25.0.0)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.26)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1)
 
   packages/discord:
     devDependencies:
@@ -548,6 +557,9 @@ importers:
       '@kan/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      '@types/node':
+        specifier: ^20.17.7
+        version: 20.19.26
       eslint:
         specifier: 'catalog:'
         version: 9.34.0(jiti@2.6.1)(supports-color@8.1.1)
@@ -562,7 +574,7 @@ importers:
         version: 8.41.0(eslint@9.34.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.9.2)
       vitest:
         specifier: ^3.0.0
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@25.0.0)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.26)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1)
 
   packages/email:
     dependencies:
@@ -597,6 +609,9 @@ importers:
       '@kan/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      '@types/node':
+        specifier: ^20.17.7
+        version: 20.19.26
       '@types/nodemailer':
         specifier: ^6.4.17
         version: 6.4.19
@@ -637,6 +652,9 @@ importers:
       '@kan/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      '@types/node':
+        specifier: ^20.17.7
+        version: 20.19.26
       eslint:
         specifier: 'catalog:'
         version: 9.34.0(jiti@2.6.1)(supports-color@8.1.1)
@@ -716,7 +734,7 @@ importers:
     dependencies:
       stripe:
         specifier: ^18.2.0
-        version: 18.5.0(@types/node@25.0.0)
+        version: 18.5.0(@types/node@20.19.26)
     devDependencies:
       '@kan/eslint-config':
         specifier: workspace:*
@@ -727,6 +745,9 @@ importers:
       '@kan/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      '@types/node':
+        specifier: ^20.17.7
+        version: 20.19.26
       eslint:
         specifier: 'catalog:'
         version: 9.34.0(jiti@2.6.1)(supports-color@8.1.1)
@@ -10672,12 +10693,12 @@ snapshots:
       nanostores: 1.1.0
       zod: 4.1.13
 
-  '@better-auth/stripe@1.4.6(@better-auth/core@1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5(zod@4.1.13))(jose@6.1.3)(kysely@0.28.8)(nanostores@1.1.0))(better-auth@1.4.6(next@16.0.8(@babel/core@7.28.3(supports-color@8.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(stripe@18.5.0(@types/node@25.0.0))':
+  '@better-auth/stripe@1.4.6(@better-auth/core@1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5(zod@4.1.13))(jose@6.1.3)(kysely@0.28.8)(nanostores@1.1.0))(better-auth@1.4.6(next@16.0.8(@babel/core@7.28.3(supports-color@8.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(stripe@18.5.0(@types/node@20.19.26))':
     dependencies:
       '@better-auth/core': 1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5(zod@4.1.13))(jose@6.1.3)(kysely@0.28.8)(nanostores@1.1.0)
       better-auth: 1.4.6(next@16.0.8(@babel/core@7.28.3(supports-color@8.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       defu: 6.1.4
-      stripe: 18.5.0(@types/node@25.0.0)
+      stripe: 18.5.0(@types/node@20.19.26)
       zod: 4.1.13
 
   '@better-auth/telemetry@1.4.6(@better-auth/core@1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5(zod@4.1.13))(jose@6.1.3)(kysely@0.28.8)(nanostores@1.1.0))':
@@ -13201,7 +13222,7 @@ snapshots:
   '@types/nodemailer@6.4.19':
     dependencies:
       '@aws-sdk/client-ses': 3.879.0
-      '@types/node': 20.19.11
+      '@types/node': 20.19.26
     transitivePeerDependencies:
       - aws-crt
 
@@ -13416,13 +13437,13 @@ snapshots:
     optionalDependencies:
       vite: 7.3.1(@types/node@20.19.11)(jiti@1.21.7)(terser@5.44.1)(yaml@2.8.1)
 
-  '@vitest/mocker@3.2.4(vite@7.3.1(@types/node@25.0.0)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1))':
+  '@vitest/mocker@3.2.4(vite@7.3.1(@types/node@20.19.26)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1))':
     dependencies:
       '@vitest/spy': 3.2.4
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 7.3.1(@types/node@25.0.0)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1)
+      vite: 7.3.1(@types/node@20.19.26)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1)
 
   '@vitest/pretty-format@3.2.4':
     dependencies:
@@ -18429,11 +18450,11 @@ snapshots:
     dependencies:
       js-tokens: 9.0.1
 
-  stripe@18.5.0(@types/node@25.0.0):
+  stripe@18.5.0(@types/node@20.19.26):
     dependencies:
       qs: 6.15.1
     optionalDependencies:
-      '@types/node': 25.0.0
+      '@types/node': 20.19.26
 
   strnum@2.1.1: {}
 
@@ -19084,13 +19105,13 @@ snapshots:
       - tsx
       - yaml
 
-  vite-node@3.2.4(@types/node@25.0.0)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1):
+  vite-node@3.2.4(@types/node@20.19.26)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1):
     dependencies:
       cac: 6.7.14
       debug: 4.4.3(supports-color@8.1.1)
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 7.3.1(@types/node@25.0.0)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1)
+      vite: 7.3.1(@types/node@20.19.26)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -19120,7 +19141,7 @@ snapshots:
       terser: 5.44.1
       yaml: 2.8.1
 
-  vite@7.3.1(@types/node@25.0.0)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1):
+  vite@7.3.1(@types/node@20.19.26)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1):
     dependencies:
       esbuild: 0.27.2
       fdir: 6.5.0(picomatch@4.0.3)
@@ -19129,7 +19150,7 @@ snapshots:
       rollup: 4.56.0
       tinyglobby: 0.2.15
     optionalDependencies:
-      '@types/node': 25.0.0
+      '@types/node': 20.19.26
       fsevents: 2.3.3
       jiti: 2.6.1
       terser: 5.44.1
@@ -19177,11 +19198,11 @@ snapshots:
       - tsx
       - yaml
 
-  vitest@3.2.4(@types/debug@4.1.12)(@types/node@25.0.0)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1):
+  vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.26)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1):
     dependencies:
       '@types/chai': 5.2.3
       '@vitest/expect': 3.2.4
-      '@vitest/mocker': 3.2.4(vite@7.3.1(@types/node@25.0.0)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1))
+      '@vitest/mocker': 3.2.4(vite@7.3.1(@types/node@20.19.26)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4
@@ -19199,12 +19220,12 @@ snapshots:
       tinyglobby: 0.2.15
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
-      vite: 7.3.1(@types/node@25.0.0)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1)
-      vite-node: 3.2.4(@types/node@25.0.0)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1)
+      vite: 7.3.1(@types/node@20.19.26)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1)
+      vite-node: 3.2.4(@types/node@20.19.26)(jiti@2.6.1)(supports-color@8.1.1)(terser@5.44.1)(yaml@2.8.1)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/debug': 4.1.12
-      '@types/node': 25.0.0
+      '@types/node': 20.19.26
     transitivePeerDependencies:
       - jiti
       - less
