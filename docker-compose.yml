@@ -144,7 +144,11 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - kan_postgres_data:/var/lib/postgresql/data
+      # postgres:18+ wants ONE mount at /var/lib/postgresql and puts the
+      # cluster in a major-version subdirectory beneath it. Mounting the old
+      # /var/lib/postgresql/data path makes the image refuse to start, calling
+      # it an "unused mount/volume". See docker-library/postgres#1259.
+      - kan_postgres_data:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U kan -d kan_db"]
       interval: 5s
