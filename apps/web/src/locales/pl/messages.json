@@ -124,7 +124,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        634
+        635
       ]
     ],
     "translation": "{0} nie znaleziono"
@@ -484,7 +484,6 @@
     "translation": "Dodaj / edytuj etykietę"
   },
   "uIFtq7": {
-    "translation": "",
     "message": "Add #board-slug before the title to send the card to that board's first list, for example: !create-sp #support Payment failed.",
     "placeholders": {},
     "comments": [],
@@ -493,7 +492,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         139
       ]
-    ]
+    ],
+    "translation": ""
   },
   "B3xxao": {
     "message": "Add a card",
@@ -1644,7 +1644,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        607
+        608
       ],
       [
         "src/views/card/index.tsx",
@@ -2528,7 +2528,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        315
+        316
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -3523,7 +3523,6 @@
     "obsolete": true
   },
   "sW14sW": {
-    "translation": "",
     "message": "Create cards from Crisp conversations: choose the default board and list used when no #board-slug is given, then paste the generated webhook URL into your Crisp dashboard.",
     "placeholders": {},
     "comments": [],
@@ -3532,7 +3531,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         151
       ]
-    ]
+    ],
+    "translation": ""
   },
   "d33Usy": {
     "message": "Create checklist",
@@ -3637,11 +3637,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        97
+        98
       ],
       [
         "src/views/board/index.tsx",
-        748
+        750
       ]
     ],
     "translation": "Utwórz nową listę"
@@ -3771,7 +3771,6 @@
     "translation": ""
   },
   "rrhgTx": {
-    "translation": "",
     "message": "Crisp is connected. Operator notes starting with !create-sp create cards in",
     "placeholders": {},
     "comments": [],
@@ -3780,7 +3779,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         123
       ]
-    ]
+    ],
+    "translation": ""
   },
   "j7J5wV": {
     "message": "Crisp is connected. Operator notes starting with #card create cards in",
@@ -4283,6 +4283,18 @@
       ]
     ],
     "translation": "Design"
+  },
+  "ltv1xq": {
+    "translation": "",
+    "message": "Desktop notifications are blocked by your browser — sound and tab badge still work.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardNotificationToggle.tsx",
+        52
+      ]
+    ]
   },
   "Uf+1DF": {
     "message": "Destination workspace",
@@ -6044,7 +6056,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        733
+        735
       ]
     ],
     "translation": "Rozpocznij, tworząc nową listę"
@@ -6607,7 +6619,6 @@
     "translation": "w"
   },
   "JAtoYG": {
-    "translation": "",
     "message": "In a conversation, write a private note starting with !create-sp followed by the card title.",
     "placeholders": {},
     "comments": [],
@@ -6616,7 +6627,8 @@
         "src/views/settings/components/CrispIntegrationSection.tsx",
         138
       ]
-    ]
+    ],
+    "translation": ""
   },
   "OTnexY": {
     "message": "In a conversation, write a private note starting with #card followed by the card title.",
@@ -6941,6 +6953,18 @@
     ],
     "translation": "Junior"
   },
+  "tHjBUm": {
+    "translation": "",
+    "message": "Kan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/hooks/useBoardNotifications.ts",
+        96
+      ]
+    ]
+  },
   "aWDhU5": {
     "message": "Kanban is better with a team. Perfect for small and growing teams looking to collaborate.",
     "placeholders": {},
@@ -7261,7 +7285,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        313
+        314
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -7994,7 +8018,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        697
+        698
       ]
     ],
     "translation": "Nowa lista"
@@ -8246,7 +8270,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        729
+        731
       ]
     ],
     "translation": "Brak list"
@@ -8258,7 +8282,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        734
+        736
       ]
     ],
     "translation": "Nie utworzono jeszcze żadnych list"
@@ -9055,11 +9079,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        225
+        226
       ],
       [
         "src/views/board/index.tsx",
-        281
+        282
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -9251,7 +9275,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        322
+        323
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -10940,11 +10964,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        607
+        608
       ],
       [
         "src/views/board/index.tsx",
-        643
+        644
       ]
     ],
     "translation": "Szablon"
@@ -11342,6 +11366,18 @@
     ],
     "translation": "Ten klucz API zostanie wyświetlony tylko raz. Zapisz go w bezpiecznym miejscu."
   },
+  "tenpvP": {
+    "translation": "",
+    "message": "This board has new changes",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/hooks/useBoardNotifications.ts",
+        97
+      ]
+    ]
+  },
   "l4asa1": {
     "message": "This board is private or does not exist",
     "placeholders": {},
@@ -11662,6 +11698,30 @@
     ],
     "translation": "Zaufany przez dynamiczne zespoły<0/>na całym świecie"
   },
+  "euk6kh": {
+    "translation": "",
+    "message": "Turn off notifications for this board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardNotificationToggle.tsx",
+        53
+      ]
+    ]
+  },
+  "oVolk7": {
+    "translation": "",
+    "message": "Turn on notifications for this board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardNotificationToggle.tsx",
+        50
+      ]
+    ]
+  },
   "bZSICm": {
     "message": "Unable to add checklist item",
     "placeholders": {},
@@ -11741,7 +11801,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        320
+        321
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -12086,7 +12146,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        280
+        281
       ],
       [
         "src/views/card/index.tsx",
@@ -12170,7 +12230,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        224
+        225
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -13206,7 +13266,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        607
+        608
       ],
       [
         "src/views/boards/index.tsx",
@@ -13600,11 +13660,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        681
+        682
       ],
       [
         "src/views/board/index.tsx",
-        739
+        741
       ],
       [
         "src/views/boards/components/BoardsList.tsx",

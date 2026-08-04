@@ -214,7 +214,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const workspaceMembers = board?.workspace.members;
   const boardId = board?.publicId;
 
-  useBoardEvents(boardId, cardId);
+  const { unreadCount } = useBoardEvents(boardId, cardId);
 
   const editorWorkspaceMembers =
     workspaceMembers
@@ -320,7 +320,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   return (
     <>
       <PageHead
-        title={t`${card?.title ?? t`Card`} | ${board?.name ?? t`Board`}`}
+        title={`${unreadCount > 0 ? `(${unreadCount}) ` : ""}${t`${card?.title ?? t`Card`} | ${board?.name ?? t`Board`}`}`}
       />
       <div className="flex h-full flex-1 flex-col overflow-hidden">
         {/* Full-width top strip with board link and dropdown */}

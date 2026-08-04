@@ -40,6 +40,7 @@ import { formatToArray } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import BoardDiscordChannelModal from "./components/BoardDiscordChannelModal";
 import BoardDropdown from "./components/BoardDropdown";
+import BoardNotificationToggle from "./components/BoardNotificationToggle";
 import Card from "./components/Card";
 import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
 import { CardContextDuplicateModal } from "./components/CardContextDuplicateModal";
@@ -104,8 +105,6 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       : params.boardId
     : null;
 
-  useBoardEvents(boardId);
-
   const updateBoard = api.board.update.useMutation();
 
   const { register, handleSubmit, setValue } = useForm<UpdateBoardInput>({
@@ -153,6 +152,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     enabled: !!boardId,
     placeholderData: keepPreviousData,
   });
+
+  const { unreadCount } = useBoardEvents(boardId, null, boardData?.name);
 
   // Redirect to 404 if board doesn't exist
   useEffect(() => {
@@ -604,7 +605,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   return (
     <>
       <PageHead
-        title={`${boardData?.name ?? (isTemplate ? t`Board` : t`Template`)} | ${workspace.name ?? t`Workspace`}`}
+        title={`${unreadCount > 0 ? `(${unreadCount}) ` : ""}${boardData?.name ?? (isTemplate ? t`Board` : t`Template`)} | ${workspace.name ?? t`Workspace`}`}
       />
       <div className="relative flex h-full flex-col">
         <PatternedBackground />
@@ -697,6 +698,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 {t`New list`}
               </Button>
             </Tooltip>
+            <BoardNotificationToggle />
             <BoardDropdown
               isTemplate={!!isTemplate}
               isLoading={!boardData}
