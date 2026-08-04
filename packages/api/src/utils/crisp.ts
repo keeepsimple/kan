@@ -3,8 +3,11 @@ import { z } from "zod";
 import type { dbClient } from "@kan/db/client";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as crispIntegrationRepo from "@kan/db/repository/crispIntegration.repo";
+import * as listRepo from "@kan/db/repository/list.repo";
 import { createLogger } from "@kan/logger";
 
+import { emitFromList } from "../events/boardEvents";
+import { notifyCardCreated } from "./discord";
 import { createCardWebhookPayload, sendWebhooksForWorkspace } from "./webhook";
 
 const log = createLogger("crisp");
@@ -111,8 +114,40 @@ export async function handleCrispWebhook(
   const command = parseCardCommand(data.content);
   if (!command) return { status: 200, message: "Ignored" };
 
-  // Target list was soft-deleted; don't create cards into a hidden list.
-  if (integration.list.deletedAt) return { status: 200, message: "Ignored" };
+  let resolvedBySlug = false;
+  let target = null as Awaited<
+    ReturnType<typeof listRepo.getWorkspaceAndListIdByListPublicId>
+  >;
+
+  if (command.boardSlug) {
+    target = await listRepo.getFirstListByBoardSlug(db, {
+      boardSlug: command.boardSlug,
+      workspaceId: integration.workspaceId,
+    });
+    resolvedBySlug = target !== null;
+  }
+
+  // Also covers a soft-deleted default list: the repo filters deletedAt.
+  target ??= await listRepo.getWorkspaceAndListIdByListPublicId(
+    db,
+    integration.list.publicId,
+  );
+
+  if (!target) return { status: 200, message: "Ignored" };
+
+  // Mirrors assertListAllowsCardCreation, which the card router enforces for
+  // every other creation path. A webhook must not throw, so log and 200.
+  if (target.discordBehaviour === "notify") {
+    log.warn(
+      { listPublicId: target.publicId },
+      "Crisp note targeted a Discord notify list — skipped",
+    );
+    return { status: 200, message: "Ignored" };
+  }
+
+  // Slug did not resolve: keep the #slug token in the title so no typed
+  // words are silently dropped.
+  const title = resolvedBySlug ? command.title : command.rawTitle;
 
   const description = buildCardDescription({
     body: command.body,
@@ -123,10 +158,10 @@ export async function handleCrispWebhook(
 
   try {
     const newCard = await cardRepo.create(db, {
-      title: command.title,
+      title,
       description,
       createdBy: integration.createdBy,
-      listId: integration.listId,
+      listId: target.id,
       workspaceId: integration.workspaceId,
       position: "end",
     });
@@ -142,20 +177,41 @@ export async function handleCrispWebhook(
         {
           id: String(newCard.id),
           publicId: newCard.publicId,
-          title: command.title,
+          title,
           description,
           dueDate: null,
-          listId: integration.list.publicId,
+          listId: target.publicId,
         },
         {
-          boardId: integration.list.board.publicId,
-          boardName: integration.list.board.name,
-          listName: integration.list.name,
+          boardId: target.boardPublicId,
+          boardName: target.boardName,
+          listName: target.name,
         },
       ),
     ).catch((error) => {
       log.error({ err: error }, "Crisp card webhook fanout failed");
     });
+
+    // Same Discord path as the card router: forum channels get a forum post,
+    // text channels get a thread.
+    notifyCardCreated(db, {
+      cardId: newCard.id,
+      cardPublicId: newCard.publicId,
+      cardTitle: title,
+      boardName: target.boardName,
+      workspaceId: integration.workspaceId,
+      discordChannelId: target.boardDiscordChannelId,
+      discordBehaviour: target.discordBehaviour,
+      discordRoleIds: target.discordRoleIds,
+      description,
+      listName: target.name,
+      createdBy: data.user?.nickname ?? null,
+    }).catch((error) => {
+      log.error({ err: error }, "Crisp Discord notify failed");
+    });
+
+    // No acting viewer — an integration created this, so notify everyone.
+    emitFromList(db, target.publicId, null);
 
     return { status: 200, message: "Card created" };
   } catch (error) {

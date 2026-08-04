@@ -10,7 +10,7 @@ const db = createDrizzleClient();
 // carries customer chat content — neither belongs in application logs.
 export default withRateLimit(
   // ponytail: generous limit — Crisp delivers every subscribed message event
-  // for the whole website here, not just #card notes
+  // for the whole website here, not just !create-sp notes
   { points: 600, duration: 60 },
   async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "POST") {
